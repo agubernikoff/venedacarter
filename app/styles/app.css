@@ -299,42 +299,46 @@ aside li {
   gap: 1rem;
 }
 
-
-
 /*
 * --------------------------------------------------
 * routes/__index
 * --------------------------------------------------
 */
-.featured-collection {
-  display: block;
+.home {
+  display: grid;
+  grid-template-areas:
+    'new-arrival-markup new-arrival-img new-arrival-img'
+    'featured-product-title featured-product-title featured-product-title';
+  grid-auto-columns: 1fr;
+}
+.new-arrivals-container {
+  grid-area: new-arrival-markup;
+}
+.new-arrivals-collection {
+  /* display: block;
   margin-bottom: 2rem;
-  position: relative;
+  position: relative; */
+  grid-area: new-arrival-img;
 }
 
-.featured-collection-image {
+.new-arrivals-collection-image {
   aspect-ratio: 1 / 1;
   @media (min-width: 45em) {
     aspect-ratio: 16 / 9;
   }
 }
 
-.featured-collection img {
+.new-arrivals-collection img {
   height: auto;
-  max-height: 100%;
+  max-height: calc(100vh - var(--header-height));
   object-fit: cover;
 }
 
-.recommended-products-grid {
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-template-columns: repeat(2, 1fr);
-  @media (min-width: 45em) {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.featured-products {
+  grid-area: featured-product-title;
 }
 
-.recommended-product img {
+.featured-product img {
   height: auto;
 }
 
