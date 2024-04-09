@@ -373,7 +373,6 @@ aside li {
 .product-title-price {
   margin-left: 5%;
   font-size: 0.75rem;
-
   font-family: 'regular-font';
 }
 .product-title-price > h4,
@@ -381,6 +380,8 @@ aside li {
   margin-top: 0%;
   margin-bottom: 0%;
   padding: 0%;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 .featured-products {
   font-size: 0.75rem;
