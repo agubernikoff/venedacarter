@@ -12,6 +12,11 @@ img {
   border-radius: 4px;
 }
 
+@font-face {
+  font-family: 'regular-font';
+  src: url('font-regular.otf') format('truetype');
+}
+
 /*
 * --------------------------------------------------
 * components/Aside
@@ -179,6 +184,7 @@ aside li {
 .footer {
   background: var(--color-dark);
   margin-top: auto;
+  display: none;
 }
 
 .footer-menu {
@@ -334,14 +340,66 @@ aside li {
   object-fit: cover;
 }
 
+.new-arrivals-container {
+  padding-left: 5%;
+}
+.new-arrivals-container > h1 {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  position: relative; /* Ensures positioning context for ::before pseudo-element */
+  padding-left: 15px; /* Adds space on the left for the bullet */
+}
+
+.new-arrivals-container > h1::before {
+  content: ''; /* Ensures the pseudo-element has content */
+  position: absolute; /* Position relative to the h1 */
+  top: 45%; /* Positions the bullet vertically centered */
+  left: 0; /* Positions the bullet on the left of the h1 */
+  transform: translateY(-50%); /* Adjusts vertical alignment */
+  width: 10px; /* Diameter of the bullet */
+  height: 10px; /* Diameter of the bullet */
+  border-radius: 50%; /* Makes the bullet circular */
+  background-color: black; /* Color of the bullet */
+}
+
 .featured-products {
   grid-area: featured-product-title;
 }
 
 .featured-product img {
   height: auto;
+  background-color: rgb(245, 245, 245);
+}
+.product-title-price {
+  margin-left: 5%;
+  font-size: 0.75rem;
+
+  font-family: 'regular-font';
+}
+.product-title-price > h4,
+.product-title-price > small {
+  margin-top: 0%;
+  margin-bottom: 0%;
+  padding: 0%;
+}
+.featured-products {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  position: relative; /* Ensures positioning context for ::before pseudo-element */
+  padding-left: 15px; /* Adds space on the left for the bullet */
 }
 
+.featured-products::before {
+  content: ''; /* Ensures the pseudo-element has content */
+  position: absolute; /* Position relative to the h1 */
+  top: 45%; /* Positions the bullet vertically centered */
+  left: 0; /* Positions the bullet on the left of the h1 */
+  transform: translateY(-50%); /* Adjusts vertical alignment */
+  width: 10px; /* Diameter of the bullet */
+  height: 10px; /* Diameter of the bullet */
+  border-radius: 50%; /* Makes the bullet circular */
+  background-color: black; /* Color of the bullet */
+}
 /*
 * --------------------------------------------------
 * routes/collections._index.tsx

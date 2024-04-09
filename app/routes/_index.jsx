@@ -89,10 +89,12 @@ function FeaturedProducts({products}) {
             aspectRatio="1/1"
             sizes="(min-width: 45em) 20vw, 50vw"
           />
-          <h4>{product.title}</h4>
-          <small>
-            <Money data={product.priceRange.minVariantPrice} />
-          </small>
+          <div className="product-title-price">
+            <h4>{product.title}</h4>
+            <small>
+              <Money data={product.priceRange.minVariantPrice} />
+            </small>
+          </div>
         </Link>
       ))}
       {/* </div> */}
