@@ -3,7 +3,7 @@
   --cart-aside-summary-height-with-discount: 300px;
   --cart-aside-summary-height: 250px;
   --grid-item-width: 355px;
-  --header-height: 64px;
+  --header-height: 50px;
   --color-dark: #000;
   --color-light: #fff;
 }
@@ -14,7 +14,12 @@ img {
 
 @font-face {
   font-family: 'regular-font';
-  src: url('font-regular.otf') format('truetype');
+  src: url('font-regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'bold-font';
+  src: url('bold-font.otf') format('opentype');
 }
 
 /*
@@ -136,11 +141,23 @@ aside li {
   align-items: center;
   background: #fff;
   display: flex;
+  justify-content: space-between;
   height: var(--header-height);
   padding: 0 1rem;
   position: sticky;
   top: 0;
   z-index: 1;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  border-bottom: 1px solid #ccc;
+}
+.header-left,
+.header-right {
+  flex: 1;
+}
+
+.header-center {
+  flex: 2;
 }
 
 .header-menu-mobile-toggle {
@@ -158,15 +175,30 @@ aside li {
 .header-menu-desktop {
   display: none;
   grid-gap: 1rem;
+  justify-content: center;
+
   @media (min-width: 45em) {
     display: flex;
-    grid-gap: 1rem;
-    margin-left: 3rem;
+    margin-left: auto;
   }
 }
 
 .header-menu-item {
   cursor: pointer;
+  position: relative;
+  padding-left: 17px;
+}
+.header-menu-item::before {
+  content: ''; /* Ensures the pseudo-element has content */
+  position: absolute; /* Position relative to the h1 */
+  top: 47%; /* Positions the bullet vertically centered */
+  left: 0; /* Positions the bullet on the left of the h1 */
+  transform: translateY(-50%); /* Adjusts vertical alignment */
+  width: 10px; /* Diameter of the bullet */
+  height: 10px; /* Diameter of the bullet */
+  border: 1px solid black;
+  border-radius: 50%; /* Makes the bullet circular */
+  background-color: white; /* Color of the bullet */
 }
 
 .header-ctas {
@@ -174,6 +206,11 @@ aside li {
   display: flex;
   grid-gap: 1rem;
   margin-left: auto;
+  justify-content: flex-end;
+}
+.shop-name {
+  font-family: 'bold-font';
+  font-size: 0.75rem;
 }
 
 /*
@@ -341,7 +378,7 @@ aside li {
 }
 
 .new-arrivals-container {
-  padding-left: 5%;
+  padding-left: 1rem;
 }
 .new-arrivals-container > h1 {
   font-size: 0.75rem;
@@ -364,8 +401,22 @@ aside li {
 
 .featured-products {
   grid-area: featured-product-title;
+  margin-left: 1rem;
 }
-
+.product-details-container {
+  display: flex;
+  justify-content: space-between;
+}
+.product-color-variants {
+  margin-right: 5%;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  margin-top: 0;
+  margin-bottom: 3%;
+}
+.product-color-variants > h4 {
+  color: #d3d3d3;
+}
 .featured-product img {
   height: auto;
   background-color: #f4f4f4;
