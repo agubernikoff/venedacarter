@@ -374,6 +374,8 @@ aside li {
   margin-left: 5%;
   font-size: 0.75rem;
   font-family: 'regular-font';
+  margin-top: 1%;
+  margin-bottom: 3%;
 }
 .product-title-price > h4,
 .product-title-price > small {
