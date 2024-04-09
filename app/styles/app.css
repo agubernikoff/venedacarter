@@ -385,6 +385,7 @@ aside li {
   font-family: 'regular-font';
   position: relative; /* Ensures positioning context for ::before pseudo-element */
   padding-left: 15px; /* Adds space on the left for the bullet */
+  margin-top: 5%;
 }
 
 .new-arrivals-container > h1::before {
