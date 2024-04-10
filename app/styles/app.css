@@ -369,7 +369,6 @@ aside li {
   padding-left: 15px; /* Adds space on the left for the bullet */
   margin-top: 5%;
 }
-
 .new-arrivals-container > h1::before {
   content: ''; /* Ensures the pseudo-element has content */
   position: absolute; /* Position relative to the h1 */
@@ -381,6 +380,10 @@ aside li {
   border-radius: 50%; /* Makes the bullet circular */
   background-color: black; /* Color of the bullet */
 }
+.new-arrivals-container > p {
+  margin-bottom: 5%;
+}
+
 .new-arrivals-collection {
   /* display: block;
   margin-bottom: 2rem;
