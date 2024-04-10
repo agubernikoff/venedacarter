@@ -62,7 +62,6 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
         </NavLink>
       )}
       {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
-        console.log(item);
         if (!item.url) return null;
 
         // if the url is internal, we strip the domain
