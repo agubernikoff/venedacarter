@@ -1,6 +1,6 @@
 import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
-import {Suspense} from 'react';
+import {Suspense, useState} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 
 /**
@@ -79,33 +79,41 @@ function FeaturedProducts({products}) {
       <h2 className="featured-products">Featured Products</h2>
       {/* <div className="featured-products-grid"> */}
       {products.map((product) => (
-        <Link
-          key={product.id}
-          className="featured-product"
-          to={`/products/${product.handle}`}
-        >
-          <Image
-            data={product.images.nodes[0]}
-            aspectRatio="1/1"
-            sizes="(min-width: 45em) 20vw, 50vw"
-          />
-          <div className="product-details-container">
-            <div className="product-title-price">
-              <h4>{product.title}</h4>
-              <small>
-                <Money data={product.priceRange.minVariantPrice} />
-              </small>
-            </div>
-            <div className="product-color-variants">
-              <h4>+2 Colors</h4>
-            </div>
-          </div>
-        </Link>
+        <FeaturedProduct product={product} key={product.id} />
       ))}
       {/* </div> */}
       <br />
       {/* </div> */}
     </>
+  );
+}
+
+function FeaturedProduct({product}) {
+  const [index, setIndex] = useState(0);
+  return (
+    <Link
+      className="featured-product"
+      to={`/products/${product.handle}`}
+      onMouseEnter={() => setIndex(1)}
+      onMouseLeave={() => setIndex(0)}
+    >
+      <Image
+        data={product.images.nodes[index]}
+        aspectRatio="1/1"
+        sizes="(min-width: 45em) 20vw, 50vw"
+      />
+      <div className="product-details-container">
+        <div className="product-title-price">
+          <h4>{product.title}</h4>
+          <small>
+            <Money data={product.priceRange.minVariantPrice} />
+          </small>
+        </div>
+        <div className="product-color-variants">
+          <h4>+2 Colors</h4>
+        </div>
+      </div>
+    </Link>
   );
 }
 
@@ -124,7 +132,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
             currencyCode
           }
         }
-        images(first: 1) {
+        images(first: 2) {
           nodes {
             id
             url
