@@ -88,15 +88,10 @@ function FeaturedProducts({products}) {
   if (!products) return null;
   return (
     <>
-      {/* <div className="featured-products"> */}
       <h2 className="featured-products">Featured Products</h2>
-      {/* <div className="featured-products-grid"> */}
       {products.map((product) => (
         <FeaturedProduct product={product} key={product.id} />
       ))}
-      {/* </div> */}
-      <br />
-      {/* </div> */}
     </>
   );
 }
