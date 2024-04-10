@@ -140,11 +140,26 @@ function FeaturedProduct({product}) {
 }
 
 function Categories({categories}) {
-  console.log(categories);
   return (
-    <div className="categories">
-      <h2 className="featured-products">Categories</h2>
-    </div>
+    <>
+      <h2 className="category">Categories</h2>
+      <br></br>
+      <div></div>
+      {categories.map((category) => (
+        <Link
+          key={category.handle}
+          className="category-collection"
+          to={`/collections/${category.handle}`}
+        >
+          <Image
+            data={category.image}
+            aspectRatio="1/1"
+            sizes="(min-width: 45em) 20vw, 50vw"
+            className="category-image"
+          />
+        </Link>
+      ))}
+    </>
   );
 }
 

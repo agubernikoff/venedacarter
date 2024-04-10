@@ -482,9 +482,34 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
 }
-.categories {
-  /* width: 100%; */
+.category {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  position: relative;
+  padding-left: 15px;
 }
+.category::before {
+  content: '';
+  position: absolute;
+  top: 45%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+}
+.category-image {
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border: none !important;
+  @media (min-width: 45em) {
+    aspect-ratio: 16 / 9;
+  }
+}
+
 /*
 * --------------------------------------------------
 * routes/collections._index.tsx
