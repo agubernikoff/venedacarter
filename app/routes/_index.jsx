@@ -2,6 +2,7 @@ import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense, useState} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
+import {motion, AnimatePresence} from 'framer-motion';
 
 /**
  * @type {MetaFunction}
@@ -97,11 +98,23 @@ function FeaturedProduct({product}) {
       onMouseEnter={() => setIndex(1)}
       onMouseLeave={() => setIndex(0)}
     >
-      <Image
-        data={product.images.nodes[index]}
-        aspectRatio="1/1"
-        sizes="(min-width: 45em) 20vw, 50vw"
-      />
+      <div style={{background: '#f4f4f4'}}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{duration: 0.2}}
+          >
+            <Image
+              data={product.images.nodes[index]}
+              aspectRatio="1/1"
+              sizes="(min-width: 45em) 20vw, 50vw"
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
       <div className="product-details-container">
         <div className="product-title-price">
           <h4>{product.title}</h4>
