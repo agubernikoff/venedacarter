@@ -19,11 +19,13 @@ export async function loader({context}) {
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const newArrivalsCollection = collections.nodes[1];
+  const restOfCollections = [...collections.nodes].slice(2);
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
 
   return defer({
     featuredCollection,
     newArrivalsCollection,
+    restOfCollections,
     recommendedProducts,
   });
 }
@@ -36,7 +38,7 @@ export default function Homepage() {
     <div className="home">
       <NewArrivals collection={data.newArrivalsCollection} />
       <FeaturedProducts products={data.featuredCollection.products.nodes} />
-      <Categories />
+      <Categories categories={data.restOfCollections} />
     </div>
   );
 }
@@ -137,7 +139,8 @@ function FeaturedProduct({product}) {
   );
 }
 
-function Categories() {
+function Categories({categories}) {
+  console.log(categories);
   return (
     <div className="categories">
       <h2 className="featured-products">Categories</h2>
@@ -182,7 +185,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   }
   query FeaturedCollection($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    collections(first: 2, sortKey: UPDATED_AT, reverse: true) {
+    collections(first: 6, sortKey: ID) {
       nodes {
         ...FeaturedCollection
       }
