@@ -356,28 +356,9 @@ aside li {
 }
 .new-arrivals-container {
   grid-area: new-arrival-markup;
-}
-.new-arrivals-collection {
-  /* display: block;
-  margin-bottom: 2rem;
-  position: relative; */
-  grid-area: new-arrival-img;
-}
-
-.new-arrivals-collection-image {
-  aspect-ratio: 1 / 1;
-  @media (min-width: 45em) {
-    aspect-ratio: 16 / 9;
-  }
-}
-
-.new-arrivals-collection img {
-  height: auto;
-  max-height: calc(100vh - var(--header-height));
-  object-fit: cover;
-}
-
-.new-arrivals-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding-left: 1rem;
 }
 .new-arrivals-container > h1 {
@@ -398,6 +379,25 @@ aside li {
   height: 10px; /* Diameter of the bullet */
   border-radius: 50%; /* Makes the bullet circular */
   background-color: black; /* Color of the bullet */
+}
+.new-arrivals-collection {
+  /* display: block;
+  margin-bottom: 2rem;
+  position: relative; */
+  grid-area: new-arrival-img;
+}
+
+.new-arrivals-collection-image {
+  aspect-ratio: 1 / 1;
+  @media (min-width: 45em) {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.new-arrivals-collection img {
+  height: auto;
+  max-height: calc(100vh - var(--header-height));
+  object-fit: cover;
 }
 
 .featured-products {

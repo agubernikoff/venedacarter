@@ -52,6 +52,14 @@ function NewArrivals({collection}) {
     <>
       <div className="new-arrivals-container">
         <h1>{collection.title}</h1>
+        <p>
+          Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+          IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+          IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+          IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+          IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
+          IpsumLorem IpsumLorem IpsumLorem Ipsum
+        </p>
       </div>
       <Link
         className="new-arrivals-collection"
