@@ -66,9 +66,11 @@ function NewArrivals({collection}) {
         to={`/collections/${collection.handle}`}
       >
         {image && (
-          <div className="new-arrivals-collection-image">
-            <Image data={image} sizes="66vw" />
-          </div>
+          <Image
+            data={image}
+            sizes="66vw"
+            className="new-arrivals-collection-image"
+          />
         )}
       </Link>
     </>
@@ -107,21 +109,21 @@ function FeaturedProduct({product}) {
       onMouseLeave={() => setIndex(0)}
     >
       <div style={{background: '#f4f4f4'}}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
-            transition={{duration: 0.2}}
-          >
-            <Image
-              data={product.images.nodes[index]}
-              aspectRatio="1/1"
-              sizes="(min-width: 45em) 20vw, 50vw"
-            />
-          </motion.div>
-        </AnimatePresence>
+        {/* <AnimatePresence mode="wait" initial={false}> */}
+        <motion.div
+          key={index}
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          exit={{opacity: 0}}
+          transition={{duration: 0.2}}
+        >
+          <Image
+            data={product.images.nodes[index]}
+            aspectRatio="1/1"
+            sizes="(min-width: 45em) 20vw, 50vw"
+          />
+        </motion.div>
+        {/* </AnimatePresence> */}
       </div>
       <div className="product-details-container">
         <div className="product-title-price">

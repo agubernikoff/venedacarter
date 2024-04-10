@@ -8,9 +8,9 @@
   --color-light: #fff;
 }
 
-img {
+/* img {
   border-radius: 4px;
-}
+} */
 
 @font-face {
   font-family: 'regular-font';
@@ -360,6 +360,7 @@ aside li {
   flex-direction: column;
   justify-content: space-between;
   padding-left: 1rem;
+  border: 1px solid #f4f4f4;
 }
 .new-arrivals-container > h1 {
   font-size: 0.75rem;
@@ -388,21 +389,41 @@ aside li {
 }
 
 .new-arrivals-collection-image {
+  display: block;
+  height: auto;
+  max-height: calc(100vh - var(--header-height));
+  object-fit: cover;
   aspect-ratio: 1 / 1;
+  border: 1px solid #f4f4f4;
   @media (min-width: 45em) {
     aspect-ratio: 16 / 9;
   }
 }
 
-.new-arrivals-collection img {
-  height: auto;
-  max-height: calc(100vh - var(--header-height));
-  object-fit: cover;
-}
-
 .featured-products {
   grid-area: featured-product-title;
   margin-left: 1rem;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  position: relative; /* Ensures positioning context for ::before pseudo-element */
+  padding-left: 15px; /* Adds space on the left for the bullet */
+}
+
+.featured-products::before {
+  content: ''; /* Ensures the pseudo-element has content */
+  position: absolute; /* Position relative to the h1 */
+  top: 45%; /* Positions the bullet vertically centered */
+  left: 0; /* Positions the bullet on the left of the h1 */
+  transform: translateY(-50%); /* Adjusts vertical alignment */
+  width: 10px; /* Diameter of the bullet */
+  height: 10px; /* Diameter of the bullet */
+  border-radius: 50%; /* Makes the bullet circular */
+  background-color: black; /* Color of the bullet */
+}
+.featured-product {
+  border: 0.5px solid #f4f4f4;
+  border-left: none;
 }
 .product-details-container {
   display: flex;
@@ -436,24 +457,6 @@ aside li {
   padding: 0%;
   font-size: 0.75rem;
   font-family: 'regular-font';
-}
-.featured-products {
-  font-size: 0.75rem;
-  font-family: 'regular-font';
-  position: relative; /* Ensures positioning context for ::before pseudo-element */
-  padding-left: 15px; /* Adds space on the left for the bullet */
-}
-
-.featured-products::before {
-  content: ''; /* Ensures the pseudo-element has content */
-  position: absolute; /* Position relative to the h1 */
-  top: 45%; /* Positions the bullet vertically centered */
-  left: 0; /* Positions the bullet on the left of the h1 */
-  transform: translateY(-50%); /* Adjusts vertical alignment */
-  width: 10px; /* Diameter of the bullet */
-  height: 10px; /* Diameter of the bullet */
-  border-radius: 50%; /* Makes the bullet circular */
-  background-color: black; /* Color of the bullet */
 }
 /*
 * --------------------------------------------------
