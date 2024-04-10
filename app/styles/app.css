@@ -387,8 +387,24 @@ aside li {
 }
 .new-arrivals-container > p {
   margin-bottom: 5%;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
-
+.new-arrivals-text {
+  margin-bottom: 5%;
+}
+.new-arrivals-text > p {
+  margin-bottom: 2%;
+}
+.new-arrivals-text > p,
+.new-arrivals-text > a {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  width: 90%;
+}
+.new-arrivals-text > a {
+  text-decoration: underline;
+}
 .new-arrivals-collection {
   /* display: block;
   margin-bottom: 2rem;
@@ -465,6 +481,9 @@ aside li {
   padding: 0%;
   font-size: 0.75rem;
   font-family: 'regular-font';
+}
+.categories {
+  /* width: 100%; */
 }
 /*
 * --------------------------------------------------

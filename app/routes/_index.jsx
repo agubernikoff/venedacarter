@@ -36,6 +36,7 @@ export default function Homepage() {
     <div className="home">
       <NewArrivals collection={data.newArrivalsCollection} />
       <FeaturedProducts products={data.featuredCollection.products.nodes} />
+      <Categories />
     </div>
   );
 }
@@ -52,14 +53,15 @@ function NewArrivals({collection}) {
     <>
       <div className="new-arrivals-container">
         <h1>{collection.title}</h1>
-        <p>
-          Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-          IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-          IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-          IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-          IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem
-          IpsumLorem IpsumLorem IpsumLorem Ipsum
-        </p>
+        <div className="new-arrivals-text">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+            risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing
+            nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas
+            ligula massa, varius a, semper congue, euismod non, mi.
+          </p>
+          <a>Discover</a>
+        </div>
       </div>
       <Link
         className="new-arrivals-collection"
@@ -137,6 +139,14 @@ function FeaturedProduct({product}) {
         </div>
       </div>
     </Link>
+  );
+}
+
+function Categories() {
+  return (
+    <div className="categories">
+      <h2 className="featured-products">Categories</h2>
+    </div>
   );
 }
 
