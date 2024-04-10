@@ -1,6 +1,7 @@
 import {Await, NavLink} from '@remix-run/react';
-import {Suspense} from 'react';
+import {Suspense, useState} from 'react';
 import {useRootLoaderData} from '~/root';
+import {motion, AnimatePresence} from 'framer-motion';
 
 /**
  * @param {HeaderProps}
@@ -38,6 +39,7 @@ export function Header({header, isLoggedIn, cart}) {
 export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
   const {publicStoreDomain} = useRootLoaderData();
   const className = `header-menu-${viewport}`;
+  const [hovered, setHovered] = useState(false);
 
   function closeAside(event) {
     if (viewport === 'mobile') {
@@ -70,19 +72,87 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
           item.url.includes(primaryDomainUrl)
             ? new URL(item.url).pathname
             : item.url;
+
+        // if (item.items.length > 0) {
         return (
-          <NavLink
-            className="header-menu-item"
-            end
+          <div
             key={item.id}
-            onClick={closeAside}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
+            onMouseEnter={() => {
+              if (item.title === 'Shop') setHovered(true);
+            }}
+            onMouseLeave={() => {
+              if (item.title === 'Shop') setHovered(false);
+            }}
+            className={
+              item.title === 'Shop' ? 'header-catalog-submenu-container' : null
+            }
           >
-            {item.title}
-          </NavLink>
+            <motion.div layout="position" transition={{ease: 'easeInOut'}}>
+              <NavLink
+                className="header-menu-item"
+                end
+                onClick={closeAside}
+                prefetch="intent"
+                style={(activeLinkStyle, hovered ? {opacity: 0.25} : null)}
+                to={url}
+              >
+                {item.title}
+              </NavLink>
+            </motion.div>
+            <AnimatePresence mode="popLayout">
+              {hovered && (
+                <motion.div
+                  initial={{opacity: 0, x: 500}}
+                  animate={{opacity: 1, x: 0}}
+                  exit={{opacity: 0, x: 500}}
+                  transition={{ease: 'easeInOut'}}
+                  className="header-catalog-submenu-container"
+                >
+                  {item.items.map((item) => {
+                    if (!item.url) return null;
+
+                    // if the url is internal, we strip the domain
+                    const url =
+                      item.url.includes('myshopify.com') ||
+                      item.url.includes(publicStoreDomain) ||
+                      item.url.includes(primaryDomainUrl)
+                        ? new URL(item.url).pathname
+                        : item.url;
+                    return (
+                      <NavLink
+                        className="header-menu-item"
+                        end
+                        key={item.id}
+                        onClick={closeAside}
+                        prefetch="intent"
+                        style={activeLinkStyle}
+                        to={url}
+                      >
+                        {item.title}
+                      </NavLink>
+                    );
+                  })}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         );
+        // }
+
+        // return (
+        //   <motion.div key={item.id} layout={true}>
+        //     <NavLink
+        //       className="header-menu-item"
+        //       end
+        //       onClick={closeAside}
+        //       prefetch="intent"
+        //       style={activeLinkStyle}
+        //       to={url}
+        //     >
+        //       {item.title}
+        //     </NavLink>
+        //   </motion.div>
+        // );
       })}
     </nav>
   );

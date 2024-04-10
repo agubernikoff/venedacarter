@@ -160,6 +160,11 @@ aside li {
   flex: 2;
 }
 
+.header-catalog-submenu-container {
+  display: flex;
+  gap: 1rem;
+}
+
 .header-menu-mobile-toggle {
   @media (min-width: 48em) {
     display: none;
