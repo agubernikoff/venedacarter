@@ -143,8 +143,6 @@ function Categories({categories}) {
   return (
     <>
       <h2 className="category">Categories</h2>
-      <br></br>
-      <div></div>
       {categories.map((category) => (
         <Link
           key={category.handle}
@@ -153,10 +151,11 @@ function Categories({categories}) {
         >
           <Image
             data={category.image}
-            aspectRatio="1/1"
+            aspectRatio="1/1.2"
             sizes="(min-width: 45em) 20vw, 50vw"
             className="category-image"
           />
+          <p>{`Shop ${category.title}`}</p>
         </Link>
       ))}
     </>

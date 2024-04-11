@@ -446,7 +446,7 @@ aside li {
   background-color: black; /* Color of the bullet */
 }
 .featured-product {
-  border: 0.5px solid #f4f4f4;
+  border: 1px solid #f4f4f4;
   border-left: none;
 }
 .product-details-container {
@@ -483,6 +483,7 @@ aside li {
   font-family: 'regular-font';
 }
 .category {
+  grid-column: span 3;
   margin-left: 1rem;
   margin-top: 1rem;
   font-size: 0.75rem;
@@ -501,9 +502,20 @@ aside li {
   border-radius: 50%;
   background-color: black;
 }
+.category-collection {
+  position: relative;
+}
+.category-collection > p {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  color: #f4f4f4;
+}
 .category-image {
+  display: block;
   height: auto;
   aspect-ratio: 1 / 1;
+  object-fit: cover;
   border: none !important;
   @media (min-width: 45em) {
     aspect-ratio: 16 / 9;
