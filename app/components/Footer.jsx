@@ -7,9 +7,8 @@ import {useRootLoaderData} from '~/root';
 export function Footer({menu, shop}) {
   return (
     <footer className="footer">
-      {menu && shop?.primaryDomain?.url && (
-        <FooterMenu menu={menu} primaryDomainUrl={shop.primaryDomain.url} />
-      )}
+      <FooterTitles />
+      <FooterContent />
     </footer>
   );
 }
@@ -20,38 +19,51 @@ export function Footer({menu, shop}) {
  *   primaryDomainUrl: HeaderQuery['shop']['primaryDomain']['url'];
  * }}
  */
-function FooterMenu({menu, primaryDomainUrl}) {
-  const {publicStoreDomain} = useRootLoaderData();
-
+function FooterTitles() {
   return (
-    <nav className="footer-menu" role="navigation">
-      {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
-        if (!item.url) return null;
-        // if the url is internal, we strip the domain
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
-        const isExternal = !url.startsWith('/');
-        return isExternal ? (
-          <a href={url} key={item.id} rel="noopener noreferrer" target="_blank">
-            {item.title}
-          </a>
-        ) : (
-          <NavLink
-            end
-            key={item.id}
-            prefetch="intent"
-            style={activeLinkStyle}
-            to={url}
-          >
-            {item.title}
-          </NavLink>
-        );
-      })}
-    </nav>
+    <>
+      <div className="brand-footer">
+        <h2>Brand</h2>
+      </div>
+      <div className="support-footer">
+        <h2>Support</h2>
+      </div>
+      <div className="newsletter-footer">
+        <h2>Newsletter</h2>
+      </div>
+    </>
+  );
+}
+
+function FooterContent() {
+  return (
+    <>
+      <div className="brand-content-footer">
+        <div className="brand-list">
+          <a>New Arrivals</a>
+          <a>Shop</a>
+          <a>About</a>
+          <a>Stockists</a>
+          <a>Instagram</a>
+        </div>
+        <div className="site-credit">
+          <p>© Veneda Carter 2024, All Rights Reserved. </p>
+          <a>Site Credit</a>
+        </div>
+      </div>
+      <div className="support-content-footer">
+        <div className="brand-list">
+          <a>Terms of Servive</a>
+          <a>Privacy Policy</a>
+          <a>Refund Policy</a>
+          <a>Claim Portal</a>
+          <a>Contact</a>
+        </div>
+      </div>
+      <div className="newsletter-content-footer">
+        <h2>Newsletter</h2>
+      </div>
+    </>
   );
 }
 

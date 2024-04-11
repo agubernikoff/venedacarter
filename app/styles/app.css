@@ -150,6 +150,7 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
   border-bottom: 1px solid #ccc;
+  border-right: none;
 }
 .header-left,
 .header-right {
@@ -224,20 +225,91 @@ aside li {
 * --------------------------------------------------
 */
 .footer {
-  background: var(--color-dark);
   margin-top: auto;
-  display: none;
+  height: calc(100vh - var(--header-height));
+  display: grid;
+  grid-template-areas: 'brand support newsletter';
+  grid-auto-columns: 1fr;
+  grid-template-rows: 6% 94%;
 }
+.brand-footer {
+  grid-area: brand;
+  border-right: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+}
+.support-footer {
+  grid-area: support;
+  border-right: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+}
+.newsletter-footer {
+  grid-area: newsletter;
 
-.footer-menu {
-  align-items: center;
+  border-bottom: 1px solid #efefef;
+}
+.brand-footer > h2,
+.support-footer > h2,
+.newsletter-footer > h2 {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  position: relative;
+  padding-left: 15px;
+  margin-left: 1rem;
+  margin-top: 1.1rem;
+}
+.brand-footer > h2::before,
+.support-footer > h2::before,
+.newsletter-footer > h2::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+}
+.brand-content-footer {
   display: flex;
-  grid-gap: 1rem;
-  padding: 1rem;
+  flex-direction: column;
+  margin-left: 1rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  justify-content: space-between;
+  border-right: 1px solid #efefef;
 }
-
-.footer-menu a {
-  color: var(--color-light);
+.brand-list {
+  display: flex;
+  flex-direction: column;
+}
+.site-credit {
+  margin-bottom: 3%;
+}
+.site-credit > a {
+  text-decoration: underline;
+}
+.site-credit > a,
+.site-credit > p {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  color: #c2c2c2;
+}
+.brand-list > a,
+.support-content-footer > a {
+  margin-bottom: 1%;
+}
+.support-content-footer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  border-right: 1px solid #efefef;
+}
+.brand-list,
+.newsletter-content-footer {
+  margin-top: 3%;
 }
 
 /*
