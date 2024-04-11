@@ -453,6 +453,9 @@ aside li {
   display: flex;
   justify-content: space-between;
 }
+.featured-product:hover {
+  text-decoration: none !important;
+}
 .product-color-variants {
   margin-right: 5%;
   font-size: 0.75rem;
