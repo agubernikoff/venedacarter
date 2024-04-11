@@ -1,5 +1,6 @@
 import {NavLink} from '@remix-run/react';
 import {useRootLoaderData} from '~/root';
+import lisa from '../assets/lisa.jpg';
 
 /**
  * @param {FooterQuery & {shop: HeaderQuery['shop']}}
@@ -61,7 +62,12 @@ function FooterContent() {
         </div>
       </div>
       <div className="newsletter-content-footer">
-        <h2>Newsletter</h2>
+        <div className="newsletter-image-container">
+          <img src={lisa} />
+        </div>
+        <div className="newsletter-form-footer">
+          <p>Join our newsletter for the latest news and releases.</p>
+        </div>
       </div>
     </>
   );
