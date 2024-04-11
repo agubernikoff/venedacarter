@@ -155,7 +155,9 @@ function Categories({categories}) {
             sizes="(min-width: 45em) 20vw, 50vw"
             className="category-image"
           />
-          <p>{`Shop ${category.title}`}</p>
+          <p
+            style={{fontFamily: 'regular-font', fontSize: '.75rem'}}
+          >{`Shop ${category.title}`}</p>
         </Link>
       ))}
     </>
