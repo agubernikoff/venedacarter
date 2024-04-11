@@ -193,7 +193,7 @@ function SearchToggle() {
  * @param {{count: number}}
  */
 function CartBadge({count}) {
-  return <a href="#cart-aside">Bag {count}</a>;
+  return <a href="#cart-aside">Bag ({count})</a>;
 }
 
 /**

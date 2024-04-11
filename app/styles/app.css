@@ -196,11 +196,11 @@ aside li {
 .header-menu-item::before {
   content: ''; /* Ensures the pseudo-element has content */
   position: absolute; /* Position relative to the h1 */
-  top: 47%; /* Positions the bullet vertically centered */
+  top: 50%; /* Positions the bullet vertically centered */
   left: 0; /* Positions the bullet on the left of the h1 */
   transform: translateY(-50%); /* Adjusts vertical alignment */
-  width: 10px; /* Diameter of the bullet */
-  height: 10px; /* Diameter of the bullet */
+  width: 9px; /* Diameter of the bullet */
+  height: 9px; /* Diameter of the bullet */
   border: 1px solid black;
   border-radius: 50%; /* Makes the bullet circular */
   background-color: white; /* Color of the bullet */
@@ -372,12 +372,12 @@ aside li {
   font-family: 'regular-font';
   position: relative; /* Ensures positioning context for ::before pseudo-element */
   padding-left: 15px; /* Adds space on the left for the bullet */
-  margin-top: 5%;
+  margin-top: 3%;
 }
 .new-arrivals-container > h1::before {
   content: ''; /* Ensures the pseudo-element has content */
   position: absolute; /* Position relative to the h1 */
-  top: 45%; /* Positions the bullet vertically centered */
+  top: 50%; /* Positions the bullet vertically centered */
   left: 0; /* Positions the bullet on the left of the h1 */
   transform: translateY(-50%); /* Adjusts vertical alignment */
   width: 10px; /* Diameter of the bullet */
@@ -391,7 +391,7 @@ aside li {
   font-family: 'regular-font';
 }
 .new-arrivals-text {
-  margin-bottom: 5%;
+  margin-bottom: 4%;
 }
 .new-arrivals-text > p {
   margin-bottom: 2%;
@@ -418,7 +418,7 @@ aside li {
   max-height: calc(100vh - var(--header-height));
   object-fit: cover;
   aspect-ratio: 1 / 1;
-  border: 1px solid #f4f4f4;
+
   @media (min-width: 45em) {
     aspect-ratio: 16 / 9;
   }
@@ -430,14 +430,14 @@ aside li {
   margin-top: 1rem;
   font-size: 0.75rem;
   font-family: 'regular-font';
-  position: relative; /* Ensures positioning context for ::before pseudo-element */
-  padding-left: 15px; /* Adds space on the left for the bullet */
+  position: relative;
+  padding-left: 15px;
 }
 
 .featured-products::before {
   content: ''; /* Ensures the pseudo-element has content */
   position: absolute; /* Position relative to the h1 */
-  top: 45%; /* Positions the bullet vertically centered */
+  top: 50%; /* Positions the bullet vertically centered */
   left: 0; /* Positions the bullet on the left of the h1 */
   transform: translateY(-50%); /* Adjusts vertical alignment */
   width: 10px; /* Diameter of the bullet */
@@ -494,7 +494,7 @@ aside li {
 .category::before {
   content: '';
   position: absolute;
-  top: 45%;
+  top: 50%;
   left: 0;
   transform: translateY(-50%);
   width: 10px;
@@ -504,6 +504,7 @@ aside li {
 }
 .category-collection {
   position: relative;
+  width: 100.1%;
 }
 .category-collection > p {
   position: absolute;
