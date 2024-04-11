@@ -138,6 +138,7 @@ aside li {
 * --------------------------------------------------
 */
 .header {
+  z-index: 4;
   align-items: center;
   background: #fff;
   display: flex;
@@ -255,6 +256,7 @@ aside li {
   position: relative;
   padding-left: 15px;
   margin-left: 1rem;
+  margin-top: 1.2rem;
 }
 .brand-footer > h2::before,
 .support-footer > h2::before,
@@ -513,9 +515,15 @@ aside li {
     aspect-ratio: 16 / 9;
   }
 }
+.featured-products-title-container {
+  grid-area: featured-product-title;
+  position: sticky;
+  top: var(--header-height);
+  background: white;
+  z-index: 2;
+}
 
 .featured-products {
-  grid-area: featured-product-title;
   margin-left: 1rem;
   margin-top: 1rem;
   font-size: 0.75rem;
@@ -575,8 +583,14 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
 }
-.category {
+.categories-title-container {
+  position: sticky;
+  top: var(--header-height);
+  background: white;
+  z-index: 3;
   grid-column: span 3;
+}
+.category {
   margin-left: 1rem;
   margin-top: 1rem;
   font-size: 0.75rem;

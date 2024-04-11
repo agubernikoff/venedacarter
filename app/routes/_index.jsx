@@ -90,7 +90,9 @@ function FeaturedProducts({products}) {
   if (!products) return null;
   return (
     <>
-      <h2 className="featured-products">Featured Products</h2>
+      <div className="featured-products-title-container">
+        <h2 className="featured-products">Featured Products</h2>
+      </div>
       {products.map((product) => (
         <FeaturedProduct product={product} key={product.id} />
       ))}
@@ -142,7 +144,9 @@ function FeaturedProduct({product}) {
 function Categories({categories}) {
   return (
     <>
-      <h2 className="category">Categories</h2>
+      <div className="categories-title-container">
+        <h2 className="category">Categories</h2>
+      </div>
       {categories.map((category) => (
         <Link
           key={category.handle}
