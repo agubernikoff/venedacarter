@@ -120,7 +120,8 @@ function FeaturedProduct({product}) {
         >
           <Image
             data={product.images.nodes[index]}
-            aspectRatio="1/1"
+            aspectRatio="1/1.2"
+            crop={false}
             sizes="(min-width: 45em) 20vw, 50vw"
           />
         </motion.div>
