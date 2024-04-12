@@ -67,6 +67,10 @@ function FooterContent() {
         </div>
         <div className="newsletter-form-footer">
           <p>Join our newsletter for the latest news and releases.</p>
+          <form className="newsletter-input-container">
+            <input placeholder="Email" name="email"></input>
+            <button type="submit">Submit</button>
+          </form>
         </div>
       </div>
     </>

@@ -323,14 +323,46 @@ aside li {
   margin-right: 1rem;
 }
 .newsletter-form-footer > p {
-  margin-left: 1rem;
   font-size: 0.75rem;
   font-family: 'regular-font';
 }
 .newsletter-form-footer {
   margin-bottom: 3%;
+  margin-left: 1rem;
+}
+.newsletter-input-container {
+  width: 97% !important;
+  max-width: 97% !important;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 2%;
+  margin-left: 0;
+  background: transparent;
 }
 
+.newsletter-input-container > input {
+  width: 70%;
+  border: none;
+  outline: none;
+  font-family: 'regular-font';
+  margin: 0;
+  padding: 0;
+  font-size: 0.75rem;
+}
+
+.newsletter-input-container > button {
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  color: black;
+  border: none;
+  padding: 0;
+  width: fit-content;
+  font-family: 'regular-font';
+  font-size: 0.75rem;
+}
 /*
 * --------------------------------------------------
 * components/Cart
