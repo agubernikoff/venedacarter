@@ -551,7 +551,7 @@ aside li {
   border-left: none;
 }
 .featured-product:nth-of-type(n + 5) {
-  border-top: 1px solid #eaeaea;
+  /* border-top: 1px solid #eaeaea; */
   border-bottom: none;
 }
 .product-details-container {
@@ -620,7 +620,7 @@ aside li {
 }
 .category-collection {
   position: relative;
-  width: 100.1%;
+  width: 100.25%;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
 }
