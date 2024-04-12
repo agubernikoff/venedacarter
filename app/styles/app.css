@@ -316,11 +316,14 @@ aside li {
   justify-content: space-between;
   flex-direction: column;
 }
+.newsletter-image-container {
+  max-width: 94%;
+  max-height: 88%;
+  margin: 0 1rem;
+  overflow: hidden;
+}
 .newsletter-image-container > img {
-  width: 94%;
-  aspect-ratio: 1/1.325;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  width: 100%;
 }
 .newsletter-form-footer > p {
   font-size: 0.75rem;
