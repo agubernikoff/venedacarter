@@ -1,6 +1,6 @@
 import {NavLink} from '@remix-run/react';
 import {useRootLoaderData} from '~/root';
-import lisa from '../assets/lisa.jpg';
+import lisa from '../assets/lisa.png';
 
 /**
  * @param {FooterQuery & {shop: HeaderQuery['shop']}}
