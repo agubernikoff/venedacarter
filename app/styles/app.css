@@ -138,7 +138,7 @@ aside li {
 * --------------------------------------------------
 */
 .header {
-  z-index: 4;
+  z-index: 5;
   align-items: center;
   background: #fff;
   display: flex;
@@ -147,7 +147,6 @@ aside li {
   padding: 0 1rem;
   position: sticky;
   top: 0;
-  z-index: 1;
   font-size: 0.75rem;
   font-family: 'regular-font';
   border-bottom: 1px solid #ccc;
@@ -235,18 +234,18 @@ aside li {
 }
 .brand-footer {
   grid-area: brand;
-  border-right: 1px solid #efefef;
-  border-bottom: 1px solid #efefef;
+  border-right: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 .support-footer {
   grid-area: support;
-  border-right: 1px solid #efefef;
-  border-bottom: 1px solid #efefef;
+  border-right: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 .newsletter-footer {
   grid-area: newsletter;
 
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid #eaeaea;
 }
 .brand-footer > h2,
 .support-footer > h2,
@@ -278,7 +277,7 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
   justify-content: space-between;
-  border-right: 1px solid #efefef;
+  border-right: 1px solid #eaeaea;
 }
 .brand-list {
   display: flex;
@@ -306,7 +305,7 @@ aside li {
   margin-left: 1rem;
   font-size: 0.75rem;
   font-family: 'regular-font';
-  border-right: 1px solid #efefef;
+  border-right: 1px solid #eaeaea;
 }
 .brand-list,
 .newsletter-content-footer {
@@ -457,7 +456,8 @@ aside li {
   flex-direction: column;
   justify-content: space-between;
   padding-left: 1rem;
-  border: 1px solid #f4f4f4;
+  border: 1px solid #eaeaea;
+  border-bottom: none;
 }
 .new-arrivals-container > h1 {
   font-size: 0.75rem;
@@ -521,6 +521,8 @@ aside li {
   top: var(--header-height);
   background: white;
   z-index: 2;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .featured-products {
@@ -544,8 +546,13 @@ aside li {
   background-color: black; /* Color of the bullet */
 }
 .featured-product {
-  border: 1px solid #f4f4f4;
+  border: 1px solid #eaeaea;
+  border-top: none;
   border-left: none;
+}
+.featured-product:nth-of-type(n + 5) {
+  border-top: 1px solid #eaeaea;
+  border-bottom: none;
 }
 .product-details-container {
   display: flex;
@@ -589,6 +596,8 @@ aside li {
   background: white;
   z-index: 3;
   grid-column: span 3;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 .category {
   margin-left: 1rem;
@@ -612,6 +621,8 @@ aside li {
 .category-collection {
   position: relative;
   width: 100.1%;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 .category-collection > p {
   position: absolute;
