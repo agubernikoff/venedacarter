@@ -482,7 +482,7 @@ aside li {
   display: grid;
   grid-template-areas:
     'new-arrival-markup new-arrival-img new-arrival-img'
-    'featured-product-title featured-product-title featured-product-title';
+    'featured-products featured-products featured-products';
   grid-auto-columns: 1fr;
 }
 .new-arrivals-container {
@@ -550,17 +550,22 @@ aside li {
     aspect-ratio: 16 / 9;
   }
 }
-.featured-products-title-container {
-  grid-area: featured-product-title;
+.subgrid {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 3;
+}
+.title-container {
   position: sticky;
   top: var(--header-height);
   background: white;
+  grid-column: span 3;
   z-index: 2;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
 }
 
-.featured-products {
+.title {
   margin-left: 1rem;
   margin-top: 1rem;
   font-size: 0.75rem;
@@ -569,7 +574,7 @@ aside li {
   padding-left: 15px;
 }
 
-.featured-products::before {
+.title::before {
   content: ''; /* Ensures the pseudo-element has content */
   position: absolute; /* Position relative to the h1 */
   top: 50%; /* Positions the bullet vertically centered */
@@ -625,7 +630,7 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
 }
-.categories-title-container {
+/* .categories-title-container {
   position: sticky;
   top: var(--header-height);
   background: white;
@@ -652,7 +657,7 @@ aside li {
   height: 10px;
   border-radius: 50%;
   background-color: black;
-}
+} */
 .category-collection {
   position: relative;
   width: 100.25%;

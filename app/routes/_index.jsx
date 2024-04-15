@@ -89,14 +89,14 @@ function NewArrivals({collection}) {
 function FeaturedProducts({products}) {
   if (!products) return null;
   return (
-    <>
-      <div className="featured-products-title-container">
-        <h2 className="featured-products">Featured Products</h2>
+    <div className="subgrid">
+      <div className="title-container">
+        <h2 className="title">Featured Products</h2>
       </div>
       {products.map((product) => (
         <FeaturedProduct product={product} key={product.id} />
       ))}
-    </>
+    </div>
   );
 }
 
@@ -145,8 +145,8 @@ function FeaturedProduct({product}) {
 function Categories({categories}) {
   return (
     <>
-      <div className="categories-title-container">
-        <h2 className="category">Categories</h2>
+      <div className="title-container">
+        <h2 className="title">Categories</h2>
       </div>
       {categories.map((category) => (
         <Link
