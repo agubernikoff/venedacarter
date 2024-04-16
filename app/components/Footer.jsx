@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from 'react';
 import {NavLink} from '@remix-run/react';
 import {useRootLoaderData} from '~/root';
 import lisa from '../assets/lisa.png';
@@ -6,10 +7,25 @@ import lisa from '../assets/lisa.png';
  * @param {FooterQuery & {shop: HeaderQuery['shop']}}
  */
 export function Footer({menu, shop}) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    window
+      .matchMedia('(max-width:700px)')
+      .addEventListener('change', (e) => setIsMobile(e.matches));
+    if (window.matchMedia('(max-width:700px)').matches) setIsMobile(true);
+  }, []);
+
   return (
     <footer className="footer">
-      <FooterTitles />
-      <FooterContent />
+      <Brand isMobile={isMobile} />
+      <Support />
+      <Newsletter />
+      {isMobile ? (
+        <div className="site-credit">
+          <p>© Veneda Carter 2024, All Rights Reserved. </p>
+          <a>Site Credit</a>
+        </div>
+      ) : null}
     </footer>
   );
 }
@@ -20,26 +36,14 @@ export function Footer({menu, shop}) {
  *   primaryDomainUrl: HeaderQuery['shop']['primaryDomain']['url'];
  * }}
  */
-function FooterTitles() {
-  return (
-    <>
-      <div className="brand-footer">
-        <h2>Brand</h2>
-      </div>
-      <div className="support-footer">
-        <h2>Support</h2>
-      </div>
-      <div className="newsletter-footer">
-        <h2>Newsletter</h2>
-      </div>
-    </>
-  );
-}
 
-function FooterContent() {
+function Brand({isMobile}) {
   return (
-    <>
-      <div className="brand-content-footer">
+    <div className="brand-footer">
+      <div className="footer-title-container">
+        <h2 className="footer-title">Brand</h2>
+      </div>
+      <div className="footer-content-container">
         <div className="brand-list">
           <a>New Arrivals</a>
           <a>Shop</a>
@@ -47,12 +51,24 @@ function FooterContent() {
           <a>Stockists</a>
           <a>Instagram</a>
         </div>
-        <div className="site-credit">
-          <p>© Veneda Carter 2024, All Rights Reserved. </p>
-          <a>Site Credit</a>
-        </div>
+        {isMobile ? null : (
+          <div className="site-credit">
+            <p>© Veneda Carter 2024, All Rights Reserved. </p>
+            <a>Site Credit</a>
+          </div>
+        )}
       </div>
-      <div className="support-content-footer">
+    </div>
+  );
+}
+
+function Support() {
+  return (
+    <div className="support-footer">
+      <div className="footer-title-container">
+        <h2 className="footer-title">Support</h2>
+      </div>
+      <div className="footer-content-container">
         <div className="brand-list">
           <a>Terms of Servive</a>
           <a>Privacy Policy</a>
@@ -60,6 +76,15 @@ function FooterContent() {
           <a>Claim Portal</a>
           <a>Contact</a>
         </div>
+      </div>
+    </div>
+  );
+}
+function Newsletter() {
+  return (
+    <div className="newsletter-footer">
+      <div className="footer-title-container">
+        <h2 className="footer-title">Newsletter</h2>
       </div>
       <div className="newsletter-content-footer">
         <div className="newsletter-image-container">
@@ -73,7 +98,7 @@ function FooterContent() {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

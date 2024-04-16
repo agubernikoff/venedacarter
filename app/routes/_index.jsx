@@ -1,6 +1,6 @@
 import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
-import {Suspense, useState} from 'react';
+import {Suspense, useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {motion, AnimatePresence} from 'framer-motion';
 
@@ -34,9 +34,22 @@ export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
   console.log(data);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    window
+      .matchMedia('(max-width:700px)')
+      .addEventListener('change', (e) => setIsMobile(e.matches));
+    if (window.matchMedia('(max-width:700px)').matches) setIsMobile(true);
+  }, []);
+
   return (
     <div className="home">
-      <NewArrivals collection={data.newArrivalsCollection} />
+      {isMobile ? (
+        <MobileNewArrivals collection={data.newArrivalsCollection} />
+      ) : (
+        <NewArrivals collection={data.newArrivalsCollection} />
+      )}
       <FeaturedProducts products={data.featuredCollection.products.nodes} />
       <Categories categories={data.restOfCollections} />
     </div>
@@ -78,6 +91,39 @@ function NewArrivals({collection}) {
         )}
       </Link>
     </>
+  );
+}
+
+function MobileNewArrivals({collection}) {
+  if (!collection) return null;
+  const image = collection?.image;
+  return (
+    <div className="mobile-new-arrivals">
+      <div className="title-container">
+        <h2 className="title">{collection.title}</h2>
+      </div>
+      <Link
+        className="new-arrivals-collection"
+        to={`/collections/${collection.handle}`}
+      >
+        {image && (
+          <Image
+            data={image}
+            sizes="66vw"
+            className="new-arrivals-collection-image"
+          />
+        )}
+      </Link>
+      <div className="new-arrivals-text">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
+          risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec,
+          ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula
+          massa, varius a, semper congue, euismod non, mi.
+        </p>
+        <a>Discover</a>
+      </div>
+    </div>
   );
 }
 
