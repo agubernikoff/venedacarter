@@ -12,7 +12,14 @@ import {
 /**
  * @param {LayoutProps}
  */
-export function Layout({cart, children = null, footer, header, isLoggedIn}) {
+export function Layout({
+  cart,
+  children = null,
+  footer,
+  footerImage,
+  header,
+  isLoggedIn,
+}) {
   return (
     <>
       <CartAside cart={cart} />
@@ -22,7 +29,13 @@ export function Layout({cart, children = null, footer, header, isLoggedIn}) {
       <main>{children}</main>
       <Suspense>
         <Await resolve={footer}>
-          {(footer) => <Footer menu={footer?.menu} shop={header?.shop} />}
+          {(footer) => (
+            <Footer
+              menu={footer?.menu}
+              shop={header?.shop}
+              footerImage={footerImage}
+            />
+          )}
         </Await>
       </Suspense>
     </>

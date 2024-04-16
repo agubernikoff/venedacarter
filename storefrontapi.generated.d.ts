@@ -215,6 +215,26 @@ export type FooterQuery = {
   >;
 };
 
+export type GetMetafieldsQueryVariables = StorefrontAPI.Exact<{
+  type: StorefrontAPI.Scalars['String']['input'];
+}>;
+
+export type GetMetafieldsQuery = {
+  metaobjects: {
+    edges: Array<{
+      node: Pick<StorefrontAPI.Metaobject, 'id' | 'handle'> & {
+        fields: Array<
+          Pick<StorefrontAPI.MetaobjectField, 'value' | 'key'> & {
+            reference?: StorefrontAPI.Maybe<{
+              image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>;
+            }>;
+          }
+        >;
+      };
+    }>;
+  };
+};
+
 export type StoreRobotsQueryVariables = StorefrontAPI.Exact<{
   country?: StorefrontAPI.InputMaybe<StorefrontAPI.CountryCode>;
   language?: StorefrontAPI.InputMaybe<StorefrontAPI.LanguageCode>;
@@ -1118,6 +1138,10 @@ interface GeneratedQueryTypes {
   '#graphql\n  query Footer(\n    $country: CountryCode\n    $footerMenuHandle: String!\n    $language: LanguageCode\n  ) @inContext(language: $language, country: $country) {\n    menu(handle: $footerMenuHandle) {\n      ...Menu\n    }\n  }\n  #graphql\n  fragment MenuItem on MenuItem {\n    id\n    resourceId\n    tags\n    title\n    type\n    url\n  }\n  fragment ChildMenuItem on MenuItem {\n    ...MenuItem\n  }\n  fragment ParentMenuItem on MenuItem {\n    ...MenuItem\n    items {\n      ...ChildMenuItem\n    }\n  }\n  fragment Menu on Menu {\n    id\n    items {\n      ...ParentMenuItem\n    }\n  }\n\n': {
     return: FooterQuery;
     variables: FooterQueryVariables;
+  };
+  '#graphql\nquery getMetafields($type: String!) {\n  metaobjects(first: 10, type: $type) {\n    edges {\n      node {\n        id\n        handle\n        fields {\n          reference {\n            ... on MediaImage {\n              image {\n                url\n              }\n            }\n          }\n          value\n          key\n        }\n      }\n    }\n  }\n}\n': {
+    return: GetMetafieldsQuery;
+    variables: GetMetafieldsQueryVariables;
   };
   '#graphql\n  query StoreRobots($country: CountryCode, $language: LanguageCode)\n   @inContext(country: $country, language: $language) {\n    shop {\n      id\n    }\n  }\n': {
     return: StoreRobotsQuery;

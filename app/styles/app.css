@@ -227,6 +227,7 @@ aside li {
 .footer {
   margin-top: auto;
   height: calc(100vh - var(--header-height));
+  /* max-height: calc(100vh - var(--header-height)); */
   display: grid;
   grid-template-areas: 'brand support newsletter';
   grid-auto-columns: 1fr;
@@ -328,7 +329,7 @@ aside li {
   overflow: hidden;
 }
 .newsletter-image-container > img {
-  width: 100%;
+  /* width: 100%; */
   aspect-ratio: 1/1.4;
   object-fit: cover;
   object-position: 50% 30%;
@@ -616,7 +617,7 @@ aside li {
   border-top: none;
   border-left: none;
 }
-.featured-product:nth-of-type(n + 5) {
+.featured-product:nth-of-type(n + 4) {
   /* border-top: 1px solid #eaeaea; */
   border-bottom: none;
 }

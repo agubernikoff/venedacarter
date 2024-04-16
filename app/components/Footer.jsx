@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {Suspense, useState, useEffect} from 'react';
 import {NavLink} from '@remix-run/react';
 import {useRootLoaderData} from '~/root';
 import lisa from '../assets/lisa.png';
+import {Image} from '@shopify/hydrogen';
+import {Await} from '@remix-run/react';
 
 /**
  * @param {FooterQuery & {shop: HeaderQuery['shop']}}
  */
-export function Footer({menu, shop}) {
+export function Footer({menu, shop, footerImage}) {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     window
@@ -19,7 +21,7 @@ export function Footer({menu, shop}) {
     <footer className="footer">
       <Brand isMobile={isMobile} />
       <Support />
-      <Newsletter />
+      <Newsletter footerImage={footerImage} />
       {isMobile ? (
         <div className="site-credit">
           <p>© Veneda Carter 2024, All Rights Reserved. </p>
@@ -80,7 +82,8 @@ function Support() {
     </div>
   );
 }
-function Newsletter() {
+function Newsletter({footerImage}) {
+  console.log(footerImage);
   return (
     <div className="newsletter-footer">
       <div className="footer-title-container">
@@ -88,7 +91,19 @@ function Newsletter() {
       </div>
       <div className="newsletter-content-footer">
         <div className="newsletter-image-container">
-          <img src={lisa} />
+          {/* <img src={lisa} /> */}
+          <Suspense>
+            <Await resolve={footerImage}>
+              {(footerImage) => (
+                <Image
+                  data={
+                    footerImage.metaobjects.edges[0].node.fields[0].reference
+                      .image
+                  }
+                />
+              )}
+            </Await>
+          </Suspense>
         </div>
         <div className="newsletter-form-footer">
           <p>Join our newsletter for the latest news and releases.</p>

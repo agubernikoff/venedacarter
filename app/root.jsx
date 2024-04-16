@@ -78,6 +78,13 @@ export async function loader({context}) {
     },
   });
 
+  const footerImage = storefront.query(FOOTER_IMAGE_QUERY, {
+    cache: storefront.CacheLong(),
+    variables: {
+      type: 'footer_image', // Adjust to your footer menu handle
+    },
+  });
+
   // await the header query (above the fold)
   const headerPromise = storefront.query(HEADER_QUERY, {
     cache: storefront.CacheLong(),
@@ -90,6 +97,7 @@ export async function loader({context}) {
     {
       cart: cartPromise,
       footer: footerPromise,
+      footerImage: footerImage,
       header: await headerPromise,
       isLoggedIn: isLoggedInPromise,
       publicStoreDomain,
@@ -239,6 +247,29 @@ const FOOTER_QUERY = `#graphql
   ${MENU_FRAGMENT}
 `;
 
+const FOOTER_IMAGE_QUERY = `#graphql
+query getMetafields($type: String!) {
+  metaobjects(first: 10, type: $type) {
+    edges {
+      node {
+        id
+        handle
+        fields {
+          reference {
+            ... on MediaImage {
+              image {
+                url
+              }
+            }
+          }
+          value
+          key
+        }
+      }
+    }
+  }
+}
+`;
 /** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */
 /** @typedef {import('@remix-run/react').ShouldRevalidateFunction} ShouldRevalidateFunction */
 /** @typedef {import('@shopify/remix-oxygen').SerializeFrom<typeof loader>} LoaderReturnData */
