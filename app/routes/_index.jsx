@@ -50,7 +50,10 @@ export default function Homepage() {
       ) : (
         <NewArrivals collection={data.newArrivalsCollection} />
       )}
-      <FeaturedProducts products={data.featuredCollection.products.nodes} />
+      <FeaturedProducts
+        products={data.featuredCollection.products.nodes}
+        isMobile={isMobile}
+      />
       <Categories categories={data.restOfCollections} />
     </div>
   );
@@ -132,17 +135,71 @@ function MobileNewArrivals({collection}) {
  *   products: Promise<RecommendedProductsQuery>;
  * }}
  */
-function FeaturedProducts({products}) {
+function FeaturedProducts({products, isMobile}) {
   if (!products) return null;
+  const endOfSlice = isMobile ? 9 : 6;
   return (
     <div className="subgrid">
       <div className="title-container">
         <h2 className="title">Featured Products</h2>
       </div>
-      {products.map((product) => (
-        <FeaturedProduct product={product} key={product.id} />
-      ))}
+      {products.slice(0, endOfSlice).map((product, i) => {
+        if (i === 0 && isMobile)
+          return <MainFeaturedProduct product={product} key={product.id} />;
+        else return <FeaturedProduct product={product} key={product.id} />;
+      })}
     </div>
+  );
+}
+
+function MainFeaturedProduct({product}) {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    setTimeout(() => {
+      if (index === product.images.nodes.length - 1) setIndex(0);
+      else setIndex(index + 1);
+    }, 2000);
+  });
+  return (
+    <Link
+      className="main-featured-product"
+      to={`/products/${product.handle}`}
+      style={{border: '1px solid pink'}}
+    >
+      <div style={{background: '#f4f4f4'}}>
+        {/* <AnimatePresence mode="wait" initial={false}> */}
+        <motion.div
+          key={index}
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          exit={{opacity: 0}}
+          transition={{duration: 0.2}}
+        >
+          <Image
+            data={product.images.nodes[index]}
+            aspectRatio="1/1.2"
+            crop={false}
+            sizes="(min-width: 45em) 20vw, 50vw"
+          />
+        </motion.div>
+        {/* </AnimatePresence> */}
+      </div>
+      <div className="product-details-container">
+        <div className="product-title-price">
+          <h4>{product.title}</h4>
+          <small>
+            <Money data={product.priceRange.minVariantPrice} />
+          </small>
+        </div>
+        {/* <div className="product-color-variants">
+          <h4>+2 Colors</h4>
+        </div> */}
+      </div>
+      <div className="product-title-price">
+        <p>{product.description}</p>
+        <p style={{textDecoration: 'underline'}}>View Product</p>
+      </div>
+    </Link>
   );
 }
 
@@ -219,18 +276,19 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   fragment FeaturedCollection on Collection {
     id
     title
-    products(first: 6) {
+    products(first: 9) {
       nodes {
         id
         title
         handle
+        description
         priceRange {
           minVariantPrice {
             amount
             currencyCode
           }
         }
-        images(first: 2) {
+        images(first: 4) {
           nodes {
             id
             url

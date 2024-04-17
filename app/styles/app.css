@@ -612,6 +612,10 @@ aside li {
   border-radius: 50%; /* Makes the bullet circular */
   background-color: black; /* Color of the bullet */
 }
+.main-featured-product {
+  grid-column: span 2;
+  grid-row: 5;
+}
 .featured-product {
   border: 1px solid #eaeaea;
   border-top: none;
@@ -638,6 +642,7 @@ aside li {
 .product-color-variants > h4 {
   color: #d3d3d3;
 }
+.main-featured-product img,
 .featured-product img {
   height: auto;
   background-color: #f4f4f4;
@@ -650,7 +655,8 @@ aside li {
   margin-bottom: 3%;
 }
 .product-title-price > h4,
-.product-title-price > small {
+.product-title-price > small,
+.product-title-price > p {
   margin-top: 0%;
   margin-bottom: 0%;
   padding: 0%;
