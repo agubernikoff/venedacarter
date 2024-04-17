@@ -78,6 +78,13 @@ export async function loader({context}) {
     },
   });
 
+  const footerSupportPromise = storefront.query(FOOTER_QUERY, {
+    cache: storefront.CacheLong(),
+    variables: {
+      footerMenuHandle: 'support-menu', // Adjust to your footer menu handle
+    },
+  });
+
   const footerImage = storefront.query(FOOTER_IMAGE_QUERY, {
     cache: storefront.CacheLong(),
     variables: {
@@ -97,6 +104,7 @@ export async function loader({context}) {
     {
       cart: cartPromise,
       footer: footerPromise,
+      supportMenu: footerSupportPromise,
       footerImage: footerImage,
       header: await headerPromise,
       isLoggedIn: isLoggedInPromise,

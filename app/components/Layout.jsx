@@ -16,6 +16,7 @@ export function Layout({
   cart,
   children = null,
   footer,
+  supportMenu,
   footerImage,
   header,
   isLoggedIn,
@@ -30,11 +31,16 @@ export function Layout({
       <Suspense>
         <Await resolve={footer}>
           {(footer) => (
-            <Footer
-              menu={footer?.menu}
-              shop={header?.shop}
-              footerImage={footerImage}
-            />
+            <Await resolve={supportMenu}>
+              {(supportMenu) => (
+                <Footer
+                  menu={footer?.menu}
+                  shop={header?.shop}
+                  footerImage={footerImage}
+                  supportMenu={supportMenu?.menu}
+                />
+              )}
+            </Await>
           )}
         </Await>
       </Suspense>

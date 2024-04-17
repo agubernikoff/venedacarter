@@ -1,14 +1,16 @@
 import React, {Suspense, useState, useEffect} from 'react';
 import {NavLink} from '@remix-run/react';
 import {useRootLoaderData} from '~/root';
-import lisa from '../assets/lisa.png';
 import {Image} from '@shopify/hydrogen';
 import {Await} from '@remix-run/react';
 
 /**
  * @param {FooterQuery & {shop: HeaderQuery['shop']}}
  */
-export function Footer({menu, shop, footerImage}) {
+export function Footer({menu, shop, footerImage, supportMenu}) {
+  // DONT DELETE UNTIL YOU USE THESE LOGS TO CREATE TWO SEPERATE FALLBACK MENUS
+  console.log(menu);
+  console.log(supportMenu);
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     window
@@ -19,8 +21,16 @@ export function Footer({menu, shop, footerImage}) {
 
   return (
     <footer className="footer">
-      <Brand isMobile={isMobile} />
-      <Support />
+      <Brand
+        isMobile={isMobile}
+        menu={menu}
+        primaryDomainUrl={shop.primaryDomain.url}
+      />
+      <Support
+        isMobile={isMobile}
+        menu={supportMenu}
+        primaryDomainUrl={shop.primaryDomain.url}
+      />
       <Newsletter footerImage={footerImage} />
       {isMobile ? (
         <div className="site-credit">
@@ -39,7 +49,14 @@ export function Footer({menu, shop, footerImage}) {
  * }}
  */
 
-function Brand({isMobile}) {
+function Brand({isMobile, menu, primaryDomainUrl}) {
+  const {publicStoreDomain} = useRootLoaderData();
+  function closeAside(event) {
+    if (isMobile) {
+      event.preventDefault();
+      window.location.href = event.currentTarget.href;
+    }
+  }
   return (
     <div className="brand-footer">
       <div className="footer-title-container">
@@ -47,11 +64,31 @@ function Brand({isMobile}) {
       </div>
       <div className="footer-content-container">
         <div className="brand-list">
-          <a>New Arrivals</a>
-          <a>Shop</a>
-          <a>About</a>
-          <a>Stockists</a>
-          <a>Instagram</a>
+          {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
+            if (!item.url) return null;
+
+            // if the url is internal, we strip the domain
+            const url =
+              item.url.includes('myshopify.com') ||
+              item.url.includes(publicStoreDomain) ||
+              item.url.includes(primaryDomainUrl)
+                ? new URL(item.url).pathname
+                : item.url;
+
+            return (
+              <NavLink
+                // className="header-menu-item"
+                end
+                key={item.id}
+                onClick={closeAside}
+                prefetch="intent"
+                style={activeLinkStyle}
+                to={url}
+              >
+                {item.title}
+              </NavLink>
+            );
+          })}
         </div>
         {isMobile ? null : (
           <div className="site-credit">
@@ -64,7 +101,14 @@ function Brand({isMobile}) {
   );
 }
 
-function Support() {
+function Support({isMobile, menu, primaryDomainUrl}) {
+  const {publicStoreDomain} = useRootLoaderData();
+  function closeAside(event) {
+    if (isMobile) {
+      event.preventDefault();
+      window.location.href = event.currentTarget.href;
+    }
+  }
   return (
     <div className="support-footer">
       <div className="footer-title-container">
@@ -72,18 +116,37 @@ function Support() {
       </div>
       <div className="footer-content-container">
         <div className="brand-list">
-          <a>Terms of Servive</a>
-          <a>Privacy Policy</a>
-          <a>Refund Policy</a>
-          <a>Claim Portal</a>
-          <a>Contact</a>
+          {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
+            if (!item.url) return null;
+
+            // if the url is internal, we strip the domain
+            const url =
+              item.url.includes('myshopify.com') ||
+              item.url.includes(publicStoreDomain) ||
+              item.url.includes(primaryDomainUrl)
+                ? new URL(item.url).pathname
+                : item.url;
+
+            return (
+              <NavLink
+                // className="header-menu-item"
+                end
+                key={item.id}
+                onClick={closeAside}
+                prefetch="intent"
+                style={activeLinkStyle}
+                to={url}
+              >
+                {item.title}
+              </NavLink>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 }
 function Newsletter({footerImage}) {
-  console.log(footerImage);
   return (
     <div className="newsletter-footer">
       <div className="footer-title-container">
@@ -168,7 +231,7 @@ const FALLBACK_FOOTER_MENU = {
 function activeLinkStyle({isActive, isPending}) {
   return {
     fontWeight: isActive ? 'bold' : undefined,
-    color: isPending ? 'grey' : 'white',
+    color: isPending ? 'grey' : 'black',
   };
 }
 
