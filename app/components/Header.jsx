@@ -352,7 +352,15 @@ function HeaderMenuMobileToggle() {
 
 function SearchToggle({isMobile}) {
   return (
-    <>{isMobile ? <img src={search} /> : <a href="#search-aside">Search</a>}</>
+    <>
+      {isMobile ? (
+        <a href="#search-aside">
+          <img src={search} />{' '}
+        </a>
+      ) : (
+        <a href="#search-aside">Search</a>
+      )}
+    </>
   );
 }
 
@@ -362,7 +370,13 @@ function SearchToggle({isMobile}) {
 function CartBadge({count, isMobile}) {
   return (
     <>
-      {isMobile ? <img src={cart} /> : <a href="#cart-aside">Bag ({count})</a>}
+      {isMobile ? (
+        <a href="#cart-aside">
+          <img src={cart} />{' '}
+        </a>
+      ) : (
+        <a href="#cart-aside">Bag ({count})</a>
+      )}
     </>
   );
 }
