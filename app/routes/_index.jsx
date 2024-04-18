@@ -197,7 +197,9 @@ function MainFeaturedProduct({product}) {
       </div>
       <div className="product-title-description">
         <p>{product.description}</p>
-        <p style={{textDecoration: 'underline'}}>View Product</p>
+        <p style={{textDecoration: 'underline', marginTop: '.5rem'}}>
+          View Product
+        </p>
       </div>
     </Link>
   );
