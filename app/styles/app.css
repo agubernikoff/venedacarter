@@ -747,14 +747,13 @@ aside li {
 } */
 .category-collection {
   position: relative;
-  width: 100.25%;
+  width: 100%;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
   @media (max-width: 44em) {
     grid-column: span 2;
     border-bottom: none;
     border-top: none;
-    width: 100%;
   }
 }
 .category-collection > p {
