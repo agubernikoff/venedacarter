@@ -56,6 +56,19 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
       window.location.href = event.currentTarget.href;
     }
   }
+  function isActive(item) {
+    if (typeof window !== 'undefined') {
+      if (new URL(item.url).pathname === window.location.pathname) return true;
+      if (
+        window.location.pathname.includes('collections') &&
+        item.title === 'Shop'
+      ) {
+        if (window.location.pathname.includes('new-arrivals')) return false;
+        return true;
+      }
+      return false;
+    }
+  }
 
   return (
     <nav className={className} role="navigation">
@@ -97,7 +110,11 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
           >
             <motion.div layout="position" transition={{ease: 'easeInOut'}}>
               <NavLink
-                className="header-menu-item"
+                className={
+                  isActive(item)
+                    ? 'header-menu-item-active'
+                    : 'header-menu-item'
+                }
                 end
                 onClick={closeAside}
                 prefetch="intent"
@@ -128,7 +145,7 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
                         : item.url;
                     return (
                       <NavLink
-                        className="header-menu-item"
+                        className="subheader-menu-item"
                         end
                         key={item.id}
                         onClick={closeAside}
@@ -145,22 +162,6 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
             </AnimatePresence>
           </div>
         );
-        // }
-
-        // return (
-        //   <motion.div key={item.id} layout={true}>
-        //     <NavLink
-        //       className="header-menu-item"
-        //       end
-        //       onClick={closeAside}
-        //       prefetch="intent"
-        //       style={activeLinkStyle}
-        //       to={url}
-        //     >
-        //       {item.title}
-        //     </NavLink>
-        //   </motion.div>
-        // );
       })}
     </nav>
   );

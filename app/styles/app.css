@@ -206,6 +206,26 @@ aside li {
   border-radius: 50%; /* Makes the bullet circular */
   background-color: white; /* Color of the bullet */
 }
+.header-menu-item-active {
+  cursor: pointer;
+  position: relative;
+  padding-left: 17px;
+}
+.header-menu-item-active::before {
+  content: ''; /* Ensures the pseudo-element has content */
+  position: absolute; /* Position relative to the p */
+  top: 47%; /* Positions the bullet vertically centered */
+  left: 0; /* Positions the bullet on the left of the p */
+  transform: translateY(-50%); /* Adjusts vertical alignment */
+  width: 9px; /* Diameter of the bullet */
+  height: 9px; /* Diameter of the bullet */
+  border: 1px solid black;
+  border-radius: 50%; /* Makes the bullet circular */
+  background-color: black; /* Color of the bullet */
+}
+.subheader-menu-item {
+  cursor: pointer;
+}
 
 .header-ctas {
   align-items: center;
