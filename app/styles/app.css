@@ -575,7 +575,10 @@ aside li {
 }
 .mobile-new-arrivals-text {
   margin-left: 1rem;
-  margin-top: 2%;
+  margin-top: 4%;
+  margin-bottom: 4%;
+}
+.mobile-new-arrivals-text > p {
   margin-bottom: 2%;
 }
 .new-arrivals-text > p {
