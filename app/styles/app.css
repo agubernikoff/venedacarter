@@ -314,7 +314,7 @@ aside li {
 }
 .brand-list > a,
 .support-content-footer > a {
-  margin-bottom: 1%;
+  margin-bottom: 0.6rem;
 }
 .support-content-footer {
   display: flex;
