@@ -48,7 +48,7 @@ aside header {
   padding: 0 20px;
 }
 
-aside header h3 {
+aside header p {
   margin: 0;
 }
 
@@ -64,7 +64,7 @@ aside header .close:hover {
   opacity: 1;
 }
 
-aside header h2 {
+aside header p {
   margin-bottom: 0.6rem;
   margin-top: 0;
 }
@@ -196,9 +196,9 @@ aside li {
 }
 .header-menu-item::before {
   content: ''; /* Ensures the pseudo-element has content */
-  position: absolute; /* Position relative to the h1 */
-  top: 50%; /* Positions the bullet vertically centered */
-  left: 0; /* Positions the bullet on the left of the h1 */
+  position: absolute; /* Position relative to the p */
+  top: 47%; /* Positions the bullet vertically centered */
+  left: 0; /* Positions the bullet on the left of the p */
   transform: translateY(-50%); /* Adjusts vertical alignment */
   width: 9px; /* Diameter of the bullet */
   height: 9px; /* Diameter of the bullet */
@@ -217,6 +217,9 @@ aside li {
 .shop-name {
   font-family: 'bold-font';
   font-size: 0.75rem;
+  @media (max-width: 700px) {
+    font-family: 'regular-font';
+  }
 }
 
 /*
@@ -266,7 +269,7 @@ aside li {
 .footer-title::before {
   content: '';
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: 0;
   transform: translateY(-50%);
   width: 10px;
@@ -452,7 +455,7 @@ aside li {
   margin-bottom: 2rem;
 }
 
-.predictive-search-result h5 {
+.predictive-search-result p {
   text-transform: uppercase;
 }
 
@@ -515,18 +518,18 @@ aside li {
   border: 1px solid #eaeaea;
   border-bottom: none;
 }
-.new-arrivals-container > h1 {
+.new-arrivals-container > p {
   font-size: 0.75rem;
   font-family: 'regular-font';
   position: relative; /* Ensures positioning context for ::before pseudo-element */
   padding-left: 15px; /* Adds space on the left for the bullet */
   margin-top: 3%;
 }
-.new-arrivals-container > h1::before {
+.new-arrivals-container > p::before {
   content: ''; /* Ensures the pseudo-element has content */
-  position: absolute; /* Position relative to the h1 */
-  top: 50%; /* Positions the bullet vertically centered */
-  left: 0; /* Positions the bullet on the left of the h1 */
+  position: absolute; /* Position relative to the p */
+  top: 47%; /* Positions the bullet vertically centered */
+  left: 0; /* Positions the bullet on the left of the p */
   transform: translateY(-50%); /* Adjusts vertical alignment */
   width: 10px; /* Diameter of the bullet */
   height: 10px; /* Diameter of the bullet */
@@ -603,9 +606,9 @@ aside li {
 
 .title::before {
   content: ''; /* Ensures the pseudo-element has content */
-  position: absolute; /* Position relative to the h1 */
-  top: 50%; /* Positions the bullet vertically centered */
-  left: 0; /* Positions the bullet on the left of the h1 */
+  position: absolute; /* Position relative to the p */
+  top: 47%; /* Positions the bullet vertically centered */
+  left: 0; /* Positions the bullet on the left of the p */
   transform: translateY(-50%); /* Adjusts vertical alignment */
   width: 10px; /* Diameter of the bullet */
   height: 10px; /* Diameter of the bullet */
@@ -639,8 +642,10 @@ aside li {
   margin-top: 0;
   margin-bottom: 3%;
 }
-.product-color-variants > h4 {
+.product-color-variants > p {
   color: #d3d3d3;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 .main-featured-product img,
 .featured-product img {
@@ -654,7 +659,7 @@ aside li {
   margin-top: 1%;
   margin-bottom: 3%;
 }
-.product-title-price > h4,
+.product-title-price > p,
 .product-title-price > small,
 .product-title-price > p {
   margin-top: 0%;
@@ -683,7 +688,7 @@ aside li {
 .category::before {
   content: '';
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: 0;
   transform: translateY(-50%);
   width: 10px;
@@ -771,7 +776,7 @@ aside li {
   }
 }
 
-.product h1 {
+.product p {
   margin-top: 0;
 }
 

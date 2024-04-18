@@ -60,7 +60,7 @@ function Brand({isMobile, menu, primaryDomainUrl}) {
   return (
     <div className="brand-footer">
       <div className="footer-title-container">
-        <h2 className="footer-title">Brand</h2>
+        <p className="footer-title">Brand</p>
       </div>
       <div className="footer-content-container">
         <div className="brand-list">
@@ -112,7 +112,7 @@ function Support({isMobile, menu, primaryDomainUrl}) {
   return (
     <div className="support-footer">
       <div className="footer-title-container">
-        <h2 className="footer-title">Support</h2>
+        <p className="footer-title">Support</p>
       </div>
       <div className="footer-content-container">
         <div className="brand-list">
@@ -150,7 +150,7 @@ function Newsletter({footerImage}) {
   return (
     <div className="newsletter-footer">
       <div className="footer-title-container">
-        <h2 className="footer-title">Newsletter</h2>
+        <p className="footer-title">Newsletter</p>
       </div>
       <div className="newsletter-content-footer">
         <div className="newsletter-image-container">

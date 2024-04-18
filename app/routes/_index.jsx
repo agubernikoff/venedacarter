@@ -70,7 +70,7 @@ function NewArrivals({collection}) {
   return (
     <>
       <div className="new-arrivals-container">
-        <h1>{collection.title}</h1>
+        <p>{collection.title}</p>
         <div className="new-arrivals-text">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
@@ -103,7 +103,7 @@ function MobileNewArrivals({collection}) {
   return (
     <div className="mobile-new-arrivals">
       <div className="title-container">
-        <h2 className="title">{collection.title}</h2>
+        <p className="title">{collection.title}</p>
       </div>
       <Link
         className="new-arrivals-collection"
@@ -141,7 +141,7 @@ function FeaturedProducts({products, isMobile}) {
   return (
     <div className="subgrid">
       <div className="title-container">
-        <h2 className="title">Featured Products</h2>
+        <p className="title">Featured Products</p>
       </div>
       {products.slice(0, endOfSlice).map((product, i) => {
         if (i === 0 && isMobile)
@@ -186,13 +186,13 @@ function MainFeaturedProduct({product}) {
       </div>
       <div className="product-details-container">
         <div className="product-title-price">
-          <h4>{product.title}</h4>
+          <p>{product.title}</p>
           <small>
             <Money data={product.priceRange.minVariantPrice} />
           </small>
         </div>
         {/* <div className="product-color-variants">
-          <h4>+2 Colors</h4>
+          <p>+2 Colors</p>
         </div> */}
       </div>
       <div className="product-title-price">
@@ -232,13 +232,13 @@ function FeaturedProduct({product}) {
       </div>
       <div className="product-details-container">
         <div className="product-title-price">
-          <h4>{product.title}</h4>
+          <p>{product.title}</p>
           <small>
             <Money data={product.priceRange.minVariantPrice} />
           </small>
         </div>
         <div className="product-color-variants">
-          <h4>+2 Colors</h4>
+          <p>+2 Colors</p>
         </div>
       </div>
     </Link>
@@ -249,7 +249,7 @@ function Categories({categories}) {
   return (
     <>
       <div className="title-container">
-        <h2 className="title">Categories</h2>
+        <p className="title">Categories</p>
       </div>
       {categories.map((category) => (
         <Link
