@@ -2,6 +2,10 @@ import {Await, NavLink} from '@remix-run/react';
 import {Suspense, useState, useEffect} from 'react';
 import {useRootLoaderData} from '~/root';
 import {motion, AnimatePresence} from 'framer-motion';
+import search from '../assets/search.png';
+import cart from '../assets/cart.png';
+import mobIcon from '../assets/mobile-icon.png';
+import menu from '../assets/menu.png';
 
 /**
  * @param {HeaderProps}
@@ -22,18 +26,14 @@ export function Header({header, isLoggedIn, cart}) {
           <HeaderMenuMobileToggle />
         ) : (
           <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-            <p className={isMobile ? 'shop-name-mobile' : 'shop-name'}>
-              VENEDA CARTER
-            </p>
+            <p className="shop-name">VENEDA CARTER</p>
           </NavLink>
         )}
       </div>
       <div className={isMobile ? 'header-center-mobile' : 'header-center'}>
         {isMobile ? (
           <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-            <p className={isMobile ? 'shop-name-mobile' : 'shop-name'}>
-              VENEDA CARTER
-            </p>
+            <img className="shop-name-mobile" src={mobIcon} />
           </NavLink>
         ) : (
           <HeaderMenu
@@ -327,7 +327,7 @@ function HeaderCtas({isLoggedIn, cart, isMobile}) {
   return (
     <nav className="header-ctas" role="navigation">
       {isMobile ? null : <HeaderMenuMobileToggle />}
-      <SearchToggle />
+      <SearchToggle isMobile={isMobile} />
       {isMobile ? null : (
         <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
           <Suspense fallback="Sign in">
@@ -337,7 +337,7 @@ function HeaderCtas({isLoggedIn, cart, isMobile}) {
           </Suspense>
         </NavLink>
       )}
-      <CartToggle cart={cart} />
+      <CartToggle cart={cart} isMobile={isMobile} />
     </nav>
   );
 }
@@ -345,32 +345,40 @@ function HeaderCtas({isLoggedIn, cart, isMobile}) {
 function HeaderMenuMobileToggle() {
   return (
     <a className="header-menu-mobile-toggle" href="#mobile-menu-aside">
-      <p>☰</p>
+      <img src={menu} />
     </a>
   );
 }
 
-function SearchToggle() {
-  return <a href="#search-aside">Search</a>;
+function SearchToggle({isMobile}) {
+  return (
+    <>{isMobile ? <img src={search} /> : <a href="#search-aside">Search</a>}</>
+  );
 }
 
 /**
  * @param {{count: number}}
  */
-function CartBadge({count}) {
-  return <a href="#cart-aside">Bag ({count})</a>;
+function CartBadge({count, isMobile}) {
+  return (
+    <>
+      {isMobile ? <img src={cart} /> : <a href="#cart-aside">Bag ({count})</a>}
+    </>
+  );
 }
 
 /**
  * @param {Pick<HeaderProps, 'cart'>}
  */
-function CartToggle({cart}) {
+function CartToggle({cart, isMobile}) {
   return (
     <Suspense fallback={<CartBadge count={0} />}>
       <Await resolve={cart}>
         {(cart) => {
           if (!cart) return <CartBadge count={0} />;
-          return <CartBadge count={cart.totalQuantity || 0} />;
+          return (
+            <CartBadge isMobile={isMobile} count={cart.totalQuantity || 0} />
+          );
         }}
       </Await>
     </Suspense>
