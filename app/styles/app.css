@@ -366,8 +366,8 @@ aside li {
   margin-right: 1rem;
 }
 .newsletter-input-container {
-  width: 97% !important;
-  max-width: 97% !important;
+  width: 96% !important;
+  max-width: 96% !important;
   border-bottom: 1px solid black;
   display: flex;
   justify-content: space-between;
