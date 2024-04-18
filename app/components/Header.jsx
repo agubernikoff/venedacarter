@@ -166,6 +166,144 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
     </nav>
   );
 }
+export function HeaderMenuMobile({
+  menu,
+  primaryDomainUrl,
+  viewport,
+  menu2,
+  menu3,
+}) {
+  const {publicStoreDomain} = useRootLoaderData();
+  const className = `header-menu-${viewport}`;
+  function closeAside(event) {
+    if (viewport === 'mobile') {
+      event.preventDefault();
+      window.location.href = event.currentTarget.href;
+    }
+  }
+
+  return (
+    <nav className={className} role="navigation">
+      <div
+        className={className}
+        style={{borderBottom: '1px solid #eaeaea', paddingBottom: '1rem'}}
+      >
+        <p className="subheader-menu-item" style={{fontWeight: 'bold'}}>
+          Shop
+        </p>
+        {(menu || FALLBACK_HEADER_MENU).items
+          .filter((item) => item.title !== 'About')
+          .map((item) => {
+            if (!item.url) return null;
+
+            // if the url is internal, we strip the domain
+            const url =
+              item.url.includes('myshopify.com') ||
+              item.url.includes(publicStoreDomain) ||
+              item.url.includes(primaryDomainUrl)
+                ? new URL(item.url).pathname
+                : item.url;
+            if (item.items.length > 0)
+              return item.items.map((item) => {
+                if (!item.url) return null;
+
+                // if the url is internal, we strip the domain
+                const url =
+                  item.url.includes('myshopify.com') ||
+                  item.url.includes(publicStoreDomain) ||
+                  item.url.includes(primaryDomainUrl)
+                    ? new URL(item.url).pathname
+                    : item.url;
+                return (
+                  <NavLink
+                    className="subheader-menu-item"
+                    end
+                    key={item.id}
+                    onClick={closeAside}
+                    prefetch="intent"
+                    // style={activeLinkStyle}
+                    to={url}
+                  >
+                    {item.title}
+                  </NavLink>
+                );
+              });
+            return (
+              <NavLink
+                className="subheader-menu-item"
+                end
+                key={item.id}
+                onClick={closeAside}
+                prefetch="intent"
+                // style={activeLinkStyle}
+                to={url}
+              >
+                {item.title}
+              </NavLink>
+            );
+          })}
+      </div>
+      {(menu2 || FALLBACK_HEADER_MENU).items.map((item) => {
+        if (!item.url) return null;
+
+        // if the url is internal, we strip the domain
+        const url =
+          item.url.includes('myshopify.com') ||
+          item.url.includes(publicStoreDomain) ||
+          item.url.includes(primaryDomainUrl)
+            ? new URL(item.url).pathname
+            : item.url;
+
+        return (
+          <NavLink
+            className="mobile-middle-menu-item"
+            end
+            key={item.id}
+            onClick={closeAside}
+            prefetch="intent"
+            // style={activeLinkStyle}
+            to={url}
+          >
+            {item.title}
+          </NavLink>
+        );
+      })}
+      <div
+        className={className}
+        style={{borderBottom: '1px solid #eaeaea', paddingBottom: '1rem'}}
+      >
+        <p className="subheader-menu-item" style={{fontWeight: 'bold'}}>
+          Support
+        </p>
+        {(menu3 || FALLBACK_HEADER_MENU).items.map((item) => {
+          if (!item.url) return null;
+
+          // if the url is internal, we strip the domain
+          const url =
+            item.url.includes('myshopify.com') ||
+            item.url.includes(publicStoreDomain) ||
+            item.url.includes(primaryDomainUrl)
+              ? new URL(item.url).pathname
+              : item.url;
+
+          return (
+            <NavLink
+              className="subheader-menu-item"
+              end
+              key={item.id}
+              onClick={closeAside}
+              prefetch="intent"
+              // style={activeLinkStyle}
+              to={url}
+            >
+              {item.title}
+            </NavLink>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
 
 /**
  * @param {Pick<HeaderProps, 'isLoggedIn' | 'cart'>}

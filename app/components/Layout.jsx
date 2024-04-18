@@ -2,7 +2,7 @@ import {Await} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Aside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
-import {Header, HeaderMenu} from '~/components/Header';
+import {Header, HeaderMenuMobile} from '~/components/Header';
 import {CartMain} from '~/components/Cart';
 import {
   PredictiveSearchForm,
@@ -17,6 +17,7 @@ export function Layout({
   children = null,
   footer,
   supportMenu,
+  mobileMenu,
   footerImage,
   header,
   isLoggedIn,
@@ -25,7 +26,6 @@ export function Layout({
     <>
       <CartAside cart={cart} />
       <SearchAside />
-      <MobileMenuAside menu={header?.menu} shop={header?.shop} />
       {header && <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />}
       <main>{children}</main>
       <Suspense>
@@ -33,12 +33,24 @@ export function Layout({
           {(footer) => (
             <Await resolve={supportMenu}>
               {(supportMenu) => (
-                <Footer
-                  menu={footer?.menu}
-                  shop={header?.shop}
-                  footerImage={footerImage}
-                  supportMenu={supportMenu?.menu}
-                />
+                <Await resolve={mobileMenu}>
+                  {(mobileMenu) => (
+                    <>
+                      <Footer
+                        menu={footer?.menu}
+                        shop={header?.shop}
+                        footerImage={footerImage}
+                        supportMenu={supportMenu?.menu}
+                      />
+                      <MobileMenuAside
+                        menu={header?.menu}
+                        shop={header?.shop}
+                        menu2={mobileMenu?.menu}
+                        menu3={supportMenu?.menu}
+                      />
+                    </>
+                  )}
+                </Await>
               )}
             </Await>
           )}
@@ -106,15 +118,17 @@ function SearchAside() {
  *   shop: HeaderQuery['shop'];
  * }}
  */
-function MobileMenuAside({menu, shop}) {
+function MobileMenuAside({menu, shop, menu2, menu3}) {
   return (
     menu &&
     shop?.primaryDomain?.url && (
       <Aside id="mobile-menu-aside" heading="MENU">
-        <HeaderMenu
+        <HeaderMenuMobile
           menu={menu}
           viewport="mobile"
           primaryDomainUrl={shop.primaryDomain.url}
+          menu2={menu2}
+          menu3={menu3}
         />
       </Aside>
     )
