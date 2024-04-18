@@ -145,8 +145,21 @@ function FeaturedProducts({products, isMobile}) {
       </div>
       {products.slice(0, endOfSlice).map((product, i) => {
         if (i === 0 && isMobile)
-          return <MainFeaturedProduct product={product} key={product.id} />;
-        else return <FeaturedProduct product={product} key={product.id} />;
+          return (
+            <MainFeaturedProduct
+              product={product}
+              key={product.id}
+              isMobile={isMobile}
+            />
+          );
+        else
+          return (
+            <FeaturedProduct
+              product={product}
+              key={product.id}
+              isMobile={isMobile}
+            />
+          );
       })}
     </div>
   );
