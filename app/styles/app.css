@@ -752,6 +752,7 @@ aside li {
     grid-column: span 2;
     border-bottom: none;
     border-top: none;
+    width: 100%;
   }
 }
 .category-collection > p {
