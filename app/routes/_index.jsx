@@ -174,11 +174,7 @@ function MainFeaturedProduct({product, isMobile}) {
     }, 2000);
   });
   return (
-    <Link
-      className="main-featured-product"
-      to={`/products/${product.handle}`}
-      style={{border: '1px solid pink'}}
-    >
+    <Link className="main-featured-product" to={`/products/${product.handle}`}>
       <div style={{background: '#f4f4f4'}}>
         {/* <AnimatePresence mode="wait" initial={false}> */}
         <motion.div

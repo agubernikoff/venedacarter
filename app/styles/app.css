@@ -576,13 +576,10 @@ aside li {
 .mobile-new-arrivals-text {
   margin-left: 1rem;
   margin-top: 2%;
-  margin-bottom: 2.5%;
+  margin-bottom: 2%;
 }
 .new-arrivals-text > p {
   margin-bottom: 2%;
-}
-.mobile-new-arrivals-text {
-  margin-bottom: 1%;
 }
 
 .new-arrivals-text > p,
@@ -668,6 +665,7 @@ aside li {
 .main-featured-product {
   grid-column: span 2;
   grid-row: 5;
+  border-block: 1px solid #eaeaea;
 }
 .main-featured-product:hover {
   text-decoration: none;
