@@ -200,7 +200,7 @@ aside li {
 }
 
 .header-menu-mobile-toggle {
-  @media (min-width: 48em) {
+  @media (min-width: 44em) {
     display: none;
   }
 }
@@ -218,7 +218,7 @@ aside li {
   grid-gap: 1rem;
   justify-content: center;
 
-  @media (min-width: 45em) {
+  @media (min-width: 44em) {
     display: flex;
     margin-left: auto;
   }
