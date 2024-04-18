@@ -170,6 +170,21 @@ aside li {
   border-bottom: 1px solid #ccc;
   border-right: none;
 }
+.header-mobile {
+  z-index: 5;
+  align-items: center;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: 0 1rem;
+  position: sticky;
+  top: 0;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  border-bottom: 1px solid #ccc;
+  border-right: none;
+}
 .header-left,
 .header-right {
   flex: 1;

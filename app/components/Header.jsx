@@ -16,23 +16,35 @@ export function Header({header, isLoggedIn, cart}) {
   }, []);
   const {shop, menu} = header;
   return (
-    <header className="header">
+    <header className={isMobile ? 'header-mobile' : 'header'}>
       <div className="header-left">
-        <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-          <p className={isMobile ? 'shop-name-mobile' : 'shop-name'}>
-            VENEDA CARTER
-          </p>
-        </NavLink>
+        {isMobile ? (
+          <HeaderMenuMobileToggle />
+        ) : (
+          <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+            <p className={isMobile ? 'shop-name-mobile' : 'shop-name'}>
+              VENEDA CARTER
+            </p>
+          </NavLink>
+        )}
       </div>
-      <div className="header-center">
-        <HeaderMenu
-          menu={menu}
-          viewport="desktop"
-          primaryDomainUrl={header.shop.primaryDomain.url}
-        />
+      <div className={isMobile ? 'header-center-mobile' : 'header-center'}>
+        {isMobile ? (
+          <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+            <p className={isMobile ? 'shop-name-mobile' : 'shop-name'}>
+              VENEDA CARTER
+            </p>
+          </NavLink>
+        ) : (
+          <HeaderMenu
+            menu={menu}
+            viewport="desktop"
+            primaryDomainUrl={header.shop.primaryDomain.url}
+          />
+        )}
       </div>
       <div className="header-right">
-        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} isMobile={isMobile} />
       </div>
     </header>
   );
@@ -308,18 +320,20 @@ export function HeaderMenuMobile({
 /**
  * @param {Pick<HeaderProps, 'isLoggedIn' | 'cart'>}
  */
-function HeaderCtas({isLoggedIn, cart}) {
+function HeaderCtas({isLoggedIn, cart, isMobile}) {
   return (
     <nav className="header-ctas" role="navigation">
-      <HeaderMenuMobileToggle />
+      {isMobile ? null : <HeaderMenuMobileToggle />}
       <SearchToggle />
-      <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
-        <Suspense fallback="Sign in">
-          <Await resolve={isLoggedIn} errorElement="Sign in">
-            {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Log in')}
-          </Await>
-        </Suspense>
-      </NavLink>
+      {isMobile ? null : (
+        <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
+          <Suspense fallback="Sign in">
+            <Await resolve={isLoggedIn} errorElement="Sign in">
+              {(isLoggedIn) => (isLoggedIn ? 'Account' : 'Log in')}
+            </Await>
+          </Suspense>
+        </NavLink>
+      )}
       <CartToggle cart={cart} />
     </nav>
   );
