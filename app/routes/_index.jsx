@@ -38,9 +38,9 @@ export default function Homepage() {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     window
-      .matchMedia('(max-width:700px)')
+      .matchMedia('(max-width:44em)')
       .addEventListener('change', (e) => setIsMobile(e.matches));
-    if (window.matchMedia('(max-width:700px)').matches) setIsMobile(true);
+    if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
 
   return (

@@ -14,9 +14,9 @@ export function Footer({menu, shop, footerImage, supportMenu}) {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     window
-      .matchMedia('(max-width:700px)')
+      .matchMedia('(max-width:704px)')
       .addEventListener('change', (e) => setIsMobile(e.matches));
-    if (window.matchMedia('(max-width:700px)').matches) setIsMobile(true);
+    if (window.matchMedia('(max-width:704px)').matches) setIsMobile(true);
   }, []);
 
   return (
