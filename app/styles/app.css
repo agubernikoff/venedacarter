@@ -265,6 +265,7 @@ aside li {
   padding-left: 15px;
   margin-left: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .footer-title::before {
   content: '';
@@ -298,6 +299,8 @@ aside li {
     flex-direction: row;
     justify-content: space-between;
     padding-block: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 }
 .site-credit > a {
