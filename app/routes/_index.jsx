@@ -195,7 +195,7 @@ function MainFeaturedProduct({product}) {
           <p>+2 Colors</p>
         </div> */}
       </div>
-      <div className="product-title-price">
+      <div className="product-title-description">
         <p>{product.description}</p>
         <p style={{textDecoration: 'underline'}}>View Product</p>
       </div>
