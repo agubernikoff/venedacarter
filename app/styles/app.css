@@ -512,7 +512,9 @@ aside li {
       'featured-products featured-products featured-products';
     grid-auto-columns: 1fr;
   }
-  @media (max-width: 700px) {
+}
+@media (max-width: 700px) {
+  .home {
     grid-template-areas: 'new-arrivals-mobile new-arrivals-mobile';
     grid-template-columns: repeat(2, 1fr);
   }
