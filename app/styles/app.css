@@ -29,7 +29,7 @@
 */
 aside {
   background: var(--color-light);
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 0 50px rgba(0, 0, 0, 0.3); */
   height: 100vh;
   max-width: var(--aside-width);
   min-width: var(--aside-width);
