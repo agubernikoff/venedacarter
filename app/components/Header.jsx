@@ -386,10 +386,10 @@ function CartBadge({count, isMobile}) {
  */
 function CartToggle({cart, isMobile}) {
   return (
-    <Suspense fallback={<CartBadge count={0} />}>
+    <Suspense fallback={<CartBadge isMobile={isMobile} count={0} />}>
       <Await resolve={cart}>
         {(cart) => {
-          if (!cart) return <CartBadge count={0} />;
+          if (!cart) return <CartBadge isMobile={isMobile} count={0} />;
           return (
             <CartBadge isMobile={isMobile} count={cart.totalQuantity || 0} />
           );
