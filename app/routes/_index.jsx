@@ -44,7 +44,7 @@ export default function Homepage() {
   }, []);
 
   return (
-    <div className="home">
+    <div className={isMobile ? 'home-mobile' : 'home'}>
       {isMobile ? (
         <MobileNewArrivals collection={data.newArrivalsCollection} />
       ) : (
@@ -54,7 +54,7 @@ export default function Homepage() {
         products={data.featuredCollection.products.nodes}
         isMobile={isMobile}
       />
-      <Categories categories={data.restOfCollections} />
+      <Categories categories={data.restOfCollections} isMobile={isMobile} />
     </div>
   );
 }
@@ -117,7 +117,7 @@ function MobileNewArrivals({collection}) {
           />
         )}
       </Link>
-      <div className="new-arrivals-text">
+      <div className="mobile-new-arrivals-text">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
           risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec,
@@ -139,8 +139,8 @@ function FeaturedProducts({products, isMobile}) {
   if (!products) return null;
   const endOfSlice = isMobile ? 9 : 6;
   return (
-    <div className="subgrid">
-      <div className="title-container">
+    <div className={isMobile ? 'subgrid-mobile' : 'subgrid'}>
+      <div className={isMobile ? 'title-container-mobile' : 'title-container'}>
         <p className="title">Featured Products</p>
       </div>
       {products.slice(0, endOfSlice).map((product, i) => {
@@ -152,7 +152,7 @@ function FeaturedProducts({products, isMobile}) {
   );
 }
 
-function MainFeaturedProduct({product}) {
+function MainFeaturedProduct({product, isMobile}) {
   const [index, setIndex] = useState(0);
   useEffect(() => {
     setTimeout(() => {
@@ -184,8 +184,18 @@ function MainFeaturedProduct({product}) {
         </motion.div>
         {/* </AnimatePresence> */}
       </div>
-      <div className="product-details-container">
-        <div className="product-title-price">
+      <div
+        className={
+          isMobile
+            ? 'product-details-container-mobile'
+            : 'product-details-container'
+        }
+      >
+        <div
+          className={
+            isMobile ? 'product-title-price-mobile' : 'product-title-price'
+          }
+        >
           <p>{product.title}</p>
           <small>
             <Money data={product.priceRange.minVariantPrice} />
@@ -195,7 +205,13 @@ function MainFeaturedProduct({product}) {
           <p>+2 Colors</p>
         </div> */}
       </div>
-      <div className="product-title-description">
+      <div
+        className={
+          isMobile
+            ? 'product-title-description-mobile'
+            : 'product-title-description'
+        }
+      >
         <p>{product.description}</p>
         <p style={{textDecoration: 'underline', marginTop: '.5rem'}}>
           View Product
@@ -205,7 +221,7 @@ function MainFeaturedProduct({product}) {
   );
 }
 
-function FeaturedProduct({product}) {
+function FeaturedProduct({product, isMobile}) {
   const [index, setIndex] = useState(0);
   return (
     <Link
@@ -232,8 +248,18 @@ function FeaturedProduct({product}) {
         </motion.div>
         {/* </AnimatePresence> */}
       </div>
-      <div className="product-details-container">
-        <div className="product-title-price">
+      <div
+        className={
+          isMobile
+            ? 'product-details-container-mobile'
+            : 'product-details-container'
+        }
+      >
+        <div
+          className={
+            isMobile ? 'product-title-price-mobile' : 'product-title-price'
+          }
+        >
           <p>{product.title}</p>
           <small>
             <Money data={product.priceRange.minVariantPrice} />
@@ -247,7 +273,7 @@ function FeaturedProduct({product}) {
   );
 }
 
-function Categories({categories}) {
+function Categories({categories, isMobile}) {
   return (
     <>
       <div className="title-container">
@@ -256,7 +282,9 @@ function Categories({categories}) {
       {categories.map((category) => (
         <Link
           key={category.handle}
-          className="category-collection"
+          className={
+            isMobile ? 'category-collection-mobile' : 'category-collection'
+          }
           to={`/collections/${category.handle}`}
         >
           <Image

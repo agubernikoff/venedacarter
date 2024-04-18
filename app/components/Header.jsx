@@ -1,5 +1,5 @@
 import {Await, NavLink} from '@remix-run/react';
-import {Suspense, useState} from 'react';
+import {Suspense, useState, useEffect} from 'react';
 import {useRootLoaderData} from '~/root';
 import {motion, AnimatePresence} from 'framer-motion';
 
@@ -7,12 +7,21 @@ import {motion, AnimatePresence} from 'framer-motion';
  * @param {HeaderProps}
  */
 export function Header({header, isLoggedIn, cart}) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    window
+      .matchMedia('(max-width:44em)')
+      .addEventListener('change', (e) => setIsMobile(e.matches));
+    if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
+  }, []);
   const {shop, menu} = header;
   return (
     <header className="header">
       <div className="header-left">
         <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-          <p className="shop-name">VENEDA CARTER</p>
+          <p className={isMobile ? 'shop-name-mobile' : 'shop-name'}>
+            VENEDA CARTER
+          </p>
         </NavLink>
       </div>
       <div className="header-center">

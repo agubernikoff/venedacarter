@@ -20,7 +20,7 @@ export function Footer({menu, shop, footerImage, supportMenu}) {
   }, []);
 
   return (
-    <footer className="footer">
+    <footer className={isMobile ? 'footer-mobile' : 'footer'}>
       <Brand
         isMobile={isMobile}
         menu={menu}
@@ -31,9 +31,9 @@ export function Footer({menu, shop, footerImage, supportMenu}) {
         menu={supportMenu}
         primaryDomainUrl={shop.primaryDomain.url}
       />
-      <Newsletter footerImage={footerImage} />
+      <Newsletter footerImage={footerImage} isMobile={isMobile} />
       {isMobile ? (
-        <div className="site-credit">
+        <div className="site-credit-mobile">
           <p>© Veneda Carter 2024, All Rights Reserved. </p>
           <a>Site Credit</a>
         </div>
@@ -146,14 +146,20 @@ function Support({isMobile, menu, primaryDomainUrl}) {
     </div>
   );
 }
-function Newsletter({footerImage}) {
+function Newsletter({footerImage, isMobile}) {
   return (
     <div className="newsletter-footer">
       <div className="footer-title-container">
         <p className="footer-title">Newsletter</p>
       </div>
       <div className="newsletter-content-footer">
-        <div className="newsletter-image-container">
+        <div
+          className={
+            isMobile
+              ? 'newsletter-image-container-mobile'
+              : 'newsletter-image-container'
+          }
+        >
           {/* <img src={lisa} /> */}
           <Suspense>
             <Await resolve={footerImage}>
@@ -168,9 +174,21 @@ function Newsletter({footerImage}) {
             </Await>
           </Suspense>
         </div>
-        <div className="newsletter-form-footer">
+        <div
+          className={
+            isMobile
+              ? 'newsletter-form-footer-mobile'
+              : 'newsletter-form-footer'
+          }
+        >
           <p>Join our newsletter for the latest news and releases.</p>
-          <form className="newsletter-input-container">
+          <form
+            className={
+              isMobile
+                ? 'newsletter-input-container-mobile'
+                : 'newsletter-input-container'
+            }
+          >
             <input placeholder="Email" name="email"></input>
             <button type="submit">Submit</button>
           </form>
