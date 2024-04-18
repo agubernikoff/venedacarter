@@ -208,7 +208,9 @@ aside li {
 .header-menu-mobile {
   display: flex;
   flex-direction: column;
-  grid-gap: 1rem;
+  grid-gap: 0.5rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .header-menu-desktop {
@@ -258,11 +260,14 @@ aside li {
 }
 .subheader-menu-item {
   cursor: pointer;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 .mobile-middle-menu-item {
   cursor: pointer;
-  font-weight: bold;
-  padding-bottom: 1rem;
+  font-family: 'bold-font';
+  padding-bottom: 0.75rem;
+  padding-top: 0.25rem;
   border-bottom: 1px solid #eaeaea;
 }
 

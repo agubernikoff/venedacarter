@@ -200,7 +200,7 @@ export function HeaderMenuMobile({
         className={className}
         style={{borderBottom: '1px solid #eaeaea', paddingBottom: '1rem'}}
       >
-        <p className="subheader-menu-item" style={{fontWeight: 'bold'}}>
+        <p className="subheader-menu-item" style={{fontFamily: 'bold-font'}}>
           Shop
         </p>
         {(menu || FALLBACK_HEADER_MENU).items
@@ -284,7 +284,10 @@ export function HeaderMenuMobile({
         className={className}
         style={{borderBottom: '1px solid #eaeaea', paddingBottom: '1rem'}}
       >
-        <p className="subheader-menu-item" style={{fontWeight: 'bold'}}>
+        <p
+          className="subheader-menu-item"
+          style={{fontFamily: 'bold-font', marginTop: '.5rem'}}
+        >
           Support
         </p>
         {(menu3 || FALLBACK_HEADER_MENU).items.map((item) => {
