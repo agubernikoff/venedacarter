@@ -793,6 +793,12 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
 }
+.circle {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  display: inline;
+}
 .main-featured-product img,
 .featured-product img {
   height: auto;

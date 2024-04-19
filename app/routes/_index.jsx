@@ -232,6 +232,8 @@ function MainFeaturedProduct({product, isMobile}) {
 
 function FeaturedProduct({product, isMobile}) {
   const [index, setIndex] = useState(0);
+  const colorOptionsObj = product.options.find((o) => o.name === 'Color');
+  console.log(colorOptionsObj);
   return (
     <Link
       className="featured-product"
@@ -275,7 +277,31 @@ function FeaturedProduct({product, isMobile}) {
           </small>
         </div>
         <div className="product-color-variants">
-          <p>+2 Colors</p>
+          {
+            //JANKY SOLUTION FOR NOW... UPDATE TO SET HEX CODE BASED ON METAL NAME
+            colorOptionsObj ? (
+              index === 1 ? (
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    flexDirection: 'row',
+                    gap: '.5em',
+                    padding: '.25em',
+                  }}
+                >
+                  {colorOptionsObj.values.map((v) => (
+                    <div
+                      className="circle"
+                      style={{background: v.toLowerCase()}}
+                      key={v}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <p>{`+${colorOptionsObj.values.length} Colors`}</p>
+              )
+            ) : null
+          }
         </div>
       </div>
     </Link>
@@ -321,6 +347,10 @@ const FEATURED_COLLECTION_QUERY = `#graphql
         title
         handle
         description
+        options {
+          name
+          values
+        }
         priceRange {
           minVariantPrice {
             amount
