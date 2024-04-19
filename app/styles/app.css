@@ -190,6 +190,15 @@ aside li {
   flex: 1;
 }
 
+.header-left img,
+.header-right img {
+  max-width: 5vw;
+}
+
+.header-center-mobile img {
+  max-width: 44vw;
+}
+
 .header-center {
   flex: 2;
 }
@@ -283,7 +292,7 @@ aside li {
 .header-ctas {
   align-items: center;
   display: flex;
-  grid-gap: 1rem;
+  grid-gap: 1em;
   margin-left: auto;
   justify-content: flex-end;
 }
