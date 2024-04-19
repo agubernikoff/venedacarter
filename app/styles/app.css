@@ -217,7 +217,11 @@ aside li {
   background: white;
   height: calc(100vh - var(--header-height));
 }
-
+.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
 .header-menu-mobile-toggle {
   @media (min-width: 44em) {
     display: none;

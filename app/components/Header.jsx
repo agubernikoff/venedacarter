@@ -22,6 +22,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
   const [isOpen, setIsOpen] = useState(false);
   function toggleMenu() {
     setIsOpen(!isOpen);
+    document.body.classList.toggle('no-scroll', !isOpen);
   }
 
   const {shop, menu} = header;
