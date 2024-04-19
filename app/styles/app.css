@@ -198,6 +198,15 @@ aside li {
   display: flex;
   gap: 1rem;
 }
+.mobile-menu-container {
+  position: fixed;
+  top: calc(var(--header-height) + 1px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  background: white;
+}
 
 .header-menu-mobile-toggle {
   @media (min-width: 44em) {

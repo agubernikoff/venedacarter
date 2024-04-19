@@ -10,7 +10,7 @@ import menu from '../assets/menu.png';
 /**
  * @param {HeaderProps}
  */
-export function Header({header, isLoggedIn, cart}) {
+export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     window
@@ -18,12 +18,19 @@ export function Header({header, isLoggedIn, cart}) {
       .addEventListener('change', (e) => setIsMobile(e.matches));
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
+
+  const [isOpen, setIsOpen] = useState(false);
+  function toggleMenu() {
+    setIsOpen(!isOpen);
+  }
+
   const {shop, menu} = header;
+
   return (
     <header className={isMobile ? 'header-mobile' : 'header'}>
       <div className="header-left">
         {isMobile ? (
-          <HeaderMenuMobileToggle />
+          <HeaderMenuMobileToggle isOpen={isOpen} toggleMenu={toggleMenu} />
         ) : (
           <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
             <p className="shop-name">VENEDA CARTER</p>
@@ -46,6 +53,24 @@ export function Header({header, isLoggedIn, cart}) {
       <div className="header-right">
         <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} isMobile={isMobile} />
       </div>
+      <AnimatePresence mode="wait">
+        {isOpen && (
+          <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            className="mobile-menu-container"
+          >
+            <HeaderMenuMobile
+              menu={menu}
+              viewport="mobile"
+              primaryDomainUrl={header.shop.primaryDomain.url}
+              menu2={mobileMenu}
+              menu3={supportMenu}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
@@ -326,7 +351,6 @@ export function HeaderMenuMobile({
 function HeaderCtas({isLoggedIn, cart, isMobile}) {
   return (
     <nav className="header-ctas" role="navigation">
-      {isMobile ? null : <HeaderMenuMobileToggle />}
       <SearchToggle isMobile={isMobile} />
       {isMobile ? null : (
         <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
@@ -342,9 +366,10 @@ function HeaderCtas({isLoggedIn, cart, isMobile}) {
   );
 }
 
-function HeaderMenuMobileToggle() {
+function HeaderMenuMobileToggle({isOpen, toggleMenu}) {
+  const href = isOpen ? '#x' : '#mobile-menu-aside';
   return (
-    <a className="header-menu-mobile-toggle" href="#mobile-menu-aside">
+    <a className="header-menu-mobile-toggle" href={href} onClick={toggleMenu}>
       <img src={menu} />
     </a>
   );

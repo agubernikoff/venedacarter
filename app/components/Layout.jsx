@@ -26,36 +26,22 @@ export function Layout({
     <>
       <CartAside cart={cart} />
       <SearchAside />
-      {header && <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />}
+      {header && (
+        <Header
+          header={header}
+          cart={cart}
+          isLoggedIn={isLoggedIn}
+          supportMenu={supportMenu.menu}
+          mobileMenu={mobileMenu.menu}
+        />
+      )}
       <main>{children}</main>
-      <Suspense>
-        <Await resolve={footer}>
-          {(footer) => (
-            <Await resolve={supportMenu}>
-              {(supportMenu) => (
-                <Await resolve={mobileMenu}>
-                  {(mobileMenu) => (
-                    <>
-                      <Footer
-                        menu={footer?.menu}
-                        shop={header?.shop}
-                        footerImage={footerImage}
-                        supportMenu={supportMenu?.menu}
-                      />
-                      <MobileMenuAside
-                        menu={header?.menu}
-                        shop={header?.shop}
-                        menu2={mobileMenu?.menu}
-                        menu3={supportMenu?.menu}
-                      />
-                    </>
-                  )}
-                </Await>
-              )}
-            </Await>
-          )}
-        </Await>
-      </Suspense>
+      <Footer
+        menu={footer?.menu}
+        shop={header?.shop}
+        footerImage={footerImage}
+        supportMenu={supportMenu?.menu}
+      />
     </>
   );
 }
