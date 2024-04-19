@@ -128,3 +128,7 @@ code {
   font-family: monospace;
   padding: 0.25rem;
 }
+
+a > img {
+  display: block;
+}
