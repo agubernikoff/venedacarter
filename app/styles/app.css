@@ -215,6 +215,7 @@ aside li {
   bottom: 0;
   padding: 1rem;
   background: white;
+  height: calc(100vh - var(--header-height));
 }
 
 .header-menu-mobile-toggle {
