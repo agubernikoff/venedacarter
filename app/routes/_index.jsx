@@ -314,7 +314,7 @@ function Categories({categories, isMobile}) {
       <div className="title-container">
         <p className="title">Categories</p>
       </div>
-      {categories.map((category) => (
+      {categories.slice(0, 3).map((category) => (
         <Link
           key={category.handle}
           className={
