@@ -6,6 +6,7 @@ import search from '../assets/search.png';
 import cart from '../assets/cart.png';
 import mobIcon from '../assets/mobile-icon.png';
 import menu from '../assets/menu.png';
+import {useLocation} from '@remix-run/react';
 
 /**
  * @param {HeaderProps}
@@ -86,25 +87,11 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
 export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
   const {publicStoreDomain} = useRootLoaderData();
   const className = `header-menu-${viewport}`;
-  const [hovered, setHovered] = useState(false);
 
   function closeAside(event) {
     if (viewport === 'mobile') {
       event.preventDefault();
       window.location.href = event.currentTarget.href;
-    }
-  }
-  function isActive(item) {
-    if (typeof window !== 'undefined') {
-      if (new URL(item.url).pathname === window.location.pathname) return true;
-      if (
-        window.location.pathname.includes('collections') &&
-        item.title === 'Shop'
-      ) {
-        if (window.location.pathname.includes('new-arrivals')) return false;
-        return true;
-      }
-      return false;
     }
   }
 
@@ -121,89 +108,113 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
           Home
         </NavLink>
       )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
-        if (!item.url) return null;
-
-        // if the url is internal, we strip the domain
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
-
-        // if (item.items.length > 0) {
-        return (
-          <div
-            key={item.id}
-            onMouseEnter={() => {
-              if (item.title === 'Shop') setHovered(true);
-            }}
-            onMouseLeave={() => {
-              if (item.title === 'Shop') setHovered(false);
-            }}
-            className={
-              item.title === 'Shop' ? 'header-catalog-submenu-container' : null
-            }
-          >
-            <motion.div layout="position" transition={{ease: 'easeInOut'}}>
-              <NavLink
-                className={
-                  isActive(item)
-                    ? 'header-menu-item-active'
-                    : 'header-menu-item'
-                }
-                end
-                onClick={closeAside}
-                prefetch="intent"
-                style={(activeLinkStyle, hovered ? {opacity: 0.25} : null)}
-                to={url}
-              >
-                {item.title}
-              </NavLink>
-            </motion.div>
-            <AnimatePresence mode="popLayout">
-              {hovered && (
-                <motion.div
-                  initial={{opacity: 0, x: 500}}
-                  animate={{opacity: 1, x: 0}}
-                  exit={{opacity: 0, x: 500}}
-                  transition={{ease: 'easeInOut'}}
-                  className="header-catalog-submenu-container"
-                >
-                  {item.items.map((item) => {
-                    if (!item.url) return null;
-
-                    // if the url is internal, we strip the domain
-                    const url =
-                      item.url.includes('myshopify.com') ||
-                      item.url.includes(publicStoreDomain) ||
-                      item.url.includes(primaryDomainUrl)
-                        ? new URL(item.url).pathname
-                        : item.url;
-                    return (
-                      <NavLink
-                        className="subheader-menu-item"
-                        end
-                        key={item.id}
-                        onClick={closeAside}
-                        prefetch="intent"
-                        style={activeLinkStyle}
-                        to={url}
-                      >
-                        {item.title}
-                      </NavLink>
-                    );
-                  })}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        );
-      })}
+      {(menu || FALLBACK_HEADER_MENU).items.map((item) => (
+        <HeaderMenuItem
+          key={item.title}
+          item={item}
+          publicStoreDomain={publicStoreDomain}
+          primaryDomainUrl={primaryDomainUrl}
+          closeAside={closeAside}
+        />
+      ))}
     </nav>
   );
 }
+
+function HeaderMenuItem({
+  item,
+  publicStoreDomain,
+  primaryDomainUrl,
+  closeAside,
+}) {
+  const [hovered, setHovered] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const {pathname} = useLocation();
+
+  useEffect(() => {
+    if (new URL(item.url).pathname === pathname) setIsActive(true);
+    else if (pathname.includes('collections') && item.title === 'Shop') {
+      if (pathname.includes('new-arrivals')) setIsActive(false);
+      setIsActive(true);
+    } else setIsActive(false);
+  }, [pathname, item.title, item.url]);
+
+  if (!item.url) return null;
+
+  // if the url is internal, we strip the domain
+  const url =
+    item.url.includes('myshopify.com') ||
+    item.url.includes(publicStoreDomain) ||
+    item.url.includes(primaryDomainUrl)
+      ? new URL(item.url).pathname
+      : item.url;
+
+  // if (item.items.length > 0) {
+  return (
+    <div
+      key={item.id}
+      onMouseEnter={() => {
+        if (item.title === 'Shop') setHovered(true);
+      }}
+      onMouseLeave={() => {
+        if (item.title === 'Shop') setHovered(false);
+      }}
+      className={
+        item.title === 'Shop' ? 'header-catalog-submenu-container' : null
+      }
+    >
+      <motion.div layout="position" transition={{ease: 'easeInOut'}}>
+        <NavLink
+          className={isActive ? 'header-menu-item-active' : 'header-menu-item'}
+          end
+          onClick={closeAside}
+          prefetch="intent"
+          style={(activeLinkStyle, hovered ? {opacity: 0.25} : null)}
+          to={url}
+        >
+          {item.title}
+        </NavLink>
+      </motion.div>
+      <AnimatePresence mode="popLayout">
+        {hovered && (
+          <motion.div
+            initial={{opacity: 0, x: 500}}
+            animate={{opacity: 1, x: 0}}
+            exit={{opacity: 0, x: 500}}
+            transition={{ease: 'easeInOut'}}
+            className="header-catalog-submenu-container"
+          >
+            {item.items.map((item) => {
+              if (!item.url) return null;
+
+              // if the url is internal, we strip the domain
+              const url =
+                item.url.includes('myshopify.com') ||
+                item.url.includes(publicStoreDomain) ||
+                item.url.includes(primaryDomainUrl)
+                  ? new URL(item.url).pathname
+                  : item.url;
+              return (
+                <NavLink
+                  className="subheader-menu-item"
+                  end
+                  key={item.id}
+                  onClick={closeAside}
+                  prefetch="intent"
+                  style={activeLinkStyle}
+                  to={url}
+                >
+                  {item.title}
+                </NavLink>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export function HeaderMenuMobile({
   menu,
   primaryDomainUrl,
