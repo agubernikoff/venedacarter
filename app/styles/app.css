@@ -1033,3 +1033,14 @@ aside li {
 .account-logout {
   display: inline-block;
 }
+
+/*
+* --------------------------------------------------
+* About Page
+* --------------------------------------------------
+*/
+
+.page {
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
