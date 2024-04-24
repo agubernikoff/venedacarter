@@ -147,41 +147,57 @@ function ProductImage({image}) {
  */
 function ProductMain({selectedVariant, product, variants}) {
   const {title, descriptionHtml} = product;
+
+  const firstSpaceIndex = title.indexOf(' ');
+
+  const firstPart = title.slice(0, firstSpaceIndex + 1);
+  const secondPart = title.slice(firstSpaceIndex + 1);
+
   return (
     <div className="product-main">
-      <h1>{title}</h1>
-      <ProductPrice selectedVariant={selectedVariant} />
-      <br />
-      <Suspense
-        fallback={
-          <ProductForm
-            product={product}
-            selectedVariant={selectedVariant}
-            variants={[]}
-          />
-        }
-      >
-        <Await
-          errorElement="There was a problem loading product variants"
-          resolve={variants}
-        >
-          {(data) => (
+      <div className="product-main-top">
+        <p className="breadcrumbs">Shop/{title}</p>
+        <div className="product-main-title">
+          <div className="title-dissect">
+            <p>{firstPart}</p>
+            <p>{secondPart}</p>
+          </div>
+          <ProductPrice selectedVariant={selectedVariant} />
+        </div>
+      </div>
+      <div className="product-main-middle">
+        <div
+          className="product-main-description"
+          dangerouslySetInnerHTML={{__html: descriptionHtml}}
+        />
+        <div className="size-guide">
+          <a style={{textDecoration: 'underline'}}>Size Guide</a>
+        </div>
+      </div>
+      <div className="product-main-bottom">
+        <Suspense
+          fallback={
             <ProductForm
               product={product}
               selectedVariant={selectedVariant}
-              variants={data.product?.variants.nodes || []}
+              variants={[]}
             />
-          )}
-        </Await>
-      </Suspense>
-      <br />
-      <br />
-      <p>
-        <strong>Description</strong>
-      </p>
-      <br />
-      <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
-      <br />
+          }
+        >
+          <Await
+            errorElement="There was a problem loading product variants"
+            resolve={variants}
+          >
+            {(data) => (
+              <ProductForm
+                product={product}
+                selectedVariant={selectedVariant}
+                variants={data.product?.variants.nodes || []}
+              />
+            )}
+          </Await>
+        </Suspense>
+      </div>
     </div>
   );
 }
