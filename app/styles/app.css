@@ -968,6 +968,7 @@ aside li {
   display: flex;
   font-size: 0.75rem;
   font-family: 'regular-font';
+  height: calc(100vh - var(--header-height));
 }
 
 .product-image {
