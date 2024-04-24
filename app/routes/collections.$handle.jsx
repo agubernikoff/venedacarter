@@ -7,6 +7,8 @@ import {
   Money,
 } from '@shopify/hydrogen';
 import {useVariantUrl} from '~/lib/variants';
+import {FeaturedProduct} from './_index';
+import {useState, useEffect} from 'react';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -22,7 +24,7 @@ export async function loader({request, params, context}) {
   const {handle} = params;
   const {storefront} = context;
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 8,
+    pageBy: 12,
   });
 
   if (!handle) {
@@ -45,9 +47,19 @@ export default function Collection() {
   /** @type {LoaderReturnData} */
   const {collection} = useLoaderData();
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    window
+      .matchMedia('(max-width:44em)')
+      .addEventListener('change', (e) => setIsMobile(e.matches));
+    if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
+  }, []);
+
   return (
-    <div className="collection">
-      <h1>{collection.title}</h1>
+    <div className={isMobile ? 'home-mobile' : 'home'}>
+      <div className={isMobile ? 'title-container-mobile' : 'title-container'}>
+        <p className="collection-title">{`Shop/${collection.title}`}</p>
+      </div>
       <Pagination connection={collection.products}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
           <>
@@ -71,17 +83,17 @@ export default function Collection() {
  */
 function ProductsGrid({products}) {
   return (
-    <div className="products-grid">
+    <>
       {products.map((product, index) => {
         return (
-          <ProductItem
+          <FeaturedProduct
             key={product.id}
             product={product}
             loading={index < 8 ? 'eager' : undefined}
           />
         );
       })}
-    </div>
+    </>
   );
 }
 
@@ -140,6 +152,19 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
       }
       maxVariantPrice {
         ...MoneyProductItem
+      }
+    }
+    options {
+      name
+      values
+    }
+    images(first: 2) {
+      nodes {
+        id
+        url
+        altText
+        width
+        height
       }
     }
     variants(first: 1) {

@@ -230,7 +230,7 @@ function MainFeaturedProduct({product, isMobile}) {
   );
 }
 
-function FeaturedProduct({product, isMobile}) {
+export function FeaturedProduct({product, isMobile, loading}) {
   const [index, setIndex] = useState(0);
   const colorOptionsObj = product.options.find((o) => o.name === 'Color');
   console.log(colorOptionsObj);
@@ -254,6 +254,7 @@ function FeaturedProduct({product, isMobile}) {
             data={product.images.nodes[index]}
             aspectRatio="1/1.2"
             crop={false}
+            loading={loading}
             sizes="(min-width: 45em) 20vw, 50vw"
           />
         </motion.div>

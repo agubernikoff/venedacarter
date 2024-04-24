@@ -334,16 +334,20 @@ aside li {
 .brand-footer {
   grid-area: brand;
   border: 1px solid #eaeaea;
+  border-left: none;
   height: 100%;
 }
 .support-footer {
   grid-area: support;
   border: 1px solid #eaeaea;
+  border-left: none;
   height: 100%;
 }
 .newsletter-footer {
   grid-area: newsletter;
   border: 1px solid #eaeaea;
+  border-left: none;
+  border-right: none;
   height: 100%;
 }
 .footer-title-container {
@@ -729,6 +733,15 @@ aside li {
   z-index: 2;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
+}
+
+.collection-title {
+  margin-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  position: relative;
 }
 
 .title {
