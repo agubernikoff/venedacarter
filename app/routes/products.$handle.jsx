@@ -1,6 +1,8 @@
 import {Suspense} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {defer, redirect} from '@shopify/remix-oxygen';
 import {Await, Link, useLoaderData} from '@remix-run/react';
+import size from '../assets/size.png';
 
 import {
   Image,
@@ -147,6 +149,35 @@ function ProductImage({image}) {
  */
 function ProductMain({selectedVariant, product, variants}) {
   const {title, descriptionHtml} = product;
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
+  const sizeGuideRef = useRef(null);
+
+  useEffect(() => {
+    const handleEscapeKeyPress = (event) => {
+      if (event.key === 'Escape') {
+        setIsSizeGuideOpen(false);
+      }
+    };
+
+    const handleClickOutside = (event) => {
+      if (
+        sizeGuideRef.current &&
+        !sizeGuideRef.current.contains(event.target)
+      ) {
+        setIsSizeGuideOpen(false);
+      }
+    };
+
+    if (isSizeGuideOpen) {
+      document.addEventListener('keydown', handleEscapeKeyPress);
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKeyPress);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSizeGuideOpen]);
 
   const firstSpaceIndex = title.indexOf(' ');
 
@@ -171,7 +202,25 @@ function ProductMain({selectedVariant, product, variants}) {
           dangerouslySetInnerHTML={{__html: descriptionHtml}}
         />
         <div className="size-guide">
-          <a style={{textDecoration: 'underline'}}>Size Guide</a>
+          <p
+            style={{textDecoration: 'underline', cursor: 'pointer'}}
+            onClick={() => setIsSizeGuideOpen(true)}
+          >
+            Size Guide
+          </p>
+          {isSizeGuideOpen && (
+            <div className="size-guide-overlay">
+              <div className="size-guide-popup" ref={sizeGuideRef}>
+                <img src={size} alt="Size Guide" className="size-guide-image" />
+                <button
+                  className="close-button"
+                  onClick={() => setIsSizeGuideOpen(false)}
+                >
+                  X
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="product-main-bottom">
