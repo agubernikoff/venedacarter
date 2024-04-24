@@ -238,14 +238,15 @@ function ProductPrice({selectedVariant}) {
 function ProductForm({product, selectedVariant, variants}) {
   return (
     <div className="product-form">
-      <VariantSelector
-        handle={product.handle}
-        options={product.options}
-        variants={variants}
-      >
-        {({option}) => <ProductOptions key={option.name} option={option} />}
-      </VariantSelector>
-      <br />
+      <div className="product-options-container">
+        <VariantSelector
+          handle={product.handle}
+          options={product.options}
+          variants={variants}
+        >
+          {({option}) => <ProductOptions key={option.name} option={option} />}
+        </VariantSelector>
+      </div>
       <AddToCartButton
         disabled={!selectedVariant || !selectedVariant.availableForSale}
         onClick={() => {
@@ -274,7 +275,7 @@ function ProductForm({product, selectedVariant, variants}) {
 function ProductOptions({option}) {
   return (
     <div className="product-options" key={option.name}>
-      <h5>{option.name}</h5>
+      <p style={{marginBottom: '1%'}}>{option.name.toUpperCase()}</p>
       <div className="product-options-grid">
         {option.values.map(({value, isAvailable, isActive, to}) => {
           return (
@@ -286,7 +287,8 @@ function ProductOptions({option}) {
               replace
               to={to}
               style={{
-                border: isActive ? '1px solid black' : '1px solid transparent',
+                backgroundColor: isActive ? 'black' : 'transparent',
+                color: isActive ? 'white' : 'black',
                 opacity: isAvailable ? 1 : 0.3,
               }}
             >
@@ -320,11 +322,12 @@ function AddToCartButton({analytics, children, disabled, lines, onClick}) {
             value={JSON.stringify(analytics)}
           />
           <button
+            className="add-to-cart-button"
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== 'idle'}
           >
-            {children}
+            {children.toUpperCase()}
           </button>
         </>
       )}
