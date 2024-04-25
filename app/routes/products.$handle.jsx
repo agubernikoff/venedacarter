@@ -108,9 +108,13 @@ export default function Product() {
   /** @type {LoaderReturnData} */
   const {product, variants} = useLoaderData();
   const {selectedVariant} = product;
+  console.log('pppppp', product);
   return (
     <div className="product">
-      <ProductImage image={selectedVariant?.image} />
+      <ProductImage
+        images={product?.images.nodes}
+        selectedVariant={selectedVariant}
+      />
       <ProductMain
         selectedVariant={selectedVariant}
         product={product}
@@ -123,19 +127,32 @@ export default function Product() {
 /**
  * @param {{image: ProductVariantFragment['image']}}
  */
-function ProductImage({image}) {
-  if (!image) {
-    return <div className="product-image" />;
+function ProductImage({images, selectedVariant}) {
+  if (!images) {
+    return (
+      <div className="product-image">
+        <Image
+          alt={selectedVariant.image.altText || 'Product Image'}
+          aspectRatio="1/1"
+          data={selectedVariant.image}
+          sizes="(min-width: 45em) 50vw, 100vw"
+        />
+      </div>
+    );
   }
   return (
     <div className="product-image">
-      <Image
-        alt={image.altText || 'Product Image'}
-        aspectRatio="1/1"
-        data={image}
-        key={image.id}
-        sizes="(min-width: 45em) 50vw, 100vw"
-      />
+      {images
+        .filter((i) => i.altText === selectedVariant.image.altText)
+        .map((image) => (
+          <Image
+            alt={image.altText || 'Product Image'}
+            aspectRatio="1/1"
+            data={image}
+            key={image.id}
+            sizes="(min-width: 45em) 50vw, 100vw"
+          />
+        ))}
     </div>
   );
 }
@@ -437,6 +454,15 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    images(first: 8) {
+      nodes {
+        id
+        url
+        altText
+        width
+        height
+      }
+    }
     options {
       name
       values

@@ -974,6 +974,7 @@ aside li {
 .product-image {
   width: 50%;
   border-right: 1px solid #eaeaea;
+  overflow: auto;
 }
 
 .product p {
