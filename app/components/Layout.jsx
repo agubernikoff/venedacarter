@@ -129,7 +129,6 @@ function FilterAside() {
     <Aside id="filter-aside" heading="FILTER">
       <button
         className="collection-title"
-        // href="#x"
         onClick={() => {
           const params = new URLSearchParams();
           params.set('sortkey', 'CREATED_AT');
@@ -140,7 +139,7 @@ function FilterAside() {
         }}
       >
         Filter
-      </a>
+      </button>
     </Aside>
   );
 }
