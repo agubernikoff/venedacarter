@@ -38,7 +38,6 @@ export async function loader({request, params, context}) {
     variables: {...paginationVariables},
   });
 
-  console.log(paginationVariables, collection);
   if (!collection && handle !== 'all') {
     throw new Response(`Collection ${handle} not found`, {
       status: 404,
@@ -61,8 +60,6 @@ export default function Collection() {
       .addEventListener('change', (e) => setIsMobile(e.matches));
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
-
-  console.log('cccccc', collection);
 
   return (
     <div className={isMobile ? 'home-mobile' : 'home'}>

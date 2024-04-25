@@ -127,14 +127,6 @@ export default function Product() {
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
 
-  console.log(
-    'pppppp',
-    product.collections.nodes.find(
-      (node) =>
-        node.title !== 'Featured Products' && node.title !== 'New Arrivals',
-    ),
-  );
-  console.log('rrrrrrr', recs);
   return (
     <>
       <div className={isMobile ? 'product-mobile' : 'product'}>
@@ -467,7 +459,6 @@ function ProductForm({product, selectedVariant, variants, isMobile}) {
  * @param {{option: VariantOption}}
  */
 function ProductOptions({option}) {
-  console.log('ooooo', option);
   return (
     <div className="product-options" key={option.name}>
       <p style={{marginBottom: '1%'}}>{option.name.toUpperCase()}</p>

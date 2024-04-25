@@ -34,7 +34,6 @@ export async function loader({context}) {
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
-  console.log(data);
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -231,7 +230,7 @@ function MainFeaturedProduct({product, isMobile}) {
 export function FeaturedProduct({product, isMobile, loading}) {
   const [index, setIndex] = useState(0);
   const colorOptionsObj = product.options.find((o) => o.name === 'Material');
-  console.log('material log:', product.options);
+
   return (
     <Link
       className="featured-product"
