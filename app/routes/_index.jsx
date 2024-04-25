@@ -34,6 +34,7 @@ export async function loader({context}) {
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
+  console.log(data);
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -230,7 +231,7 @@ function MainFeaturedProduct({product, isMobile}) {
 export function FeaturedProduct({product, isMobile, loading}) {
   const [index, setIndex] = useState(0);
   const colorOptionsObj = product.options.find((o) => o.name === 'Material');
-
+  console.log('material log:', product.options);
   return (
     <Link
       className="featured-product"
@@ -240,21 +241,31 @@ export function FeaturedProduct({product, isMobile, loading}) {
     >
       <div style={{background: '#f4f4f4'}}>
         {/* <AnimatePresence mode="wait" initial={false}> */}
-        <motion.div
-          key={index}
-          initial={{opacity: 0}}
-          animate={{opacity: 1}}
-          exit={{opacity: 0}}
-          transition={{duration: 0.2}}
-        >
+        {isMobile ? (
           <Image
-            data={product.images.nodes[index]}
+            data={product.images.nodes[0]}
             aspectRatio="1/1.2"
             crop={false}
             loading={loading}
             sizes="(min-width: 45em) 20vw, 50vw"
           />
-        </motion.div>
+        ) : (
+          <motion.div
+            key={index}
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{duration: 0.2}}
+          >
+            <Image
+              data={product.images.nodes[index]}
+              aspectRatio="1/1.2"
+              crop={false}
+              loading={loading}
+              sizes="(min-width: 45em) 20vw, 50vw"
+            />
+          </motion.div>
+        )}
         {/* </AnimatePresence> */}
       </div>
       <div
