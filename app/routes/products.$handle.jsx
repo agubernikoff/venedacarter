@@ -163,6 +163,37 @@ export default function Product() {
  * @param {{image: ProductVariantFragment['image']}}
  */
 function ProductImage({images, selectedVariant, isMobile}) {
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const filteredImages = images.filter(
+    (i) => i.altText === selectedVariant.image.altText,
+  );
+
+  function cycleImages(delta) {
+    const newIndex = imageIndex + delta;
+    if (newIndex >= 0 && newIndex < filteredImages.length) {
+      setImageIndex(imageIndex + delta);
+    }
+    if (newIndex < 0) {
+      setImageIndex(filteredImages.length - 1);
+    }
+    if (newIndex >= filteredImages.length) {
+      setImageIndex(0);
+    }
+  }
+
+  const mappedIndicators = filteredImages.map((e, i) => (
+    <div
+      key={e.id}
+      className="circle"
+      style={{
+        background: i === imageIndex ? 'black' : 'grey',
+        height: '10px',
+        width: '10px',
+      }}
+    ></div>
+  ));
+
   if (!images) {
     return (
       <div className="product-image">
@@ -176,51 +207,54 @@ function ProductImage({images, selectedVariant, isMobile}) {
     );
   }
   return (
-    <>
+    <div className="product-image">
       {isMobile ? (
-        <div className="product-container-mobile">
+        <>
           <div
-            className="product-image-container-mobile"
-            onScroll={(e) =>
-              handleScroll(e.target.scrollWidth, e.target.scrollLeft)
-            }
+            className="left-image-button-container"
+            onClick={() => {
+              cycleImages(-1);
+            }}
+          />
+          <div
+            className="right-image-button-container"
+            onClick={() => {
+              cycleImages(1);
+            }}
+          />
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              width: 'fit-content',
+              gap: '.2rem',
+              position: 'absolute',
+              bottom: '5%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+            }}
           >
-            {images
-              .filter((i) => i.altText === selectedVariant.image.altText)
-              .map((i) => (
-                <div
-                  key={i.id}
-                  style={{color: 'white'}}
-                  className="mobile-image-container"
-                >
-                  <Image
-                    className="mobile-pdp-image"
-                    data={i}
-                    key={i.id}
-                    sizes="(min-width: 45em) 20vw, 50vw"
-                    aspectRatio="1/1"
-                    alt={i.altText || 'Product Image'}
-                  />
-                </div>
-              ))}
+            {mappedIndicators}
           </div>
-        </div>
+          <Image
+            alt={filteredImages[imageIndex].altText || 'Product Image'}
+            aspectRatio="1/1"
+            data={filteredImages[imageIndex]}
+            sizes="(min-width: 45em) 50vw, 100vw"
+          />
+        </>
       ) : (
-        <div className="product-image">
-          {images
-            .filter((i) => i.altText === selectedVariant.image.altText)
-            .map((image) => (
-              <Image
-                alt={image.altText || 'Product Image'}
-                aspectRatio="1/1"
-                data={image}
-                key={image.id}
-                sizes="(min-width: 45em) 50vw, 100vw"
-              />
-            ))}
-        </div>
+        filteredImages.map((image) => (
+          <Image
+            alt={image.altText || 'Product Image'}
+            aspectRatio="1/1"
+            data={image}
+            key={image.id}
+            sizes="(min-width: 45em) 50vw, 100vw"
+          />
+        ))
       )}
-    </>
+    </div>
   );
 }
 
@@ -513,16 +547,23 @@ function AddToCartButton({
 }
 
 function ProductRecommendations({recs, product, isMobile}) {
+  const endOfSlice = isMobile ? 6 : 3;
   return (
     <Suspense>
       <Await resolve={recs}>
         {(recs) => (
           <div className={isMobile ? 'home-mobile' : 'home'}>
-            <div style={{borderTop: 'none'}} className="title-container-mobile">
+            <div
+              style={{borderTop: 'none'}}
+              className={
+                isMobile ? 'title-container-mobile' : 'title-container'
+              }
+            >
               <p className="title">Recommended Products</p>
             </div>
             {recs.collection.products.nodes
               .filter((rec) => rec.id !== product.id)
+              .slice(0, endOfSlice)
               .map((rec) => (
                 <FeaturedProduct
                   isMobile={isMobile}
