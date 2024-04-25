@@ -810,7 +810,7 @@ aside li {
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  display: inline;
+  display: inline-block;
 }
 .main-featured-product img,
 .featured-product img {
@@ -1109,6 +1109,9 @@ aside li {
 
 .product-options-item {
   padding: 0.25rem 0.5rem;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
 }
 .product-options-item:hover {
   text-decoration: none;

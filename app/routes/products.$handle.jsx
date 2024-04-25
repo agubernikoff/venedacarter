@@ -1,8 +1,8 @@
-import {Suspense} from 'react';
-import React, {useState, useEffect, useRef} from 'react';
+import React, {Suspense, useState, useEffect, useRef} from 'react';
 import {defer, redirect} from '@shopify/remix-oxygen';
 import {Await, Link, useLoaderData} from '@remix-run/react';
 import size from '../assets/size.png';
+import colorPicker from '~/helper/ColorPicker';
 
 import {
   Image,
@@ -322,6 +322,7 @@ function ProductForm({product, selectedVariant, variants}) {
  * @param {{option: VariantOption}}
  */
 function ProductOptions({option}) {
+  console.log('ooooo', option);
   return (
     <div className="product-options" key={option.name}>
       <p style={{marginBottom: '1%'}}>{option.name.toUpperCase()}</p>
@@ -341,7 +342,14 @@ function ProductOptions({option}) {
                 opacity: isAvailable ? 1 : 0.3,
               }}
             >
-              {value}
+              {option.name === 'Material' ? (
+                <div
+                  className="circle"
+                  style={{background: colorPicker(value)}}
+                  key={value}
+                />
+              ) : null}
+              <span>{value}</span>
             </Link>
           );
         })}
