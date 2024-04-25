@@ -176,19 +176,51 @@ function ProductImage({images, selectedVariant, isMobile}) {
     );
   }
   return (
-    <div className="product-image">
-      {images
-        .filter((i) => i.altText === selectedVariant.image.altText)
-        .map((image) => (
-          <Image
-            alt={image.altText || 'Product Image'}
-            aspectRatio="1/1"
-            data={image}
-            key={image.id}
-            sizes="(min-width: 45em) 50vw, 100vw"
-          />
-        ))}
-    </div>
+    <>
+      {isMobile ? (
+        <div className="product-container-mobile">
+          <div
+            className="product-image-container-mobile"
+            onScroll={(e) =>
+              handleScroll(e.target.scrollWidth, e.target.scrollLeft)
+            }
+          >
+            {images
+              .filter((i) => i.altText === selectedVariant.image.altText)
+              .map((i) => (
+                <div
+                  key={i.id}
+                  style={{color: 'white'}}
+                  className="mobile-image-container"
+                >
+                  <Image
+                    className="mobile-pdp-image"
+                    data={i}
+                    key={i.id}
+                    sizes="(min-width: 45em) 20vw, 50vw"
+                    aspectRatio="1/1"
+                    alt={i.altText || 'Product Image'}
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
+      ) : (
+        <div className="product-image">
+          {images
+            .filter((i) => i.altText === selectedVariant.image.altText)
+            .map((image) => (
+              <Image
+                alt={image.altText || 'Product Image'}
+                aspectRatio="1/1"
+                data={image}
+                key={image.id}
+                sizes="(min-width: 45em) 50vw, 100vw"
+              />
+            ))}
+        </div>
+      )}
+    </>
   );
 }
 
