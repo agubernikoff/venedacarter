@@ -969,12 +969,19 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
   height: calc(100vh - var(--header-height));
+  @media (max-width: 45em) {
+    flex-direction: column;
+    width: 100%;
+  }
 }
 
 .product-image {
   width: 50%;
   border-right: 1px solid #eaeaea;
   overflow: auto;
+  @media (max-width: 45em) {
+    width: 100%;
+  }
 }
 
 .product p {
@@ -992,6 +999,9 @@ aside li {
   display: flex;
   flex-direction: column;
   width: 50%;
+  @media (max-width: 45em) {
+    width: 100%;
+  }
 }
 
 .breadcrumbs {
