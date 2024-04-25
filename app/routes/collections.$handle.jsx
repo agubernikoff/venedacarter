@@ -1,5 +1,5 @@
 import {json, redirect} from '@shopify/remix-oxygen';
-import {useLoaderData, Link} from '@remix-run/react';
+import {useLocation, useLoaderData, Link} from '@remix-run/react';
 import {
   Pagination,
   getPaginationVariables,
@@ -14,7 +14,7 @@ import {useState, useEffect} from 'react';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Hydrogen | ${data?.collection.title ?? ''} Collection`}];
+  return [{title: `Hydrogen | ${data?.collection?.title ?? ''} Collection`}];
 };
 
 /**
@@ -34,18 +34,25 @@ export async function loader({request, params, context}) {
   const {collection} = await storefront.query(COLLECTION_QUERY, {
     variables: {handle, ...paginationVariables},
   });
+  const {products} = await storefront.query(ALL_QUERY, {
+    variables: {...paginationVariables},
+  });
 
-  if (!collection) {
+  console.log(paginationVariables, collection);
+  if (!collection && handle !== 'all') {
     throw new Response(`Collection ${handle} not found`, {
       status: 404,
     });
   }
-  return json({collection});
+  if (collection) return json({collection});
+  else return json({products});
 }
 
 export default function Collection() {
   /** @type {LoaderReturnData} */
-  const {collection} = useLoaderData();
+  const {collection, products} = useLoaderData();
+
+  const {pathname} = useLocation();
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -55,12 +62,18 @@ export default function Collection() {
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
 
+  console.log('cccccc', collection);
+
   return (
     <div className={isMobile ? 'home-mobile' : 'home'}>
       <div className={isMobile ? 'title-container-mobile' : 'title-container'}>
-        <p className="collection-title">{`Shop/${collection.title}`}</p>
+        <p className="collection-title">{`Shop/${
+          !pathname.includes('all') ? collection.title : 'All'
+        }`}</p>
       </div>
-      <Pagination connection={collection.products}>
+      <Pagination
+        connection={!pathname.includes('all') ? collection.products : products}
+      >
         {({nodes, isLoading, PreviousLink, NextLink}) => (
           <>
             <PreviousLink>
@@ -210,6 +223,35 @@ const COLLECTION_QUERY = `#graphql
           endCursor
           startCursor
         }
+      }
+    }
+  }
+`;
+
+const ALL_QUERY = `#graphql
+  ${PRODUCT_ITEM_FRAGMENT}
+  query Product(
+    $country: CountryCode
+    $language: LanguageCode
+    $first: Int
+    $last: Int
+    $startCursor: String
+    $endCursor: String
+  ) @inContext(country: $country, language: $language) {
+    products(
+      first: $first,
+      last: $last,
+      before: $startCursor,
+      after: $endCursor
+    ) {
+      nodes {
+        ...ProductItem
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        endCursor
+        startCursor
       }
     }
   }
