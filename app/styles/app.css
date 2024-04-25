@@ -986,7 +986,7 @@ aside li {
   position: relative;
   display: flex;
   height: -webkit-fill-available;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: center;
   width: 100%;
   scroll-snap-align: end;
@@ -999,7 +999,7 @@ aside li {
   width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: flex-start;
   overflow: scroll;
   scroll-snap-type: x mandatory;
 }
