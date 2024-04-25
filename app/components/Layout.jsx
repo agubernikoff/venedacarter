@@ -1,4 +1,4 @@
-import {Await} from '@remix-run/react';
+import {Await, useLocation, useSearchParams} from '@remix-run/react';
 import {Suspense} from 'react';
 import {Aside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
@@ -26,6 +26,7 @@ export function Layout({
     <>
       <CartAside cart={cart} />
       <SearchAside />
+      <FilterAside />
       {header && (
         <Header
           header={header}
@@ -118,6 +119,29 @@ function MobileMenuAside({menu, shop, menu2, menu3}) {
         />
       </Aside>
     )
+  );
+}
+
+function FilterAside() {
+  const {pathname} = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  return (
+    <Aside id="filter-aside" heading="FILTER">
+      <button
+        className="collection-title"
+        // href="#x"
+        onClick={() => {
+          const params = new URLSearchParams();
+          params.set('sortkey', 'CREATED_AT');
+          params.set('reverse', 'true');
+          setSearchParams(params, {
+            preventScrollReset: true,
+          });
+        }}
+      >
+        Filter
+      </a>
+    </Aside>
   );
 }
 

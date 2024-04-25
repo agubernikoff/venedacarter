@@ -23,19 +23,34 @@ export const meta = ({data}) => {
 export async function loader({request, params, context}) {
   const {handle} = params;
   const {storefront} = context;
+  const url = new URL(request.url);
+  const searchParams = new URLSearchParams(url.search);
+  const sortKey = searchParams.get('sortkey')
+    ? String(searchParams.get('sortkey'))
+    : null;
+  const reverse = Boolean(searchParams.get('reverse'));
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 12,
   });
-
+  console.log(sortKey, reverse);
   if (!handle) {
     return redirect('/collections');
   }
 
   const {collection} = await storefront.query(COLLECTION_QUERY, {
-    variables: {handle, ...paginationVariables},
+    variables: {
+      sortKey: handle !== 'all' ? sortKey : null,
+      reverse,
+      handle,
+      ...paginationVariables,
+    },
   });
   const {products} = await storefront.query(ALL_QUERY, {
-    variables: {...paginationVariables},
+    variables: {
+      sortKey: handle === 'all' ? sortKey : null,
+      reverse,
+      ...paginationVariables,
+    },
   });
 
   if (!collection && handle !== 'all') {
@@ -49,6 +64,14 @@ export async function loader({request, params, context}) {
 
 export default function Collection() {
   /** @type {LoaderReturnData} */
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // useEffect(() => {
+  //   const params = new URLSearchParams();
+  //   params.set('someKey', 'someValue');
+  //   setSearchParams(params, {
+  //     preventScrollReset: true,
+  //   });
+  // }, []);
   const {collection, products} = useLoaderData();
 
   const {pathname} = useLocation();
@@ -67,6 +90,9 @@ export default function Collection() {
         <p className="collection-title">{`Shop/${
           !pathname.includes('all') ? collection.title : 'All'
         }`}</p>
+        <a className="collection-title" href="#filter-aside">
+          Filter
+        </a>
       </div>
       <Pagination
         connection={!pathname.includes('all') ? collection.products : products}
@@ -199,6 +225,8 @@ const COLLECTION_QUERY = `#graphql
     $last: Int
     $startCursor: String
     $endCursor: String
+    $sortKey: ProductCollectionSortKeys
+    $reverse: Boolean
   ) @inContext(country: $country, language: $language) {
     collection(handle: $handle) {
       id
@@ -209,7 +237,9 @@ const COLLECTION_QUERY = `#graphql
         first: $first,
         last: $last,
         before: $startCursor,
-        after: $endCursor
+        after: $endCursor,
+        sortKey: $sortKey,
+        reverse: $reverse,
       ) {
         nodes {
           ...ProductItem
@@ -234,12 +264,16 @@ const ALL_QUERY = `#graphql
     $last: Int
     $startCursor: String
     $endCursor: String
+    $sortKey: ProductSortKeys
+    $reverse: Boolean
   ) @inContext(country: $country, language: $language) {
     products(
       first: $first,
       last: $last,
       before: $startCursor,
-      after: $endCursor
+      after: $endCursor,
+      sortKey: $sortKey,
+      reverse: $reverse,
     ) {
       nodes {
         ...ProductItem

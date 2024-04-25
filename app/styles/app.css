@@ -724,6 +724,9 @@ aside li {
   z-index: 2;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .title-container-mobile {
   position: sticky;
@@ -733,12 +736,13 @@ aside li {
   z-index: 2;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .collection-title {
-  margin-left: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem;
   font-size: 0.75rem;
   font-family: 'regular-font';
   position: relative;
