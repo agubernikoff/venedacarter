@@ -118,6 +118,15 @@ export default function Product() {
   /** @type {LoaderReturnData} */
   const {product, variants, recs} = useLoaderData();
   const {selectedVariant} = product;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    window
+      .matchMedia('(max-width:44em)')
+      .addEventListener('change', (e) => setIsMobile(e.matches));
+    if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
+  }, []);
+
   console.log(
     'pppppp',
     product.collections.nodes.find(
@@ -128,18 +137,24 @@ export default function Product() {
   console.log('rrrrrrr', recs);
   return (
     <>
-      <div className="product">
+      <div className={isMobile ? 'product-mobile' : 'product'}>
         <ProductImage
           images={product?.images.nodes}
           selectedVariant={selectedVariant}
+          isMobile={isMobile}
         />
         <ProductMain
           selectedVariant={selectedVariant}
           product={product}
           variants={variants}
+          isMobile={isMobile}
         />
       </div>
-      <ProductRecommendations recs={recs} product={product} />
+      <ProductRecommendations
+        isMobile={isMobile}
+        recs={recs}
+        product={product}
+      />
     </>
   );
 }
@@ -147,7 +162,7 @@ export default function Product() {
 /**
  * @param {{image: ProductVariantFragment['image']}}
  */
-function ProductImage({images, selectedVariant}) {
+function ProductImage({images, selectedVariant, isMobile}) {
   if (!images) {
     return (
       <div className="product-image">
@@ -184,7 +199,7 @@ function ProductImage({images, selectedVariant}) {
  *   variants: Promise<ProductVariantsQuery>;
  * }}
  */
-function ProductMain({selectedVariant, product, variants}) {
+function ProductMain({selectedVariant, product, variants, isMobile}) {
   const {title, descriptionHtml} = product;
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const sizeGuideRef = useRef(null);
@@ -222,23 +237,37 @@ function ProductMain({selectedVariant, product, variants}) {
   const secondPart = title.slice(firstSpaceIndex + 1);
 
   return (
-    <div className="product-main">
-      <div className="product-main-top">
-        <p className="breadcrumbs">Shop/{title}</p>
-        <div className="product-main-title">
-          <div className="title-dissect">
+    <div className={isMobile ? 'product-main-mobile' : 'product-main'}>
+      <div
+        className={isMobile ? 'product-main-top-mobile' : 'product-main-top'}
+      >
+        {isMobile ? null : <p className="breadcrumbs">Shop/{title}</p>}
+        <div
+          className={
+            isMobile ? 'product-main-title-mobile' : 'product-main-title'
+          }
+        >
+          <div className={isMobile ? 'title-dissect-mobile' : 'title-dissect'}>
             <p>{firstPart}</p>
             <p>{secondPart}</p>
           </div>
-          <ProductPrice selectedVariant={selectedVariant} />
+          <ProductPrice selectedVariant={selectedVariant} isMobile={isMobile} />
         </div>
       </div>
-      <div className="product-main-middle">
+      <div
+        className={
+          isMobile ? 'product-main-middle-mobile' : 'product-main-middle'
+        }
+      >
         <div
-          className="product-main-description"
+          className={
+            isMobile
+              ? 'product-main-description-mobile'
+              : 'product-main-description'
+          }
           dangerouslySetInnerHTML={{__html: descriptionHtml}}
         />
-        <div className="size-guide">
+        <div className={isMobile ? 'size-guide-mobile' : 'size-guide'}>
           <p
             style={{textDecoration: 'underline', cursor: 'pointer'}}
             onClick={() => setIsSizeGuideOpen(true)}
@@ -260,13 +289,18 @@ function ProductMain({selectedVariant, product, variants}) {
           )}
         </div>
       </div>
-      <div className="product-main-bottom">
+      <div
+        className={
+          isMobile ? 'product-main-bottom-mobile' : 'product-main-bottom'
+        }
+      >
         <Suspense
           fallback={
             <ProductForm
               product={product}
               selectedVariant={selectedVariant}
               variants={[]}
+              isMobile={isMobile}
             />
           }
         >
@@ -279,6 +313,7 @@ function ProductMain({selectedVariant, product, variants}) {
                 product={product}
                 selectedVariant={selectedVariant}
                 variants={data.product?.variants.nodes || []}
+                isMobile={isMobile}
               />
             )}
           </Await>
@@ -293,9 +328,9 @@ function ProductMain({selectedVariant, product, variants}) {
  *   selectedVariant: ProductFragment['selectedVariant'];
  * }}
  */
-function ProductPrice({selectedVariant}) {
+function ProductPrice({selectedVariant, isMobile}) {
   return (
-    <div className="product-price">
+    <div className={isMobile ? 'product-price-mobile' : 'product-price'}>
       {selectedVariant?.compareAtPrice ? (
         <>
           <p>Sale</p>
@@ -321,10 +356,16 @@ function ProductPrice({selectedVariant}) {
  *   variants: Array<ProductVariantFragment>;
  * }}
  */
-function ProductForm({product, selectedVariant, variants}) {
+function ProductForm({product, selectedVariant, variants, isMobile}) {
   return (
-    <div className="product-form">
-      <div className="product-options-container">
+    <div className={isMobile ? 'product-form-mobile' : 'product-form'}>
+      <div
+        className={
+          isMobile
+            ? 'product-options-container-mobile'
+            : 'product-options-container'
+        }
+      >
         <VariantSelector
           handle={product.handle}
           options={product.options}
@@ -348,6 +389,7 @@ function ProductForm({product, selectedVariant, variants}) {
               ]
             : []
         }
+        isMobile={isMobile}
       >
         {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
       </AddToCartButton>
@@ -405,7 +447,14 @@ function ProductOptions({option}) {
  *   onClick?: () => void;
  * }}
  */
-function AddToCartButton({analytics, children, disabled, lines, onClick}) {
+function AddToCartButton({
+  analytics,
+  children,
+  disabled,
+  lines,
+  onClick,
+  isMobile,
+}) {
   return (
     <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
       {(fetcher) => (
@@ -416,7 +465,9 @@ function AddToCartButton({analytics, children, disabled, lines, onClick}) {
             value={JSON.stringify(analytics)}
           />
           <button
-            className="add-to-cart-button"
+            className={
+              isMobile ? 'add-to-cart-button-mobile' : 'add-to-cart-button'
+            }
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== 'idle'}
