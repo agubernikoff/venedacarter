@@ -3,6 +3,7 @@ import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense, useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {motion, AnimatePresence} from 'framer-motion';
+import colorPicker from '~/helper/ColorPicker';
 
 /**
  * @type {MetaFunction}
@@ -293,7 +294,7 @@ export function FeaturedProduct({product, isMobile, loading}) {
                   {colorOptionsObj.values.map((v) => (
                     <div
                       className="circle"
-                      style={{background: v.toLowerCase()}}
+                      style={{background: colorPicker(v)}}
                       key={v}
                     />
                   ))}
