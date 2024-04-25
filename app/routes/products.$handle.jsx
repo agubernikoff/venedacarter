@@ -512,16 +512,23 @@ function AddToCartButton({
   );
 }
 
-function ProductRecommendations({recs, product}) {
+function ProductRecommendations({recs, product, isMobile}) {
   return (
     <Suspense>
       <Await resolve={recs}>
         {(recs) => (
-          <div className="home">
+          <div className={isMobile ? 'home-mobile' : 'home'}>
+            <div style={{borderTop: 'none'}} className="title-container-mobile">
+              <p className="title">Recommended Products</p>
+            </div>
             {recs.collection.products.nodes
               .filter((rec) => rec.id !== product.id)
               .map((rec) => (
-                <FeaturedProduct product={rec} key={rec.id} />
+                <FeaturedProduct
+                  isMobile={isMobile}
+                  product={rec}
+                  key={rec.id}
+                />
               ))}
           </div>
         )}
@@ -652,7 +659,7 @@ const RECOMMENDATIONS_QUERY = `#graphql
 query ($id: ID) {
   collection(id: $id) {
     title
-    products(first: 4) {
+    products(first: 7) {
       nodes {
         id
         title

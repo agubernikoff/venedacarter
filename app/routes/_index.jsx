@@ -211,9 +211,6 @@ function MainFeaturedProduct({product, isMobile}) {
             <Money data={product.priceRange.minVariantPrice} />
           </small>
         </div>
-        {/* <div className="product-color-variants">
-          <p>+2 Colors</p>
-        </div> */}
       </div>
       <div
         className={
@@ -282,7 +279,7 @@ export function FeaturedProduct({product, isMobile, loading}) {
           {
             //JANKY SOLUTION FOR NOW... UPDATE TO SET HEX CODE BASED ON METAL NAME
             colorOptionsObj ? (
-              index === 1 ? (
+              index === 1 && !isMobile ? (
                 <div
                   style={{
                     display: 'inline-flex',
