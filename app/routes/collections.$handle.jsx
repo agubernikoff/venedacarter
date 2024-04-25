@@ -64,14 +64,6 @@ export async function loader({request, params, context}) {
 
 export default function Collection() {
   /** @type {LoaderReturnData} */
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // useEffect(() => {
-  //   const params = new URLSearchParams();
-  //   params.set('someKey', 'someValue');
-  //   setSearchParams(params, {
-  //     preventScrollReset: true,
-  //   });
-  // }, []);
   const {collection, products} = useLoaderData();
 
   const {pathname} = useLocation();
