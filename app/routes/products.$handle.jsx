@@ -12,6 +12,7 @@ import {
   CartForm,
 } from '@shopify/hydrogen';
 import {getVariantUrl} from '~/lib/variants';
+import {FeaturedProduct} from './_index';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -78,7 +79,16 @@ export async function loader({params, request, context}) {
     variables: {handle},
   });
 
-  return defer({product, variants});
+  const collectionId = product.collections.nodes.find(
+    (node) =>
+      node.title !== 'Featured Products' || node.title !== 'New Arrivals',
+  ).id;
+
+  const recs = storefront.query(RECOMMENDATIONS_QUERY, {
+    variables: {id: collectionId},
+  });
+
+  return defer({product, variants, recs});
 }
 
 /**
@@ -106,21 +116,31 @@ function redirectToFirstVariant({product, request}) {
 
 export default function Product() {
   /** @type {LoaderReturnData} */
-  const {product, variants} = useLoaderData();
+  const {product, variants, recs} = useLoaderData();
   const {selectedVariant} = product;
-  console.log('pppppp', product);
+  console.log(
+    'pppppp',
+    product.collections.nodes.find(
+      (node) =>
+        node.title !== 'Featured Products' && node.title !== 'New Arrivals',
+    ),
+  );
+  console.log('rrrrrrr', recs);
   return (
-    <div className="product">
-      <ProductImage
-        images={product?.images.nodes}
-        selectedVariant={selectedVariant}
-      />
-      <ProductMain
-        selectedVariant={selectedVariant}
-        product={product}
-        variants={variants}
-      />
-    </div>
+    <>
+      <div className="product">
+        <ProductImage
+          images={product?.images.nodes}
+          selectedVariant={selectedVariant}
+        />
+        <ProductMain
+          selectedVariant={selectedVariant}
+          product={product}
+          variants={variants}
+        />
+      </div>
+      <ProductRecommendations recs={recs} product={product} />
+    </>
   );
 }
 
@@ -409,6 +429,24 @@ function AddToCartButton({analytics, children, disabled, lines, onClick}) {
   );
 }
 
+function ProductRecommendations({recs, product}) {
+  return (
+    <Suspense>
+      <Await resolve={recs}>
+        {(recs) => (
+          <div className="home">
+            {recs.collection.products.nodes
+              .filter((rec) => rec.id !== product.id)
+              .map((rec) => (
+                <FeaturedProduct product={rec} key={rec.id} />
+              ))}
+          </div>
+        )}
+      </Await>
+    </Suspense>
+  );
+}
+
 const PRODUCT_VARIANT_FRAGMENT = `#graphql
   fragment ProductVariant on ProductVariant {
     availableForSale
@@ -454,6 +492,12 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    collections(first:3){
+      nodes{
+        title
+        id
+      }
+    }
     images(first: 8) {
       nodes {
         id
@@ -519,6 +563,40 @@ const VARIANTS_QUERY = `#graphql
       ...ProductVariants
     }
   }
+`;
+
+const RECOMMENDATIONS_QUERY = `#graphql
+query ($id: ID) {
+  collection(id: $id) {
+    title
+    products(first: 4) {
+      nodes {
+        id
+        title
+        handle
+        options {
+          name
+          values
+        }
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        images(first: 2) {
+          nodes {
+            id
+            url
+            altText
+            width
+            height
+          }
+        }
+      }
+    }
+  }
+}
 `;
 
 /** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */
