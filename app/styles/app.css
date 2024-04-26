@@ -1326,8 +1326,33 @@ aside li {
 #filter-aside aside {
   margin-top: var(--header-height);
 }
+#filter-aside-mobile aside {
+  margin-top: var(--header-height);
+  width: 100%;
+  max-width: 100%;
+  /* opacity: 0; */
+  transition: opacity 0.4s ease-in-out;
+}
+
+#filter-aside-mobile:target {
+  background: transparent;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+#filter-mobile-aside:target aside {
+  transform: translateX(var(--aside-width));
+  opacity: 1;
+}
 
 #filter-aside aside > header {
+  border-bottom: 1px solid #eaeaea;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+#filter-aside-mobile aside > header {
   border-bottom: 1px solid #eaeaea;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1336,4 +1361,76 @@ aside li {
 #filter-aside aside > main {
   padding: 0;
   margin: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - var(--header-height) * 2.75);
+}
+
+#filter-aside-mobile aside > main {
+  padding: 0;
+  margin: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - var(--header-height) * 2.75);
+}
+
+.filter-selection-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.filter-header-bold {
+  font-size: 0.75rem;
+  font-family: 'bold-font';
+}
+
+.filter-selection {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  margin-bottom: 0.25rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+}
+
+.filter-selection:first-of-type {
+  margin-top: 1rem;
+}
+
+.filter-submit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.show-results-button {
+  width: 100%;
+  padding: 0.3rem;
+  margin-bottom: 0.75rem;
+  background-color: black;
+  color: white;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  border: 1px solid black;
+}
+
+.clear-flter-button {
+  width: 100%;
+  padding: 0.3rem;
+  background-color: transparent;
+  color: black;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  border: 1px solid black;
 }

@@ -1,5 +1,5 @@
 import {Await, useLocation, useSearchParams} from '@remix-run/react';
-import {Suspense} from 'react';
+import {useEffect, useState, Suspense} from 'react';
 import {Aside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
 import {Header, HeaderMenuMobile} from '~/components/Header';
@@ -22,11 +22,18 @@ export function Layout({
   header,
   isLoggedIn,
 }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    window
+      .matchMedia('(max-width:44em)')
+      .addEventListener('change', (e) => setIsMobile(e.matches));
+    if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
+  }, []);
   return (
     <>
       <CartAside cart={cart} />
       <SearchAside />
-      <FilterAside />
+      <FilterAside isMobile={isMobile} />
       {header && (
         <Header
           header={header}
@@ -122,24 +129,48 @@ function MobileMenuAside({menu, shop, menu2, menu3}) {
   );
 }
 
-function FilterAside() {
+function FilterAside({isMobile}) {
   const {pathname} = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   return (
-    <Aside id="filter-aside" heading="Filter +">
-      <button
-        className="collection-title"
-        onClick={() => {
-          const params = new URLSearchParams();
-          params.set('sortkey', 'CREATED_AT');
-          params.set('reverse', 'true');
-          setSearchParams(params, {
-            preventScrollReset: true,
-          });
-        }}
-      >
-        Filter
-      </button>
+    <Aside
+      id={isMobile ? 'filter-aside-mobile' : 'filter-aside'}
+      heading="Filter +"
+    >
+      <div className="filters-container">
+        <p className="filter-header-bold">Sort By:</p>
+        <div className="filter-selection-container">
+          <button className="filter-selection">Featured</button>
+
+          <button className="filter-selection">Price: Low to High</button>
+          <button className="filter-selection">Price: High to Low</button>
+          <button className="filter-selection">Date: New to Old</button>
+          <button
+            className="filter-selection"
+            onClick={() => {
+              const params = new URLSearchParams();
+              params.set('sortkey', 'CREATED_AT');
+              params.set('reverse', 'true');
+              setSearchParams(params, {
+                preventScrollReset: true,
+              });
+            }}
+          >
+            Date: Old to New
+          </button>
+        </div>
+        <p className="filter-header-bold">Materials:</p>
+        <div className="filter-selection-container">
+          <button className="filter-selection">Sterling Silver</button>
+          <button className="filter-selection">Gold Vermeil</button>
+          <button className="filter-selection">14k Solid Yellow Gold</button>
+          <button className="filter-selection">14k Solid White Gold</button>
+        </div>
+      </div>
+      <div className="filter-submit-container">
+        <button className="show-results-button">Show Results</button>
+        <button className="clear-flter-button">Clear Filter</button>
+      </div>
     </Aside>
   );
 }
