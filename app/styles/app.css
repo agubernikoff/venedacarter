@@ -58,6 +58,14 @@ aside header {
 
 aside header p {
   margin: 0;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  margin-bottom: 0 !important;
+}
+
+aside header a {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 aside header .close {
@@ -65,7 +73,6 @@ aside header .close {
   opacity: 0.8;
   text-decoration: none;
   transition: all 200ms;
-  width: 20px;
 }
 
 aside header .close:hover {
@@ -105,7 +112,7 @@ aside li {
   transition: opacity 400ms ease-in-out;
   transition: opacity 400ms;
   visibility: hidden;
-  z-index: 10;
+  z-index: 5;
 }
 
 .overlay .close-outside {
@@ -1308,4 +1315,25 @@ aside li {
 .page {
   margin-bottom: 2%;
   margin-top: 2%;
+}
+
+/*
+* --------------------------------------------------
+* Filter
+* --------------------------------------------------
+*/
+
+#filter-aside aside {
+  margin-top: var(--header-height);
+}
+
+#filter-aside aside > header {
+  border-bottom: 1px solid #eaeaea;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+#filter-aside aside > main {
+  padding: 0;
+  margin: 0;
 }

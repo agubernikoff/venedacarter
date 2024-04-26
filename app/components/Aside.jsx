@@ -26,7 +26,7 @@ export function Aside({children, heading, id = 'aside'}) {
       <aside>
         {heading === 'MENU' ? null : (
           <header>
-            <h3>{heading}</h3>
+            <p>{heading}</p>
             <CloseAside />
           </header>
         )}
