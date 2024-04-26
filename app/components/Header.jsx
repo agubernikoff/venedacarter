@@ -379,7 +379,8 @@ function HeaderCtas({isLoggedIn, cart, isMobile}) {
 }
 
 function HeaderMenuMobileToggle({isOpen, toggleMenu}) {
-  const href = isOpen ? '#x' : '#mobile-menu-aside';
+  const href = !isOpen ? '#x' : '#mobile-menu-aside';
+  console.log(href);
   return (
     <a className="header-menu-mobile-toggle" href={href} onClick={toggleMenu}>
       <img src={menu} />

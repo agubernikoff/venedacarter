@@ -185,9 +185,13 @@ function ProductItem({product, loading}) {
 }
 
 function FilterAside({isMobile, toggleFilter}) {
-  const {pathname, search} = useLocation();
+  const {pathname, search, hash} = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(search);
+
+  useEffect(() => {
+    if (hash && hash !== '#x') toggleFilter();
+  }, [hash, toggleFilter]);
   return (
     <div
       aria-modal
@@ -196,7 +200,12 @@ function FilterAside({isMobile, toggleFilter}) {
       role="dialog"
     >
       {isMobile ? null : (
-        <button className="close-outside" onClick={() => toggleFilter()} />
+        <button
+          className="close-outside"
+          onClick={(e) => {
+            toggleFilter();
+          }}
+        />
       )}
       <motion.div
         initial={!isMobile ? {x: 400} : null}
