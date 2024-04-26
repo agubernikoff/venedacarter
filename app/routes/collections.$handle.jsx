@@ -1,5 +1,10 @@
 import {json, redirect} from '@shopify/remix-oxygen';
-import {useLocation, useLoaderData, Link} from '@remix-run/react';
+import {
+  useLocation,
+  useLoaderData,
+  Link,
+  useSearchParams,
+} from '@remix-run/react';
 import {
   Pagination,
   getPaginationVariables,
@@ -9,6 +14,7 @@ import {
 import {useVariantUrl} from '~/lib/variants';
 import {FeaturedProduct} from './_index';
 import {useState, useEffect} from 'react';
+import {AnimatePresence, motion} from 'framer-motion';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -32,7 +38,7 @@ export async function loader({request, params, context}) {
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 12,
   });
-  console.log(sortKey, reverse);
+
   if (!handle) {
     return redirect('/collections');
   }
@@ -67,7 +73,10 @@ export default function Collection() {
   const {collection, products} = useLoaderData();
 
   const {pathname} = useLocation();
-
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  function toggleFilter() {
+    setIsFilterOpen(!isFilterOpen);
+  }
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     window
@@ -78,13 +87,30 @@ export default function Collection() {
 
   return (
     <div className={isMobile ? 'home-mobile' : 'home'}>
+      <AnimatePresence mode="wait">
+        {isFilterOpen && (
+          <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            style={{zIndex: 5}}
+          >
+            <FilterAside isMobile={isMobile} toggleFilter={toggleFilter} />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className={isMobile ? 'title-container-mobile' : 'title-container'}>
         <p className="collection-title">{`Shop/${
           !pathname.includes('all') ? collection.title : 'All'
         }`}</p>
-        <a className="collection-title" href="#filter-aside">
+        <motion.button
+          layoutId="abc"
+          transition={{ease: 'easeInOut'}}
+          className="collection-title"
+          onClick={() => toggleFilter()}
+        >
           Filter +
-        </a>
+        </motion.button>
       </div>
       <Pagination
         connection={!pathname.includes('all') ? collection.products : products}
@@ -155,6 +181,131 @@ function ProductItem({product, loading}) {
         <Money data={product.priceRange.minVariantPrice} />
       </small>
     </Link>
+  );
+}
+
+function FilterAside({isMobile, toggleFilter}) {
+  const {pathname, search} = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = new URLSearchParams(search);
+  return (
+    <div
+      aria-modal
+      className="filter-overlay"
+      id={isMobile ? 'filter-aside-mobile' : 'filter-aside'}
+      role="dialog"
+    >
+      {isMobile ? null : (
+        <button className="close-outside" onClick={() => toggleFilter()} />
+      )}
+      <motion.div
+        initial={!isMobile ? {x: 400} : null}
+        animate={!isMobile ? {x: 0} : null}
+        exit={!isMobile ? {x: 400} : null}
+        transition={{ease: 'easeInOut'}}
+        className="filter-container"
+      >
+        {isMobile ? null : (
+          <header className="title-container">
+            <motion.button
+              layoutId="abc"
+              transition={{ease: 'easeInOut'}}
+              className="collection-title"
+              onClick={() => toggleFilter()}
+            >
+              Filter +
+            </motion.button>
+          </header>
+        )}
+        <main>
+          <div className="filters-container">
+            <p className="filter-header-bold">Sort By:</p>
+            <div className="filter-selection-container">
+              <button className="filter-selection">Featured</button>
+
+              <button
+                className="filter-selection"
+                onClick={() => {
+                  params.set('sortkey', 'PRICE');
+                  params.delete('reverse');
+                }}
+              >
+                Price: Low to High
+              </button>
+              <button
+                className="filter-selection"
+                onClick={() => {
+                  params.set('sortkey', 'PRICE');
+                  params.set('reverse', 'true');
+                }}
+              >
+                Price: High to Low
+              </button>
+              <button
+                className="filter-selection"
+                onClick={() => {
+                  params.set(
+                    'sortkey',
+                    pathname.includes('all') ? 'CREATED_AT' : 'CREATED',
+                  );
+                  params.set('reverse', 'true');
+                }}
+              >
+                Date: New to Old
+              </button>
+              <button
+                className="filter-selection"
+                onClick={() => {
+                  params.set(
+                    'sortkey',
+                    pathname.includes('all') ? 'CREATED_AT' : 'CREATED',
+                  );
+                  params.delete('reverse');
+                }}
+              >
+                Date: Old to New
+              </button>
+            </div>
+            <p className="filter-header-bold">Materials:</p>
+            <div className="filter-selection-container">
+              <button className="filter-selection">Sterling Silver</button>
+              <button className="filter-selection">Gold Vermeil</button>
+              <button className="filter-selection">
+                14k Solid Yellow Gold
+              </button>
+              <button className="filter-selection">14k Solid White Gold</button>
+            </div>
+          </div>
+          <div className="filter-submit-container">
+            <button
+              className="show-results-button"
+              onClick={() => {
+                setSearchParams(params, {
+                  preventScrollReset: true,
+                });
+                toggleFilter();
+              }}
+            >
+              Show Results
+            </button>
+            <button
+              className="clear-flter-button"
+              onClick={() => {
+                setSearchParams(
+                  {},
+                  {
+                    preventScrollReset: true,
+                  },
+                );
+                toggleFilter();
+              }}
+            >
+              Clear Filter
+            </button>
+          </div>
+        </main>
+      </motion.div>
+    </div>
   );
 }
 

@@ -115,7 +115,8 @@ aside li {
   z-index: 5;
 }
 
-.overlay .close-outside {
+.overlay .close-outside,
+.filter-overlay .close-outside {
   background: transparent;
   border: none;
   color: transparent;
@@ -1322,30 +1323,55 @@ aside li {
 * Filter
 * --------------------------------------------------
 */
-
-#filter-aside aside {
-  margin-top: var(--header-height);
+.home-mobile .filter-overlay {
+  top: calc((var(--header-height) * 2) + 2px);
+}
+.filter-overlay {
+  background: rgba(0, 0, 0, 0.2);
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 5;
+}
+#filter-aside-mobile.filter-overlay {
+  background: transparent;
 }
 
-#filter-aside-mobile aside {
-  max-width: 100% !important;
-  min-width: 100% !important;
-  margin-top: var(--header-height);
+#filter-aside .filter-container {
+  background: var(--color-light);
+  bottom: 0;
+  max-width: var(--aside-width);
+  min-width: var(--aside-width);
+  position: fixed;
+  right: 0;
+  top: calc(var(--header-height) + 2px);
 }
 
-#filter-aside aside > header {
+#filter-aside-mobile .filter-container {
+  background: var(--color-light);
+  inset: 0;
+  position: fixed;
+  top: calc((var(--header-height) * 2) + 2px);
+}
+
+#filter-aside .filter-container > header {
   border-bottom: 1px solid #eaeaea;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
-#filter-aside-mobile aside > header {
+#filter-aside-mobile .filter-container > header {
   border-bottom: 1px solid #eaeaea;
-  padding-left: 1rem;
-  padding-right: 1rem;
+}
+button.collection-title {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
-#filter-aside aside > main {
+#filter-aside .filter-container > main {
   padding: 0;
   margin: 0;
   padding-left: 1rem;
@@ -1354,10 +1380,10 @@ aside li {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100% - var(--header-height) * 2.75);
+  height: calc(100% - var(--header-height) * 1.8);
 }
 
-#filter-aside-mobile aside > main {
+#filter-aside-mobile .filter-container > main {
   padding: 0;
   margin: 0;
   padding-left: 1rem;
@@ -1366,7 +1392,7 @@ aside li {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100% - var(--header-height) * 2.75);
+  height: calc(100% - var(--header-height));
 }
 
 .filter-selection-container {
@@ -1411,6 +1437,7 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
   border: 1px solid black;
+  cursor: pointer;
 }
 
 .clear-flter-button {
@@ -1421,4 +1448,5 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
   border: 1px solid black;
+  cursor: pointer;
 }
