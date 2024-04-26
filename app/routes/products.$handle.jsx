@@ -204,8 +204,8 @@ function ProductImage({images, selectedVariant, isMobile}) {
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
-    if (isRightSwipe) setImageIndex(imageIndex + 1);
-    if (isLeftSwipe) setImageIndex(imageIndex - 1);
+    if (isRightSwipe) cycleImages(-1);
+    if (isLeftSwipe) cycleImages(1);
   };
 
   if (!images) {
