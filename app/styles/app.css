@@ -1326,25 +1326,6 @@ aside li {
 #filter-aside aside {
   margin-top: var(--header-height);
 }
-#filter-aside-mobile aside {
-  margin-top: var(--header-height);
-  width: 100%;
-  max-width: 100%;
-  /* opacity: 0; */
-  transition: opacity 0.4s ease-in-out;
-}
-
-#filter-aside-mobile:target {
-  background: transparent;
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
-}
-
-#filter-mobile-aside:target aside {
-  transform: translateX(var(--aside-width));
-  opacity: 1;
-}
 
 #filter-aside aside > header {
   border-bottom: 1px solid #eaeaea;
@@ -1352,25 +1333,7 @@ aside li {
   padding-right: 1rem;
 }
 
-#filter-aside-mobile aside > header {
-  border-bottom: 1px solid #eaeaea;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 #filter-aside aside > main {
-  padding: 0;
-  margin: 0;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: calc(100% - var(--header-height) * 2.75);
-}
-
-#filter-aside-mobile aside > main {
   padding: 0;
   margin: 0;
   padding-left: 1rem;
