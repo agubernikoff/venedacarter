@@ -191,7 +191,8 @@ function FilterAside({isMobile, toggleFilter}) {
 
   useEffect(() => {
     if (hash && hash !== '#x') toggleFilter();
-  }, [hash, toggleFilter]);
+    if (!pathname.includes('collections')) toggleFilter();
+  }, [hash, toggleFilter, pathname]);
   return (
     <div
       aria-modal
