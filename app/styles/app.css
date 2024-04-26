@@ -1327,13 +1327,37 @@ aside li {
   margin-top: var(--header-height);
 }
 
+#filter-aside-mobile aside {
+  max-width: 100% !important;
+  min-width: 100% !important;
+  margin-top: var(--header-height);
+}
+
 #filter-aside aside > header {
   border-bottom: 1px solid #eaeaea;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
+#filter-aside-mobile aside > header {
+  border-bottom: 1px solid #eaeaea;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 #filter-aside aside > main {
+  padding: 0;
+  margin: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - var(--header-height) * 2.75);
+}
+
+#filter-aside-mobile aside > main {
   padding: 0;
   margin: 0;
   padding-left: 1rem;

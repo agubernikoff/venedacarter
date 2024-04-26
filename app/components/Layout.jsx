@@ -133,7 +133,10 @@ function FilterAside({isMobile}) {
   const {pathname} = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   return (
-    <Aside id="filter-aside" heading="Filter +">
+    <Aside
+      id={isMobile ? 'filter-aside-mobile' : 'filter-aside'}
+      heading="Filter +"
+    >
       <div className="filters-container">
         <p className="filter-header-bold">Sort By:</p>
         <div className="filter-selection-container">
