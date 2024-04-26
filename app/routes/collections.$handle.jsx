@@ -83,7 +83,7 @@ export default function Collection() {
           !pathname.includes('all') ? collection.title : 'All'
         }`}</p>
         <a className="collection-title" href="#filter-aside">
-          Filter
+          Filter +
         </a>
       </div>
       <Pagination

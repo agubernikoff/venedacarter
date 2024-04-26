@@ -126,7 +126,7 @@ function FilterAside() {
   const {pathname} = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   return (
-    <Aside id="filter-aside" heading="FILTER">
+    <Aside id="filter-aside" heading="Filter +">
       <button
         className="collection-title"
         onClick={() => {
