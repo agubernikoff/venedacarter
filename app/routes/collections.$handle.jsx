@@ -76,6 +76,7 @@ export default function Collection() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   function toggleFilter() {
     setIsFilterOpen(!isFilterOpen);
+    document.body.classList.toggle('no-scroll', !isFilterOpen);
   }
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {

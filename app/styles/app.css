@@ -1354,7 +1354,8 @@ aside li {
   background: var(--color-light);
   inset: 0;
   position: fixed;
-  top: calc((var(--header-height) * 2) + 2px);
+  top: calc((var(--header-height) * 2));
+  border-top: 1px solid #eaeaea;
 }
 
 #filter-aside .filter-container > header {
