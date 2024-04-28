@@ -1370,6 +1370,7 @@ button.collection-title {
   border: none;
   background: transparent;
   cursor: pointer;
+  color: black;
 }
 
 #filter-aside .filter-container > main {
