@@ -130,8 +130,7 @@ export default function Collection() {
             <PreviousLink>
               {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
             </PreviousLink>
-            <ProductsGrid products={nodes} />
-
+            <ProductsGrid products={nodes} isMobile={isMobile} />
             <NextLink>
               {isLoading ? 'Loading...' : <span>Load more ↓</span>}
             </NextLink>
@@ -145,7 +144,12 @@ export default function Collection() {
 /**
  * @param {{products: ProductItemFragment[]}}
  */
-function ProductsGrid({products}) {
+function ProductsGrid({products, isMobile}) {
+  const columns = isMobile ? 2 : 3;
+  const itemsInLastRow = products.length % columns;
+  const firstItemInLastRow = products.length - itemsInLastRow;
+  const firstItemInSecondLastRow = firstItemInLastRow - columns;
+  const lastItemInSecondLastRow = firstItemInLastRow - 1;
   return (
     <>
       {products.map((product, index) => {
@@ -154,6 +158,12 @@ function ProductsGrid({products}) {
             key={product.id}
             product={product}
             loading={index < 8 ? 'eager' : undefined}
+            emptyCellBelow={
+              itemsInLastRow !== 0 &&
+              index >= firstItemInSecondLastRow &&
+              index <= lastItemInSecondLastRow &&
+              index + columns >= products.length
+            }
           />
         );
       })}

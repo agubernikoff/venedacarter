@@ -228,7 +228,7 @@ function MainFeaturedProduct({product, isMobile}) {
   );
 }
 
-export function FeaturedProduct({product, isMobile, loading}) {
+export function FeaturedProduct({product, isMobile, loading, emptyCellBelow}) {
   const [index, setIndex] = useState(0);
   const colorOptionsObj = product.options.find((o) => o.name === 'Material');
   console.log('material log:', product.options);
@@ -238,6 +238,7 @@ export function FeaturedProduct({product, isMobile, loading}) {
       to={`/products/${product.handle}`}
       onMouseEnter={() => setIndex(1)}
       onMouseLeave={() => setIndex(0)}
+      style={emptyCellBelow ? {borderBottom: '1px solid #eaeaea'} : {}}
     >
       <div style={{background: '#f4f4f4'}}>
         {/* <AnimatePresence mode="wait" initial={false}> */}
