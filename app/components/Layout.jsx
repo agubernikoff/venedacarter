@@ -63,7 +63,10 @@ function CartAside({cart}) {
       <Await resolve={cart}>
         {(cart) => {
           return (
-            <Aside id="cart-aside" heading={`Bag (${cart.lines.nodes.length})`}>
+            <Aside
+              id="cart-aside"
+              heading={`Bag (${cart?.lines?.nodes?.length})`}
+            >
               <CartMain cart={cart} layout="aside" />{' '}
             </Aside>
           );
