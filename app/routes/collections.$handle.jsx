@@ -35,6 +35,13 @@ export async function loader({request, params, context}) {
     ? String(searchParams.get('sortkey'))
     : null;
   const reverse = Boolean(searchParams.get('reverse'));
+  const filterFromParams = String(searchParams.get('filter') || '');
+  const filter = filterFromParams
+    ? {variantOption: {name: 'Material', value: filterFromParams}}
+    : {};
+  const filterAll = filterFromParams
+    ? `variantOption.value:${filterFromParams}`
+    : '';
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 12,
   });
@@ -42,12 +49,13 @@ export async function loader({request, params, context}) {
   if (!handle) {
     return redirect('/collections');
   }
-
+  console.log(filter, {name: 'Material', value: filterFromParams});
   const {collection} = await storefront.query(COLLECTION_QUERY, {
     variables: {
       sortKey: handle !== 'all' ? sortKey : null,
       reverse,
       handle,
+      productFilter: filter,
       ...paginationVariables,
     },
   });
@@ -55,6 +63,7 @@ export async function loader({request, params, context}) {
     variables: {
       sortKey: handle === 'all' ? sortKey : null,
       reverse,
+      query: filterAll,
       ...paginationVariables,
     },
   });
@@ -279,12 +288,38 @@ function FilterAside({isMobile, toggleFilter}) {
             </div>
             <p className="filter-header-bold">Materials:</p>
             <div className="filter-selection-container">
-              <button className="filter-selection">Sterling Silver</button>
-              <button className="filter-selection">Gold Vermeil</button>
-              <button className="filter-selection">
+              <button
+                className="filter-selection"
+                onClick={() => {
+                  params.set('filter', 'Sterling Silver');
+                }}
+              >
+                Sterling Silver
+              </button>
+              <button
+                className="filter-selection"
+                onClick={() => {
+                  params.set('filter', 'Gold Vermeil');
+                }}
+              >
+                Gold Vermeil
+              </button>
+              <button
+                className="filter-selection"
+                onClick={() => {
+                  params.set('filter', '14k Solid Yellow Gold');
+                }}
+              >
                 14k Solid Yellow Gold
               </button>
-              <button className="filter-selection">14k Solid White Gold</button>
+              <button
+                className="filter-selection"
+                onClick={() => {
+                  params.set('filter', '14k Solid White Gold');
+                }}
+              >
+                14k Solid White Gold
+              </button>
             </div>
           </div>
           <div className="filter-submit-container">
@@ -381,6 +416,7 @@ const COLLECTION_QUERY = `#graphql
     $endCursor: String
     $sortKey: ProductCollectionSortKeys
     $reverse: Boolean
+    $productFilter: [ProductFilter!]
   ) @inContext(country: $country, language: $language) {
     collection(handle: $handle) {
       id
@@ -394,6 +430,7 @@ const COLLECTION_QUERY = `#graphql
         after: $endCursor,
         sortKey: $sortKey,
         reverse: $reverse,
+        filters: $productFilter
       ) {
         nodes {
           ...ProductItem
@@ -420,6 +457,7 @@ const ALL_QUERY = `#graphql
     $endCursor: String
     $sortKey: ProductSortKeys
     $reverse: Boolean
+    $query: String
   ) @inContext(country: $country, language: $language) {
     products(
       first: $first,
@@ -428,6 +466,7 @@ const ALL_QUERY = `#graphql
       after: $endCursor,
       sortKey: $sortKey,
       reverse: $reverse,
+      query: $query
     ) {
       nodes {
         ...ProductItem

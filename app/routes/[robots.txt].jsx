@@ -82,6 +82,10 @@ Disallow: /carts
 Disallow: /account
 Disallow: /collections/*sort_by*
 Disallow: /*/collections/*sort_by*
+Disallow: /collections/*sortkey*
+Disallow: /*/collections/*sortkey*
+Disallow: /collections/*reverse*
+Disallow: /*/collections/*reverse*
 Disallow: /collections/*+*
 Disallow: /collections/*%2B*
 Disallow: /collections/*%2b*
