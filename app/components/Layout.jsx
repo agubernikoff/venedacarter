@@ -8,7 +8,6 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
-import cart2BSMYPWP from 'dist/client/build/routes/cart-2BSMYPWP';
 
 /**
  * @param {LayoutProps}
