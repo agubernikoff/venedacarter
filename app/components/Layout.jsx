@@ -8,6 +8,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
+import cart2BSMYPWP from 'dist/client/build/routes/cart-2BSMYPWP';
 
 /**
  * @param {LayoutProps}
@@ -57,16 +58,19 @@ export function Layout({
  * @param {{cart: LayoutProps['cart']}}
  */
 function CartAside({cart}) {
+  console.log(cart);
   return (
-    <Aside id="cart-aside" heading="CART">
-      <Suspense fallback={<p>Loading cart ...</p>}>
-        <Await resolve={cart}>
-          {(cart) => {
-            return <CartMain cart={cart} layout="aside" />;
-          }}
-        </Await>
-      </Suspense>
-    </Aside>
+    <Suspense fallback={<p>Loading cart ...</p>}>
+      <Await resolve={cart}>
+        {(cart) => {
+          return (
+            <Aside id="cart-aside" heading={`Bag (${cart.lines.nodes.length})`}>
+              <CartMain cart={cart} layout="aside" />{' '}
+            </Aside>
+          );
+        }}
+      </Await>
+    </Suspense>
   );
 }
 

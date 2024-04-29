@@ -410,7 +410,7 @@ function CartBadge({count, isMobile}) {
     <>
       {isMobile ? (
         <a href="#cart-aside">
-          <img src={cart} />{' '}
+          <img src={cart} />
         </a>
       ) : (
         <a href="#cart-aside">Bag ({count})</a>

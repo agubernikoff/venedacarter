@@ -49,7 +49,7 @@ aside {
 
 aside header {
   align-items: center;
-  border-bottom: 1px solid var(--color-dark);
+  border-bottom: 1px solid #eaeaea;
   display: flex;
   height: var(--header-height);
   justify-content: space-between;
@@ -112,7 +112,7 @@ aside li {
   transition: opacity 400ms ease-in-out;
   transition: opacity 400ms;
   visibility: hidden;
-  z-index: 5;
+  z-index: 6;
 }
 
 .overlay .close-outside,
@@ -535,6 +535,23 @@ aside li {
   height: 100%;
   display: block;
   margin-right: 0.75rem;
+  background-color: #eaeaea;
+  width: 40%;
+}
+
+.bold-cart {
+  font-size: 0.75rem;
+  font-family: 'bold-font';
+}
+
+.cart-material-size {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.cart-material-size > li > p {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  margin: 0;
 }
 
 .cart-summary-page {
@@ -543,7 +560,7 @@ aside li {
 
 .cart-summary-aside {
   background: white;
-  border-top: 1px solid var(--color-dark);
+  border-top: 1px solid #eaeaea;
   bottom: 0;
   padding-top: 0.75rem;
   position: absolute;
@@ -552,6 +569,36 @@ aside li {
 
 .cart-line-quantity {
   display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+}
+
+.cart-line-quantity > p {
+  font-size: 0.75rem;
+  margin: 0;
+  font-family: 'regular-font';
+  margin-right: 0.5rem;
+}
+.quantity-button {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+.cart-remove-button {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-decoration: underline;
+  margin-top: 0.5rem;
 }
 
 .cart-discount {
@@ -563,6 +610,30 @@ aside li {
 .cart-subtotal {
   align-items: center;
   display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-family: 'bold-font';
+}
+.cart-tax-sales {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  color: #c4c4c4;
+  margin-top: -1%;
+  width: 50%;
+}
+.cart-checkout-button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: black;
+  margin-top: 1rem;
+  border: none;
+}
+
+.cart-checkout-button-text {
+  color: white;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 /*
 * --------------------------------------------------
@@ -1337,6 +1408,7 @@ aside li {
   z-index: 5;
   margin-top: var(--header-height);
 }
+
 #filter-aside-mobile.filter-overlay {
   background: transparent;
 }
