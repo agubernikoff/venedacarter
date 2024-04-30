@@ -577,6 +577,12 @@ aside li {
   }
 }
 
+.cart-lines {
+  @media (max-width: 44em) {
+    padding-bottom: 20%;
+  }
+}
+
 .cart-line-quantity {
   display: flex;
   align-items: center;
