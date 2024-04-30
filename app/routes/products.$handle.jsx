@@ -463,6 +463,9 @@ function ProductForm({product, selectedVariant, variants, isMobile}) {
       <AddToCartButton
         disabled={!selectedVariant || !selectedVariant.availableForSale}
         onClick={() => {
+          {
+            isMobile ? document.body.classList.toggle('no-scroll') : null;
+          }
           window.location.href = window.location.href + '#cart-aside';
         }}
         lines={
