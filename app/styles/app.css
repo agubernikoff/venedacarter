@@ -522,6 +522,13 @@ aside li {
   width: auto;
 }
 
+#cart-aside aside,
+#search-aside aside {
+  @media (max-width: 44em) {
+    min-width: 100%;
+  }
+}
+
 .cart-main.with-discount {
   max-height: calc(100vh - var(--cart-aside-summary-height-with-discount));
 }
