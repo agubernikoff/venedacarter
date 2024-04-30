@@ -572,10 +572,11 @@ aside li {
   background: white;
   border-top: 1px solid #eaeaea;
   bottom: 0;
+  left: 1rem;
+  right: 1rem;
   padding-top: 0.75rem;
   padding-bottom: 20%;
   position: absolute;
-  width: calc(var(--aside-width) - 40px);
   @media (min-width: 44em) {
     padding-bottom: none;
   }
