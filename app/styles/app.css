@@ -607,6 +607,8 @@ aside li {
   background: transparent;
   text-decoration: underline;
   margin-top: 0.5rem;
+  color: black;
+  z-index: 100;
 }
 
 .cart-discount {
