@@ -573,16 +573,18 @@ aside li {
   border-top: 1px solid #eaeaea;
   bottom: 0;
   padding-top: 0.75rem;
+  padding-bottom: 20%;
   position: absolute;
   width: calc(var(--aside-width) - 40px);
-  @media (max-width: 44em) {
-    padding-bottom: 20%;
+  @media (min-width: 44em) {
+    padding-bottom: none;
   }
 }
 
 .cart-lines {
-  @media (max-width: 44em) {
-    padding-bottom: 20%;
+  padding-bottom: 20%;
+  @media (min-width: 44em) {
+    padding-bottom: none;
   }
 }
 
@@ -604,12 +606,12 @@ aside li {
   border: 1px solid black;
   color: black;
   cursor: pointer;
-  width: 90%;
+  width: 60%;
   display: flex;
   justify-content: center;
   font-size: 0.75rem;
-  @media (max-width: 44em) {
-    width: 60%;
+  @media (min-width: 44em) {
+    width: 90%;
   }
 }
 
