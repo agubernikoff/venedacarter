@@ -524,8 +524,9 @@ aside li {
 
 #cart-aside aside,
 #search-aside aside {
-  @media (max-width: 44em) {
-    min-width: 100%;
+  min-width: 100%;
+  @media (min-width: 44em) {
+    min-width: var(--aside-width);
   }
 }
 
