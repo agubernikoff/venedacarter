@@ -37,9 +37,18 @@ export function Aside({children, heading, id = 'aside'}) {
 }
 
 function CloseAside() {
+  function toggleScroll() {
+    document.body.classList.remove('no-scroll');
+  }
   return (
     /* eslint-disable-next-line jsx-a11y/anchor-is-valid */
-    <a className="close" href="#" onChange={() => history.go(-1)}>
+
+    <a
+      className="close"
+      onClick={toggleScroll}
+      href="#"
+      onChange={() => history.go(-1)}
+    >
       &times;
     </a>
   );

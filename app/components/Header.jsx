@@ -406,10 +406,13 @@ function SearchToggle({isMobile}) {
  * @param {{count: number}}
  */
 function CartBadge({count, isMobile}) {
+  function toggleScroll() {
+    document.body.classList.toggle('no-scroll');
+  }
   return (
     <>
       {isMobile ? (
-        <a href="#cart-aside">
+        <a href="#cart-aside" onClick={toggleScroll}>
           <img src={cart} />
         </a>
       ) : (
