@@ -572,7 +572,7 @@ aside li {
   padding-top: 0.75rem;
   position: absolute;
   width: calc(var(--aside-width) - 40px);
-  padding-bottom: 15%;
+  padding-bottom: 20%;
 }
 
 .cart-line-quantity {
