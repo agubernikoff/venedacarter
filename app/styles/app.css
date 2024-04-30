@@ -612,6 +612,7 @@ aside li {
   margin-top: 0.5rem;
   color: black;
   z-index: 100;
+  font-weight: normal;
 }
 
 .cart-discount {
