@@ -597,6 +597,9 @@ aside li {
   display: flex;
   justify-content: center;
   font-size: 0.75rem;
+  @media (max-width: 44em) {
+    width: 100%;
+  }
 }
 
 .cart-remove-button {
