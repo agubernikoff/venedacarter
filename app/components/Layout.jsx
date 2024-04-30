@@ -65,7 +65,7 @@ function CartAside({cart}) {
           return (
             <Aside
               id="cart-aside"
-              heading={`Bag (${cart?.lines?.nodes?.length})`}
+              heading={`Bag (${cart?.lines?.nodes?.length || 0})`}
             >
               <CartMain cart={cart} layout="aside" />{' '}
             </Aside>
