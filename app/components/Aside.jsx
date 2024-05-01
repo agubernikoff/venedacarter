@@ -40,10 +40,9 @@ export function Aside({children, heading, id = 'aside'}) {
                     onFocus={fetchResults}
                     placeholder="Search"
                     ref={inputRef}
-                    type="search"
                   />
                   &nbsp;
-                  <button
+                  {/* <button
                     onClick={() => {
                       window.location.href = inputRef?.current?.value
                         ? `/search?q=${inputRef.current.value}`
@@ -51,7 +50,7 @@ export function Aside({children, heading, id = 'aside'}) {
                     }}
                   >
                     Search
-                  </button>
+                  </button> */}
                 </div>
               )}
             </PredictiveSearchForm>

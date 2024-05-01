@@ -235,7 +235,7 @@ export function PredictiveSearchForm({
       : searchAction;
 
     fetcher.submit(
-      {q: newSearchTerm, limit: '6'},
+      {q: newSearchTerm, limit: '4'},
       {method: 'GET', action: localizedAction},
     );
   }
@@ -276,9 +276,9 @@ export function PredictiveSearchResults() {
     window.location.href = event.currentTarget.href;
   }
 
-  if (state === 'loading') {
-    return <div>Loading...</div>;
-  }
+  // if (state === 'loading') {
+  //   return <div>Loading...</div>;
+  // }
 
   if (!totalResults) {
     return <NoPredictiveSearchResults searchTerm={searchTerm} />;
@@ -336,9 +336,11 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
 
   return (
     <div className="predictive-search-result" key={type}>
-      <Link prefetch="intent" to={categoryUrl} onClick={goToSearchResult}>
-        <h5>Suggested Search</h5>
-      </Link>
+      {/* <Link prefetch="intent" to={categoryUrl} onClick={goToSearchResult}> */}
+      <p style={{textDecoration: 'underline', marginBottom: '1rem'}}>
+        Suggested Search
+      </p>
+      {/* </Link> */}
       <ul>
         {items.map((item) => (
           <SearchResultItem
