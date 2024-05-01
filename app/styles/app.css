@@ -53,7 +53,8 @@ aside header {
   display: flex;
   height: var(--header-height);
   justify-content: space-between;
-  padding: 0 20px;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 aside header p {
@@ -93,6 +94,7 @@ aside header input {
   font-family: 'regular-font';
   width: 100%;
   padding: 0;
+  background-color: transparent;
 }
 
 aside header input:focus {
@@ -543,8 +545,11 @@ aside li {
 }
 
 #search-aside aside {
-  height: 25%;
+  height: 30%;
   margin-top: var(--header-height);
+  @media (min-width: 44em) {
+    height: 25%;
+  }
 }
 
 #search-aside.overlay {
