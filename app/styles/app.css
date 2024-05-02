@@ -526,6 +526,15 @@ aside li {
   width: auto;
 }
 
+#search-aside aside {
+  height: 40%;
+  margin-top: var(--header-height);
+}
+
+#search-aside.overlay {
+  margin-top: var(--header-height);
+}
+
 #cart-aside aside,
 #search-aside aside {
   min-width: 100%;
