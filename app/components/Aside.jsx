@@ -1,3 +1,7 @@
+import {
+  PredictiveSearchForm,
+  PredictiveSearchResults,
+} from '~/components/Search';
 /**
  * A side bar component with Overlay that works without JavaScript.
  * @example
@@ -14,6 +18,7 @@
  * }}
  */
 export function Aside({children, heading, id = 'aside'}) {
+  console.log(heading);
   return (
     <div aria-modal className="overlay" id={id} role="dialog">
       <button
@@ -24,12 +29,41 @@ export function Aside({children, heading, id = 'aside'}) {
         }}
       />
       <aside>
-        {heading === 'MENU' ? null : (
+        {heading === 'MENU' ? null : heading === 'SEARCH' ? (
+          <header>
+            <PredictiveSearchForm>
+              {({fetchResults, inputRef}) => (
+                <div>
+                  <input
+                    name="q"
+                    onChange={fetchResults}
+                    onFocus={fetchResults}
+                    placeholder="Search"
+                    ref={inputRef}
+                    type="search"
+                  />
+                  &nbsp;
+                  <button
+                    onClick={() => {
+                      window.location.href = inputRef?.current?.value
+                        ? `/search?q=${inputRef.current.value}`
+                        : `/search`;
+                    }}
+                  >
+                    Search
+                  </button>
+                </div>
+              )}
+            </PredictiveSearchForm>
+            <CloseAside />
+          </header>
+        ) : (
           <header>
             <p>{heading}</p>
             <CloseAside />
           </header>
         )}
+
         <main>{children}</main>
       </aside>
     </div>
