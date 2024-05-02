@@ -1491,7 +1491,49 @@ aside li {
 
 /*
 * --------------------------------------------------
-* About Page
+* Contact Page
+* --------------------------------------------------
+*/
+
+.contact-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+  height: calc(100vh - var(--header-height));
+  @media (min-width: 44em) {
+    width: 30%;
+  }
+}
+
+.contact-title {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  margin-top: 2rem;
+}
+
+.contact-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-container > p {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+}
+
+.contact-bold {
+  font-size: 0.75rem;
+  font-family: 'bold-font' !important;
+}
+
+/*
+* --------------------------------------------------
+* Stockists Page
 * --------------------------------------------------
 */
 
@@ -1502,7 +1544,6 @@ aside li {
   text-align: center;
   font-size: 0.75rem;
   font-family: 'regular-font';
-  height: calc(100vh - var(--header-height));
   @media (min-width: 44em) {
     width: 30%;
   }
