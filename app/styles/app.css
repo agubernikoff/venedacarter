@@ -1457,8 +1457,40 @@ aside li {
 */
 
 .page {
-  margin-bottom: 2%;
-  margin-top: 2%;
+  margin-bottom: 1rem;
+  @media (min-width: 44em) {
+    margin-bottom: 2%;
+    margin-top: 2%;
+    height: calc(96vh - var(--header-height));
+  }
+}
+
+.about-image {
+  width: 100%;
+  @media (min-width: 44em) {
+    width: 27.5%;
+  }
+}
+
+.about-text-container {
+  padding-left: 1rem;
+  margin-top: 1rem;
+  padding-right: 1rem;
+  @media (min-width: 44em) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.about-text {
+  width: 100%;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  text-align: left;
+  margin: auto;
+  @media (min-width: 44em) {
+    width: 27.5%;
+  }
 }
 
 /*
