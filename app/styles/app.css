@@ -591,14 +591,14 @@ aside li {
   padding-bottom: 20%;
   position: absolute;
   @media (min-width: 44em) {
-    padding-bottom: none;
+    padding-bottom: 0;
   }
 }
 
 .cart-lines {
   padding-bottom: 20%;
   @media (min-width: 44em) {
-    padding-bottom: none;
+    padding-bottom: 0;
   }
 }
 
