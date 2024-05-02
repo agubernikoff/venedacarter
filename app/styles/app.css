@@ -1491,6 +1491,65 @@ aside li {
 
 /*
 * --------------------------------------------------
+* About Page
+* --------------------------------------------------
+*/
+
+.stockists-page {
+  width: 100%;
+  padding-top: 2rem;
+  margin: auto;
+  text-align: center;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  height: calc(100vh - var(--header-height));
+  @media (min-width: 44em) {
+    width: 30%;
+  }
+}
+
+.stockists-title {
+  padding-bottom: 2rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+}
+
+.stockists-country {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.stockists-country-canada {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.stockists-country-container {
+  padding-bottom: 2rem;
+  border-top: 1px solid #eaeaea;
+  width: 50%;
+  margin: auto;
+}
+
+.stockists-country-container > p {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+}
+
+.stockists-country-container > a {
+  text-decoration: underline;
+}
+
+.stockists-bold {
+  font-size: 0.75rem;
+  font-family: 'bold-font' !important;
+}
+/*
+* --------------------------------------------------
 * Filter
 * --------------------------------------------------
 */
