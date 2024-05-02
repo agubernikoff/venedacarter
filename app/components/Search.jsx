@@ -297,14 +297,14 @@ export function PredictiveSearchResults() {
           />
         ))}
       </div>
-      {searchTerm.current && (
+      {/* {searchTerm.current && (
         <Link onClick={goToSearchResult} to={`/search?q=${searchTerm.current}`}>
           <p>
             View all results for <q>{searchTerm.current}</q>
             &nbsp; →
           </p>
         </Link>
-      )}
+      )} */}
     </div>
   );
 }
@@ -337,7 +337,7 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
   return (
     <div className="predictive-search-result" key={type}>
       <Link prefetch="intent" to={categoryUrl} onClick={goToSearchResult}>
-        <h5>{isSuggestions ? 'Suggestions' : type}</h5>
+        <h5>Suggested Search</h5>
       </Link>
       <ul>
         {items.map((item) => (
@@ -359,14 +359,14 @@ function SearchResultItem({goToSearchResult, item}) {
   return (
     <li className="predictive-search-result-item" key={item.id}>
       <Link onClick={goToSearchResult} to={item.url}>
-        {item.image?.url && (
+        {/* {item.image?.url && (
           <Image
             alt={item.image.altText ?? ''}
             src={item.image.url}
             width={50}
             height={50}
           />
-        )}
+        )} */}
         <div>
           {item.styledTitle ? (
             <div
@@ -377,11 +377,11 @@ function SearchResultItem({goToSearchResult, item}) {
           ) : (
             <span>{item.title}</span>
           )}
-          {item?.price && (
+          {/* {item?.price && (
             <small>
               <Money data={item.price} />
             </small>
-          )}
+          )} */}
         </div>
       </Link>
     </li>
