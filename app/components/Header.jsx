@@ -6,6 +6,7 @@ import search from '../assets/search.png';
 import cart from '../assets/cart.png';
 import mobIcon from '../assets/mobile-icon.png';
 import menu from '../assets/menu.png';
+import x from '../assets/X.png';
 import {useLocation} from '@remix-run/react';
 
 /**
@@ -383,7 +384,7 @@ function HeaderMenuMobileToggle({isOpen, toggleMenu}) {
   console.log(href);
   return (
     <a className="header-menu-mobile-toggle" href={href} onClick={toggleMenu}>
-      <img src={menu} />
+      <img src={isOpen ? x : menu} />
     </a>
   );
 }
@@ -392,11 +393,11 @@ function SearchToggle({isMobile}) {
   return (
     <>
       {isMobile ? (
-        <a href="#search-aside">
+        <a href={'#search-aside'}>
           <img src={search} />{' '}
         </a>
       ) : (
-        <a href="#search-aside">Search</a>
+        <a href={'#search-aside'}>Search</a>
       )}
     </>
   );
