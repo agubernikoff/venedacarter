@@ -208,11 +208,20 @@ function FilterAside({isMobile, toggleFilter}) {
   const {pathname, search, hash} = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(search);
+  const [sort, setSort] = useState();
+  const [rev, setRev] = useState();
+  const [mat, setMat] = useState();
 
   useEffect(() => {
     if (hash && hash !== '#x') toggleFilter();
     if (!pathname.includes('collections')) toggleFilter();
   }, [hash, toggleFilter, pathname]);
+
+  useEffect(() => {
+    if (searchParams.get('sortkey')) setSort(searchParams.get('sortkey'));
+    if (searchParams.get('reverse')) setRev(searchParams.get('reverse'));
+    if (searchParams.get('filter')) setMat(searchParams.get('filter'));
+  }, [searchParams]);
   return (
     <div
       aria-modal
@@ -252,46 +261,60 @@ function FilterAside({isMobile, toggleFilter}) {
             <p className="filter-header-bold">Sort By:</p>
             <div className="filter-selection-container">
               <button className="filter-selection">Featured</button>
-
               <button
                 className="filter-selection"
                 onClick={() => {
-                  params.set('sortkey', 'PRICE');
-                  params.delete('reverse');
+                  setSort('PRICE');
+                  setRev('');
                 }}
+                style={
+                  sort === 'PRICE' && !rev
+                    ? {textDecoration: 'underline'}
+                    : null
+                }
               >
                 Price: Low to High
               </button>
               <button
                 className="filter-selection"
                 onClick={() => {
-                  params.set('sortkey', 'PRICE');
-                  params.set('reverse', 'true');
+                  setSort('PRICE');
+                  setRev('true');
                 }}
+                style={
+                  sort === 'PRICE' && rev === 'true'
+                    ? {textDecoration: 'underline'}
+                    : null
+                }
               >
                 Price: High to Low
               </button>
               <button
                 className="filter-selection"
                 onClick={() => {
-                  params.set(
-                    'sortkey',
-                    pathname.includes('all') ? 'CREATED_AT' : 'CREATED',
-                  );
-                  params.set('reverse', 'true');
+                  setSort(pathname.includes('all') ? 'CREATED_AT' : 'CREATED');
+                  setRev('true');
                 }}
+                style={
+                  (sort === 'CREATED_AT' || sort === 'CREATED') &&
+                  rev === 'true'
+                    ? {textDecoration: 'underline'}
+                    : null
+                }
               >
                 Date: New to Old
               </button>
               <button
                 className="filter-selection"
                 onClick={() => {
-                  params.set(
-                    'sortkey',
-                    pathname.includes('all') ? 'CREATED_AT' : 'CREATED',
-                  );
-                  params.delete('reverse');
+                  setSort(pathname.includes('all') ? 'CREATED_AT' : 'CREATED');
+                  setRev('');
                 }}
+                style={
+                  (sort === 'CREATED_AT' || sort === 'CREATED') && !rev
+                    ? {textDecoration: 'underline'}
+                    : null
+                }
               >
                 Date: Old to New
               </button>
@@ -301,32 +324,50 @@ function FilterAside({isMobile, toggleFilter}) {
               <button
                 className="filter-selection"
                 onClick={() => {
-                  params.set('filter', 'Sterling Silver');
+                  setMat('Sterling Silver');
                 }}
+                style={
+                  mat === 'Sterling Silver'
+                    ? {textDecoration: 'underline'}
+                    : null
+                }
               >
                 Sterling Silver
               </button>
               <button
                 className="filter-selection"
                 onClick={() => {
-                  params.set('filter', 'Gold Vermeil');
+                  setMat('Gold Vermeil');
                 }}
+                style={
+                  mat === 'Gold Vermeil' ? {textDecoration: 'underline'} : null
+                }
               >
                 Gold Vermeil
               </button>
               <button
                 className="filter-selection"
                 onClick={() => {
-                  params.set('filter', '14k Solid Yellow Gold');
+                  setMat('14k Solid Yellow Gold');
                 }}
+                style={
+                  mat === '14k Solid Yellow Gold'
+                    ? {textDecoration: 'underline'}
+                    : null
+                }
               >
                 14k Solid Yellow Gold
               </button>
               <button
                 className="filter-selection"
                 onClick={() => {
-                  params.set('filter', '14k Solid White Gold');
+                  setMat('14k Solid White Gold');
                 }}
+                style={
+                  mat === '14k Solid White Gold'
+                    ? {textDecoration: 'underline'}
+                    : null
+                }
               >
                 14k Solid White Gold
               </button>
@@ -336,6 +377,9 @@ function FilterAside({isMobile, toggleFilter}) {
             <button
               className="show-results-button"
               onClick={() => {
+                if (sort) params.set('sortkey', sort);
+                if (rev) params.set('reverse', rev);
+                if (mat) params.set('filter', mat);
                 setSearchParams(params, {
                   preventScrollReset: true,
                 });
