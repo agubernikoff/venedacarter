@@ -95,9 +95,10 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
       window.location.href = event.currentTarget.href;
     }
   }
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <nav className={className} role="navigation">
+    <motion.nav className={className} role="navigation" layout layoutRoot>
       {viewport === 'mobile' && (
         <NavLink
           end
@@ -116,9 +117,11 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
           publicStoreDomain={publicStoreDomain}
           primaryDomainUrl={primaryDomainUrl}
           closeAside={closeAside}
+          hovered={hovered}
+          setHovered={setHovered}
         />
       ))}
-    </nav>
+    </motion.nav>
   );
 }
 
@@ -127,8 +130,9 @@ function HeaderMenuItem({
   publicStoreDomain,
   primaryDomainUrl,
   closeAside,
+  hovered,
+  setHovered,
 }) {
-  const [hovered, setHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const {pathname} = useLocation();
 
