@@ -242,7 +242,7 @@ export function FeaturedProduct({product, isMobile, loading, emptyCellBelow}) {
       onMouseLeave={() => setIndex(0)}
       style={emptyCellBelow ? {borderBottom: '1px solid #eaeaea'} : {}}
     >
-      <div style={{background: '#f4f4f4'}}>
+      <div style={{background: index === 0 ? '#f4f4f4' : '#f0f0f4'}}>
         {/* <AnimatePresence mode="wait" initial={false}> */}
         {isMobile ? (
           <Image
@@ -266,6 +266,7 @@ export function FeaturedProduct({product, isMobile, loading, emptyCellBelow}) {
               crop={false}
               loading={loading}
               sizes="(min-width: 45em) 20vw, 50vw"
+              style={{background: index === 0 ? '#f4f4f4' : '#f0f0f4'}}
             />
           </motion.div>
         )}
