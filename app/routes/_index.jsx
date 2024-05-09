@@ -71,7 +71,9 @@ function NewArrivals({collection}) {
   return (
     <>
       <div className="new-arrivals-container">
-        <p>{collection.title}</p>
+        <div style={{height: '100%'}}>
+          <p className="new-arrivals-container-p">{collection.title}</p>
+        </div>
         <div className="new-arrivals-text">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non

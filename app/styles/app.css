@@ -789,14 +789,15 @@ aside li {
   border: 1px solid #eaeaea;
   border-bottom: none;
 }
-.new-arrivals-container > p {
+.new-arrivals-container-p {
   font-size: 0.75rem;
   font-family: 'regular-font';
-  position: relative; /* Ensures positioning context for ::before pseudo-element */
+  position: sticky; /* Ensures positioning context for ::before pseudo-element */
   padding-left: 15px; /* Adds space on the left for the bullet */
   margin-top: 3%;
+  top: calc(3% + var(--header-height));
 }
-.new-arrivals-container > p::before {
+.new-arrivals-container-p::before {
   content: ''; /* Ensures the pseudo-element has content */
   position: absolute; /* Position relative to the p */
   top: 47%; /* Positions the bullet vertically centered */
@@ -807,7 +808,7 @@ aside li {
   border-radius: 50%; /* Makes the bullet circular */
   background-color: black; /* Color of the bullet */
 }
-.new-arrivals-container > p {
+.new-arrivals-container-p {
   margin-bottom: 5%;
   font-size: 0.75rem;
   font-family: 'regular-font';
