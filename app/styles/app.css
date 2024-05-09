@@ -478,7 +478,7 @@ aside li {
   font-family: 'regular-font';
 }
 .newsletter-form-footer {
-  margin-bottom: 3%;
+  margin-bottom: 1rem;
   margin-left: 1rem;
 }
 .newsletter-form-footer-mobile {
@@ -787,6 +787,7 @@ aside li {
   justify-content: space-between;
   padding-left: 1rem;
   border-right: 1px solid #eaeaea;
+  border-color: #f0f0f0f4;
 }
 .new-arrivals-container-p {
   font-size: 0.75rem;
