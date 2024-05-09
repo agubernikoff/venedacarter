@@ -950,7 +950,7 @@ aside li {
   text-decoration: none !important;
 }
 .product-color-variants {
-  margin-right: 5%;
+  margin-right: 1rem;
   font-size: 0.75rem;
   font-family: 'regular-font';
   margin-top: 1%;
@@ -973,7 +973,7 @@ aside li {
   background-color: #f4f4f4;
 }
 .product-title-price {
-  margin-left: 5%;
+  margin-left: 1rem;
   font-size: 0.75rem;
   font-family: 'regular-font';
   margin-top: 1%;
