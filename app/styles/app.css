@@ -235,7 +235,7 @@ aside li {
 
 .header-catalog-submenu-container {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 }
 .mobile-menu-container {
   position: fixed;
@@ -268,7 +268,7 @@ aside li {
 
 .header-menu-desktop {
   display: none;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
   justify-content: center;
 
   @media (min-width: 44em) {
