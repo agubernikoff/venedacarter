@@ -786,8 +786,7 @@ aside li {
   flex-direction: column;
   justify-content: space-between;
   padding-left: 1rem;
-  border: 1px solid #eaeaea;
-  border-bottom: none;
+  border-right: 1px solid #eaeaea;
 }
 .new-arrivals-container-p {
   font-size: 0.75rem;
