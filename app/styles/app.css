@@ -1125,6 +1125,9 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
   height: calc(100vh - var(--header-height));
+  overflow: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .product-mobile {
@@ -1135,8 +1138,10 @@ aside li {
 .product-image {
   width: 50%;
   border-right: 1px solid #eaeaea;
-  overflow: auto;
-  background: #eaeaea;
+  /* overflow: auto; */
+}
+.product-image img {
+  background: linear-gradient(to bottom, #eaeaea, #dadada);
 }
 
 .product-mobile .product-image {
@@ -1184,6 +1189,8 @@ aside li {
   display: flex;
   flex-direction: column;
   width: 50%;
+  position: sticky;
+  top: 0;
 }
 
 .product-main-mobile {
