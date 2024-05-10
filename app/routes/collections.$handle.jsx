@@ -47,12 +47,10 @@ export async function loader({request, params, context}) {
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 6,
   });
-  console.log('pv', paginationVariables);
 
   if (!handle) {
     return redirect('/collections');
   }
-  console.log(filter, {name: 'Material', value: filterFromParams});
   const {collection} = await storefront.query(COLLECTION_QUERY, {
     variables: {
       sortKey: handle !== 'all' ? sortKey : null,
