@@ -4,6 +4,7 @@ import {
   useLoaderData,
   Link,
   useSearchParams,
+  useNavigate,
 } from '@remix-run/react';
 import {
   Pagination,
@@ -15,6 +16,7 @@ import {useVariantUrl} from '~/lib/variants';
 import {FeaturedProduct} from './_index';
 import {useState, useEffect} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
+import {useInView} from 'react-intersection-observer';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -43,8 +45,9 @@ export async function loader({request, params, context}) {
     ? `variantOption.value:${filterFromParams}`
     : '';
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 12,
+    pageBy: 6,
   });
+  console.log('pv', paginationVariables);
 
   if (!handle) {
     return redirect('/collections');
@@ -79,6 +82,7 @@ export async function loader({request, params, context}) {
 
 export default function Collection() {
   /** @type {LoaderReturnData} */
+  const {ref, inView, entry} = useInView();
   const {collection, products} = useLoaderData();
 
   const {pathname} = useLocation();
@@ -125,20 +129,44 @@ export default function Collection() {
       <Pagination
         connection={!pathname.includes('all') ? collection.products : products}
       >
-        {({nodes, isLoading, PreviousLink, NextLink}) => (
+        {({nodes, NextLink, hasNextPage, nextPageUrl, state}) => (
           <>
-            <PreviousLink>
-              {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
-            </PreviousLink>
-            <ProductsGrid products={nodes} isMobile={isMobile} />
-            <NextLink>
-              {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-            </NextLink>
+            <ProductsLoadedOnScroll
+              nodes={nodes}
+              inView={inView}
+              hasNextPage={hasNextPage}
+              nextPageUrl={nextPageUrl}
+              state={state}
+            />
+            <NextLink ref={ref}>Load more</NextLink>
           </>
         )}
       </Pagination>
     </div>
   );
+}
+
+function ProductsLoadedOnScroll({
+  nodes,
+  inView,
+  hasNextPage,
+  nextPageUrl,
+  state,
+  isMobile,
+}) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      navigate(nextPageUrl, {
+        replace: true,
+        preventScrollReset: true,
+        state,
+      });
+    }
+  }, [inView, navigate, state, nextPageUrl, hasNextPage]);
+
+  return <ProductsGrid products={nodes} isMobile={isMobile} />;
 }
 
 /**
