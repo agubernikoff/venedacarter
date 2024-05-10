@@ -250,10 +250,22 @@ function FilterAside({isMobile, toggleFilter}) {
               layoutId="abc"
               transition={{ease: 'easeInOut'}}
               className="collection-title"
-              onClick={() => toggleFilter()}
+              style={{cursor: 'auto'}}
             >
               Filter +
             </motion.button>
+            <button
+              style={{
+                background: 'transparent',
+                border: 'none',
+                marginRight: '1rem',
+                padding: 0,
+                cursor: 'pointer',
+              }}
+              onClick={toggleFilter}
+            >
+              &times;
+            </button>
           </header>
         )}
         <main>
