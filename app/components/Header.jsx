@@ -395,14 +395,15 @@ function HeaderMenuMobileToggle({isOpen, toggleMenu}) {
 }
 
 function SearchToggle({isMobile}) {
+  const {hash} = useLocation();
   return (
     <>
       {isMobile ? (
-        <a href={'#search-aside'}>
+        <a href={hash === '#search-aside' ? '#x' : '#search-aside'}>
           <img src={search} />{' '}
         </a>
       ) : (
-        <a href={'#search-aside'}>Search</a>
+        <a href={hash === '#search-aside' ? '#x' : '#search-aside'}>Search</a>
       )}
     </>
   );
