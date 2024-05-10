@@ -167,6 +167,7 @@ function HeaderMenuItem({
       className={
         item.title === 'Shop' ? 'header-catalog-submenu-container' : null
       }
+      style={{paddingBlock: '.5rem'}}
     >
       <motion.div layout="position" transition={{ease: 'easeInOut'}}>
         <NavLink
