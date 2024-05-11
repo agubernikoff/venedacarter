@@ -268,7 +268,7 @@ aside li {
 
 .header-menu-desktop {
   display: none;
-  grid-gap: 2rem;
+  grid-gap: 1.5rem;
   justify-content: center;
 
   @media (min-width: 44em) {
@@ -327,7 +327,7 @@ aside li {
 .header-ctas {
   align-items: center;
   display: flex;
-  grid-gap: 1em;
+  grid-gap: 1.5em;
   margin-left: auto;
   justify-content: flex-end;
 }
@@ -694,6 +694,12 @@ aside li {
 
 .cart-checkout-button-text {
   color: white;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+}
+
+.empty-bag > p,
+.empty-bag > a {
   font-size: 0.75rem;
   font-family: 'regular-font';
 }
@@ -1137,7 +1143,7 @@ aside li {
 }
 .product-image {
   width: 50%;
-  border-right: 1px solid #eaeaea;
+  /* border-right: 1px solid #eaeaea; */
   /* overflow: auto; */
 }
 .product-image img {
