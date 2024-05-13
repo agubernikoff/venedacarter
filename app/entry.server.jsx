@@ -15,7 +15,12 @@ export default async function handleRequest(
   responseHeaders,
   remixContext,
 ) {
-  const {nonce, header, NonceProvider} = createContentSecurityPolicy();
+  const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+    connectSrc: [
+      // (ie. 'wss://<your-ngrok-domain>.app:*')
+      'wss://engaged-orca-warm.ngrok-free.app:*',
+    ],
+  });
 
   const body = await renderToReadableStream(
     <NonceProvider>
