@@ -202,15 +202,6 @@ const FALLBACK_FOOTER_MENU = {
   id: 'gid://shopify/Menu/199655620664',
   items: [
     {
-      id: 'gid://shopify/MenuItem/461633060920',
-      resourceId: 'gid://shopify/ShopPolicy/23358046264',
-      tags: [],
-      title: 'Privacy Policy',
-      type: 'SHOP_POLICY',
-      url: '/policies/privacy-policy',
-      items: [],
-    },
-    {
       id: 'gid://shopify/MenuItem/461633093688',
       resourceId: 'gid://shopify/ShopPolicy/23358013496',
       tags: [],
@@ -232,9 +223,9 @@ const FALLBACK_FOOTER_MENU = {
       id: 'gid://shopify/MenuItem/461633159224',
       resourceId: 'gid://shopify/ShopPolicy/23358079032',
       tags: [],
-      title: 'Terms of Service',
+      title: 'Terms of Service + Privacy',
       type: 'SHOP_POLICY',
-      url: '/policies/terms-of-service',
+      url: '/policies/terms-of-service-+-privacy',
       items: [],
     },
   ],

@@ -19,6 +19,8 @@ export default async function handleRequest(
     connectSrc: [
       // (ie. 'wss://<your-ngrok-domain>.app:*')
       'wss://engaged-orca-warm.ngrok-free.app:*',
+      'https://engaged-orca-warm.ngrok-free.app:*',
+      'http://127.0.0.1:4040',
     ],
   });
 
