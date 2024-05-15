@@ -36,12 +36,13 @@ export default function AccountLayout() {
   const heading = customer
     ? customer.firstName
       ? `Welcome, ${customer.firstName}`
-      : `Welcome to your account.`
+      : `ACCOUNT`
     : 'Account Details';
 
   return (
     <div className="account">
-      <h1>{heading}</h1>
+      <p className="stockists-title">ACCOUNT</p>
+      {/* <p className="stockists-title">{heading}</p> */}
       <br />
       <AccountMenu />
       <br />
@@ -54,26 +55,25 @@ export default function AccountLayout() {
 function AccountMenu() {
   function isActiveStyle({isActive, isPending}) {
     return {
-      fontWeight: isActive ? 'bold' : undefined,
+      textDecoration: isActive ? 'underline' : undefined,
       color: isPending ? 'grey' : 'black',
     };
   }
 
   return (
     <nav role="navigation">
-      <NavLink to="/account/orders" style={isActiveStyle}>
-        Orders &nbsp;
-      </NavLink>
-      &nbsp;|&nbsp;
-      <NavLink to="/account/profile" style={isActiveStyle}>
-        &nbsp; Profile &nbsp;
-      </NavLink>
-      &nbsp;|&nbsp;
-      <NavLink to="/account/addresses" style={isActiveStyle}>
-        &nbsp; Addresses &nbsp;
-      </NavLink>
-      &nbsp;|&nbsp;
-      <Logout />
+      <div className="account-nav">
+        <NavLink to="/account/orders" style={isActiveStyle}>
+          Orders
+        </NavLink>
+        <NavLink to="/account/profile" style={isActiveStyle}>
+          Profile
+        </NavLink>
+        <NavLink to="/account/addresses" style={isActiveStyle}>
+          Addresses
+        </NavLink>
+        <Logout />
+      </div>
     </nav>
   );
 }
@@ -81,7 +81,9 @@ function AccountMenu() {
 function Logout() {
   return (
     <Form className="account-logout" method="POST" action="/account/logout">
-      &nbsp;<button type="submit">Sign out</button>
+      <button className="account-logout-button" type="submit">
+        Sign out
+      </button>
     </Form>
   );
 }

@@ -90,12 +90,8 @@ function OrdersTable({orders}) {
 
 function EmptyOrders() {
   return (
-    <div>
+    <div className="empty-orders">
       <p>You haven&apos;t placed any orders yet.</p>
-      <br />
-      <p>
-        <Link to="/collections">Start Shopping →</Link>
-      </p>
     </div>
   );
 }

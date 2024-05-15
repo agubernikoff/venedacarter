@@ -305,23 +305,23 @@ export default function Addresses() {
 
   return (
     <div className="account-addresses">
-      <h2>Addresses</h2>
+      <p className="account-address-bold">Saved Addresses</p>
       <br />
       {!addresses.nodes.length ? (
         <p>You have no addresses saved.</p>
       ) : (
         <div>
-          <div>
-            <legend>Create address</legend>
-            <NewAddressForm />
+          <div className="address-container">
+            <ExistingAddresses
+              addresses={addresses}
+              defaultAddress={defaultAddress}
+            />
+            <button className="add-new-address">ADD NEW</button>
+            {/* <NewAddressForm /> */}
           </div>
-          <br />
+          {/* <br />
           <hr />
-          <br />
-          <ExistingAddresses
-            addresses={addresses}
-            defaultAddress={defaultAddress}
-          />
+          <br /> */}
         </div>
       )}
     </div>
@@ -370,34 +370,58 @@ function NewAddressForm() {
 function ExistingAddresses({addresses, defaultAddress}) {
   return (
     <div>
-      <legend>Existing addresses</legend>
       {addresses.nodes.map((address) => (
-        <AddressForm
-          key={address.id}
-          addressId={address.id}
-          address={address}
-          defaultAddress={defaultAddress}
-        >
-          {({stateForMethod}) => (
-            <div>
-              <button
-                disabled={stateForMethod('PUT') !== 'idle'}
-                formMethod="PUT"
-                type="submit"
-              >
-                {stateForMethod('PUT') !== 'idle' ? 'Saving' : 'Save'}
-              </button>
-              <button
-                disabled={stateForMethod('DELETE') !== 'idle'}
-                formMethod="DELETE"
-                type="submit"
-              >
-                {stateForMethod('DELETE') !== 'idle' ? 'Deleting' : 'Delete'}
-              </button>
-            </div>
-          )}
-        </AddressForm>
+        //   <AddressForm
+        //     key={address.id}
+        //     addressId={address.id}
+        //     address={address}
+        //     defaultAddress={defaultAddress}
+        //   >
+        //     {({stateForMethod}) => (
+        //       <div>
+        //         <button
+        //           disabled={stateForMethod('PUT') !== 'idle'}
+        //           formMethod="PUT"
+        //           type="submit"
+        //         >
+        //           {stateForMethod('PUT') !== 'idle' ? 'Saving' : 'Save'}
+        //         </button>
+        //         <button
+        //           disabled={stateForMethod('DELETE') !== 'idle'}
+        //           formMethod="DELETE"
+        //           type="submit"
+        //         >
+        //           {stateForMethod('DELETE') !== 'idle' ? 'Deleting' : 'Delete'}
+        //         </button>
+        //       </div>
+        //     )}
+        //   </AddressForm>
+        // ))}
+        <div key={address.id}>
+          <AddressDisplay address={address} />
+          <div className="address-action-container">
+            <button>EDIT</button>
+            <button>DELETE</button>
+          </div>
+        </div>
       ))}
+    </div>
+  );
+}
+
+function AddressDisplay({address}) {
+  return (
+    <div className="address-display">
+      <p>
+        {address.firstName} {address.lastName}
+      </p>
+      <p>{address.company}</p>
+      <p>{address.address1}</p>
+      <p>{address.address2}</p>
+      <p>
+        {address.city}, {address.zoneCode} {address.zip}
+      </p>
+      <p>{address.phoneNumber}</p>
     </div>
   );
 }
