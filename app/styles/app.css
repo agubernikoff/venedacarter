@@ -1558,7 +1558,7 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
   @media (min-width: 44em) {
-    width: 30%;
+    width: 35%;
   }
 }
 
@@ -1566,6 +1566,7 @@ aside li {
   padding-bottom: 2rem;
   font-size: 0.75rem;
   font-family: 'regular-font';
+  text-align: center;
 }
 
 .stockists-country {
@@ -1602,6 +1603,28 @@ aside li {
   font-size: 0.75rem;
   font-family: 'bold-font' !important;
 }
+
+/*
+* --------------------------------------------------
+* TOS + Privacy Page
+* --------------------------------------------------
+*/
+
+.tospage {
+  margin: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  width: 92.5%;
+  @media (min-width: 44em) {
+    width: 35%;
+  }
+}
+
+.tospage > p {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+}
+
 /*
 * --------------------------------------------------
 * Filter
