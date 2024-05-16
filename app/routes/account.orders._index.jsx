@@ -6,10 +6,10 @@ import {
   flattenConnection,
   Image,
 } from '@shopify/hydrogen';
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {json} from '@shopify/remix-oxygen';
 import {CUSTOMER_ORDERS_QUERY} from '~/graphql/customer-account/CustomerOrdersQuery';
-import {motion, AnimatePresence} from 'framer-motion';
+import {motion, AnimatePresence, animate} from 'framer-motion';
 import closearrow from '../assets/closearrow.png';
 import openarrow from '../assets/openarrow.png';
 
@@ -114,28 +114,28 @@ function EmptyOrders() {
  * @param {{order: OrderItemFragment}}
  */
 function OrderItem({order}) {
+  const arrow = useRef();
   const [expanded, setExpanded] = useState(false);
   function toggleExpanded() {
     setExpanded(!expanded);
+    if (!expanded) animate(arrow.current, {transform: 'rotate(0deg)'});
+    if (expanded) animate(arrow.current, {transform: 'rotate(-90deg)'});
   }
   const fulfillmentStatus = flattenConnection(order.fulfillments)[0]?.status;
 
   return (
     <>
       {/* <fieldset> */}
-      <motion.div
-        className="account-orders-grey-row"
-        layout="position"
-        key={order.id}
-      >
+      <motion.div className="account-orders-grey-row" layout>
         <img
           src={expanded ? openarrow : closearrow}
           onClick={toggleExpanded}
           style={{
             width: '30%',
             margin: 'auto',
-            transform: expanded ? null : 'rotate(-90deg)',
+            transform: 'rotate(-90deg)',
           }}
+          ref={arrow}
         />
         <div className="account-orders-grid-box-container">
           <p>{new Date(order.processedAt).toDateString()}</p>
