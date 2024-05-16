@@ -1559,7 +1559,7 @@ fieldset > input {
 .address-form-buttons > button {
   width: 49%;
   border-radius: 0 !important;
-  padding: 1rem;
+  padding: 1.5rem;
   border: 1px solid black;
   font-size: 0.75rem;
   font-family: 'regular-font';
