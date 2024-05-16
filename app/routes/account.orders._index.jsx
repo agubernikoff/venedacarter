@@ -9,7 +9,7 @@ import {
 import React, {useState, useRef} from 'react';
 import {json} from '@shopify/remix-oxygen';
 import {CUSTOMER_ORDERS_QUERY} from '~/graphql/customer-account/CustomerOrdersQuery';
-import {motion, AnimatePresence, animate} from 'framer-motion';
+import {motion, AnimatePresence, animate, LayoutGroup} from 'framer-motion';
 import closearrow from '../assets/closearrow.png';
 import openarrow from '../assets/openarrow.png';
 
@@ -75,29 +75,31 @@ function OrdersTable({orders}) {
       <p style={{fontFamily: 'bold-font'}}>Items</p>
       <p style={{fontFamily: 'bold-font'}}>Status</p>
       <p style={{fontFamily: 'bold-font'}}>Total</p>
-      <motion.div className="account-orders-subgrid" layout>
-        {orders?.nodes.length ? (
-          <Pagination connection={orders}>
-            {({nodes, isLoading, PreviousLink, NextLink}) => {
-              return (
-                <>
-                  <PreviousLink>
-                    {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
-                  </PreviousLink>
-                  {nodes.map((order) => {
-                    return <OrderItem key={order.id} order={order} />;
-                  })}
-                  <NextLink>
-                    {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-                  </NextLink>
-                </>
-              );
-            }}
-          </Pagination>
-        ) : (
-          <EmptyOrders />
-        )}
-      </motion.div>
+      <div className="account-orders-subgrid">
+        <LayoutGroup>
+          {orders?.nodes.length ? (
+            <Pagination connection={orders}>
+              {({nodes, isLoading, PreviousLink, NextLink}) => {
+                return (
+                  <>
+                    <PreviousLink>
+                      {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
+                    </PreviousLink>
+                    {nodes.map((order) => {
+                      return <OrderItem key={order.id} order={order} />;
+                    })}
+                    <NextLink>
+                      {isLoading ? 'Loading...' : <span>Load more ↓</span>}
+                    </NextLink>
+                  </>
+                );
+              }}
+            </Pagination>
+          ) : (
+            <EmptyOrders />
+          )}
+        </LayoutGroup>
+      </div>
     </div>
   );
 }
@@ -126,7 +128,11 @@ function OrderItem({order}) {
   return (
     <>
       {/* <fieldset> */}
-      <motion.div className="account-orders-grey-row" layout>
+      <motion.div
+        className="account-orders-grey-row"
+        layout
+        transition={{ease: 'easeInOut'}}
+      >
         <img
           src={expanded ? openarrow : closearrow}
           onClick={toggleExpanded}
@@ -158,13 +164,14 @@ function OrderItem({order}) {
         {fulfillmentStatus && <p>{fulfillmentStatus}</p>}
         <Money data={order.totalPrice} />
       </motion.div>
-      <AnimatePresence>
+      <AnimatePresence mode="sync">
         {expanded && (
           <motion.div
             className="account-orders-subgrid-2"
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
+            initial={{opacity: 0, scaleY: 0}}
+            animate={{opacity: 1, scaleY: 1}}
+            exit={{opacity: 0, scaleY: 1}}
+            style={{originY: 0}}
             transition={{ease: 'easeInOut'}}
             key={order.name}
           >
