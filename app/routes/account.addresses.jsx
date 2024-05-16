@@ -312,6 +312,7 @@ export default function Addresses() {
   };
 
   const handleCancelEdit = () => {
+    window.scrollTo(0, 0);
     setEditAddressId(null);
   };
 
