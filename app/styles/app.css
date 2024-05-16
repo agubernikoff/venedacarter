@@ -1465,6 +1465,7 @@ aside li {
 
 .account {
   padding-top: 2rem;
+  min-height: calc(100vh - var(--header-height));
 }
 
 .account-nav {
@@ -1587,6 +1588,7 @@ fieldset > input {
   width: 60vw;
   margin: auto;
   grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr;
+  margin-bottom: 10rem;
 }
 
 .account-orders > img {
@@ -1596,13 +1598,63 @@ fieldset > input {
 .account-orders > p,
 .account-orders > a,
 .account-orders > a > p,
-.account-orders > Money,
 .account-orders > div,
-.account-orders > div > p,
-.account-orders > div > div > p,
-.account-orders > div > a {
+.account-orders-grid-box-container p,
+.account-orders-grid-box-container a,
+.account-orders-grey-row div,
+.account-orders-expanded-row p,
+.account-orders-expanded-row a,
+.account-orders-expanded-row div,
+.account-orders-expanded-totals-row p,
+.account-orders-expanded-totals-row a,
+.account-orders-expanded-totals-row div {
   font-size: 0.75rem;
   font-family: 'regular-font';
+  line-height: normal;
+}
+
+.account-orders-subgrid {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 6;
+  margin-top: 0.75rem;
+}
+.account-orders-grey-row {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 6;
+  background: #f4f4f4;
+  border-bottom: 1px solid #eaeaea;
+  align-items: center;
+  height: 1.5rem;
+}
+.account-orders-grid-box-container {
+  display: flex;
+  align-items: center;
+}
+.account-orders-expanded-row {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 6;
+  margin-top: 0.75rem;
+}
+.account-orders-expanded-row img {
+  background: #f4f4f4;
+}
+.account-orders-expanded-totals-row {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 6;
+  padding-block: 0.75rem;
+  border-top: 1px solid #eaeaea;
+}
+.track-order {
+  grid-column: span 2;
+  border: 1px solid black;
+  width: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /*
 * --------------------------------------------------

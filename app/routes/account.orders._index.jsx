@@ -72,27 +72,29 @@ function OrdersTable({orders}) {
       <p style={{fontFamily: 'bold-font'}}>Items</p>
       <p style={{fontFamily: 'bold-font'}}>Status</p>
       <p style={{fontFamily: 'bold-font'}}>Total</p>
-      {orders?.nodes.length ? (
-        <Pagination connection={orders}>
-          {({nodes, isLoading, PreviousLink, NextLink}) => {
-            return (
-              <>
-                <PreviousLink>
-                  {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
-                </PreviousLink>
-                {nodes.map((order) => {
-                  return <OrderItem key={order.id} order={order} />;
-                })}
-                <NextLink>
-                  {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-                </NextLink>
-              </>
-            );
-          }}
-        </Pagination>
-      ) : (
-        <EmptyOrders />
-      )}
+      <div className="account-orders-subgrid">
+        {orders?.nodes.length ? (
+          <Pagination connection={orders}>
+            {({nodes, isLoading, PreviousLink, NextLink}) => {
+              return (
+                <>
+                  <PreviousLink>
+                    {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
+                  </PreviousLink>
+                  {nodes.map((order) => {
+                    return <OrderItem key={order.id} order={order} />;
+                  })}
+                  <NextLink>
+                    {isLoading ? 'Loading...' : <span>Load more ↓</span>}
+                  </NextLink>
+                </>
+              );
+            }}
+          </Pagination>
+        ) : (
+          <EmptyOrders />
+        )}
+      </div>
     </div>
   );
 }
@@ -117,53 +119,57 @@ function OrderItem({order}) {
   return (
     <>
       {/* <fieldset> */}
-      <button
-        style={{
-          background: '#f4f4f4',
-          display: 'flex',
-          alignItems: 'center',
-          border: 'none',
-        }}
-        onClick={toggleExpanded}
-      >
-        x
-      </button>
-      <p style={{background: '#f4f4f4', display: 'flex', alignItems: 'center'}}>
-        {new Date(order.processedAt).toDateString()}
-      </p>
-      <Link
-        style={{background: '#f4f4f4', display: 'flex', alignItems: 'center'}}
-        to={`/account/orders/${order.id}`}
-      >
-        <p>#{order.number}</p>
-      </Link>
-      <p style={{background: '#f4f4f4', display: 'flex', alignItems: 'center'}}>
-        {order.lineItems?.nodes
-          ?.map((n) => n.quantity)
-          .reduce((partialSum, a) => partialSum + a, 0)}
-      </p>
-      <p style={{background: '#f4f4f4', display: 'flex', alignItems: 'center'}}>
-        {order.financialStatus}
-      </p>
-      {fulfillmentStatus && <p>{fulfillmentStatus}</p>}
-      <Money
-        style={{
-          background: '#f4f4f4',
-          display: 'flex',
-          alignItems: 'center',
-          fontSize: '.75rem',
-          fontFamily: 'regular-font',
-        }}
-        data={order.totalPrice}
-      />
+      <div className="account-orders-grey-row">
+        <button
+          style={{
+            border: 'none',
+            background: 'transparent',
+            height: 'fit-content',
+            width: 'fit-content',
+          }}
+          onClick={toggleExpanded}
+        >
+          x
+        </button>
+        <div className="account-orders-grid-box-container">
+          <p>{new Date(order.processedAt).toDateString()}</p>
+        </div>
+        <div className="account-orders-grid-box-container">
+          <Link to={`/account/orders/${order.id}`}>
+            <p>#{order.number}</p>
+          </Link>
+        </div>
+        <div className="account-orders-grid-box-container">
+          <p>
+            {order.lineItems?.nodes
+              ?.map((n) => n.quantity)
+              .reduce((partialSum, a) => partialSum + a, 0)}
+          </p>
+        </div>
+        <div className="account-orders-grid-box-container">
+          <p>{order.financialStatus}</p>
+        </div>
+        {fulfillmentStatus && <p>{fulfillmentStatus}</p>}
+        <Money data={order.totalPrice} />
+      </div>
       {expanded
-        ? order.lineItems?.nodes?.map((n) => (
-            <React.Fragment key={n.id}>
+        ? order.lineItems?.nodes?.map((n, i) => (
+            <div
+              style={
+                i === order.lineItems.nodes.length - 1
+                  ? {paddingBottom: '.75rem'}
+                  : null
+              }
+              key={n.id}
+              className="account-orders-expanded-row"
+            >
               <br />
-              <Image data={n.image} />
+              <Image data={n.image} aspectRatio="1:1.1" />
               <div>
                 <p style={{fontFamily: 'bold-font'}}>Description</p>
-                {n.title}
+                <br />
+                <p>{n.title}</p>
+                <br />
                 {n.variantOptions?.find((o) => isNaN(o.value))?.value &&
                 n.variantOptions?.find((o) => isNaN(o.value))?.value !==
                   'Default Title' ? (
@@ -181,20 +187,22 @@ function OrderItem({order}) {
               </div>
               <div>
                 <p style={{fontFamily: 'bold-font'}}>Qty</p>
+                <br />
                 <p>{n.quantity}</p>
               </div>
               <br />
               <div>
                 <p style={{fontFamily: 'bold-font'}}>Item Total</p>
+                <br />
                 <Money data={n.totalPrice} />
               </div>
-            </React.Fragment>
+            </div>
           ))
         : null}
       {expanded ? (
-        <>
+        <div className="account-orders-expanded-totals-row">
           <br />
-          <a style={{gridColumn: 'span 2'}}>Track Order</a>
+          <a className="track-order">TRACK ORDER</a>
           <br />
           <div>
             <div>
@@ -227,7 +235,7 @@ function OrderItem({order}) {
             </div>
             <Money style={{fontFamily: 'bold-font'}} data={order.totalPrice} />
           </div>
-        </>
+        </div>
       ) : null}
       {/* <Link to={`/account/orders/${btoa(order.id)}`}>View Order →</Link> */}
       {/* </fieldset> */}
