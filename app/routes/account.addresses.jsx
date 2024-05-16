@@ -65,9 +65,6 @@ export async function action({request, context}) {
       );
     }
 
-    const defaultAddress = form.has('defaultAddress')
-      ? String(form.get('defaultAddress')) === 'on'
-      : false;
     const address = {};
     const keys = [
       'address1',
@@ -87,6 +84,11 @@ export async function action({request, context}) {
       if (typeof value === 'string') {
         address[key] = value;
       }
+    }
+
+    let defaultAddress;
+    if (form.has('defaultAddress')) {
+      defaultAddress = String(form.get('defaultAddress')) === 'on';
     }
 
     switch (request.method) {
@@ -380,12 +382,12 @@ function NewAddressForm() {
 /**
  * @param {Pick<CustomerFragment, 'addresses' | 'defaultAddress'>}
  */
-function ExistingAddresses({
+export function ExistingAddresses({
   addresses,
   defaultAddress,
   editAddressId,
   onEditClick,
-  onCancelEdit,
+  onCancelEdit, // Added onCancelEdit prop
 }) {
   return (
     <div>
@@ -399,7 +401,7 @@ function ExistingAddresses({
               addressId={address.id}
               address={address}
               defaultAddress={defaultAddress}
-              onCancel={onCancelEdit}
+              onCancel={onCancelEdit} // Pass onCancelEdit as a prop to AddressForm
             >
               {({stateForMethod}) => (
                 <div>
@@ -457,14 +459,28 @@ function AddressDisplay({address}) {
 /**
  * @param {Class<useNavigation>['state']>}
  */
-export function AddressForm({addressId, address, defaultAddress, children}) {
-  const {state, formMethod} = useNavigation();
-  /** @type {ActionReturnData} */
-  const action = useActionData();
-  const error = action?.error?.[addressId];
+export function AddressForm({
+  addressId,
+  address,
+  defaultAddress,
+  onCancel,
+  onSave,
+}) {
+  const {formMethod} = useNavigation();
+  const {state} = useNavigation();
+  const actionData = useActionData();
+  const error = actionData?.error?.[addressId];
   const isDefaultAddress = defaultAddress?.id === addressId;
 
   const stateForMethod = (method) => (formMethod === method ? state : 'idle');
+
+  const handleCancelEdit = () => {
+    onCancel();
+  };
+
+  const handleSave = () => {
+    onSave(); // Call the onSave function passed from parent
+  };
 
   return (
     <Form id={addressId}>
@@ -571,7 +587,7 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
           type="text"
         /> */}
 
-        <div>
+        {/* <div>
           <input
             defaultChecked={isDefaultAddress}
             id="defaultAddress"
@@ -579,7 +595,7 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
             type="checkbox"
           />
           <label htmlFor="defaultAddress">Set as default address</label>
-        </div>
+        </div> */}
         {error && (
           <p>
             <mark>
@@ -589,15 +605,11 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
         )}
         <br />
         <div className="address-form-buttons">
-          {/* {children &&
-            children({
-              stateForMethod: (method) =>
-                formMethod === method ? state : 'idle',
-            })} */}
-          <button style={{background: 'white'}} onClick={() => onCancelEdit()}>
+          <button style={{background: 'white'}} onClick={handleCancelEdit}>
             CANCEL
           </button>
           <button
+            onClick={handleSave}
             style={{backgroundColor: 'black', color: 'white'}}
             disabled={stateForMethod('PUT') !== 'idle'}
             formMethod="PUT"
