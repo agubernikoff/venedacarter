@@ -9,6 +9,7 @@ import {
 import React, {useState} from 'react';
 import {json} from '@shopify/remix-oxygen';
 import {CUSTOMER_ORDERS_QUERY} from '~/graphql/customer-account/CustomerOrdersQuery';
+import {motion, AnimatePresence} from 'framer-motion';
 
 /**
  * @type {MetaFunction}
@@ -72,7 +73,7 @@ function OrdersTable({orders}) {
       <p style={{fontFamily: 'bold-font'}}>Items</p>
       <p style={{fontFamily: 'bold-font'}}>Status</p>
       <p style={{fontFamily: 'bold-font'}}>Total</p>
-      <div className="account-orders-subgrid">
+      <motion.div className="account-orders-subgrid" layout>
         {orders?.nodes.length ? (
           <Pagination connection={orders}>
             {({nodes, isLoading, PreviousLink, NextLink}) => {
@@ -94,7 +95,7 @@ function OrdersTable({orders}) {
         ) : (
           <EmptyOrders />
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -119,7 +120,11 @@ function OrderItem({order}) {
   return (
     <>
       {/* <fieldset> */}
-      <div className="account-orders-grey-row">
+      <motion.div
+        className="account-orders-grey-row"
+        layout="position"
+        key={order.id}
+      >
         <button
           style={{
             border: 'none',
@@ -151,92 +156,104 @@ function OrderItem({order}) {
         </div>
         {fulfillmentStatus && <p>{fulfillmentStatus}</p>}
         <Money data={order.totalPrice} />
-      </div>
-      {expanded
-        ? order.lineItems?.nodes?.map((n, i) => (
-            <div
-              style={
-                i === order.lineItems.nodes.length - 1
-                  ? {paddingBottom: '.75rem'}
-                  : null
-              }
-              key={n.id}
-              className="account-orders-expanded-row"
-            >
+      </motion.div>
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            className="account-orders-subgrid-2"
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{ease: 'easeInOut'}}
+            key={order.name}
+          >
+            {order.lineItems?.nodes?.map((n, i) => (
+              <div
+                style={
+                  i === order.lineItems.nodes.length - 1
+                    ? {paddingBottom: '.75rem'}
+                    : null
+                }
+                key={n.id}
+                className="account-orders-expanded-row"
+              >
+                <br />
+                <Image data={n.image} aspectRatio="1:1.1" />
+                <div>
+                  <p style={{fontFamily: 'bold-font'}}>Description</p>
+                  <br />
+                  <p>{n.title}</p>
+                  <br />
+                  {n.variantOptions?.find((o) => isNaN(o.value))?.value &&
+                  n.variantOptions?.find((o) => isNaN(o.value))?.value !==
+                    'Default Title' ? (
+                    <p>
+                      Color:{' '}
+                      {n.variantOptions?.find((o) => isNaN(o.value))?.value}
+                    </p>
+                  ) : null}
+                  {n.variantOptions?.find((o) => !isNaN(o.value))?.value ? (
+                    <p>
+                      Size:{' '}
+                      {n.variantOptions?.find((o) => !isNaN(o.value))?.value}
+                    </p>
+                  ) : null}
+                </div>
+                <div>
+                  <p style={{fontFamily: 'bold-font'}}>Qty</p>
+                  <br />
+                  <p>{n.quantity}</p>
+                </div>
+                <br />
+                <div>
+                  <p style={{fontFamily: 'bold-font'}}>Item Total</p>
+                  <br />
+                  <Money data={n.totalPrice} />
+                </div>
+              </div>
+            ))}
+            <div className="account-orders-expanded-totals-row">
               <br />
-              <Image data={n.image} aspectRatio="1:1.1" />
-              <div>
-                <p style={{fontFamily: 'bold-font'}}>Description</p>
-                <br />
-                <p>{n.title}</p>
-                <br />
-                {n.variantOptions?.find((o) => isNaN(o.value))?.value &&
-                n.variantOptions?.find((o) => isNaN(o.value))?.value !==
-                  'Default Title' ? (
-                  <p>
-                    Color:{' '}
-                    {n.variantOptions?.find((o) => isNaN(o.value))?.value}
-                  </p>
-                ) : null}
-                {n.variantOptions?.find((o) => !isNaN(o.value))?.value ? (
-                  <p>
-                    Size:{' '}
-                    {n.variantOptions?.find((o) => !isNaN(o.value))?.value}
-                  </p>
-                ) : null}
-              </div>
-              <div>
-                <p style={{fontFamily: 'bold-font'}}>Qty</p>
-                <br />
-                <p>{n.quantity}</p>
-              </div>
+              <a className="track-order">TRACK ORDER</a>
               <br />
               <div>
-                <p style={{fontFamily: 'bold-font'}}>Item Total</p>
-                <br />
-                <Money data={n.totalPrice} />
+                <div>
+                  <p>Unit Total:</p>
+                  <p>Tax:</p>
+                  <p>Shipping:</p>
+                </div>
+                <p style={{fontFamily: 'bold-font'}}>Order total:</p>
+              </div>
+              <div>
+                <div>
+                  <Money
+                    data={{
+                      amount: order.lineItems?.nodes
+                        ?.map((n) => n.totalPrice.amount)
+                        .reduce((partialSum, a) => partialSum + a, 0),
+                      currencyCode: order.totalPrice.currencyCode,
+                    }}
+                  />
+                  <Money data={order.totalTax} />
+                  <Money
+                    data={{
+                      amount: (
+                        parseFloat(order.totalPrice.amount) -
+                        parseFloat(order.totalTax.amount)
+                      ).toString(),
+                      currencyCode: order.totalPrice.currencyCode,
+                    }}
+                  />
+                </div>
+                <Money
+                  style={{fontFamily: 'bold-font'}}
+                  data={order.totalPrice}
+                />
               </div>
             </div>
-          ))
-        : null}
-      {expanded ? (
-        <div className="account-orders-expanded-totals-row">
-          <br />
-          <a className="track-order">TRACK ORDER</a>
-          <br />
-          <div>
-            <div>
-              <p>Unit Total:</p>
-              <p>Tax:</p>
-              <p>Shipping:</p>
-            </div>
-            <p style={{fontFamily: 'bold-font'}}>Order total:</p>
-          </div>
-          <div>
-            <div>
-              <Money
-                data={{
-                  amount: order.lineItems?.nodes
-                    ?.map((n) => n.totalPrice.amount)
-                    .reduce((partialSum, a) => partialSum + a, 0),
-                  currencyCode: order.totalPrice.currencyCode,
-                }}
-              />
-              <Money data={order.totalTax} />
-              <Money
-                data={{
-                  amount: (
-                    parseFloat(order.totalPrice.amount) -
-                    parseFloat(order.totalTax.amount)
-                  ).toString(),
-                  currencyCode: order.totalPrice.currencyCode,
-                }}
-              />
-            </div>
-            <Money style={{fontFamily: 'bold-font'}} data={order.totalPrice} />
-          </div>
-        </div>
-      ) : null}
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* <Link to={`/account/orders/${btoa(order.id)}`}>View Order →</Link> */}
       {/* </fieldset> */}
     </>

@@ -1619,6 +1619,11 @@ fieldset > input {
   grid-column: span 6;
   margin-top: 0.75rem;
 }
+.account-orders-subgrid-2 {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 6;
+}
 .account-orders-grey-row {
   display: grid;
   grid-template-columns: subgrid;
