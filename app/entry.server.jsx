@@ -21,6 +21,8 @@ export default async function handleRequest(
       'wss://engaged-orca-warm.ngrok-free.app:*',
       'https://engaged-orca-warm.ngrok-free.app:*',
       'http://127.0.0.1:4040',
+      'wss://kitten-composed-notably.ngrok-free.app:*',
+      'https://kitten-composed-notably.ngrok-free.app:*',
     ],
   });
 
