@@ -1,7 +1,61 @@
 // https://shopify.dev/docs/api/customer/latest/objects/Order
+export const ORDERLINEITEMFULL = `#graphql
+fragment OrderMoney on MoneyV2 {
+  amount
+  currencyCode
+}
+fragment DiscountApplication on DiscountApplication {
+  value {
+    __typename
+    ... on MoneyV2 {
+      ...OrderMoney
+    }
+    ... on PricingPercentageValue {
+      percentage
+    }
+  }
+}
+fragment OrderLineItemFull on LineItem {
+  id
+  title
+  quantity
+  price {
+    ...OrderMoney
+  }
+  discountAllocations {
+    allocatedAmount {
+      ...OrderMoney
+    }
+    discountApplication {
+      ...DiscountApplication
+    }
+  }
+  totalDiscount {
+    ...OrderMoney
+  }
+  totalPrice{
+    ...OrderMoney
+  }
+  image {
+    altText
+    height
+    url
+    id
+    width
+  }
+  variantTitle
+  variantOptions{
+    name
+    value
+  }
+}`;
 export const ORDER_ITEM_FRAGMENT = `#graphql
   fragment OrderItem on Order {
     totalPrice {
+      amount
+      currencyCode
+    }
+    totalTax{
       amount
       currencyCode
     }
@@ -14,7 +68,13 @@ export const ORDER_ITEM_FRAGMENT = `#graphql
     id
     number
     processedAt
+    lineItems(first: 100) {
+      nodes {
+        ...OrderLineItemFull
+      }
+    }
   }
+  ${ORDERLINEITEMFULL}
 `;
 
 // https://shopify.dev/docs/api/customer/latest/objects/Customer

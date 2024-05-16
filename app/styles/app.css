@@ -1542,6 +1542,13 @@ aside li {
   font-family: 'regular-font';
   text-align: center;
 }
+
+.acccount-orders {
+  display: grid;
+  width: 60vw;
+  margin: auto;
+  grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr;
+}
 /*
 * --------------------------------------------------
 * About Page

@@ -4,7 +4,9 @@ import {
   Pagination,
   getPaginationVariables,
   flattenConnection,
+  Image,
 } from '@shopify/hydrogen';
+import React, {useState} from 'react';
 import {json} from '@shopify/remix-oxygen';
 import {CUSTOMER_ORDERS_QUERY} from '~/graphql/customer-account/CustomerOrdersQuery';
 
@@ -50,6 +52,7 @@ export default function Orders() {
   /** @type {LoaderReturnData} */
   const {customer} = useLoaderData();
   const {orders} = customer;
+  console.log(customer);
   return (
     <div className="orders">
       {orders.nodes.length ? <OrdersTable orders={orders} /> : <EmptyOrders />}
@@ -63,6 +66,12 @@ export default function Orders() {
 function OrdersTable({orders}) {
   return (
     <div className="acccount-orders">
+      <p></p>
+      <p>Date</p>
+      <p>Order No.</p>
+      <p>Items</p>
+      <p>Status</p>
+      <p>Total</p>
       {orders?.nodes.length ? (
         <Pagination connection={orders}>
           {({nodes, isLoading, PreviousLink, NextLink}) => {
@@ -100,20 +109,102 @@ function EmptyOrders() {
  * @param {{order: OrderItemFragment}}
  */
 function OrderItem({order}) {
+  const [expanded, setExpanded] = useState(false);
+  function toggleExpanded() {
+    setExpanded(!expanded);
+  }
   const fulfillmentStatus = flattenConnection(order.fulfillments)[0]?.status;
   return (
     <>
-      <fieldset>
-        <Link to={`/account/orders/${order.id}`}>
-          <strong>#{order.number}</strong>
-        </Link>
-        <p>{new Date(order.processedAt).toDateString()}</p>
-        <p>{order.financialStatus}</p>
-        {fulfillmentStatus && <p>{fulfillmentStatus}</p>}
-        <Money data={order.totalPrice} />
-        <Link to={`/account/orders/${btoa(order.id)}`}>View Order →</Link>
-      </fieldset>
-      <br />
+      {/* <fieldset> */}
+      <button onClick={toggleExpanded}>x</button>
+      <p>{new Date(order.processedAt).toDateString()}</p>
+      <Link to={`/account/orders/${order.id}`}>
+        <strong>#{order.number}</strong>
+      </Link>
+      <p>
+        {order.lineItems?.nodes
+          ?.map((n) => n.quantity)
+          .reduce((partialSum, a) => partialSum + a, 0)}
+      </p>
+      <p>{order.financialStatus}</p>
+      {fulfillmentStatus && <p>{fulfillmentStatus}</p>}
+      <Money data={order.totalPrice} />
+      {expanded
+        ? order.lineItems?.nodes?.map((n) => (
+            <React.Fragment key={n.id}>
+              <br />
+              <Image data={n.image} />
+              <div>
+                <p>Description</p>
+                {n.title}
+                {n.variantOptions?.find((o) => isNaN(o.value))?.value &&
+                n.variantOptions?.find((o) => isNaN(o.value))?.value !==
+                  'Default Title' ? (
+                  <p>
+                    Color:{' '}
+                    {n.variantOptions?.find((o) => isNaN(o.value))?.value}
+                  </p>
+                ) : null}
+                {n.variantOptions?.find((o) => !isNaN(o.value))?.value ? (
+                  <p>
+                    Size:{' '}
+                    {n.variantOptions?.find((o) => !isNaN(o.value))?.value}
+                  </p>
+                ) : null}
+              </div>
+              <div>
+                <p>Qty</p>
+                <p>{n.quantity}</p>
+              </div>
+              <br />
+              <div>
+                <p>Item Total</p>
+                <Money data={n.totalPrice} />
+              </div>
+            </React.Fragment>
+          ))
+        : null}
+      {expanded ? (
+        <>
+          <br />
+          <a style={{gridColumn: 'span 2'}}>Track Order</a>
+          <br />
+          <div>
+            <div>
+              <p>Unit Total:</p>
+              <p>Tax:</p>
+              <p>Shipping:</p>
+            </div>
+            <p>Order total:</p>
+          </div>
+          <div>
+            <div>
+              <Money
+                data={{
+                  amount: order.lineItems?.nodes
+                    ?.map((n) => n.totalPrice.amount)
+                    .reduce((partialSum, a) => partialSum + a, 0),
+                  currencyCode: order.totalPrice.currencyCode,
+                }}
+              />
+              <Money data={order.totalTax} />
+              <Money
+                data={{
+                  amount: (
+                    parseFloat(order.totalPrice.amount) -
+                    parseFloat(order.totalTax.amount)
+                  ).toString(),
+                  currencyCode: order.totalPrice.currencyCode,
+                }}
+              />
+            </div>
+            <Money data={order.totalPrice} />
+          </div>
+        </>
+      ) : null}
+      {/* <Link to={`/account/orders/${btoa(order.id)}`}>View Order →</Link> */}
+      {/* </fieldset> */}
     </>
   );
 }
