@@ -65,13 +65,13 @@ export default function Orders() {
  */
 function OrdersTable({orders}) {
   return (
-    <div className="acccount-orders">
+    <div className="account-orders">
       <p></p>
-      <p>Date</p>
-      <p>Order No.</p>
-      <p>Items</p>
-      <p>Status</p>
-      <p>Total</p>
+      <p style={{fontFamily: 'bold-font'}}>Date</p>
+      <p style={{fontFamily: 'bold-font'}}>Order No.</p>
+      <p style={{fontFamily: 'bold-font'}}>Items</p>
+      <p style={{fontFamily: 'bold-font'}}>Status</p>
+      <p style={{fontFamily: 'bold-font'}}>Total</p>
       {orders?.nodes.length ? (
         <Pagination connection={orders}>
           {({nodes, isLoading, PreviousLink, NextLink}) => {
@@ -117,26 +117,52 @@ function OrderItem({order}) {
   return (
     <>
       {/* <fieldset> */}
-      <button onClick={toggleExpanded}>x</button>
-      <p>{new Date(order.processedAt).toDateString()}</p>
-      <Link to={`/account/orders/${order.id}`}>
-        <strong>#{order.number}</strong>
+      <button
+        style={{
+          background: '#f4f4f4',
+          display: 'flex',
+          alignItems: 'center',
+          border: 'none',
+        }}
+        onClick={toggleExpanded}
+      >
+        x
+      </button>
+      <p style={{background: '#f4f4f4', display: 'flex', alignItems: 'center'}}>
+        {new Date(order.processedAt).toDateString()}
+      </p>
+      <Link
+        style={{background: '#f4f4f4', display: 'flex', alignItems: 'center'}}
+        to={`/account/orders/${order.id}`}
+      >
+        <p>#{order.number}</p>
       </Link>
-      <p>
+      <p style={{background: '#f4f4f4', display: 'flex', alignItems: 'center'}}>
         {order.lineItems?.nodes
           ?.map((n) => n.quantity)
           .reduce((partialSum, a) => partialSum + a, 0)}
       </p>
-      <p>{order.financialStatus}</p>
+      <p style={{background: '#f4f4f4', display: 'flex', alignItems: 'center'}}>
+        {order.financialStatus}
+      </p>
       {fulfillmentStatus && <p>{fulfillmentStatus}</p>}
-      <Money data={order.totalPrice} />
+      <Money
+        style={{
+          background: '#f4f4f4',
+          display: 'flex',
+          alignItems: 'center',
+          fontSize: '.75rem',
+          fontFamily: 'regular-font',
+        }}
+        data={order.totalPrice}
+      />
       {expanded
         ? order.lineItems?.nodes?.map((n) => (
             <React.Fragment key={n.id}>
               <br />
               <Image data={n.image} />
               <div>
-                <p>Description</p>
+                <p style={{fontFamily: 'bold-font'}}>Description</p>
                 {n.title}
                 {n.variantOptions?.find((o) => isNaN(o.value))?.value &&
                 n.variantOptions?.find((o) => isNaN(o.value))?.value !==
@@ -154,12 +180,12 @@ function OrderItem({order}) {
                 ) : null}
               </div>
               <div>
-                <p>Qty</p>
+                <p style={{fontFamily: 'bold-font'}}>Qty</p>
                 <p>{n.quantity}</p>
               </div>
               <br />
               <div>
-                <p>Item Total</p>
+                <p style={{fontFamily: 'bold-font'}}>Item Total</p>
                 <Money data={n.totalPrice} />
               </div>
             </React.Fragment>
@@ -176,7 +202,7 @@ function OrderItem({order}) {
               <p>Tax:</p>
               <p>Shipping:</p>
             </div>
-            <p>Order total:</p>
+            <p style={{fontFamily: 'bold-font'}}>Order total:</p>
           </div>
           <div>
             <div>
@@ -199,7 +225,7 @@ function OrderItem({order}) {
                 }}
               />
             </div>
-            <Money data={order.totalPrice} />
+            <Money style={{fontFamily: 'bold-font'}} data={order.totalPrice} />
           </div>
         </>
       ) : null}

@@ -1543,11 +1543,27 @@ aside li {
   text-align: center;
 }
 
-.acccount-orders {
+.account-orders {
   display: grid;
   width: 60vw;
   margin: auto;
   grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.account-orders > img {
+  background-color: #f4f4f4;
+}
+
+.account-orders > p,
+.account-orders > a,
+.account-orders > a > p,
+.account-orders > Money,
+.account-orders > div,
+.account-orders > div > p,
+.account-orders > div > div > p,
+.account-orders > div > a {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 /*
 * --------------------------------------------------
