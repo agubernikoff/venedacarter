@@ -105,13 +105,11 @@ export default function AccountProfile() {
 
   return (
     <div className="account-profile">
-      <h2>My profile</h2>
-      <br />
       <Form method="PUT">
-        <legend>Personal information</legend>
-        <fieldset>
-          <label htmlFor="firstName">First name</label>
+        <fieldset className="profile-fieldset">
+          {/* <label htmlFor="firstName">First name</label> */}
           <input
+            className="profile-input"
             id="firstName"
             name="firstName"
             type="text"
@@ -121,8 +119,9 @@ export default function AccountProfile() {
             defaultValue={customer.firstName ?? ''}
             minLength={2}
           />
-          <label htmlFor="lastName">Last name</label>
+          {/* <label htmlFor="lastName">Last name</label> */}
           <input
+            className="profile-input"
             id="lastName"
             name="lastName"
             type="text"
@@ -142,8 +141,12 @@ export default function AccountProfile() {
         ) : (
           <br />
         )}
-        <button type="submit" disabled={state !== 'idle'}>
-          {state !== 'idle' ? 'Updating' : 'Update'}
+        <button
+          className="profile-button"
+          type="submit"
+          disabled={state !== 'idle'}
+        >
+          {state !== 'idle' ? 'SAVE CHANGES' : 'SAVE CHANGES'}
         </button>
       </Form>
     </div>

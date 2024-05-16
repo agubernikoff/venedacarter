@@ -1536,7 +1536,8 @@ aside li {
 .existing-address {
   margin-top: 1rem;
 }
-.existing-address > form {
+.existing-address > form,
+.account-profile > form {
   width: 40%;
   margin: auto;
   font-size: 0.75rem;
@@ -1556,6 +1557,20 @@ fieldset > input {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
+.profile-fieldset {
+  padding: 0;
+  margin: 0;
+  margin-top: 5rem;
+}
+.profile-input {
+  border-radius: 0;
+  margin-bottom: 1.25rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid black;
+}
 .address-form-buttons {
   display: flex;
   justify-content: space-between;
@@ -1567,6 +1582,16 @@ fieldset > input {
   border: 1px solid black;
   font-size: 0.75rem;
   font-family: 'regular-font';
+}
+.profile-button {
+  width: 100%;
+  border-radius: 0 !important;
+  padding: 1rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+  background-color: black;
+  color: white;
+  margin-top: 1rem;
 }
 .add-new-address {
   font-size: 0.75rem;
