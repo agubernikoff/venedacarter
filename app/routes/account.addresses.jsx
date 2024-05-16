@@ -594,14 +594,17 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
               stateForMethod: (method) =>
                 formMethod === method ? state : 'idle',
             })} */}
+          <button style={{background: 'white'}} onClick={() => onCancelEdit()}>
+            CANCEL
+          </button>
           <button
+            style={{backgroundColor: 'black', color: 'white'}}
             disabled={stateForMethod('PUT') !== 'idle'}
             formMethod="PUT"
             type="submit"
           >
-            {stateForMethod('PUT') !== 'idle' ? 'Saving' : 'Save Changes'}
+            {stateForMethod('PUT') !== 'idle' ? 'SAVING' : 'SAVE CHANGES'}
           </button>
-          <button onClick={() => onCancelEdit()}>Cancel</button>
         </div>
       </fieldset>
     </Form>

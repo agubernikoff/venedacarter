@@ -1552,6 +1552,18 @@ fieldset > input {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
+.address-form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.address-form-buttons > button {
+  width: 49%;
+  border-radius: 0 !important;
+  padding: 1rem;
+  border: 1px solid black;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+}
 .add-new-address {
   font-size: 0.75rem;
   font-family: 'regular-font';
