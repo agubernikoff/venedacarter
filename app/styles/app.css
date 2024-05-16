@@ -50,6 +50,7 @@ aside {
 aside header {
   align-items: center;
   border-bottom: 1px solid #eaeaea;
+  border-top: 1px solid #eaeaea;
   display: flex;
   height: var(--header-height);
   justify-content: space-between;
@@ -88,7 +89,7 @@ aside header p {
 aside header input {
   margin: 0;
   border: none;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
   border-radius: 0;
   font-size: 0.75rem;
   font-family: 'regular-font';
@@ -545,10 +546,12 @@ aside li {
 }
 
 #search-aside aside {
-  height: 30%;
+  height: 95%;
   margin-top: var(--header-height);
   @media (min-width: 44em) {
-    height: 25%;
+    height: 95%;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 
@@ -719,11 +722,11 @@ aside li {
 }
 
 .predictive-search-form {
-  background: var(--color-light);
+  background: transparent;
   position: sticky;
   top: 0;
   width: 90%;
-  margin-top: 2%;
+  margin-top: 1%;
 }
 
 .predictive-search-result {
