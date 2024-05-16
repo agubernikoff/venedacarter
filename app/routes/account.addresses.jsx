@@ -10,6 +10,7 @@ import {
   DELETE_ADDRESS_MUTATION,
   CREATE_ADDRESS_MUTATION,
 } from '~/graphql/customer-account/CustomerAddressMutations';
+import {useState} from 'react';
 
 /**
  * @type {MetaFunction}
@@ -302,10 +303,18 @@ export async function action({request, context}) {
 export default function Addresses() {
   const {customer} = useOutletContext();
   const {defaultAddress, addresses} = customer;
+  const [editAddressId, setEditAddressId] = useState(null);
+
+  const handleEditClick = (addressId) => {
+    setEditAddressId(addressId);
+  };
+
+  const handleCancelEdit = () => {
+    setEditAddressId(null);
+  };
 
   return (
     <div className="account-addresses">
-      <p className="account-address-bold">Saved Addresses</p>
       <br />
       {!addresses.nodes.length ? (
         <p>You have no addresses saved.</p>
@@ -315,10 +324,14 @@ export default function Addresses() {
             <ExistingAddresses
               addresses={addresses}
               defaultAddress={defaultAddress}
+              editAddressId={editAddressId}
+              onEditClick={handleEditClick}
+              onCancelEdit={handleCancelEdit}
             />
-            <button className="add-new-address">ADD NEW</button>
-            {/* <NewAddressForm /> */}
           </div>
+          {editAddressId === null && (
+            <button className="add-new-address">ADD NEW</button>
+          )}
           {/* <br />
           <hr />
           <br /> */}
@@ -367,42 +380,57 @@ function NewAddressForm() {
 /**
  * @param {Pick<CustomerFragment, 'addresses' | 'defaultAddress'>}
  */
-function ExistingAddresses({addresses, defaultAddress}) {
+function ExistingAddresses({
+  addresses,
+  defaultAddress,
+  editAddressId,
+  onEditClick,
+  onCancelEdit,
+}) {
   return (
     <div>
+      {editAddressId === null && (
+        <p className="account-address-bold">Saved Addresses</p>
+      )}
       {addresses.nodes.map((address) => (
-        //   <AddressForm
-        //     key={address.id}
-        //     addressId={address.id}
-        //     address={address}
-        //     defaultAddress={defaultAddress}
-        //   >
-        //     {({stateForMethod}) => (
-        //       <div>
-        //         <button
-        //           disabled={stateForMethod('PUT') !== 'idle'}
-        //           formMethod="PUT"
-        //           type="submit"
-        //         >
-        //           {stateForMethod('PUT') !== 'idle' ? 'Saving' : 'Save'}
-        //         </button>
-        //         <button
-        //           disabled={stateForMethod('DELETE') !== 'idle'}
-        //           formMethod="DELETE"
-        //           type="submit"
-        //         >
-        //           {stateForMethod('DELETE') !== 'idle' ? 'Deleting' : 'Delete'}
-        //         </button>
-        //       </div>
-        //     )}
-        //   </AddressForm>
-        // ))}
-        <div key={address.id}>
-          <AddressDisplay address={address} />
-          <div className="address-action-container">
-            <button>EDIT</button>
-            <button>DELETE</button>
-          </div>
+        <div key={address.id} className="existing-address">
+          {editAddressId === address.id ? (
+            <AddressForm
+              addressId={address.id}
+              address={address}
+              defaultAddress={defaultAddress}
+              onCancel={onCancelEdit}
+            >
+              {({stateForMethod}) => (
+                <div>
+                  <button
+                    disabled={stateForMethod('PUT') !== 'idle'}
+                    formMethod="PUT"
+                    type="submit"
+                  >
+                    {stateForMethod('PUT') !== 'idle' ? 'Saving' : 'Save'}
+                  </button>
+                  <button
+                    disabled={stateForMethod('DELETE') !== 'idle'}
+                    formMethod="DELETE"
+                    type="submit"
+                  >
+                    {stateForMethod('DELETE') !== 'idle'
+                      ? 'Deleting'
+                      : 'Delete'}
+                  </button>
+                </div>
+              )}
+            </AddressForm>
+          ) : (
+            <div style={{display: editAddressId !== null ? 'none' : 'block'}}>
+              <AddressDisplay address={address} />
+              <div className="address-action-container">
+                <button onClick={() => onEditClick(address.id)}>EDIT</button>
+                <button>DELETE</button>
+              </div>
+            </div>
+          )}
         </div>
       ))}
     </div>
@@ -435,11 +463,15 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
   const action = useActionData();
   const error = action?.error?.[addressId];
   const isDefaultAddress = defaultAddress?.id === addressId;
+
+  const stateForMethod = (method) => (formMethod === method ? state : 'idle');
+
   return (
     <Form id={addressId}>
+      <p className="account-address-bold">Saved Addresses</p>
       <fieldset>
         <input type="hidden" name="addressId" defaultValue={addressId} />
-        <label htmlFor="firstName">First name*</label>
+        <label htmlFor="firstName">First Name</label>
         <input
           aria-label="First name"
           autoComplete="given-name"
@@ -450,7 +482,7 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
           required
           type="text"
         />
-        <label htmlFor="lastName">Last name*</label>
+        <label htmlFor="lastName">Last Name</label>
         <input
           aria-label="Last name"
           autoComplete="family-name"
@@ -461,17 +493,7 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
           required
           type="text"
         />
-        <label htmlFor="company">Company</label>
-        <input
-          aria-label="Company"
-          autoComplete="organization"
-          defaultValue={address?.company ?? ''}
-          id="company"
-          name="company"
-          placeholder="Company"
-          type="text"
-        />
-        <label htmlFor="address1">Address line*</label>
+        <label htmlFor="address1">Address Line</label>
         <input
           aria-label="Address line 1"
           autoComplete="address-line1"
@@ -482,7 +504,7 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
           required
           type="text"
         />
-        <label htmlFor="address2">Address line 2</label>
+        <label htmlFor="address2">Address Line 2</label>
         <input
           aria-label="Address line 2"
           autoComplete="address-line2"
@@ -492,40 +514,7 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
           placeholder="Address line 2"
           type="text"
         />
-        <label htmlFor="city">City*</label>
-        <input
-          aria-label="City"
-          autoComplete="address-level2"
-          defaultValue={address?.city ?? ''}
-          id="city"
-          name="city"
-          placeholder="City"
-          required
-          type="text"
-        />
-        <label htmlFor="zoneCode">State / Province*</label>
-        <input
-          aria-label="State/Province"
-          autoComplete="address-level1"
-          defaultValue={address?.zoneCode ?? ''}
-          id="zoneCode"
-          name="zoneCode"
-          placeholder="State / Province"
-          required
-          type="text"
-        />
-        <label htmlFor="zip">Zip / Postal Code*</label>
-        <input
-          aria-label="Zip"
-          autoComplete="postal-code"
-          defaultValue={address?.zip ?? ''}
-          id="zip"
-          name="zip"
-          placeholder="Zip / Postal Code"
-          required
-          type="text"
-        />
-        <label htmlFor="territoryCode">Country Code*</label>
+        <label htmlFor="territoryCode">Country</label>
         <input
           aria-label="territoryCode"
           autoComplete="country"
@@ -536,6 +525,28 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
           required
           type="text"
           maxLength={2}
+        />
+        <label htmlFor="zoneCode">State / Province</label>
+        <input
+          aria-label="State/Province"
+          autoComplete="address-level1"
+          defaultValue={address?.zoneCode ?? ''}
+          id="zoneCode"
+          name="zoneCode"
+          placeholder="State / Province"
+          required
+          type="text"
+        />
+        <label htmlFor="zip">Zip / Postal Code</label>
+        <input
+          aria-label="Zip"
+          autoComplete="postal-code"
+          defaultValue={address?.zip ?? ''}
+          id="zip"
+          name="zip"
+          placeholder="Zip / Postal Code"
+          required
+          type="text"
         />
         <label htmlFor="phoneNumber">Phone</label>
         <input
@@ -548,6 +559,18 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
           pattern="^\+?[1-9]\d{3,14}$"
           type="tel"
         />
+        {/* <label htmlFor="city">City</label>
+        <input
+          aria-label="City"
+          autoComplete="address-level2"
+          defaultValue={address?.city ?? ''}
+          id="city"
+          name="city"
+          placeholder="City"
+          required
+          type="text"
+        /> */}
+
         <div>
           <input
             defaultChecked={isDefaultAddress}
@@ -557,18 +580,29 @@ export function AddressForm({addressId, address, defaultAddress, children}) {
           />
           <label htmlFor="defaultAddress">Set as default address</label>
         </div>
-        {error ? (
+        {error && (
           <p>
             <mark>
               <small>{error}</small>
             </mark>
           </p>
-        ) : (
-          <br />
         )}
-        {children({
-          stateForMethod: (method) => (formMethod === method ? state : 'idle'),
-        })}
+        <br />
+        <div className="address-form-buttons">
+          {/* {children &&
+            children({
+              stateForMethod: (method) =>
+                formMethod === method ? state : 'idle',
+            })} */}
+          <button
+            disabled={stateForMethod('PUT') !== 'idle'}
+            formMethod="PUT"
+            type="submit"
+          >
+            {stateForMethod('PUT') !== 'idle' ? 'Saving' : 'Save Changes'}
+          </button>
+          <button onClick={() => onCancelEdit()}>Cancel</button>
+        </div>
       </fieldset>
     </Form>
   );
