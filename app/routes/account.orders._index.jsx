@@ -10,6 +10,8 @@ import React, {useState} from 'react';
 import {json} from '@shopify/remix-oxygen';
 import {CUSTOMER_ORDERS_QUERY} from '~/graphql/customer-account/CustomerOrdersQuery';
 import {motion, AnimatePresence} from 'framer-motion';
+import closearrow from '../assets/closearrow.png';
+import openarrow from '../assets/openarrow.png';
 
 /**
  * @type {MetaFunction}
@@ -117,6 +119,7 @@ function OrderItem({order}) {
     setExpanded(!expanded);
   }
   const fulfillmentStatus = flattenConnection(order.fulfillments)[0]?.status;
+
   return (
     <>
       {/* <fieldset> */}
@@ -125,17 +128,15 @@ function OrderItem({order}) {
         layout="position"
         key={order.id}
       >
-        <button
-          style={{
-            border: 'none',
-            background: 'transparent',
-            height: 'fit-content',
-            width: 'fit-content',
-          }}
+        <img
+          src={expanded ? openarrow : closearrow}
           onClick={toggleExpanded}
-        >
-          x
-        </button>
+          style={{
+            width: '30%',
+            margin: 'auto',
+            transform: expanded ? null : 'rotate(-90deg)',
+          }}
+        />
         <div className="account-orders-grid-box-container">
           <p>{new Date(order.processedAt).toDateString()}</p>
         </div>
@@ -217,7 +218,7 @@ function OrderItem({order}) {
               <a className="track-order">TRACK ORDER</a>
               <br />
               <div>
-                <div>
+                <div style={{marginBottom: '1rem'}}>
                   <p>Unit Total:</p>
                   <p>Tax:</p>
                   <p>Shipping:</p>
@@ -225,7 +226,7 @@ function OrderItem({order}) {
                 <p style={{fontFamily: 'bold-font'}}>Order total:</p>
               </div>
               <div>
-                <div>
+                <div style={{marginBottom: '1rem'}}>
                   <Money
                     data={{
                       amount: order.lineItems?.nodes

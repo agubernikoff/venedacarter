@@ -1645,6 +1645,7 @@ fieldset > input {
 }
 .account-orders-expanded-row img {
   background: #f4f4f4;
+  width: 90% !important;
 }
 .account-orders-expanded-totals-row {
   display: grid;
@@ -1652,6 +1653,8 @@ fieldset > input {
   grid-column: span 6;
   padding-block: 0.75rem;
   border-top: 1px solid #eaeaea;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 .track-order {
   grid-column: span 2;
