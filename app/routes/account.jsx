@@ -63,14 +63,14 @@ function AccountMenu() {
   return (
     <nav role="navigation">
       <div className="account-nav">
-        <NavLink to="/account/orders" style={isActiveStyle}>
-          Orders
-        </NavLink>
         <NavLink to="/account/profile" style={isActiveStyle}>
-          Profile
+          Account Details
         </NavLink>
         <NavLink to="/account/addresses" style={isActiveStyle}>
           Addresses
+        </NavLink>
+        <NavLink to="/account/orders" style={isActiveStyle}>
+          Orders
         </NavLink>
         <Logout />
       </div>
@@ -82,7 +82,7 @@ function Logout() {
   return (
     <Form className="account-logout" method="POST" action="/account/logout">
       <button className="account-logout-button" type="submit">
-        Sign out
+        Log out
       </button>
     </Form>
   );
