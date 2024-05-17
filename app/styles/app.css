@@ -1106,7 +1106,7 @@ aside li {
 */
 .collection-description {
   margin-bottom: 1rem;
-  max-width: 95%;
+  max-width: 92.5%;
   @media (min-width: 45em) {
     max-width: 600px;
   }
@@ -1538,7 +1538,7 @@ aside li {
 }
 .existing-address > form,
 .account-profile > form {
-  width: 95%;
+  width: 92.5%;
   margin: auto;
   font-size: 0.75rem;
   font-family: 'regular-font';
@@ -1616,7 +1616,7 @@ fieldset > input {
 
 .account-orders {
   display: grid;
-  width: 95%;
+  width: 92.5%;
   margin: auto;
   grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr;
   margin-bottom: 10rem;
