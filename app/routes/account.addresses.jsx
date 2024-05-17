@@ -11,6 +11,8 @@ import {
   CREATE_ADDRESS_MUTATION,
 } from '~/graphql/customer-account/CustomerAddressMutations';
 import {useState} from 'react';
+import {useEffect} from 'react';
+import {useRef} from 'react';
 
 /**
  * @type {MetaFunction}
@@ -391,7 +393,7 @@ export function ExistingAddresses({
 }) {
   return (
     <div>
-      {editAddressId === null && (
+      {!editAddressId && (
         <p className="account-address-bold">Saved Addresses</p>
       )}
       {addresses.nodes.map((address) => (
@@ -466,12 +468,12 @@ export function AddressForm({
   onCancel,
   onSave,
 }) {
+  const prev = useRef();
   const {formMethod} = useNavigation();
   const {state} = useNavigation();
   const actionData = useActionData();
   const error = actionData?.error?.[addressId];
   const isDefaultAddress = defaultAddress?.id === addressId;
-
   const stateForMethod = (method) => (formMethod === method ? state : 'idle');
 
   const handleCancelEdit = () => {
@@ -481,6 +483,17 @@ export function AddressForm({
   const handleSave = () => {
     onSave(); // Call the onSave function passed from parent
   };
+
+  useEffect(() => {
+    if (
+      stateForMethod('PUT') === 'idle' &&
+      prev.current === 'loading' &&
+      !error
+    ) {
+      handleCancelEdit();
+    }
+    prev.current = stateForMethod('PUT');
+  }, [stateForMethod('PUT')]);
 
   return (
     <Form id={addressId}>
@@ -609,7 +622,7 @@ export function AddressForm({
             CANCEL
           </button>
           <button
-            onClick={handleSave}
+            // onClick={}
             style={{backgroundColor: 'black', color: 'white'}}
             disabled={stateForMethod('PUT') !== 'idle'}
             formMethod="PUT"
