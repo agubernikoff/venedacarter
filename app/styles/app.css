@@ -531,6 +531,7 @@ aside li {
   padding: 0;
   width: fit-content;
   font-family: 'regular-font' !important;
+  font-weight: normal;
   font-size: 0.75rem;
 }
 /*
@@ -656,6 +657,7 @@ aside li {
 .cart-remove-button {
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
+  font-weight: normal;
   padding: 0;
   border: none;
   background: transparent;
@@ -699,6 +701,7 @@ aside li {
   color: white;
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
+  font-weight: normal;
 }
 
 .empty-bag > p,
@@ -1412,6 +1415,7 @@ aside li {
   color: white;
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
+  font-weight: normal;
 }
 
 .add-to-cart-button-mobile {
@@ -1422,6 +1426,7 @@ aside li {
   color: white;
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
+  font-weight: normal;
   margin-bottom: 5rem;
 }
 
@@ -1478,6 +1483,7 @@ aside li {
   align-items: center;
   font-size: 0.75rem;
   font-family: 'regular-font';
+  font-weight: normal;
 }
 
 .account-logout-button {
@@ -1526,6 +1532,7 @@ aside li {
 .address-action-container > button {
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
+  font-weight: normal;
   padding: 0;
   border: none;
   background: transparent;
@@ -1586,6 +1593,8 @@ fieldset > input {
   border: 1px solid black;
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
+  font-weight: normal;
+  color: black;
 }
 .profile-button {
   width: 100%;
@@ -1593,6 +1602,7 @@ fieldset > input {
   padding: 1rem;
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
+  font-weight: normal;
   background-color: black;
   color: white;
   margin-top: 1rem;
@@ -1987,6 +1997,7 @@ button.collection-title {
   color: white;
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
+  font-weight: normal;
   border: 1px solid black;
   cursor: pointer;
 }
@@ -1998,6 +2009,7 @@ button.collection-title {
   color: black;
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
+  font-weight: normal;
   border: 1px solid black;
   cursor: pointer;
 }
