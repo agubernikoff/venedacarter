@@ -101,10 +101,11 @@ export function normalizePredictiveSearchResults(predictiveSearch, locale) {
           __typename: product.__typename,
           handle: product.handle,
           id: product.id,
-          image: product.variants?.nodes?.[0]?.image,
+          images: product.images,
           title: product.title,
           url: `${localePrefix}/products/${product.handle}${trackingParams}`,
           price: product.variants.nodes[0].price,
+          options: product.options,
         };
       }),
     });
@@ -120,6 +121,19 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
     title
     handle
     trackingParameters
+    options{
+      name
+      values
+    }
+    images(first: 4) {
+      nodes {
+        id
+        url
+        altText
+        width
+        height
+      }
+    }
     variants(first: 1) {
       nodes {
         id

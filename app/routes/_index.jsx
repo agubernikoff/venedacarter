@@ -229,7 +229,13 @@ function MainFeaturedProduct({product, isMobile}) {
   );
 }
 
-export function FeaturedProduct({product, isMobile, loading, emptyCellBelow}) {
+export function FeaturedProduct({
+  product,
+  isMobile,
+  loading,
+  emptyCellBelow,
+  goToSearchResult,
+}) {
   const [index, setIndex] = useState(0);
   const colorOptionsObj = product.options.find((o) => o.name === 'Material');
 
@@ -240,6 +246,9 @@ export function FeaturedProduct({product, isMobile, loading, emptyCellBelow}) {
       onMouseEnter={() => setIndex(1)}
       onMouseLeave={() => setIndex(0)}
       style={emptyCellBelow ? {borderBottom: '1px solid #eaeaea'} : {}}
+      onClick={() => {
+        if (goToSearchResult) goToSearchResult();
+      }}
     >
       <div style={{background: index === 0 ? '#f4f4f4' : '#f0f0f4'}}>
         {/* <AnimatePresence mode="wait" initial={false}> */}
@@ -285,7 +294,9 @@ export function FeaturedProduct({product, isMobile, loading, emptyCellBelow}) {
         >
           <p>{product.title}</p>
           <small>
-            <Money data={product.priceRange.minVariantPrice} />
+            <Money
+              data={product.priceRange?.minVariantPrice || product.price}
+            />
           </small>
         </div>
         <div className="product-color-variants">

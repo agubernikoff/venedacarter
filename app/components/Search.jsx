@@ -1,7 +1,9 @@
 import {Link, Form, useParams, useFetcher} from '@remix-run/react';
 import {Image, Money, Pagination} from '@shopify/hydrogen';
 import React, {useRef, useEffect} from 'react';
+import {useState} from 'react';
 import {applyTrackingParams} from '~/lib/search';
+import {FeaturedProduct} from '../routes/_index';
 
 export const NO_PREDICTIVE_SEARCH_RESULTS = [
   {type: 'queries', items: []},
@@ -334,22 +336,36 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
     searchTerm.current
   }&type=${pluralToSingularSearchType(type)}`;
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    window
+      .matchMedia('(max-width:44em)')
+      .addEventListener('change', (e) => setIsMobile(e.matches));
+    if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
+  }, []);
+
   return (
-    <div className="predictive-search-result" key={type}>
+    <div className={isMobile ? 'home-mobile' : 'home'} key={type}>
       {/* <Link prefetch="intent" to={categoryUrl} onClick={goToSearchResult}> */}
-      <p style={{textDecoration: 'underline', marginBottom: '1rem'}}>
-        Suggested Search
+      <p
+        style={{
+          marginBottom: '1rem',
+          gridColumn: isMobile ? 'span 2' : 'span 3',
+          fontSize: '.75rem',
+          fontFamily: 'regular-font',
+          color: '#bebebe',
+        }}
+      >
+        {`Showing ${items.length} results for "${searchTerm.current}"`}
       </p>
       {/* </Link> */}
-      <ul>
-        {items.map((item) => (
-          <SearchResultItem
-            goToSearchResult={goToSearchResult}
-            item={item}
-            key={item.id}
-          />
-        ))}
-      </ul>
+      {items.map((item) => (
+        <FeaturedProduct
+          key={item.id}
+          product={item}
+          goToSearchResult={goToSearchResult}
+        />
+      ))}
     </div>
   );
 }

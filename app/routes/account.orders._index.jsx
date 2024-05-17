@@ -55,7 +55,6 @@ export default function Orders() {
   /** @type {LoaderReturnData} */
   const {customer} = useLoaderData();
   const {orders} = customer;
-  console.log(customer);
   return (
     <div className="orders">
       {orders.nodes.length ? <OrdersTable orders={orders} /> : <EmptyOrders />}
