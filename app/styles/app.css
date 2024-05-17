@@ -1482,7 +1482,8 @@ aside li {
 
 .account-logout-button {
   font-size: 0.75rem;
-  font-family: cursive;
+  font-family: 'regular-font';
+  font-weight: normal;
   padding: 0;
   border: none;
   background: transparent;
