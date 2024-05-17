@@ -1501,10 +1501,12 @@ aside li {
   text-decoration: underline;
 }
 
-.empty-orders > p {
+.empty-orders > p,
+.empty-addresses {
   font-size: 0.75rem;
   font-family: 'regular-font';
   text-align: center;
+  margin-top: 7.5rem;
 }
 .account-addresses {
   text-align: center;

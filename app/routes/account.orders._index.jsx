@@ -107,7 +107,7 @@ function OrdersTable({orders}) {
 function EmptyOrders() {
   return (
     <div className="empty-orders">
-      <p>You haven&apos;t placed any orders yet.</p>
+      <p>You have no orders.</p>
     </div>
   );
 }
