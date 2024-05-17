@@ -530,7 +530,7 @@ aside li {
   border: none;
   padding: 0;
   width: fit-content;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
   font-size: 0.75rem;
 }
 /*
@@ -655,7 +655,7 @@ aside li {
 
 .cart-remove-button {
   font-size: 0.75rem;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
   padding: 0;
   border: none;
   background: transparent;
@@ -698,7 +698,7 @@ aside li {
 .cart-checkout-button-text {
   color: white;
   font-size: 0.75rem;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
 }
 
 .empty-bag > p,
@@ -1411,7 +1411,7 @@ aside li {
   background-color: black;
   color: white;
   font-size: 0.75rem;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
 }
 
 .add-to-cart-button-mobile {
@@ -1421,7 +1421,7 @@ aside li {
   background-color: black;
   color: white;
   font-size: 0.75rem;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
   margin-bottom: 5rem;
 }
 
@@ -1482,7 +1482,7 @@ aside li {
 
 .account-logout-button {
   font-size: 0.75rem;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
   padding: 0;
   border: none;
   background: transparent;
@@ -1524,7 +1524,7 @@ aside li {
 }
 .address-action-container > button {
   font-size: 0.75rem;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
   padding: 0;
   border: none;
   background: transparent;
@@ -1584,14 +1584,14 @@ fieldset > input {
   padding: 1.5rem;
   border: 1px solid black;
   font-size: 0.75rem;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
 }
 .profile-button {
   width: 100%;
   border-radius: 0 !important;
   padding: 1rem;
   font-size: 0.75rem;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
   background-color: black;
   color: white;
   margin-top: 1rem;
@@ -1985,7 +1985,7 @@ button.collection-title {
   background-color: black;
   color: white;
   font-size: 0.75rem;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
   border: 1px solid black;
   cursor: pointer;
 }
@@ -1996,7 +1996,7 @@ button.collection-title {
   background-color: transparent;
   color: black;
   font-size: 0.75rem;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
   border: 1px solid black;
   cursor: pointer;
 }
