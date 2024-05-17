@@ -84,8 +84,11 @@ fieldset {
   display: flex;
   flex-direction: column;
   margin-bottom: 0.5rem;
-  padding: 1rem;
+  padding: 0rem;
   border: none;
+  @media (min-width: 44em) {
+    padding: 1rem;
+  }
 }
 
 form {

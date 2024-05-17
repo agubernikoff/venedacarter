@@ -1538,10 +1538,13 @@ aside li {
 }
 .existing-address > form,
 .account-profile > form {
-  width: 40%;
+  width: 95%;
   margin: auto;
   font-size: 0.75rem;
   font-family: 'regular-font';
+  @media (min-width: 44em) {
+    width: 40%;
+  }
 }
 fieldset > label {
   text-align: left;
@@ -1613,10 +1616,13 @@ fieldset > input {
 
 .account-orders {
   display: grid;
-  width: 60vw;
+  width: 95%;
   margin: auto;
   grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr;
   margin-bottom: 10rem;
+  @media (min-width: 44em) {
+    width: 60vw;
+  }
 }
 
 .account-orders > img {
@@ -1636,9 +1642,12 @@ fieldset > input {
 .account-orders-expanded-totals-row p,
 .account-orders-expanded-totals-row a,
 .account-orders-expanded-totals-row div {
-  font-size: 0.75rem;
+  font-size: 0.5rem;
   font-family: 'regular-font';
   line-height: normal;
+  @media (min-width: 44em) {
+    font-size: 0.75rem;
+  }
 }
 
 .account-orders-subgrid {
