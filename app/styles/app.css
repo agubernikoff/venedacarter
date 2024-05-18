@@ -111,9 +111,12 @@ aside header input::placeholder {
   font-size: 0.75rem;
   font-family: 'regular-font';
 }
-
 aside main {
   margin: 1rem;
+}
+
+#search-aside main {
+  margin-inline: 0;
 }
 
 aside p {

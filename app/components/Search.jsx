@@ -349,6 +349,7 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
       {/* <Link prefetch="intent" to={categoryUrl} onClick={goToSearchResult}> */}
       <p
         style={{
+          marginLeft: '1rem',
           marginBottom: '1rem',
           gridColumn: isMobile ? 'span 2' : 'span 3',
           fontSize: '.75rem',
