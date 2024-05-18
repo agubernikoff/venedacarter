@@ -1,4 +1,4 @@
-import {Await, NavLink} from '@remix-run/react';
+import {Await, NavLink, useFetcher, useParams} from '@remix-run/react';
 import {Suspense, useState, useEffect} from 'react';
 import {useRootLoaderData} from '~/root';
 import {motion, AnimatePresence} from 'framer-motion';
@@ -8,6 +8,7 @@ import mobIcon from '../assets/mobile-icon.png';
 import menu from '../assets/menu.png';
 import x from '../assets/X.png';
 import {useLocation} from '@remix-run/react';
+import {usePredictiveSearch} from './Search';
 
 /**
  * @param {HeaderProps}
@@ -396,14 +397,58 @@ function HeaderMenuMobileToggle({isOpen, toggleMenu}) {
 
 function SearchToggle({isMobile}) {
   const {hash} = useLocation();
+
+  const params = useParams();
+  const fetcher = useFetcher({
+    key: 'search',
+  });
+
+  const {results, totalResults, searchInputRef, searchTerm, state} =
+    usePredictiveSearch();
+
+  function goToSearchResult(event) {
+    if (!searchInputRef.current) return;
+    searchInputRef.current.blur();
+    searchInputRef.current.value = '';
+    // close the aside
+    window.location.href = event.currentTarget.href;
+  }
+  console.log(searchInputRef);
+
+  function clearSearch() {
+    if (searchInputRef.current) {
+      searchInputRef.current.blur();
+      searchInputRef.current.value = '';
+    }
+
+    const searchAction = '/api/predictive-search';
+    const newSearchTerm = '';
+    const localizedAction = params.locale
+      ? `/${params.locale}${searchAction}`
+      : searchAction;
+
+    fetcher.submit(
+      {q: newSearchTerm, limit: '4'},
+      {method: 'GET', action: localizedAction},
+    );
+  }
+
   return (
     <>
       {isMobile ? (
-        <a href={hash === '#search-aside' ? '#x' : '#search-aside'}>
+        <a
+          href={hash === '#search-aside' ? '#x' : '#search-aside'}
+          onClick={clearSearch}
+        >
           <img src={search} />{' '}
         </a>
       ) : (
-        <a href={hash === '#search-aside' ? '#x' : '#search-aside'}>Search</a>
+        <a
+          href={hash === '#search-aside' ? '#x' : '#search-aside'}
+          onClick={clearSearch}
+        >
+          Search
+        </a>
       )}
     </>
   );

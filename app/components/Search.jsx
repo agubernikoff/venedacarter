@@ -277,7 +277,6 @@ export function PredictiveSearchResults() {
     // close the aside
     window.location.href = event.currentTarget.href;
   }
-
   // if (state === 'loading') {
   //   return <div>Loading...</div>;
   // }
@@ -321,7 +320,7 @@ function NoPredictiveSearchResults({searchTerm}) {
     return null;
   }
   return (
-    <p>
+    <p style={{margin: '1rem'}}>
       No results found for <q>{searchTerm.current}</q>
     </p>
   );
@@ -406,7 +405,7 @@ function SearchResultItem({goToSearchResult, item}) {
   );
 }
 
-function usePredictiveSearch() {
+export function usePredictiveSearch() {
   const searchFetcher = useFetcher({key: 'search'});
   const searchTerm = useRef('');
   const searchInputRef = useRef(null);
