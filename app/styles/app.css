@@ -38,6 +38,11 @@ aside {
   top: 0;
   transition: transform 200ms ease-in-out;
 }
+#search-aside aside {
+  top: -100%;
+  right: 0;
+  transition: all 200ms ease-in-out;
+}
 #mobile-menu-aside aside {
   top: var(--header-height);
   left: calc(var(--aside-width) * -1);
@@ -180,6 +185,9 @@ aside li {
   transform: translateX(var(--aside-width));
   opacity: 1;
 }
+#search-aside:target aside {
+  transform: translateY(calc(99% + var(--header-height)));
+}
 
 /*
 * --------------------------------------------------
@@ -187,7 +195,7 @@ aside li {
 * --------------------------------------------------
 */
 .header {
-  z-index: 5;
+  z-index: 50;
   align-items: center;
   background: #fff;
   display: flex;
