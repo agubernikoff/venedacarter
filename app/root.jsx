@@ -64,10 +64,16 @@ export const useRootLoaderData = () => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({context}) {
-  const {storefront, customerAccount, cart} = context;
+  const {storefront, cart, session} = context;
+
   const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN;
 
-  const isLoggedInPromise = customerAccount.isLoggedIn();
+  function isLoggedIn() {
+    if (session.get('customerAccessToken')) return true;
+    else return false;
+  }
+  const isLoggedInPromise = isLoggedIn();
+
   const cartPromise = cart.get();
 
   // defer the footer query (below the fold)

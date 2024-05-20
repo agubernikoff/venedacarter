@@ -3,16 +3,19 @@ import {
   Form,
   NavLink,
   useActionData,
+  useNavigate,
   useNavigation,
   useOutletContext,
 } from '@remix-run/react';
+import {CUSTOMER_CREATE_MUTATION} from '../graphql/customer-account/CustomerCreate';
 import {CUSTOMER_LOGIN_MUTATION} from '../graphql/customer-account/CustomerLogin';
+import {useEffect} from 'react';
 
 /**
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Log In'}];
+  return [{title: 'Sign Up'}];
 };
 
 /**
@@ -36,8 +39,7 @@ export const meta = () => {
  */
 export async function action({request, context}) {
   const {storefront} = context;
-
-  if (request.method !== 'PUT') {
+  if (request.method !== 'POST') {
     return json({error: 'Method not allowed'}, {status: 405});
   }
 
@@ -45,7 +47,7 @@ export async function action({request, context}) {
 
   try {
     const input = {};
-    const validInputKeys = ['email', 'password'];
+    const validInputKeys = ['firstName', 'lastName', 'email', 'password'];
     for (const [key, value] of form.entries()) {
       if (!validInputKeys.includes(key)) {
         continue;
@@ -54,7 +56,13 @@ export async function action({request, context}) {
         input[key] = value;
       }
     }
-    // update customer and possibly password
+
+    const {customerCreate} = await storefront.mutate(CUSTOMER_CREATE_MUTATION, {
+      cache: storefront.CacheNone(),
+      variables: {
+        input,
+      },
+    });
     const {customerAccessTokenCreate} = await storefront.mutate(
       CUSTOMER_LOGIN_MUTATION,
       {
@@ -62,12 +70,21 @@ export async function action({request, context}) {
         variables: {input: {email: input.email, password: input.password}},
       },
     );
-
-    if (customerAccessTokenCreate?.customerUserErrors.length) {
-      throw new Error(customerAccessTokenCreate?.customerUserErrors[0].message);
+    console.log(customerCreate, customerAccessTokenCreate);
+    if (
+      customerCreate?.customerUserErrors.length ||
+      customerAccessTokenCreate?.customerUserErrors.length
+    ) {
+      throw new Error(
+        customerCreate?.customerUserErrors[0].message ||
+          customerAccessTokenCreate?.customerUserErrors[0].message,
+      );
     }
-
-    if (customerAccessTokenCreate?.customerAccessToken?.accessToken) {
+    // return json({1: customerCreate, 2: customerAccessTokenCreate});
+    if (
+      customerCreate?.customer?.id &&
+      customerAccessTokenCreate?.customerAccessToken?.accessToken
+    ) {
       await context.session.set(
         'customerAccessToken',
         customerAccessTokenCreate?.customerAccessToken?.accessToken,
@@ -85,7 +102,9 @@ export async function action({request, context}) {
     } else
       return json(
         {
-          error: customerAccessTokenCreate?.customerUserErrors[0].message,
+          error:
+            customerCreate?.customerUserErrors[0].message ||
+            customerAccessTokenCreate?.customerUserErrors[0].message,
         },
         {
           status: 404,
@@ -112,12 +131,37 @@ export default function AccountProfile() {
   const {state} = useNavigation();
   /** @type {ActionReturnData} */
   const action = useActionData();
-  const customer = action?.customer ?? account?.customer;
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (action && action.created) navigate('/account/profile');
+  }, [action, navigate]);
   return (
     <div className="account-profile">
-      <Form method="PUT">
+      <Form method="POST">
         <fieldset className="profile-fieldset">
+          {/* <label htmlFor="firstName">First name</label> */}
+          <input
+            className="profile-input"
+            id="firstName"
+            name="firstName"
+            type="text"
+            autoComplete="given-name"
+            placeholder="First name"
+            aria-label="First name"
+            minLength={2}
+          />
+          {/* <label htmlFor="lastName">Last name</label> */}
+          <input
+            className="profile-input"
+            id="lastName"
+            name="lastName"
+            type="text"
+            autoComplete="family-name"
+            placeholder="Last name"
+            aria-label="Last name"
+            minLength={2}
+          />
           {/* <label htmlFor="firstName">First name</label> */}
           <input
             className="profile-input"
@@ -127,7 +171,6 @@ export default function AccountProfile() {
             autoComplete="email"
             placeholder="Email"
             aria-label="Email"
-            // defaultValue={customer.lastName ?? ''}
             minLength={2}
           />
           {/* <label htmlFor="lastName">Last name</label> */}
@@ -139,7 +182,6 @@ export default function AccountProfile() {
             autoComplete="current-password"
             placeholder="Password"
             aria-label="Password"
-            // defaultValue={customer.firstName ?? ''}
             minLength={2}
           />
         </fieldset>
@@ -157,7 +199,7 @@ export default function AccountProfile() {
           type="submit"
           disabled={state !== 'idle'}
         >
-          {state !== 'idle' ? 'CONTINUE' : 'CONTINUE'}
+          {state !== 'idle' ? 'LOADING' : 'REGISTER'}
         </button>
       </Form>
       <div className="login-links">

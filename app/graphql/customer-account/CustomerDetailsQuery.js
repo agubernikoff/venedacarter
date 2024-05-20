@@ -4,34 +4,38 @@ export const CUSTOMER_FRAGMENT = `#graphql
     firstName
     lastName
     defaultAddress {
-      ...Address
+      id
+      formatted
+      firstName
+      lastName
+      company
+      address1
+      address2
+      city
+      zip
+      phone
     }
     addresses(first: 6) {
       nodes {
-        ...Address
+        id
+        formatted
+        firstName
+        lastName
+        company
+        address1
+        address2
+        city
+        zip
+        phone
       }
     }
-  }
-  fragment Address on CustomerAddress {
-    id
-    formatted
-    firstName
-    lastName
-    company
-    address1
-    address2
-    territoryCode
-    zoneCode
-    city
-    zip
-    phoneNumber
   }
 `;
 
 // NOTE: https://shopify.dev/docs/api/customer/latest/queries/customer
 export const CUSTOMER_DETAILS_QUERY = `#graphql
-  query CustomerDetails {
-    customer {
+  query CustomerDetails($cutomerAccessToken: String!) {
+    customer(customerAccessToken: $cutomerAccessToken) {
       ...Customer
     }
   }

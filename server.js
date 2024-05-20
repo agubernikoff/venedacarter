@@ -6,7 +6,7 @@ import {
   createCartHandler,
   createStorefrontClient,
   storefrontRedirect,
-  createCustomerAccountClient,
+  // createCustomerAccountClient,
 } from '@shopify/hydrogen';
 import {
   createRequestHandler,
@@ -56,13 +56,13 @@ export default {
       /**
        * Create a client for Customer Account API.
        */
-      const customerAccount = createCustomerAccountClient({
-        waitUntil,
-        request,
-        session,
-        customerAccountId: env.PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID,
-        customerAccountUrl: env.PUBLIC_CUSTOMER_ACCOUNT_API_URL,
-      });
+      // const customerAccount = createCustomerAccountClient({
+      //   waitUntil,
+      //   request,
+      //   session,
+      //   customerAccountId: env.PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID,
+      //   customerAccountUrl: env.PUBLIC_CUSTOMER_ACCOUNT_API_URL,
+      // });
 
       /*
        * Create a cart handler that will be used to
@@ -70,7 +70,7 @@ export default {
        */
       const cart = createCartHandler({
         storefront,
-        customerAccount,
+        // customerAccount,
         getCartId: cartGetIdDefault(request.headers),
         setCartId: cartSetIdDefault(),
         cartQueryFragment: CART_QUERY_FRAGMENT,
@@ -86,7 +86,7 @@ export default {
         getLoadContext: () => ({
           session,
           storefront,
-          customerAccount,
+          // customerAccount,
           cart,
           env,
           waitUntil,

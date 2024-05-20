@@ -18,7 +18,8 @@ export const meta = () => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({context}) {
-  await context.customerAccount.handleAuthStatus();
+  console.log(context.session.get('customerAccessToken'));
+  // await context.customerAccount.handleAuthStatus();
 
   return json(
     {},
@@ -41,59 +42,59 @@ export async function action({request, context}) {
   }
 
   const form = await request.formData();
+  return null;
+  // try {
+  //   const customer = {};
+  //   const validInputKeys = ['firstName', 'lastName'];
+  //   for (const [key, value] of form.entries()) {
+  //     if (!validInputKeys.includes(key)) {
+  //       continue;
+  //     }
+  //     if (typeof value === 'string' && value.length) {
+  //       customer[key] = value;
+  //     }
+  //   }
 
-  try {
-    const customer = {};
-    const validInputKeys = ['firstName', 'lastName'];
-    for (const [key, value] of form.entries()) {
-      if (!validInputKeys.includes(key)) {
-        continue;
-      }
-      if (typeof value === 'string' && value.length) {
-        customer[key] = value;
-      }
-    }
+  //   // update customer and possibly password
+  //   const {data, errors} = await customerAccount.mutate(
+  //     CUSTOMER_UPDATE_MUTATION,
+  //     {
+  //       variables: {
+  //         customer,
+  //       },
+  //     },
+  //   );
 
-    // update customer and possibly password
-    const {data, errors} = await customerAccount.mutate(
-      CUSTOMER_UPDATE_MUTATION,
-      {
-        variables: {
-          customer,
-        },
-      },
-    );
+  //   if (errors?.length) {
+  //     throw new Error(errors[0].message);
+  //   }
 
-    if (errors?.length) {
-      throw new Error(errors[0].message);
-    }
+  //   if (!data?.customerUpdate?.customer) {
+  //     throw new Error('Customer profile update failed.');
+  //   }
 
-    if (!data?.customerUpdate?.customer) {
-      throw new Error('Customer profile update failed.');
-    }
-
-    return json(
-      {
-        error: null,
-        customer: data?.customerUpdate?.customer,
-      },
-      {
-        headers: {
-          'Set-Cookie': await context.session.commit(),
-        },
-      },
-    );
-  } catch (error) {
-    return json(
-      {error: error.message, customer: null},
-      {
-        status: 400,
-        headers: {
-          'Set-Cookie': await context.session.commit(),
-        },
-      },
-    );
-  }
+  //   return json(
+  //     {
+  //       error: null,
+  //       customer: data?.customerUpdate?.customer,
+  //     },
+  //     {
+  //       headers: {
+  //         'Set-Cookie': await context.session.commit(),
+  //       },
+  //     },
+  //   );
+  // } catch (error) {
+  //   return json(
+  //     {error: error.message, customer: null},
+  //     {
+  //       status: 400,
+  //       headers: {
+  //         'Set-Cookie': await context.session.commit(),
+  //       },
+  //     },
+  //   );
+  // }
 }
 
 export default function AccountProfile() {

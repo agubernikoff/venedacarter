@@ -27,28 +27,28 @@ export async function loader({request, context}) {
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 20,
   });
+  return null;
+  // const {data, errors} = await context.customerAccount.query(
+  //   CUSTOMER_ORDERS_QUERY,
+  //   {
+  //     variables: {
+  //       ...paginationVariables,
+  //     },
+  //   },
+  // );
 
-  const {data, errors} = await context.customerAccount.query(
-    CUSTOMER_ORDERS_QUERY,
-    {
-      variables: {
-        ...paginationVariables,
-      },
-    },
-  );
+  // if (errors?.length || !data?.customer) {
+  //   throw Error('Customer orders not found');
+  // }
 
-  if (errors?.length || !data?.customer) {
-    throw Error('Customer orders not found');
-  }
-
-  return json(
-    {customer: data.customer},
-    {
-      headers: {
-        'Set-Cookie': await context.session.commit(),
-      },
-    },
-  );
+  // return json(
+  //   {customer: data.customer},
+  //   {
+  //     headers: {
+  //       'Set-Cookie': await context.session.commit(),
+  //     },
+  //   },
+  // );
 }
 
 export default function Orders() {

@@ -5,13 +5,13 @@ import {redirect} from '@shopify/remix-oxygen';
  * @param {LoaderFunctionArgs}
  */
 export async function loader({context}) {
-  await context.customerAccount.handleAuthStatus();
-
-  return redirect('/account', {
-    headers: {
-      'Set-Cookie': await context.session.commit(),
-    },
-  });
+  // await context.customerAccount.handleAuthStatus();
+  if (!context.session.get('customerAccessToken'))
+    return redirect('/account/login', {
+      headers: {
+        'Set-Cookie': await context.session.commit(),
+      },
+    });
 }
 
 /** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */

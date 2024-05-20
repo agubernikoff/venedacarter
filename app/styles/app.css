@@ -1558,7 +1558,8 @@ aside li {
   margin-top: 1rem;
 }
 .existing-address > form,
-.account-profile > form {
+.account-profile > form,
+.login-links {
   width: 92.5%;
   margin: auto;
   font-size: 0.75rem;
@@ -1566,6 +1567,15 @@ aside li {
   @media (min-width: 44em) {
     width: 40%;
   }
+}
+.login-links {
+  display: flex;
+  flex-direction: column;
+  margin-block: 1rem;
+  gap: 0.5rem;
+}
+.login-links a {
+  text-decoration: underline;
 }
 fieldset > label {
   text-align: left;
