@@ -3,10 +3,12 @@ import {
   Form,
   NavLink,
   useActionData,
+  useNavigate,
   useNavigation,
   useOutletContext,
 } from '@remix-run/react';
 import {CUSTOMER_LOGIN_MUTATION} from '../graphql/customer-account/CustomerLogin';
+import {useEffect} from 'react';
 
 /**
  * @type {MetaFunction}
@@ -112,7 +114,11 @@ export default function AccountProfile() {
   const {state} = useNavigation();
   /** @type {ActionReturnData} */
   const action = useActionData();
-  const customer = action?.customer ?? account?.customer;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (action && action.created) navigate('/account/profile');
+  }, [action, navigate]);
 
   return (
     <div className="account-profile">
@@ -157,7 +163,7 @@ export default function AccountProfile() {
           type="submit"
           disabled={state !== 'idle'}
         >
-          {state !== 'idle' ? 'CONTINUE' : 'CONTINUE'}
+          {state !== 'idle' ? 'LOGGING IN' : 'CONTINUE'}
         </button>
       </Form>
       <div className="login-links">

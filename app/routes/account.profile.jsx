@@ -1,5 +1,5 @@
 import {CUSTOMER_UPDATE_MUTATION} from '~/graphql/customer-account/CustomerUpdateMutation';
-import {json} from '@shopify/remix-oxygen';
+import {redirect, json} from '@shopify/remix-oxygen';
 import {
   Form,
   useActionData,
@@ -18,83 +18,94 @@ export const meta = () => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({context}) {
-  console.log(context.session.get('customerAccessToken'));
+  if (!context.session.get('customerAccessToken'))
+    return redirect('account/login');
   // await context.customerAccount.handleAuthStatus();
-
-  return json(
-    {},
-    {
-      headers: {
-        'Set-Cookie': await context.session.commit(),
+  else
+    return json(
+      {},
+      {
+        headers: {
+          'Set-Cookie': await context.session.commit(),
+        },
       },
-    },
-  );
+    );
 }
 
 /**
  * @param {ActionFunctionArgs}
  */
 export async function action({request, context}) {
-  const {customerAccount} = context;
+  const {storefront} = context;
+  const token = context.session.get('customerAccessToken');
 
   if (request.method !== 'PUT') {
     return json({error: 'Method not allowed'}, {status: 405});
   }
 
   const form = await request.formData();
-  return null;
-  // try {
-  //   const customer = {};
-  //   const validInputKeys = ['firstName', 'lastName'];
-  //   for (const [key, value] of form.entries()) {
-  //     if (!validInputKeys.includes(key)) {
-  //       continue;
-  //     }
-  //     if (typeof value === 'string' && value.length) {
-  //       customer[key] = value;
-  //     }
-  //   }
+  try {
+    const customer = {};
+    const validInputKeys = ['firstName', 'lastName', 'email', 'password'];
+    for (const [key, value] of form.entries()) {
+      if (!validInputKeys.includes(key)) {
+        continue;
+      }
+      if (typeof value === 'string' && value.length) {
+        customer[key] = value;
+      }
+    }
 
-  //   // update customer and possibly password
-  //   const {data, errors} = await customerAccount.mutate(
-  //     CUSTOMER_UPDATE_MUTATION,
-  //     {
-  //       variables: {
-  //         customer,
-  //       },
-  //     },
-  //   );
+    // update customer and possibly password
+    const {customerUpdate, errors} = await storefront.mutate(
+      CUSTOMER_UPDATE_MUTATION,
+      {
+        variables: {
+          customerAccessToken: token,
+          customer,
+        },
+      },
+    );
 
-  //   if (errors?.length) {
-  //     throw new Error(errors[0].message);
-  //   }
+    if (errors?.length || customerUpdate?.customerUserErrors?.length) {
+      throw new Error(
+        errors[0].message || customerUpdate?.customerUserErrors[0].message,
+      );
+    }
 
-  //   if (!data?.customerUpdate?.customer) {
-  //     throw new Error('Customer profile update failed.');
-  //   }
+    if (!customerUpdate?.customer) {
+      throw new Error('Customer profile update failed.');
+    }
 
-  //   return json(
-  //     {
-  //       error: null,
-  //       customer: data?.customerUpdate?.customer,
-  //     },
-  //     {
-  //       headers: {
-  //         'Set-Cookie': await context.session.commit(),
-  //       },
-  //     },
-  //   );
-  // } catch (error) {
-  //   return json(
-  //     {error: error.message, customer: null},
-  //     {
-  //       status: 400,
-  //       headers: {
-  //         'Set-Cookie': await context.session.commit(),
-  //       },
-  //     },
-  //   );
-  // }
+    if (customerUpdate.customerAccessToken?.accessToken) {
+      await context.session.set(
+        'customerAccessToken',
+        customerUpdate?.customerAccessToken?.accessToken,
+      );
+    }
+
+    return json(
+      {
+        error: null,
+        customer: customerUpdate?.customer,
+      },
+      {
+        headers: {
+          'Set-Cookie': await context.session.commit(),
+        },
+      },
+    );
+  } catch (error) {
+    return json(
+      {error: error.message, customer: null},
+      {
+        status: 400,
+        headers: {
+          'Set-Cookie': await context.session.commit(),
+        },
+      },
+    );
+  }
 }
 
 export default function AccountProfile() {
@@ -103,7 +114,7 @@ export default function AccountProfile() {
   /** @type {ActionReturnData} */
   const action = useActionData();
   const customer = action?.customer ?? account?.customer;
-
+  console.log(account);
   return (
     <div className="account-profile">
       <Form method="PUT">
@@ -132,6 +143,28 @@ export default function AccountProfile() {
             defaultValue={customer.lastName ?? ''}
             minLength={2}
           />
+          <input
+            className="profile-input"
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            placeholder="Email"
+            aria-label="Email"
+            defaultValue={customer.email ?? ''}
+            minLength={2}
+          />
+          <input
+            className="profile-input"
+            id="password"
+            name="password"
+            type="text"
+            autoComplete="new-password"
+            placeholder="New Password"
+            aria-label="Password"
+            // defaultValue={customer.firstName ?? ''}
+            minLength={2}
+          />
         </fieldset>
         {action?.error ? (
           <p>
@@ -147,7 +180,7 @@ export default function AccountProfile() {
           type="submit"
           disabled={state !== 'idle'}
         >
-          {state !== 'idle' ? 'SAVE CHANGES' : 'SAVE CHANGES'}
+          {state !== 'idle' ? 'SAVING' : 'SAVE CHANGES'}
         </button>
       </Form>
     </div>
