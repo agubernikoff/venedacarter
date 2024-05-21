@@ -1512,14 +1512,18 @@ aside li {
   text-decoration: underline;
 }
 
-.empty-orders > p,
-.empty-addresses {
+.empty-orders > p {
   font-size: 0.75rem;
   font-family: 'regular-font';
   text-align: center;
   margin-top: 7.5rem;
 }
+.empty-addresses > p {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+}
 .account-addresses {
+  padding-top: 7.5rem;
   text-align: center;
   margin-bottom: 2rem;
 }

@@ -1,4 +1,4 @@
-import {json} from '@shopify/remix-oxygen';
+import {redirect, json} from '@shopify/remix-oxygen';
 import {
   Form,
   useActionData,
@@ -10,9 +10,7 @@ import {
   DELETE_ADDRESS_MUTATION,
   CREATE_ADDRESS_MUTATION,
 } from '~/graphql/customer-account/CustomerAddressMutations';
-import {useState} from 'react';
-import {useEffect} from 'react';
-import {useRef} from 'react';
+import {useState, useEffect, useRef} from 'react';
 
 /**
  * @type {MetaFunction}
@@ -25,23 +23,26 @@ export const meta = () => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({context}) {
-  await context.customerAccount.handleAuthStatus();
-
-  return json(
-    {},
-    {
-      headers: {
-        'Set-Cookie': await context.session.commit(),
+  if (!context.session.get('customerAccessToken'))
+    return redirect('account/login');
+  // await context.customerAccount.handleAuthStatus();
+  else
+    return json(
+      {},
+      {
+        headers: {
+          'Set-Cookie': await context.session.commit(),
+        },
       },
-    },
-  );
+    );
 }
 
 /**
  * @param {ActionFunctionArgs}
  */
 export async function action({request, context}) {
-  const {customerAccount} = context;
+  const {storefront} = context;
+  const token = context.session.get('customerAccessToken');
 
   try {
     const form = await request.formData();
@@ -54,8 +55,8 @@ export async function action({request, context}) {
     }
 
     // this will ensure redirecting to login never happen for mutatation
-    const isLoggedIn = await customerAccount.isLoggedIn();
-    if (!isLoggedIn) {
+
+    if (!token) {
       return json(
         {error: {[addressId]: 'Unauthorized'}},
         {
@@ -69,16 +70,15 @@ export async function action({request, context}) {
 
     const address = {};
     const keys = [
+      'firstName',
+      'lastName',
       'address1',
       'address2',
       'city',
-      'company',
-      'territoryCode',
-      'firstName',
-      'lastName',
-      'phoneNumber',
-      'zoneCode',
+      'province',
+      'country',
       'zip',
+      'phone',
     ];
 
     for (const key of keys) {
@@ -97,10 +97,10 @@ export async function action({request, context}) {
       case 'POST': {
         // handle new address creation
         try {
-          const {data, errors} = await customerAccount.mutate(
+          const {customerAddressCreate, errors} = await storefront.mutate(
             CREATE_ADDRESS_MUTATION,
             {
-              variables: {address, defaultAddress},
+              variables: {address, customerAccessToken: token},
             },
           );
 
@@ -108,19 +108,24 @@ export async function action({request, context}) {
             throw new Error(errors[0].message);
           }
 
-          if (data?.customerAddressCreate?.userErrors?.length) {
-            throw new Error(data?.customerAddressCreate?.userErrors[0].message);
+          if (customerAddressCreate?.customerUserErrors?.length) {
+            throw new Error(
+              customerAddressCreate?.customerUserErrors[0].message,
+            );
           }
 
-          if (!data?.customerAddressCreate?.customerAddress) {
+          if (customerAddressCreate?.userErrors?.length) {
+            throw new Error(customerAddressCreate?.userErrors[0].message);
+          }
+
+          if (!customerAddressCreate?.customerAddress) {
             throw new Error('Customer address create failed.');
           }
 
           return json(
             {
               error: null,
-              createdAddress: data?.customerAddressCreate?.customerAddress,
-              defaultAddress,
+              createdAddress: customerAddressCreate?.customerAddress,
             },
             {
               headers: {
@@ -155,7 +160,7 @@ export async function action({request, context}) {
       case 'PUT': {
         // handle address updates
         try {
-          const {data, errors} = await customerAccount.mutate(
+          const {data, errors} = await storefront.mutate(
             UPDATE_ADDRESS_MUTATION,
             {
               variables: {
@@ -217,7 +222,7 @@ export async function action({request, context}) {
       case 'DELETE': {
         // handles address deletion
         try {
-          const {data, errors} = await customerAccount.mutate(
+          const {data, errors} = await storefront.mutate(
             DELETE_ADDRESS_MUTATION,
             {
               variables: {addressId: decodeURIComponent(addressId)},
@@ -308,6 +313,14 @@ export default function Addresses() {
   const {customer} = useOutletContext();
   const {defaultAddress, addresses} = customer;
   const [editAddressId, setEditAddressId] = useState(null);
+  const [displayForm, setDisplayForm] = useState(false);
+  const actionData = useActionData();
+
+  useEffect(() => {
+    if (actionData?.createdAddress) {
+      addresses?.nodes?.push(actionData.createdAddress);
+    }
+  }, [actionData?.createdAddress, addresses?.nodes]);
 
   const handleEditClick = (addressId) => {
     setEditAddressId(addressId);
@@ -315,49 +328,62 @@ export default function Addresses() {
 
   const handleCancelEdit = () => {
     window.scrollTo(0, 0);
-    setEditAddressId(null);
+    if (editAddressId) setEditAddressId(null);
+    if (displayForm) setDisplayForm(false);
   };
 
   return (
     <div className="account-addresses">
-      {!addresses.nodes.length ? (
-        <p className="empty-addresses">You have no addresses saved.</p>
-      ) : (
-        <div>
-          <div className="address-container">
-            <ExistingAddresses
-              addresses={addresses}
-              defaultAddress={defaultAddress}
-              editAddressId={editAddressId}
-              onEditClick={handleEditClick}
-              onCancelEdit={handleCancelEdit}
-            />
-          </div>
-          {editAddressId === null && (
-            <button className="add-new-address">ADD NEW</button>
+      {!displayForm ? (
+        <>
+          {!editAddressId && (
+            <p className="account-address-bold">Saved Addresses</p>
           )}
-          {/* <br />
-          <hr />
-          <br /> */}
-        </div>
-      )}
+          {!addresses.nodes.length ? (
+            <div className="empty-addresses">
+              <p>You have no addresses saved.</p>
+            </div>
+          ) : (
+            <div>
+              <div className="address-container">
+                <ExistingAddresses
+                  addresses={addresses}
+                  defaultAddress={defaultAddress}
+                  editAddressId={editAddressId}
+                  onEditClick={handleEditClick}
+                  onCancelEdit={handleCancelEdit}
+                />
+              </div>
+            </div>
+          )}
+          <button
+            className="add-new-address"
+            onClick={() => {
+              setDisplayForm(true);
+            }}
+          >
+            ADD NEW
+          </button>
+        </>
+      ) : !editAddressId ? (
+        <NewAddressForm handleCancelEdit={handleCancelEdit} />
+      ) : null}
     </div>
   );
 }
 
-function NewAddressForm() {
+function NewAddressForm({handleCancelEdit}) {
   const newAddress = {
+    id: 'new',
+    firstName: '',
+    lastName: '',
     address1: '',
     address2: '',
     city: '',
-    company: '',
-    territoryCode: '',
-    firstName: '',
-    id: 'new',
-    lastName: '',
-    phoneNumber: '',
-    zoneCode: '',
+    province: '',
+    country: '',
     zip: '',
+    phone: '',
   };
 
   return (
@@ -365,15 +391,20 @@ function NewAddressForm() {
       addressId={'NEW_ADDRESS_ID'}
       address={newAddress}
       defaultAddress={null}
+      onCancel={handleCancelEdit}
     >
       {({stateForMethod}) => (
-        <div>
+        <div className="address-form-buttons">
+          <button style={{background: 'white'}} onClick={handleCancelEdit}>
+            CANCEL
+          </button>
           <button
+            style={{backgroundColor: 'black', color: 'white'}}
             disabled={stateForMethod('POST') !== 'idle'}
             formMethod="POST"
             type="submit"
           >
-            {stateForMethod('POST') !== 'idle' ? 'Creating' : 'Create'}
+            {stateForMethod('POST') !== 'idle' ? 'SAVING' : 'SAVE CHANGES'}
           </button>
         </div>
       )}
@@ -393,9 +424,6 @@ export function ExistingAddresses({
 }) {
   return (
     <div>
-      {!editAddressId && (
-        <p className="account-address-bold">Saved Addresses</p>
-      )}
       {addresses.nodes.map((address) => (
         <div key={address.id} className="existing-address">
           {editAddressId === address.id ? (
@@ -465,6 +493,7 @@ export function AddressForm({
   addressId,
   address,
   defaultAddress,
+  children,
   onCancel,
   onSave,
 }) {
@@ -495,12 +524,25 @@ export function AddressForm({
     prev.current = stateForMethod('PUT');
   }, [stateForMethod('PUT')]);
 
+  useEffect(() => {
+    if (
+      stateForMethod('POST') === 'idle' &&
+      prev.current === 'loading' &&
+      !error
+    ) {
+      handleCancelEdit();
+    }
+    prev.current = stateForMethod('POST');
+  }, [stateForMethod('POST')]);
+
   return (
     <Form id={addressId}>
-      <p className="account-address-bold">Saved Addresses</p>
+      <p className="account-address-bold">
+        {addressId === 'NEW_ADDRESS_ID' ? 'Add New Address' : 'Edit Address'}
+      </p>
       <fieldset>
         <input type="hidden" name="addressId" defaultValue={addressId} />
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="firstName">First Name:</label>
         <input
           aria-label="First name"
           autoComplete="given-name"
@@ -511,7 +553,7 @@ export function AddressForm({
           required
           type="text"
         />
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor="lastName">Last Name:</label>
         <input
           aria-label="Last name"
           autoComplete="family-name"
@@ -522,51 +564,50 @@ export function AddressForm({
           required
           type="text"
         />
-        <label htmlFor="address1">Address Line</label>
+        <label htmlFor="address1">Street Address:</label>
         <input
-          aria-label="Address line 1"
+          aria-label="Street Address"
           autoComplete="address-line1"
           defaultValue={address?.address1 ?? ''}
           id="address1"
           name="address1"
-          placeholder="Address line 1*"
+          placeholder="Street Address*"
           required
           type="text"
         />
-        <label htmlFor="address2">Address Line 2</label>
+        <label htmlFor="address2">Apt:</label>
         <input
-          aria-label="Address line 2"
+          aria-label="Apt"
           autoComplete="address-line2"
           defaultValue={address?.address2 ?? ''}
           id="address2"
           name="address2"
-          placeholder="Address line 2"
+          placeholder="Apt"
           type="text"
         />
-        <label htmlFor="territoryCode">Country</label>
+        <label htmlFor="city">City:</label>
         <input
-          aria-label="territoryCode"
-          autoComplete="country"
-          defaultValue={address?.territoryCode ?? ''}
-          id="territoryCode"
-          name="territoryCode"
-          placeholder="Country"
+          aria-label="City"
+          autoComplete="address-level2"
+          defaultValue={address?.city ?? ''}
+          id="city"
+          name="city"
+          placeholder="City"
           required
           type="text"
-          maxLength={2}
         />
-        <label htmlFor="zoneCode">State / Province</label>
+        <label htmlFor="province">State:</label>
         <input
           aria-label="State/Province"
           autoComplete="address-level1"
-          defaultValue={address?.zoneCode ?? ''}
-          id="zoneCode"
-          name="zoneCode"
-          placeholder="State / Province"
+          defaultValue={address?.province ?? ''}
+          id="province"
+          name="province"
+          placeholder="State"
           required
           type="text"
         />
-        <label htmlFor="zip">Zip / Postal Code</label>
+        <label htmlFor="zip">Zip / Postal Code:</label>
         <input
           aria-label="Zip"
           autoComplete="postal-code"
@@ -577,7 +618,19 @@ export function AddressForm({
           required
           type="text"
         />
-        <label htmlFor="phoneNumber">Phone</label>
+        <label htmlFor="country">Country/Region:</label>
+        <input
+          aria-label="country"
+          autoComplete="country"
+          defaultValue={address?.country ?? ''}
+          id="country"
+          name="country"
+          placeholder="Country"
+          required
+          type="text"
+          // maxLength={2}
+        />
+        <label htmlFor="phoneNumber">Phone:</label>
         <input
           aria-label="Phone Number"
           autoComplete="tel"
@@ -588,17 +641,6 @@ export function AddressForm({
           pattern="^\+?[1-9]\d{3,14}$"
           type="tel"
         />
-        {/* <label htmlFor="city">City</label>
-        <input
-          aria-label="City"
-          autoComplete="address-level2"
-          defaultValue={address?.city ?? ''}
-          id="city"
-          name="city"
-          placeholder="City"
-          required
-          type="text"
-        /> */}
 
         {/* <div>
           <input
@@ -617,6 +659,9 @@ export function AddressForm({
           </p>
         )}
         <br />
+        {children({
+          stateForMethod: (method) => (formMethod === method ? state : 'idle'),
+        })}
         <div className="address-form-buttons">
           <button style={{background: 'white'}} onClick={handleCancelEdit}>
             CANCEL

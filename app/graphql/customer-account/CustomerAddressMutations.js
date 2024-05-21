@@ -40,22 +40,29 @@ export const DELETE_ADDRESS_MUTATION = `#graphql
 
 // NOTE: https://shopify.dev/docs/api/customer/latest/mutations/customerAddressCreate
 export const CREATE_ADDRESS_MUTATION = `#graphql
-  mutation customerAddressCreate(
-    $address: CustomerAddressInput!
-    $defaultAddress: Boolean
-  ) {
-    customerAddressCreate(
-      address: $address
-      defaultAddress: $defaultAddress
-    ) {
-      customerAddress {
-        id
-      }
-      userErrors {
-        code
-        field
-        message
-      }
+mutation customerAddressCreate($address: MailingAddressInput!, $customerAccessToken: String!) {
+  customerAddressCreate(address: $address, customerAccessToken: $customerAccessToken) {
+    customerAddress {
+      id
+      formatted
+      firstName
+      lastName
+      company
+      address1
+      address2
+      city
+      zip
+      phone
+    }
+    customerUserErrors {
+      code
+      field
+      message
+    }
+    userErrors {
+      field
+      message
     }
   }
+}
 `;
