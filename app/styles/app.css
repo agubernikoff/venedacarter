@@ -1792,7 +1792,7 @@ fieldset > input {
   text-align: center;
   height: calc(100vh - var(--header-height));
   @media (min-width: 44em) {
-    width: 30%;
+    width: 33.3%;
   }
 }
 
@@ -1834,7 +1834,7 @@ fieldset > input {
   font-size: 0.75rem;
   font-family: 'regular-font';
   @media (min-width: 44em) {
-    width: 35%;
+    width: 33.3%;
   }
 }
 
@@ -1892,7 +1892,7 @@ fieldset > input {
   padding-bottom: 2rem;
   width: 92.5%;
   @media (min-width: 44em) {
-    width: 35%;
+    width: 33.3%;
   }
 }
 
