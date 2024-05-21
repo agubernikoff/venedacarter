@@ -26,6 +26,8 @@ export const CUSTOMER_FRAGMENT = `#graphql
         address1
         address2
         city
+        country
+        province
         zip
         phone
       }

@@ -159,14 +159,15 @@ export async function action({request, context}) {
 
       case 'PUT': {
         // handle address updates
+
         try {
-          const {data, errors} = await storefront.mutate(
+          const {customerAddressUpdate, errors} = await storefront.mutate(
             UPDATE_ADDRESS_MUTATION,
             {
               variables: {
                 address,
-                addressId: decodeURIComponent(addressId),
-                defaultAddress,
+                id: decodeURIComponent(addressId),
+                customerAccessToken: token,
               },
             },
           );
@@ -175,19 +176,24 @@ export async function action({request, context}) {
             throw new Error(errors[0].message);
           }
 
-          if (data?.customerAddressUpdate?.userErrors?.length) {
-            throw new Error(data?.customerAddressUpdate?.userErrors[0].message);
+          if (customerAddressUpdate?.customerUserErrors?.length) {
+            throw new Error(
+              customerAddressUpdate?.customerUserErrors[0].message,
+            );
           }
 
-          if (!data?.customerAddressUpdate?.customerAddress) {
+          if (customerAddressUpdate?.userErrors?.length) {
+            throw new Error(customerAddressUpdate?.userErrors[0].message);
+          }
+
+          if (!customerAddressUpdate?.customerAddress) {
             throw new Error('Customer address update failed.');
           }
 
           return json(
             {
               error: null,
-              updatedAddress: address,
-              defaultAddress,
+              updatedAddress: customerAddressUpdate,
             },
             {
               headers: {
@@ -328,9 +334,15 @@ export default function Addresses() {
 
   const handleCancelEdit = () => {
     window.scrollTo(0, 0);
-    if (editAddressId) setEditAddressId(null);
+    if (editAddressId) {
+      setEditAddressId(null), console.log('infunctionedit', editAddressId);
+    }
     if (displayForm) setDisplayForm(false);
   };
+
+  console.log(displayForm);
+  console.log('length', addresses.nodes.length);
+  console.log('editid', editAddressId);
 
   return (
     <div className="account-addresses">
@@ -420,8 +432,10 @@ export function ExistingAddresses({
   defaultAddress,
   editAddressId,
   onEditClick,
+  handleCancelEdit,
   onCancelEdit, // Added onCancelEdit prop
 }) {
+  console.log('existingedit', onCancelEdit);
   return (
     <div>
       {addresses.nodes.map((address) => (
@@ -434,22 +448,19 @@ export function ExistingAddresses({
               onCancel={onCancelEdit} // Pass onCancelEdit as a prop to AddressForm
             >
               {({stateForMethod}) => (
-                <div>
+                <div className="address-form-buttons">
+                  <button style={{background: 'white'}} onClick={onCancelEdit}>
+                    CANCEL
+                  </button>
                   <button
+                    style={{backgroundColor: 'black', color: 'white'}}
                     disabled={stateForMethod('PUT') !== 'idle'}
                     formMethod="PUT"
                     type="submit"
                   >
-                    {stateForMethod('PUT') !== 'idle' ? 'Saving' : 'Save'}
-                  </button>
-                  <button
-                    disabled={stateForMethod('DELETE') !== 'idle'}
-                    formMethod="DELETE"
-                    type="submit"
-                  >
-                    {stateForMethod('DELETE') !== 'idle'
-                      ? 'Deleting'
-                      : 'Delete'}
+                    {stateForMethod('PUT') !== 'idle'
+                      ? 'SAVING'
+                      : 'SAVE CHANGES'}
                   </button>
                 </div>
               )}
@@ -481,7 +492,7 @@ function AddressDisplay({address}) {
       <p>
         {address.city}, {address.zoneCode} {address.zip}
       </p>
-      <p>{address.phoneNumber}</p>
+      <p>{address.phone}</p>
     </div>
   );
 }
@@ -514,27 +525,35 @@ export function AddressForm({
   };
 
   useEffect(() => {
+    console.log(`State for PUT: ${stateForMethod('PUT')}`);
     if (
       stateForMethod('PUT') === 'idle' &&
       prev.current === 'loading' &&
       !error
     ) {
-      handleCancelEdit();
+      console.log('PUT request finished, calling onCancel');
+      onCancel();
     }
     prev.current = stateForMethod('PUT');
-  }, [stateForMethod('PUT')]);
+  }, [stateForMethod('PUT'), onCancel, error]);
 
   useEffect(() => {
+    console.log(`State for POST: ${stateForMethod('POST')}`);
     if (
       stateForMethod('POST') === 'idle' &&
       prev.current === 'loading' &&
       !error
     ) {
-      handleCancelEdit();
+      console.log('POST request finished, calling onCancel');
+      onCancel();
     }
     prev.current = stateForMethod('POST');
-  }, [stateForMethod('POST')]);
+  }, [stateForMethod('POST'), onCancel, error]);
 
+  console.log('Current state:', state);
+  console.log('Form method:', formMethod);
+  console.log('Previous state:', prev.current);
+  console.log('Error:', error);
   return (
     <Form id={addressId}>
       <p className="account-address-bold">
@@ -630,13 +649,13 @@ export function AddressForm({
           type="text"
           // maxLength={2}
         />
-        <label htmlFor="phoneNumber">Phone:</label>
+        <label htmlFor="phone">Phone:</label>
         <input
           aria-label="Phone Number"
           autoComplete="tel"
-          defaultValue={address?.phoneNumber ?? ''}
-          id="phoneNumber"
-          name="phoneNumber"
+          defaultValue={address?.phone ?? ''}
+          id="phone"
+          name="phone"
           placeholder="+16135551111"
           pattern="^\+?[1-9]\d{3,14}$"
           type="tel"
@@ -662,20 +681,6 @@ export function AddressForm({
         {children({
           stateForMethod: (method) => (formMethod === method ? state : 'idle'),
         })}
-        <div className="address-form-buttons">
-          <button style={{background: 'white'}} onClick={handleCancelEdit}>
-            CANCEL
-          </button>
-          <button
-            // onClick={}
-            style={{backgroundColor: 'black', color: 'white'}}
-            disabled={stateForMethod('PUT') !== 'idle'}
-            formMethod="PUT"
-            type="submit"
-          >
-            {stateForMethod('PUT') !== 'idle' ? 'SAVING' : 'SAVE CHANGES'}
-          </button>
-        </div>
       </fieldset>
     </Form>
   );
