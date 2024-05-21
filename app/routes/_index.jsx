@@ -250,7 +250,7 @@ export function FeaturedProduct({
         if (goToSearchResult) goToSearchResult();
       }}
     >
-      <div style={{background: index === 0 ? '#f4f4f4' : '#f0f0f4'}}>
+      <div style={{background: index === 0 ? '#f4f4f4' : '#ededed'}}>
         {/* <AnimatePresence mode="wait" initial={false}> */}
         {isMobile ? (
           <Image
@@ -274,7 +274,7 @@ export function FeaturedProduct({
               crop={false}
               loading={loading}
               sizes="(min-width: 45em) 20vw, 50vw"
-              style={{background: index === 0 ? '#f4f4f4' : '#f0f0f4'}}
+              style={{background: index === 0 ? '#f4f4f4' : '#ededed'}}
             />
           </motion.div>
         )}
