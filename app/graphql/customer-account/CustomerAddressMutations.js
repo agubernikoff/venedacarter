@@ -11,6 +11,8 @@ mutation customerAddressUpdate($address: MailingAddressInput!, $customerAccessTo
       address1
       address2
       city
+      country
+      province
       zip
       phone
     }
@@ -56,6 +58,8 @@ mutation customerAddressCreate($address: MailingAddressInput!, $customerAccessTo
       address1
       address2
       city
+      country
+      province
       zip
       phone
     }
