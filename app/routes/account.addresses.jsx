@@ -402,14 +402,16 @@ export default function Addresses() {
               </div>
             </div>
           )}
-          <button
-            className="add-new-address"
-            onClick={() => {
-              setDisplayForm(true);
-            }}
-          >
-            ADD NEW
-          </button>
+          {!editAddressId && (
+            <button
+              className="add-new-address"
+              onClick={() => {
+                setDisplayForm(true);
+              }}
+            >
+              ADD NEW
+            </button>
+          )}
         </>
       ) : !editAddressId ? (
         <NewAddressForm handleCancelEdit={handleCancelEdit} />
