@@ -525,35 +525,27 @@ export function AddressForm({
   };
 
   useEffect(() => {
-    console.log(`State for PUT: ${stateForMethod('PUT')}`);
     if (
       stateForMethod('PUT') === 'idle' &&
       prev.current === 'loading' &&
       !error
     ) {
-      console.log('PUT request finished, calling onCancel');
       onCancel();
     }
     prev.current = stateForMethod('PUT');
-  }, [stateForMethod('PUT'), onCancel, error]);
+  }, [stateForMethod('PUT')]);
 
   useEffect(() => {
-    console.log(`State for POST: ${stateForMethod('POST')}`);
     if (
       stateForMethod('POST') === 'idle' &&
       prev.current === 'loading' &&
       !error
     ) {
-      console.log('POST request finished, calling onCancel');
       onCancel();
     }
     prev.current = stateForMethod('POST');
-  }, [stateForMethod('POST'), onCancel, error]);
+  }, [stateForMethod('POST')]);
 
-  console.log('Current state:', state);
-  console.log('Form method:', formMethod);
-  console.log('Previous state:', prev.current);
-  console.log('Error:', error);
   return (
     <Form id={addressId}>
       <p className="account-address-bold">
