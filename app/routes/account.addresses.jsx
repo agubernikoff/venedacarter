@@ -328,21 +328,32 @@ export default function Addresses() {
     }
   }, [actionData?.createdAddress, addresses?.nodes]);
 
+  useEffect(() => {
+    if (actionData?.updatedAddress?.customerAddress?.id) {
+      const old = addresses?.nodes?.find(
+        (n) =>
+          stripQueryString(n.id) ===
+          stripQueryString(actionData?.updatedAddress?.customerAddress?.id),
+      );
+      const index = addresses?.nodes?.indexOf(old);
+      addresses?.nodes?.splice(
+        index,
+        1,
+        actionData?.updatedAddress?.customerAddress,
+      );
+    }
+  }, [actionData?.updatedAddress, addresses?.nodes]);
+
   const handleEditClick = (addressId) => {
     setEditAddressId(addressId);
   };
 
   const handleCancelEdit = () => {
     window.scrollTo(0, 0);
-    if (editAddressId) {
-      setEditAddressId(null), console.log('infunctionedit', editAddressId);
-    }
+    if (editAddressId) setEditAddressId(null);
+
     if (displayForm) setDisplayForm(false);
   };
-
-  console.log(displayForm);
-  console.log('length', addresses.nodes.length);
-  console.log('editid', editAddressId);
 
   return (
     <div className="account-addresses">
@@ -424,6 +435,11 @@ function NewAddressForm({handleCancelEdit}) {
   );
 }
 
+function stripQueryString(id) {
+  if (id) return id.split('?')[0];
+  return id;
+}
+
 /**
  * @param {Pick<CustomerFragment, 'addresses' | 'defaultAddress'>}
  */
@@ -435,12 +451,11 @@ export function ExistingAddresses({
   handleCancelEdit,
   onCancelEdit, // Added onCancelEdit prop
 }) {
-  console.log('existingedit', onCancelEdit);
   return (
     <div>
       {addresses.nodes.map((address) => (
         <div key={address.id} className="existing-address">
-          {editAddressId === address.id ? (
+          {stripQueryString(editAddressId) === stripQueryString(address.id) ? (
             <AddressForm
               addressId={address.id}
               address={address}
@@ -508,7 +523,7 @@ export function AddressForm({
   onCancel,
   onSave,
 }) {
-  const prev = useRef();
+  const prevPOST = useRef();
   const {formMethod} = useNavigation();
   const {state} = useNavigation();
   const actionData = useActionData();
@@ -516,34 +531,27 @@ export function AddressForm({
   const isDefaultAddress = defaultAddress?.id === addressId;
   const stateForMethod = (method) => (formMethod === method ? state : 'idle');
 
-  const handleCancelEdit = () => {
-    onCancel();
-  };
-
-  const handleSave = () => {
-    onSave(); // Call the onSave function passed from parent
-  };
-
   useEffect(() => {
     if (
       stateForMethod('PUT') === 'idle' &&
-      prev.current === 'loading' &&
+      stripQueryString(actionData?.updatedAddress?.customerAddress?.id) ===
+        stripQueryString(address.id) &&
+      actionData?.updatedAddress?.customerAddress?.id !== address.id &&
       !error
     ) {
       onCancel();
     }
-    prev.current = stateForMethod('PUT');
-  }, [stateForMethod('PUT')]);
+  }, [actionData?.updatedAddress?.customerAddress?.id, stateForMethod('PUT')]);
 
   useEffect(() => {
     if (
       stateForMethod('POST') === 'idle' &&
-      prev.current === 'loading' &&
+      prevPOST.current === 'loading' &&
       !error
     ) {
       onCancel();
     }
-    prev.current = stateForMethod('POST');
+    prevPOST.current = stateForMethod('POST');
   }, [stateForMethod('POST')]);
 
   return (
