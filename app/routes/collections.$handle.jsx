@@ -112,9 +112,12 @@ export default function Collection() {
         )}
       </AnimatePresence>
       <div className={isMobile ? 'title-container-mobile' : 'title-container'}>
-        <p className="collection-title">{`Shop/${
-          !pathname.includes('all') ? collection.title : 'All'
-        }`}</p>
+        <p className="collection-title">
+          <Link to="/" className="home-link">
+            Home
+          </Link>{' '}
+          / {!pathname.includes('all') ? collection.title : 'All'}
+        </p>
         <motion.button
           layoutId="abc"
           transition={{ease: 'easeInOut'}}

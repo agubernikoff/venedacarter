@@ -70,7 +70,7 @@ function NewArrivals({collection}) {
   return (
     <>
       <div className="new-arrivals-container">
-        <div style={{height: '100%'}}>
+        <div style={{margin: '1rem', marginLeft: '0'}}>
           <p className="new-arrivals-container-p">{collection.title}</p>
         </div>
         <div className="new-arrivals-text">
