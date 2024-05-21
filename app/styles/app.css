@@ -1747,7 +1747,7 @@ fieldset > input {
 
 .about-image {
   width: 100%;
-  aspect-ratio: 1 / 1.5;
+  /* aspect-ratio: 1 / 1.5; */
   @media (min-width: 44em) {
     width: 30%;
     margin-top: 1.5rem;
