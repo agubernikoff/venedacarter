@@ -228,10 +228,13 @@ export async function action({request, context}) {
       case 'DELETE': {
         // handles address deletion
         try {
-          const {data, errors} = await storefront.mutate(
+          const {customerAddressDelete, errors} = await storefront.mutate(
             DELETE_ADDRESS_MUTATION,
             {
-              variables: {addressId: decodeURIComponent(addressId)},
+              variables: {
+                id: decodeURIComponent(addressId),
+                customerAccessToken: token,
+              },
             },
           );
 
@@ -239,16 +242,21 @@ export async function action({request, context}) {
             throw new Error(errors[0].message);
           }
 
-          if (data?.customerAddressDelete?.userErrors?.length) {
-            throw new Error(data?.customerAddressDelete?.userErrors[0].message);
+          if (customerAddressDelete?.customerUserErrors?.length) {
+            throw new Error(
+              customerAddressDelete?.customerUserErrors[0].message,
+            );
           }
 
-          if (!data?.customerAddressDelete?.deletedAddressId) {
+          if (!customerAddressDelete?.deletedCustomerAddressId) {
             throw new Error('Customer address delete failed.');
           }
 
           return json(
-            {error: null, deletedAddress: addressId},
+            {
+              error: null,
+              deletedAddress: customerAddressDelete?.deletedCustomerAddressId,
+            },
             {
               headers: {
                 'Set-Cookie': await context.session.commit(),
@@ -318,6 +326,7 @@ export async function action({request, context}) {
 export default function Addresses() {
   const {customer} = useOutletContext();
   const {defaultAddress, addresses} = customer;
+  const [addys, setAddys] = useState(addresses?.nodes);
   const [editAddressId, setEditAddressId] = useState(null);
   const [displayForm, setDisplayForm] = useState(false);
   const actionData = useActionData();
@@ -341,8 +350,23 @@ export default function Addresses() {
         1,
         actionData?.updatedAddress?.customerAddress,
       );
+      setAddys(addresses?.nodes);
+      handleCancelEdit();
     }
   }, [actionData?.updatedAddress, addresses?.nodes]);
+
+  useEffect(() => {
+    if (actionData?.deletedAddress) {
+      const old = addresses?.nodes?.find(
+        (n) =>
+          stripQueryString(n.id) ===
+          stripQueryString(actionData?.deletedAddress),
+      );
+      const index = addresses?.nodes?.indexOf(old);
+      addresses?.nodes?.splice(index, 1);
+      setAddys(addresses?.nodes);
+    }
+  }, [actionData?.deletedAddress, addresses?.nodes]);
 
   const handleEditClick = (addressId) => {
     setEditAddressId(addressId);
@@ -351,7 +375,6 @@ export default function Addresses() {
   const handleCancelEdit = () => {
     window.scrollTo(0, 0);
     if (editAddressId) setEditAddressId(null);
-
     if (displayForm) setDisplayForm(false);
   };
 
@@ -362,7 +385,7 @@ export default function Addresses() {
           {!editAddressId && (
             <p className="account-address-bold">Saved Addresses</p>
           )}
-          {!addresses.nodes.length ? (
+          {!addys.length ? (
             <div className="empty-addresses">
               <p>You have no addresses saved.</p>
             </div>
@@ -370,7 +393,7 @@ export default function Addresses() {
             <div>
               <div className="address-container">
                 <ExistingAddresses
-                  addresses={addresses}
+                  addresses={addys}
                   defaultAddress={defaultAddress}
                   editAddressId={editAddressId}
                   onEditClick={handleEditClick}
@@ -453,7 +476,7 @@ export function ExistingAddresses({
 }) {
   return (
     <div>
-      {addresses.nodes.map((address) => (
+      {addresses.map((address) => (
         <div key={address.id} className="existing-address">
           {stripQueryString(editAddressId) === stripQueryString(address.id) ? (
             <AddressForm
@@ -485,7 +508,16 @@ export function ExistingAddresses({
               <AddressDisplay address={address} />
               <div className="address-action-container">
                 <button onClick={() => onEditClick(address.id)}>EDIT</button>
-                <button>DELETE</button>
+                <Form id={address.id} method="delete">
+                  <fieldset>
+                    <input
+                      type="hidden"
+                      name="addressId"
+                      defaultValue={address.id}
+                    />
+                  </fieldset>
+                  <button type="submit">DELETE</button>
+                </Form>
               </div>
             </div>
           )}

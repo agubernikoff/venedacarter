@@ -31,18 +31,18 @@ mutation customerAddressUpdate($address: MailingAddressInput!, $customerAccessTo
 
 // NOTE: https://shopify.dev/docs/api/customer/latest/mutations/customerAddressDelete
 export const DELETE_ADDRESS_MUTATION = `#graphql
-  mutation customerAddressDelete(
-    $addressId: ID!,
-  ) {
-    customerAddressDelete(addressId: $addressId) {
-      deletedAddressId
-      userErrors {
-        code
-        field
-        message
-      }
+mutation customerAddressDelete($customerAccessToken: String!, $id: ID!) {
+  customerAddressDelete(customerAccessToken: $customerAccessToken, id: $id) {
+    customerUserErrors {
+      message
+    }
+    deletedCustomerAddressId
+    customerUserErrors {
+      field
+      message
     }
   }
+}
 `;
 
 // NOTE: https://shopify.dev/docs/api/customer/latest/mutations/customerAddressCreate
