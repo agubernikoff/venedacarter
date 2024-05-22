@@ -125,9 +125,7 @@ function OrderItem({order}) {
     if (!expanded) animate(arrow.current, {transform: 'rotate(0deg)'});
     if (expanded) animate(arrow.current, {transform: 'rotate(-90deg)'});
   }
-  const fulfillmentStatus = flattenConnection(order.fulfillments)[0]?.status;
-
-  console.log('order', order);
+  // const fulfillmentStatus = flattenConnection(order.fulfillments)[0]?.status;
 
   return (
     <>
@@ -146,6 +144,7 @@ function OrderItem({order}) {
             transform: 'rotate(-90deg)',
           }}
           ref={arrow}
+          alt="arrow"
         />
         <div className="account-orders-grid-box-container">
           <p>{new Date(order.processedAt).toDateString()}</p>
@@ -163,9 +162,9 @@ function OrderItem({order}) {
           </p>
         </div>
         <div className="account-orders-grid-box-container">
-          <p>{order.financialStatus}</p>
+          <p>{order.fulfillmentStatus}</p>
         </div>
-        {fulfillmentStatus && <p>{fulfillmentStatus}</p>}
+        {/* {fulfillmentStatus && <p>{fulfillmentStatus}</p>} */}
         <Money data={order.totalPrice} />
       </motion.div>
       <AnimatePresence mode="sync">
@@ -251,6 +250,9 @@ function OrderItem({order}) {
               </div>
               <div>
                 <div style={{marginBottom: '1rem'}}>
+                  <p>n/a</p>
+                  <p>n/a</p>
+                  <p>n/a</p>
                   {/* <Money
                     data={{
                       amount: order.lineItems?.nodes
