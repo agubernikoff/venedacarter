@@ -250,9 +250,6 @@ function OrderItem({order}) {
               </div>
               <div>
                 <div style={{marginBottom: '1rem'}}>
-                  <p>n/a</p>
-                  <p>n/a</p>
-                  <p>n/a</p>
                   {/* <Money
                     data={{
                       amount: order.lineItems?.nodes
@@ -261,8 +258,10 @@ function OrderItem({order}) {
                       currencyCode: order.totalPrice.currencyCode,
                     }}
                   /> */}
-                  {/* <Money data={order.totalTax} />
-                  <Money
+                  <p>n/a</p>
+                  <Money data={order.totalTax} />
+                  <p>n/a</p>
+                  {/* <Money
                     data={{
                       amount: (
                         parseFloat(order.totalPrice.amount) -
