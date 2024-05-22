@@ -196,18 +196,31 @@ function OrderItem({order}) {
                   <br />
                   <p>{n.title}</p>
                   <br />
-                  {n.variantOptions?.find((o) => isNaN(o.value))?.value &&
-                  n.variantOptions?.find((o) => isNaN(o.value))?.value !==
-                    'Default Title' ? (
+                  <p>
+                    Color:{' '}
+                    {
+                      n.variant.selectedOptions?.find(
+                        (o) => o.name === 'Material',
+                      )?.value
+                    }
+                  </p>
+                  <p>
+                    Size:{' '}
+                    {
+                      n.variant.selectedOptions?.find((o) => o.name === 'Size')
+                        ?.value
+                    }
+                  </p>
+                  {n.variant.selectedOptions?.find(
+                    (o) => o.name === 'Thickness',
+                  ) ? (
                     <p>
-                      Color:{' '}
-                      {n.variantOptions?.find((o) => isNaN(o.value))?.value}
-                    </p>
-                  ) : null}
-                  {n.variantOptions?.find((o) => !isNaN(o.value))?.value ? (
-                    <p>
-                      Size:{' '}
-                      {n.variantOptions?.find((o) => !isNaN(o.value))?.value}
+                      Width:{' '}
+                      {
+                        n.variant.selectedOptions?.find(
+                          (o) => o.name === 'Thickness',
+                        )?.value
+                      }
                     </p>
                   ) : null}
                 </div>
