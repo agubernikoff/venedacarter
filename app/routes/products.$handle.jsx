@@ -328,6 +328,12 @@ function ProductMain({selectedVariant, product, variants, isMobile}) {
         className={isMobile ? 'product-main-top-mobile' : 'product-main-top'}
       >
         {isMobile ? null : <p className="breadcrumbs">Shop / {title}</p>}
+      </div>
+      <div
+        className={
+          isMobile ? 'product-main-middle-mobile' : 'product-main-middle'
+        }
+      >
         <div
           className={
             isMobile ? 'product-main-title-mobile' : 'product-main-title'
@@ -339,12 +345,7 @@ function ProductMain({selectedVariant, product, variants, isMobile}) {
           </div>
           <ProductPrice selectedVariant={selectedVariant} isMobile={isMobile} />
         </div>
-      </div>
-      <div
-        className={
-          isMobile ? 'product-main-middle-mobile' : 'product-main-middle'
-        }
-      >
+
         <div
           className={
             isMobile
@@ -374,12 +375,6 @@ function ProductMain({selectedVariant, product, variants, isMobile}) {
             </div>
           )}
         </div>
-      </div>
-      <div
-        className={
-          isMobile ? 'product-main-bottom-mobile' : 'product-main-bottom'
-        }
-      >
         <Suspense
           fallback={
             <ProductForm
@@ -404,6 +399,16 @@ function ProductMain({selectedVariant, product, variants, isMobile}) {
             )}
           </Await>
         </Suspense>
+      </div>
+      <div
+        className={
+          isMobile ? 'product-main-bottom-mobile' : 'product-main-bottom'
+        }
+      >
+        <AddToCartButtonComponent
+          selectedVariant={selectedVariant}
+          isMobile={isMobile}
+        />
       </div>
     </div>
   );
@@ -460,26 +465,31 @@ function ProductForm({product, selectedVariant, variants, isMobile}) {
           {({option}) => <ProductOptions key={option.name} option={option} />}
         </VariantSelector>
       </div>
-      <AddToCartButton
-        disabled={!selectedVariant || !selectedVariant.availableForSale}
-        onClick={() => {
-          window.location.href = window.location.href + '#cart-aside';
-        }}
-        lines={
-          selectedVariant
-            ? [
-                {
-                  merchandiseId: selectedVariant.id,
-                  quantity: 1,
-                },
-              ]
-            : []
-        }
-        isMobile={isMobile}
-      >
-        {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
-      </AddToCartButton>
     </div>
+  );
+}
+
+function AddToCartButtonComponent({selectedVariant, isMobile}) {
+  return (
+    <AddToCartButton
+      disabled={!selectedVariant || !selectedVariant.availableForSale}
+      onClick={() => {
+        window.location.href = window.location.href + '#cart-aside';
+      }}
+      lines={
+        selectedVariant
+          ? [
+              {
+                merchandiseId: selectedVariant.id,
+                quantity: 1,
+              },
+            ]
+          : []
+      }
+      isMobile={isMobile}
+    >
+      {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
+    </AddToCartButton>
   );
 }
 
