@@ -1506,10 +1506,6 @@ aside li {
   padding-top: 2rem;
 }
 
-.account-login > .account-profile {
-  margin-top: 11rem;
-}
-
 .account-logout {
   display: inline-block;
 }
