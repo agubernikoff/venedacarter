@@ -1364,9 +1364,12 @@ aside li {
 
 .size-guide-popup {
   background-color: white;
-  width: 40%;
+  width: 75%;
   position: relative;
   z-index: 1100;
+  @media (min-width: 44em) {
+    width: 40%;
+  }
 }
 
 .size-guide-image {
