@@ -127,6 +127,8 @@ function OrderItem({order}) {
   }
   const fulfillmentStatus = flattenConnection(order.fulfillments)[0]?.status;
 
+  console.log('order', order);
+
   return (
     <>
       {/* <fieldset> */}
@@ -150,7 +152,7 @@ function OrderItem({order}) {
         </div>
         <div className="account-orders-grid-box-container">
           <Link to={`/account/orders/${order.id}`}>
-            <p>#{order.number}</p>
+            <p>{order.name}</p>
           </Link>
         </div>
         <div className="account-orders-grid-box-container">
@@ -188,7 +190,7 @@ function OrderItem({order}) {
                 className="account-orders-expanded-row"
               >
                 <br />
-                <Image data={n.image} aspectRatio="1:1.1" />
+                <Image data={n.variant.image} aspectRatio="1:1.1" />
                 <div>
                   <p style={{fontFamily: 'bold-font'}}>Description</p>
                   <br />
@@ -218,7 +220,7 @@ function OrderItem({order}) {
                 <div>
                   <p style={{fontFamily: 'bold-font'}}>Item Total</p>
                   <br />
-                  <Money data={n.totalPrice} />
+                  <Money data={n.variant.price} />
                 </div>
               </div>
             ))}
@@ -236,15 +238,15 @@ function OrderItem({order}) {
               </div>
               <div>
                 <div style={{marginBottom: '1rem'}}>
-                  <Money
+                  {/* <Money
                     data={{
                       amount: order.lineItems?.nodes
                         ?.map((n) => n.totalPrice.amount)
                         .reduce((partialSum, a) => partialSum + a, 0),
                       currencyCode: order.totalPrice.currencyCode,
                     }}
-                  />
-                  <Money data={order.totalTax} />
+                  /> */}
+                  {/* <Money data={order.totalTax} />
                   <Money
                     data={{
                       amount: (
@@ -253,7 +255,7 @@ function OrderItem({order}) {
                       ).toString(),
                       currencyCode: order.totalPrice.currencyCode,
                     }}
-                  />
+                  /> */}
                 </div>
                 <Money
                   style={{fontFamily: 'bold-font'}}

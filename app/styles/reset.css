@@ -109,6 +109,10 @@ input {
   padding: 0.5rem;
 }
 
+input:focus {
+  outline: none; /* Remove default browser outline */
+}
+
 legend {
   font-weight: 600;
   margin-bottom: 0.5rem;

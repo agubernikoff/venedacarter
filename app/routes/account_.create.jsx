@@ -178,7 +178,7 @@ export default function AccountProfile() {
             className="profile-input"
             id="password"
             name="password"
-            type="text"
+            type="password"
             autoComplete="current-password"
             placeholder="Password"
             aria-label="Password"
