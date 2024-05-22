@@ -87,7 +87,9 @@ fieldset {
   padding: 0rem;
   border: none;
   @media (min-width: 44em) {
-    padding: 1rem;
+    padding: 0rem;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
   }
 }
 

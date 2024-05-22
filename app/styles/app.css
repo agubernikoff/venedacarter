@@ -1535,9 +1535,15 @@ aside li {
   font-family: 'regular-font';
   text-align: center;
 }
+.account-addresses > form > fieldset {
+  width: 33.3%;
+  margin: auto;
+}
+
 .account-address-bold {
   font-family: 'bold-font' !important;
   font-size: 0.75rem;
+  margin-bottom: 1rem;
 }
 .address-container {
   text-align: center;
@@ -1577,7 +1583,7 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
   @media (min-width: 44em) {
-    width: 40%;
+    width: 33.3%;
   }
 }
 .login-links {
