@@ -114,6 +114,9 @@ export default function AccountProfile() {
   /** @type {ActionReturnData} */
   const action = useActionData();
   const customer = action?.customer ?? account?.customer;
+  const {formMethod} = useNavigation();
+  const stateForMethod = (method) => (formMethod === method ? state : 'idle');
+
   console.log(account);
   return (
     <div className="account-profile">
@@ -180,7 +183,7 @@ export default function AccountProfile() {
           type="submit"
           disabled={state !== 'idle'}
         >
-          {state !== 'idle' ? 'SAVING' : 'SAVE CHANGES'}
+          {stateForMethod('PUT') !== 'idle' ? 'SAVING' : 'SAVE CHANGES'}
         </button>
       </Form>
     </div>
