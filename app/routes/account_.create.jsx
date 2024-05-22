@@ -137,76 +137,79 @@ export default function AccountProfile() {
     if (action && action.created) navigate('/account/profile');
   }, [action, navigate]);
   return (
-    <div className="account-profile">
-      <Form method="POST">
-        <fieldset className="profile-fieldset">
-          {/* <label htmlFor="firstName">First name</label> */}
-          <input
-            className="profile-input"
-            id="firstName"
-            name="firstName"
-            type="text"
-            autoComplete="given-name"
-            placeholder="First name"
-            aria-label="First name"
-            minLength={2}
-          />
-          {/* <label htmlFor="lastName">Last name</label> */}
-          <input
-            className="profile-input"
-            id="lastName"
-            name="lastName"
-            type="text"
-            autoComplete="family-name"
-            placeholder="Last name"
-            aria-label="Last name"
-            minLength={2}
-          />
-          {/* <label htmlFor="firstName">First name</label> */}
-          <input
-            className="profile-input"
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            placeholder="Email"
-            aria-label="Email"
-            minLength={2}
-          />
-          {/* <label htmlFor="lastName">Last name</label> */}
-          <input
-            className="profile-input"
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            placeholder="Password"
-            aria-label="Password"
-            minLength={2}
-          />
-        </fieldset>
-        {action?.error ? (
-          <p>
-            <mark>
-              <small>{action.error}</small>
-            </mark>
-          </p>
-        ) : (
-          <br />
-        )}
-        <button
-          className="profile-button"
-          type="submit"
-          disabled={state !== 'idle'}
-        >
-          {state !== 'idle' ? 'LOADING' : 'REGISTER'}
-        </button>
-      </Form>
-      <div className="login-links">
-        <a>Reset Password</a>
-        <NavLink prefetch="intent" to="/account/create">
-          Create an Account
-        </NavLink>
+    <div className="account-login">
+      <p className="stockists-title">CREATE AN ACCOUNT</p>
+      <div className="account-profile">
+        <Form method="POST">
+          <fieldset className="profile-fieldset">
+            {/* <label htmlFor="firstName">First name</label> */}
+            <input
+              className="profile-input"
+              id="firstName"
+              name="firstName"
+              type="text"
+              autoComplete="given-name"
+              placeholder="First name"
+              aria-label="First name"
+              minLength={2}
+            />
+            {/* <label htmlFor="lastName">Last name</label> */}
+            <input
+              className="profile-input"
+              id="lastName"
+              name="lastName"
+              type="text"
+              autoComplete="family-name"
+              placeholder="Last name"
+              aria-label="Last name"
+              minLength={2}
+            />
+            {/* <label htmlFor="firstName">First name</label> */}
+            <input
+              className="profile-input"
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="Email"
+              aria-label="Email"
+              minLength={2}
+            />
+            {/* <label htmlFor="lastName">Last name</label> */}
+            <input
+              className="profile-input"
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              placeholder="Password"
+              aria-label="Password"
+              minLength={2}
+            />
+          </fieldset>
+          {action?.error ? (
+            <p>
+              <mark>
+                <small>{action.error}</small>
+              </mark>
+            </p>
+          ) : (
+            <br />
+          )}
+          <button
+            className="profile-button"
+            type="submit"
+            disabled={state !== 'idle'}
+          >
+            {state !== 'idle' ? 'LOADING' : 'REGISTER'}
+          </button>
+        </Form>
+        <div className="login-links">
+          <a>Reset Password</a>
+          <NavLink prefetch="intent" to="/account/create">
+            Create an Account
+          </NavLink>
+        </div>
       </div>
     </div>
   );

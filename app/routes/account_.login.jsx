@@ -121,56 +121,59 @@ export default function AccountProfile() {
   }, [action, navigate]);
 
   return (
-    <div className="account-profile">
-      <Form method="PUT">
-        <fieldset className="profile-fieldset">
-          {/* <label htmlFor="firstName">First name</label> */}
-          <input
-            className="profile-input"
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            placeholder="Email"
-            aria-label="Email"
-            // defaultValue={customer.lastName ?? ''}
-            minLength={2}
-          />
-          {/* <label htmlFor="lastName">Last name</label> */}
-          <input
-            className="profile-input"
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            placeholder="Password"
-            aria-label="Password"
-            // defaultValue={customer.firstName ?? ''}
-            minLength={2}
-          />
-        </fieldset>
-        {action?.error ? (
-          <p>
-            <mark>
-              <small>{action.error}</small>
-            </mark>
-          </p>
-        ) : (
-          <br />
-        )}
-        <button
-          className="profile-button"
-          type="submit"
-          disabled={state !== 'idle'}
-        >
-          {state !== 'idle' ? 'LOGGING IN' : 'CONTINUE'}
-        </button>
-      </Form>
-      <div className="login-links">
-        <a>Reset Password</a>
-        <NavLink prefetch="intent" to="/account/create">
-          Create an Account
-        </NavLink>
+    <div className="account-login">
+      <p className="stockists-title">LOG IN</p>
+      <div className="account-profile">
+        <Form method="PUT">
+          <fieldset className="profile-fieldset">
+            {/* <label htmlFor="firstName">First name</label> */}
+            <input
+              className="profile-input"
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              placeholder="Email"
+              aria-label="Email"
+              // defaultValue={customer.lastName ?? ''}
+              minLength={2}
+            />
+            {/* <label htmlFor="lastName">Last name</label> */}
+            <input
+              className="profile-input"
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              placeholder="Password"
+              aria-label="Password"
+              // defaultValue={customer.firstName ?? ''}
+              minLength={2}
+            />
+          </fieldset>
+          {action?.error ? (
+            <p>
+              <mark>
+                <small>{action.error}</small>
+              </mark>
+            </p>
+          ) : (
+            <br />
+          )}
+          <button
+            className="profile-button"
+            type="submit"
+            disabled={state !== 'idle'}
+          >
+            {state !== 'idle' ? 'LOGGING IN' : 'CONTINUE'}
+          </button>
+        </Form>
+        <div className="login-links">
+          <a>Reset Password</a>
+          <NavLink prefetch="intent" to="/account/create">
+            Create an Account
+          </NavLink>
+        </div>
       </div>
     </div>
   );
