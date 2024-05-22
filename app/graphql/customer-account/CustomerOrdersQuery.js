@@ -15,11 +15,10 @@ fragment DiscountApplication on DiscountApplication {
     }
   }
 }
-fragment OrderLineItemFull on LineItem {
-  id
+fragment OrderLineItemFull on OrderLineItem {
   title
   quantity
-  price {
+  originalTotalPrice {
     ...OrderMoney
   }
   discountAllocations {
@@ -30,23 +29,22 @@ fragment OrderLineItemFull on LineItem {
       ...DiscountApplication
     }
   }
-  totalDiscount {
-    ...OrderMoney
-  }
-  totalPrice{
-    ...OrderMoney
-  }
-  image {
-    altText
-    height
-    url
-    id
-    width
-  }
-  variantTitle
-  variantOptions{
-    name
-    value
+  variant{
+    title
+    image{
+      url
+      altText
+      height
+      id
+      width
+    }
+    selectedOptions{
+      name
+      value
+    }
+    price{
+      ...OrderMoney
+    }
   }
 }`;
 export const ORDER_ITEM_FRAGMENT = `#graphql
@@ -60,13 +58,9 @@ export const ORDER_ITEM_FRAGMENT = `#graphql
       currencyCode
     }
     financialStatus
-    fulfillments(first: 1) {
-      nodes {
-        status
-      }
-    }
+    fulfillmentStatus
     id
-    number
+    name
     processedAt
     lineItems(first: 100) {
       nodes {
@@ -110,8 +104,9 @@ export const CUSTOMER_ORDERS_QUERY = `#graphql
     $first: Int
     $last: Int
     $startCursor: String
+    $customerAccessToken:String!
   ) {
-    customer {
+    customer(customerAccessToken:$customerAccessToken) {
       ...CustomerOrders
     }
   }

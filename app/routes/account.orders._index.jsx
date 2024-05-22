@@ -7,7 +7,7 @@ import {
   Image,
 } from '@shopify/hydrogen';
 import React, {useState, useRef} from 'react';
-import {json} from '@shopify/remix-oxygen';
+import {redirect, json} from '@shopify/remix-oxygen';
 import {CUSTOMER_ORDERS_QUERY} from '~/graphql/customer-account/CustomerOrdersQuery';
 import {motion, AnimatePresence, animate, LayoutGroup} from 'framer-motion';
 import closearrow from '../assets/closearrow.png';
@@ -24,31 +24,34 @@ export const meta = () => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({request, context}) {
+  const token = context.session.get('customerAccessToken');
+  if (!token) return redirect('account/login');
+
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 20,
   });
-  return null;
-  // const {data, errors} = await context.customerAccount.query(
-  //   CUSTOMER_ORDERS_QUERY,
-  //   {
-  //     variables: {
-  //       ...paginationVariables,
-  //     },
-  //   },
-  // );
+  const {customer, errors} = await context.storefront.query(
+    CUSTOMER_ORDERS_QUERY,
+    {
+      variables: {
+        ...paginationVariables,
+        customerAccessToken: token,
+      },
+    },
+  );
 
-  // if (errors?.length || !data?.customer) {
-  //   throw Error('Customer orders not found');
-  // }
+  if (errors?.length || !customer) {
+    throw Error('Customer orders not found');
+  }
 
-  // return json(
-  //   {customer: data.customer},
-  //   {
-  //     headers: {
-  //       'Set-Cookie': await context.session.commit(),
-  //     },
-  //   },
-  // );
+  return json(
+    {customer},
+    {
+      headers: {
+        'Set-Cookie': await context.session.commit(),
+      },
+    },
+  );
 }
 
 export default function Orders() {
