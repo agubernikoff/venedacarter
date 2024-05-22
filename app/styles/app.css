@@ -1503,7 +1503,7 @@ aside li {
 
 .account-login {
   min-height: calc(100vh - var(--header-height));
-  padding-top: 2rem;
+  padding-top: 3rem;
 }
 
 .account-logout {
@@ -1511,7 +1511,7 @@ aside li {
 }
 
 .account {
-  padding-top: 2rem;
+  padding-top: 3rem;
   min-height: calc(100vh - var(--header-height));
 }
 
@@ -1844,7 +1844,7 @@ fieldset > input {
 .contact-title {
   font-size: 0.75rem;
   font-family: 'regular-font';
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 .contact-container {
@@ -1873,7 +1873,7 @@ fieldset > input {
 
 .stockists-page {
   width: 100%;
-  padding-top: 2rem;
+  padding-top: 3rem;
   margin: auto;
   text-align: center;
   font-size: 0.75rem;
@@ -1885,7 +1885,7 @@ fieldset > input {
 }
 
 .stockists-title {
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
   font-size: 0.75rem;
   font-family: 'regular-font';
   text-align: center;
@@ -1894,19 +1894,19 @@ fieldset > input {
 .stockists-country {
   font-size: 0.75rem;
   font-family: 'regular-font';
-  padding-top: 2rem;
+  padding-top: 3rem;
   padding-bottom: 2rem;
 }
 
 .stockists-country-canada {
   font-size: 0.75rem;
   font-family: 'regular-font';
-  padding-top: 2rem;
+  padding-top: 3rem;
   padding-bottom: 2rem;
 }
 
 .stockists-country-container {
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
   border-top: 1px solid #eaeaea;
   width: 50%;
   margin: auto;
@@ -1934,7 +1934,7 @@ fieldset > input {
 
 .tospage {
   margin: auto;
-  padding-top: 2rem;
+  padding-top: 3rem;
   padding-bottom: 2rem;
   width: 92.5%;
   min-height: calc(100vh - var(--header-height));
