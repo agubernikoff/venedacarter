@@ -574,6 +574,7 @@ aside li {
 }
 
 #cart-aside aside {
+  transition: all 200ms ease-in-out;
   min-width: 100%;
   max-width: 100%;
   @media (min-width: 44em) {
