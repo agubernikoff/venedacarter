@@ -1,7 +1,7 @@
 import {Await} from '@remix-run/react';
 import {Suspense} from 'react';
 import {CartForm} from '@shopify/hydrogen';
-import {json} from '@shopify/remix-oxygen';
+import {redirect, json} from '@shopify/remix-oxygen';
 import {CartMain} from '~/components/Cart';
 import {useRootLoaderData} from '~/root';
 
@@ -11,6 +11,10 @@ import {useRootLoaderData} from '~/root';
 export const meta = () => {
   return [{title: `Hydrogen | Cart`}];
 };
+
+export async function loader({context}) {
+  return redirect('/#cart-aside');
+}
 
 /**
  * @param {ActionFunctionArgs}
