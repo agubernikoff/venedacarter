@@ -5,6 +5,7 @@ import React, {useRef, useEffect} from 'react';
 import {useState} from 'react';
 import {applyTrackingParams} from '~/lib/search';
 import {FeaturedProduct} from '../routes/_index';
+import {Footer} from './Footer';
 
 export const NO_PREDICTIVE_SEARCH_RESULTS = [
   {type: 'queries', items: []},
@@ -267,7 +268,12 @@ export function PredictiveSearchForm({
   );
 }
 
-export function PredictiveSearchResults() {
+export function PredictiveSearchResults({
+  menu,
+  shop,
+  footerImage,
+  supportMenu,
+}) {
   const {results, totalResults, searchInputRef, searchTerm, state} =
     usePredictiveSearch();
 
@@ -311,6 +317,12 @@ export function PredictiveSearchResults() {
           </p>
         </Link>
       )} */}
+      <Footer
+        menu={menu}
+        shop={shop}
+        footerImage={footerImage}
+        supportMenu={supportMenu}
+      />
     </motion.div>
   );
 }

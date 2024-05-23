@@ -32,7 +32,12 @@ export function Layout({
   return (
     <>
       <CartAside cart={cart} />
-      <SearchAside />
+      <SearchAside
+        menu={footer?.menu}
+        shop={header?.shop}
+        footerImage={footerImage}
+        supportMenu={supportMenu?.menu}
+      />
       {header && (
         <Header
           header={header}
@@ -76,11 +81,16 @@ function CartAside({cart}) {
   );
 }
 
-function SearchAside() {
+function SearchAside({menu, shop, footerImage, supportMenu}) {
   return (
     <Aside id="search-aside" heading="SEARCH">
       <div className="predictive-search">
-        <PredictiveSearchResults />
+        <PredictiveSearchResults
+          menu={menu}
+          shop={shop}
+          footerImage={footerImage}
+          supportMenu={supportMenu}
+        />
       </div>
     </Aside>
   );
