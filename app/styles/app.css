@@ -424,9 +424,9 @@ aside li {
   font-family: 'regular-font';
   position: relative;
   padding-left: 15px;
-  margin-left: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-left: 1rem !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
 }
 .footer-title::before {
   content: '';
