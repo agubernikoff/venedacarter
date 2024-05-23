@@ -1,5 +1,6 @@
 import {Link, Form, useParams, useFetcher} from '@remix-run/react';
 import {Image, Money, Pagination} from '@shopify/hydrogen';
+import {motion} from 'framer-motion';
 import React, {useRef, useEffect} from 'react';
 import {useState} from 'react';
 import {applyTrackingParams} from '~/lib/search';
@@ -286,7 +287,11 @@ export function PredictiveSearchResults() {
   }
 
   return (
-    <div className="predictive-search-results">
+    <motion.div
+      className="predictive-search-results"
+      initial={{height: 0}}
+      animate={{height: 'calc(100vh - 2 * var(--header-height))'}}
+    >
       <div>
         {results.map(({type, items}) => (
           <PredictiveSearchResult
@@ -306,7 +311,7 @@ export function PredictiveSearchResults() {
           </p>
         </Link>
       )} */}
-    </div>
+    </motion.div>
   );
 }
 
