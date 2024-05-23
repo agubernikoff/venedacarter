@@ -1598,7 +1598,7 @@ aside li {
   text-align: center;
 }
 .account-addresses > form > fieldset {
-  width: 33.3%;
+  width: 31.3%;
   margin: auto;
 }
 
@@ -1645,7 +1645,7 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font';
   @media (min-width: 44em) {
-    width: 33.3%;
+    width: 31.3%;
   }
 }
 .login-links {
@@ -1825,7 +1825,7 @@ fieldset > input {
   width: 100%;
   /* aspect-ratio: 1 / 1.5; */
   @media (min-width: 44em) {
-    width: 33.3%;
+    width: 31.3%;
     margin-top: 1.5rem;
   }
 }
@@ -1850,7 +1850,7 @@ fieldset > input {
   text-align: left;
   margin: auto;
   @media (min-width: 44em) {
-    width: 33.3%;
+    width: 31.3%;
   }
 }
 
@@ -1869,7 +1869,7 @@ fieldset > input {
   min-height: calc(100vh - var(--header-height));
   height: calc(100vh - var(--header-height));
   @media (min-width: 44em) {
-    width: 33.3%;
+    width: 31.3%;
   }
 }
 
@@ -1912,7 +1912,7 @@ fieldset > input {
   font-family: 'regular-font';
   min-height: calc(100vh - var(--header-height));
   @media (min-width: 44em) {
-    width: 33.3%;
+    width: 31.3%;
   }
 }
 
@@ -1971,7 +1971,7 @@ fieldset > input {
   width: 92.5%;
   min-height: calc(100vh - var(--header-height));
   @media (min-width: 44em) {
-    width: 33.3%;
+    width: 31.3%;
   }
 }
 
