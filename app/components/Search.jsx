@@ -46,7 +46,7 @@ export function SearchForm({searchTerm}) {
         name="q"
         placeholder="Search…"
         ref={inputRef}
-        type="text"
+        type="search"
       />
       &nbsp;
       <button type="submit">Search</button>
