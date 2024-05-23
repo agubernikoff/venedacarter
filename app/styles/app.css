@@ -388,6 +388,9 @@ aside li {
   grid-template-areas: 'brand support newsletter';
   grid-auto-columns: 1fr;
 }
+.predictive-search-results .footer {
+  height: calc(100vh - 2 * var(--header-height));
+}
 .footer-mobile {
   margin-top: auto;
   height: calc(100vh - var(--header-height));
@@ -416,6 +419,11 @@ aside li {
   border-right: none;
   height: 100%;
 }
+.predictive-search-results .brand-footer,
+.predictive-search-results .support-footer,
+.predictive-search-results .newsletter-footer {
+  height: calc(100% - var(--header-height));
+}
 .footer-title-container {
   border-bottom: 1px solid #eaeaea;
 }
@@ -424,9 +432,9 @@ aside li {
   font-family: 'regular-font';
   position: relative;
   padding-left: 15px;
-  margin-left: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-left: 1rem !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
 }
 .footer-title::before {
   content: '';
