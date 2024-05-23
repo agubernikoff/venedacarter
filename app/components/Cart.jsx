@@ -94,10 +94,8 @@ function CartLineItem({layout, line}) {
             }
           }}
         >
-          <p>
-            <p style={{marginBottom: '-3%'}} className="bold-cart">
-              {product.title}
-            </p>
+          <p style={{marginBottom: '-3%'}} className="bold-cart">
+            {product.title || ''}
           </p>
         </Link>
         <CartLinePrice line={line} as="span" />
@@ -121,7 +119,7 @@ function CartLineItem({layout, line}) {
  */
 function CartCheckoutActions({checkoutUrl}) {
   if (!checkoutUrl) return null;
-
+  console.log(checkoutUrl);
   return (
     <div>
       <button className="cart-checkout-button">
