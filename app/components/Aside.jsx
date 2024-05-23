@@ -40,7 +40,7 @@ export function Aside({children, heading, id = 'aside'}) {
                     onFocus={fetchResults}
                     placeholder="Search"
                     ref={inputRef}
-                    type="text"
+                    type="text !important"
                   />
                   &nbsp;
                   {/* <button
