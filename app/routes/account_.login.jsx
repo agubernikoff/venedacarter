@@ -1,4 +1,4 @@
-import {json} from '@shopify/remix-oxygen';
+import {redirect, json} from '@shopify/remix-oxygen';
 import {
   Form,
   NavLink,
@@ -20,18 +20,12 @@ export const meta = () => {
 /**
  * @param {LoaderFunctionArgs}
  */
-// export async function loader({context}) {
-//   await context.customerAccount.handleAuthStatus();
-
-//   return json(
-//     {},
-//     {
-//       headers: {
-//         'Set-Cookie': await context.session.commit(),
-//       },
-//     },
-//   );
-// }
+export async function loader({context}) {
+  console.log(context.session.get('customerAccessToken'));
+  if (context.session.get('customerAccessToken'))
+    return redirect('/account/profile');
+  return json({});
+}
 
 /**
  * @param {ActionFunctionArgs}
