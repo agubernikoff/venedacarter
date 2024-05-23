@@ -1826,7 +1826,7 @@ fieldset > input {
   /* aspect-ratio: 1 / 1.5; */
   @media (min-width: 44em) {
     width: 31.3%;
-    margin-top: 1.5rem;
+    margin-top: 3rem;
   }
 }
 
