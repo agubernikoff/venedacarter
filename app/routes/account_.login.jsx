@@ -21,7 +21,6 @@ export const meta = () => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({context}) {
-  console.log(context.session.get('customerAccessToken'));
   if (context.session.get('customerAccessToken'))
     return redirect('/account/profile');
   return json({});
@@ -75,6 +74,7 @@ export async function action({request, context}) {
           status: 200,
           headers: {
             'Set-Cookie': await context.session.commit(),
+            Location: '/account/profile',
           },
         },
       );
@@ -108,11 +108,6 @@ export default function AccountProfile() {
   const {state} = useNavigation();
   /** @type {ActionReturnData} */
   const action = useActionData();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (action && action.created) navigate('/account/profile');
-  }, [action, navigate]);
 
   return (
     <div className="account-login">
