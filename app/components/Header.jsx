@@ -28,6 +28,11 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
     document.body.classList.toggle('no-scroll', !isOpen);
   }
 
+  function closeMenu() {
+    setIsOpen(false);
+    document.body.classList.toggle('no-scroll', !isOpen);
+  }
+
   const {shop, menu} = header;
 
   return (
@@ -55,7 +60,12 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
         )}
       </div>
       <div className="header-right">
-        <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} isMobile={isMobile} />
+        <HeaderCtas
+          isLoggedIn={isLoggedIn}
+          cart={cart}
+          isMobile={isMobile}
+          closeMenu={closeMenu}
+        />
       </div>
       <AnimatePresence mode="wait">
         {isOpen && (
@@ -140,8 +150,8 @@ function HeaderMenuItem({
   useEffect(() => {
     if (new URL(item.url).pathname === pathname) setIsActive(true);
     else if (pathname.includes('collections') && item.title === 'Shop') {
-      if (pathname.includes('new-arrivals')) setIsActive(false);
-      setIsActive(true);
+      if (pathname.includes('new_arrivals')) setIsActive(false);
+      else setIsActive(true);
     } else setIsActive(false);
   }, [pathname, item.title, item.url]);
 
@@ -367,10 +377,10 @@ export function HeaderMenuMobile({
 /**
  * @param {Pick<HeaderProps, 'isLoggedIn' | 'cart'>}
  */
-function HeaderCtas({isLoggedIn, cart, isMobile}) {
+function HeaderCtas({isLoggedIn, cart, isMobile, closeMenu}) {
   return (
     <nav className="header-ctas" role="navigation">
-      <SearchToggle isMobile={isMobile} />
+      <SearchToggle isMobile={isMobile} closeMenu={closeMenu} />
       {isMobile ? null : (
         <NavLink
           prefetch="intent"
@@ -380,7 +390,7 @@ function HeaderCtas({isLoggedIn, cart, isMobile}) {
           {isLoggedIn ? 'Account' : 'Log in'}
         </NavLink>
       )}
-      <CartToggle cart={cart} isMobile={isMobile} />
+      <CartToggle cart={cart} isMobile={isMobile} closeMenu={closeMenu} />
     </nav>
   );
 }
@@ -395,7 +405,7 @@ function HeaderMenuMobileToggle({isOpen, toggleMenu}) {
   );
 }
 
-function SearchToggle({isMobile}) {
+function SearchToggle({isMobile, closeMenu}) {
   const {hash} = useLocation();
 
   const params = useParams();
@@ -438,7 +448,10 @@ function SearchToggle({isMobile}) {
       {isMobile ? (
         <a
           href={hash === '#search-aside' ? '#x' : '#search-aside'}
-          onClick={clearSearch}
+          onClick={() => {
+            clearSearch();
+            closeMenu();
+          }}
         >
           <img src={search} />{' '}
         </a>
@@ -457,14 +470,20 @@ function SearchToggle({isMobile}) {
 /**
  * @param {{count: number}}
  */
-function CartBadge({count, isMobile}) {
+function CartBadge({count, isMobile, closeMenu}) {
   function toggleScroll() {
     document.body.classList.toggle('no-scroll');
   }
   return (
     <>
       {isMobile ? (
-        <a href="#cart-aside" onClick={toggleScroll}>
+        <a
+          href="#cart-aside"
+          onClick={() => {
+            toggleScroll();
+            closeMenu();
+          }}
+        >
           <img src={cart} />
         </a>
       ) : (
@@ -477,14 +496,25 @@ function CartBadge({count, isMobile}) {
 /**
  * @param {Pick<HeaderProps, 'cart'>}
  */
-function CartToggle({cart, isMobile}) {
+function CartToggle({cart, isMobile, closeMenu}) {
   return (
-    <Suspense fallback={<CartBadge isMobile={isMobile} count={0} />}>
+    <Suspense
+      fallback={
+        <CartBadge isMobile={isMobile} count={0} closeMenu={closeMenu} />
+      }
+    >
       <Await resolve={cart}>
         {(cart) => {
-          if (!cart) return <CartBadge isMobile={isMobile} count={0} />;
+          if (!cart)
+            return (
+              <CartBadge isMobile={isMobile} count={0} closeMenu={closeMenu} />
+            );
           return (
-            <CartBadge isMobile={isMobile} count={cart.totalQuantity || 0} />
+            <CartBadge
+              isMobile={isMobile}
+              count={cart.totalQuantity || 0}
+              closeMenu={closeMenu}
+            />
           );
         }}
       </Await>
