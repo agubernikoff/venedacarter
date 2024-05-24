@@ -79,7 +79,7 @@ input[type='search']::-webkit-search-results-decoration {
 aside header {
   align-items: center;
   border-bottom: 1px solid #eaeaea;
-  border-top: 1px solid #eaeaea;
+  /* border-top: 1px solid #eaeaea; */
   display: flex;
   height: var(--header-height);
   justify-content: space-between;
@@ -2125,4 +2125,11 @@ button.collection-title {
 
 .page {
   min-height: calc(100vh - var(--header-height));
+}
+
+body {
+  overscroll-behavior-y: default;
+  @media (min-width: 44em) {
+    overscroll-behavior-y: none;
+  }
 }
