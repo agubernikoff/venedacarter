@@ -51,25 +51,51 @@ export async function loader({request, params, context}) {
   if (!handle) {
     return redirect('/collections');
   }
+
   const {collection} = await storefront.query(COLLECTION_QUERY, {
     variables: {
-      sortKey: handle !== 'all' ? sortKey : null,
+      sortKey: handle !== 'all' && handle !== 'new_arrivals' ? sortKey : null,
       reverse,
       handle,
       productFilter: filter,
       ...paginationVariables,
     },
   });
-  const {products} = await storefront.query(ALL_QUERY, {
-    variables: {
-      sortKey: handle === 'all' ? sortKey : null,
-      reverse,
-      query: filterAll,
-      ...paginationVariables,
-    },
-  });
+  const {products} =
+    handle === 'all'
+      ? await storefront.query(ALL_QUERY, {
+          variables: {
+            sortKey:
+              handle === 'all' || handle === 'new_arrivals'
+                ? sortKey || null
+                : null,
+            reverse,
+            query: filterAll,
+            ...paginationVariables,
+          },
+        })
+      : await storefront.query(NEW_ARRIVALS_QUERY, {
+          variables: {
+            query: filterAll,
+          },
+        });
 
-  if (!collection && handle !== 'all') {
+  if (handle === 'new_arrivals' && sortKey === 'PRICE') {
+    if (reverse)
+      products.nodes.sort(
+        (a, b) =>
+          b.priceRange.minVariantPrice.amount -
+          a.priceRange.minVariantPrice.amount,
+      );
+    else
+      products.nodes.sort(
+        (a, b) =>
+          a.priceRange.minVariantPrice.amount -
+          b.priceRange.minVariantPrice.amount,
+      );
+  }
+
+  if (!collection && handle !== 'all' && handle !== 'new_arrivals') {
     throw new Response(`Collection ${handle} not found`, {
       status: 404,
     });
@@ -116,7 +142,12 @@ export default function Collection() {
           <Link to="/" className="home-link">
             Home
           </Link>{' '}
-          / {!pathname.includes('all') ? collection.title : 'All'}
+          /{' '}
+          {!pathname.includes('all') && !pathname.includes('new_arrivals')
+            ? collection.title
+            : pathname.includes('new_arrivals')
+            ? 'New Arrivals'
+            : 'All'}
         </p>
         <motion.button
           layoutId="abc"
@@ -128,7 +159,11 @@ export default function Collection() {
         </motion.button>
       </div>
       <Pagination
-        connection={!pathname.includes('all') ? collection.products : products}
+        connection={
+          !pathname.includes('all') && !pathname.includes('new_arrivals')
+            ? collection.products
+            : products
+        }
       >
         {({nodes, NextLink, hasNextPage, nextPageUrl, state}) => (
           <>
@@ -330,35 +365,43 @@ function FilterAside({isMobile, toggleFilter}) {
               >
                 Price: High to Low
               </button>
-              <button
-                className="filter-selection"
-                onClick={() => {
-                  setSort(pathname.includes('all') ? 'CREATED_AT' : 'CREATED');
-                  setRev('true');
-                }}
-                style={
-                  (sort === 'CREATED_AT' || sort === 'CREATED') &&
-                  rev === 'true'
-                    ? {textDecoration: 'underline'}
-                    : null
-                }
-              >
-                Date: New to Old
-              </button>
-              <button
-                className="filter-selection"
-                onClick={() => {
-                  setSort(pathname.includes('all') ? 'CREATED_AT' : 'CREATED');
-                  setRev('');
-                }}
-                style={
-                  (sort === 'CREATED_AT' || sort === 'CREATED') && !rev
-                    ? {textDecoration: 'underline'}
-                    : null
-                }
-              >
-                Date: Old to New
-              </button>
+              {!pathname.includes('new_arrivals') ? (
+                <>
+                  <button
+                    className="filter-selection"
+                    onClick={() => {
+                      setSort(
+                        pathname.includes('all') ? 'CREATED_AT' : 'CREATED',
+                      );
+                      setRev('true');
+                    }}
+                    style={
+                      (sort === 'CREATED_AT' || sort === 'CREATED') &&
+                      rev === 'true'
+                        ? {textDecoration: 'underline'}
+                        : null
+                    }
+                  >
+                    Date: New to Old
+                  </button>
+                  <button
+                    className="filter-selection"
+                    onClick={() => {
+                      setSort(
+                        pathname.includes('all') ? 'CREATED_AT' : 'CREATED',
+                      );
+                      setRev('');
+                    }}
+                    style={
+                      (sort === 'CREATED_AT' || sort === 'CREATED') && !rev
+                        ? {textDecoration: 'underline'}
+                        : null
+                    }
+                  >
+                    Date: Old to New
+                  </button>
+                </>
+              ) : null}
             </div>
             <p className="filter-header-bold">Materials:</p>
             <div className="filter-selection-container">
@@ -419,7 +462,7 @@ function FilterAside({isMobile, toggleFilter}) {
               className="show-results-button"
               onClick={() => {
                 if (sort) params.set('sortkey', sort);
-                if (rev) params.set('reverse', rev);
+                params.set('reverse', rev);
                 if (mat) params.set('filter', mat);
                 setSearchParams(params, {
                   preventScrollReset: true,
@@ -561,6 +604,32 @@ const ALL_QUERY = `#graphql
       after: $endCursor,
       sortKey: $sortKey,
       reverse: $reverse,
+      query: $query
+    ) {
+      nodes {
+        ...ProductItem
+      }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        endCursor
+        startCursor
+      }
+    }
+  }
+`;
+
+const NEW_ARRIVALS_QUERY = `#graphql
+  ${PRODUCT_ITEM_FRAGMENT}
+  query Product(
+    $country: CountryCode
+    $language: LanguageCode
+    $query: String
+  ) @inContext(country: $country, language: $language) {
+    products(
+      first: 12,
+      sortKey: CREATED_AT,
+      reverse: true,
       query: $query
     ) {
       nodes {
