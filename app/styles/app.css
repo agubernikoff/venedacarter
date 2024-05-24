@@ -14,12 +14,12 @@
 
 @font-face {
   font-family: 'regular-font';
-  src: url('font-regular.otf') format('opentype');
+  src: url('diatype-regular.woff') format('opentype');
 }
 
 @font-face {
   font-family: 'bold-font';
-  src: url('bold-font.otf') format('opentype');
+  src: url('diatype-bold.woff') format('opentype');
 }
 
 /*
