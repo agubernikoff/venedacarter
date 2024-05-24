@@ -80,7 +80,7 @@ function NewArrivals({collection}) {
             nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas
             ligula massa, varius a, semper congue, euismod non, mi.
           </p>
-          <a>Discover</a>
+          <Link to={'/collections/new_arrivals'}>Discover</Link>
         </div>
       </div>
       <Link
@@ -126,7 +126,7 @@ function MobileNewArrivals({collection}) {
           ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula
           massa, varius a, semper congue, euismod non, mi.
         </p>
-        <a>Discover</a>
+        <Link to={'/collections/new_arrivals'}>Discover</Link>
       </div>
     </div>
   );
