@@ -48,7 +48,13 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
       </div>
       <div className={isMobile ? 'header-center-mobile' : 'header-center'}>
         {isMobile ? (
-          <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+          <NavLink
+            prefetch="intent"
+            to="/"
+            style={activeLinkStyle}
+            onClick={closeMenu}
+            end
+          >
             <img className="shop-name-mobile" src={mobIcon} />
           </NavLink>
         ) : (
