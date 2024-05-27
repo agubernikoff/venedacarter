@@ -557,7 +557,8 @@ aside li {
 }
 
 .newsletter-input-container > input,
-.newsletter-input-container-mobile > input {
+.newsletter-input-container-mobile > input,
+#email_114346644 {
   width: 70%;
   border: none;
   outline: none;

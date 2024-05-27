@@ -182,7 +182,7 @@ function Newsletter({footerImage, isMobile}) {
           }
         >
           <p>Join our newsletter for the latest news and releases.</p>
-          <form
+          {/* <form
             className={
               isMobile
                 ? 'newsletter-input-container-mobile'
@@ -191,7 +191,8 @@ function Newsletter({footerImage, isMobile}) {
           >
             <input placeholder="Email" name="email"></input>
             <button type="submit">Submit</button>
-          </form>
+          </form> */}
+          <div class="klaviyo-form-XrMRY4"></div>
         </div>
       </div>
     </div>

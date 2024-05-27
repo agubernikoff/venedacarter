@@ -23,6 +23,18 @@ export default async function handleRequest(
       'http://127.0.0.1:4040',
       'wss://kitten-composed-notably.ngrok-free.app:*',
       'https://kitten-composed-notably.ngrok-free.app:*',
+      'https://klaviyo.com',
+      'https://*.klaviyo.com',
+    ],
+    styleSrc: [
+      'https://klaviyo.com',
+      'https://*.klaviyo.com',
+      'https://fonts.googleapis.com',
+    ],
+    scriptSrc: [
+      'https://klaviyo.com',
+      'https://*.klaviyo.com',
+      'https://cdn.shopify.com',
     ],
   });
 
