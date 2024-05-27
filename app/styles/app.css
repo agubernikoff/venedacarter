@@ -620,7 +620,10 @@ aside li {
 }
 
 .klaviyo-form-XrMRY4.klaviyo-form.form-version-cid-1 {
-  padding-right: 1rem;
+  padding-right: 0rem;
+  @media (min-width: 44em) {
+    padding-right: 1rem;
+  }
 }
 .needsclick.go3894874857.kl-private-reset-css-Xuajs1 {
   white-space: nowrap !important;
