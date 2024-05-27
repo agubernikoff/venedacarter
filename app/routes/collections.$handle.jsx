@@ -38,9 +38,25 @@ export async function loader({request, params, context}) {
     : null;
   const reverse = Boolean(searchParams.get('reverse'));
   const filterFromParams = String(searchParams.get('filter') || '');
+  const isFeatured = Boolean(searchParams.get('isFeatured'));
   const filter = filterFromParams
-    ? {variantOption: {name: 'Material', value: filterFromParams}}
-    : {};
+    ? [
+        {
+          variantOption: {name: 'Material', value: filterFromParams},
+        },
+      ]
+    : [];
+  const featuredFilter = {
+    productMetafield: {
+      key: 'featured',
+      namespace: 'custom',
+      value: 'true',
+    },
+  };
+
+  if (isFeatured && handle !== 'all' && handle !== 'new_arrivals')
+    filter.push(featuredFilter);
+
   const filterAll = filterFromParams
     ? `variantOption.value:${filterFromParams}`
     : '';
@@ -54,9 +70,17 @@ export async function loader({request, params, context}) {
 
   const {collection} = await storefront.query(COLLECTION_QUERY, {
     variables: {
-      sortKey: handle !== 'all' && handle !== 'new_arrivals' ? sortKey : null,
-      reverse,
-      handle,
+      sortKey:
+        handle !== 'all' && handle !== 'new_arrivals'
+          ? sortKey
+          : handle === 'new_arrivals'
+          ? 'CREATED'
+          : null,
+      reverse: handle !== 'new_arrivals' ? reverse : true,
+      handle:
+        (handle === 'all' || handle === 'new_arrivals') && isFeatured
+          ? 'frontpage'
+          : handle,
       productFilter: filter,
       ...paginationVariables,
     },
@@ -109,7 +133,8 @@ export default function Collection() {
   const {ref, inView, entry} = useInView();
   const {collection, products} = useLoaderData();
 
-  const {pathname} = useLocation();
+  const {pathname, search} = useLocation();
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   function toggleFilter() {
     setIsFilterOpen(!isFilterOpen);
@@ -160,7 +185,8 @@ export default function Collection() {
       </div>
       <Pagination
         connection={
-          !pathname.includes('all') && !pathname.includes('new_arrivals')
+          (!pathname.includes('all') && !pathname.includes('new_arrivals')) ||
+          search.includes('isFeatured=true')
             ? collection.products
             : products
         }
@@ -273,8 +299,9 @@ function FilterAside({isMobile, toggleFilter}) {
   const [searchParams, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(search);
   const [sort, setSort] = useState();
-  const [rev, setRev] = useState();
+  const [rev, setRev] = useState(false);
   const [mat, setMat] = useState();
+  const [feat, setFeat] = useState();
 
   useEffect(() => {
     if (hash && hash !== '#x') toggleFilter();
@@ -285,6 +312,7 @@ function FilterAside({isMobile, toggleFilter}) {
     if (searchParams.get('sortkey')) setSort(searchParams.get('sortkey'));
     if (searchParams.get('reverse')) setRev(searchParams.get('reverse'));
     if (searchParams.get('filter')) setMat(searchParams.get('filter'));
+    if (searchParams.get('isFeatured')) setFeat(true);
   }, [searchParams]);
   return (
     <div
@@ -336,12 +364,23 @@ function FilterAside({isMobile, toggleFilter}) {
           <div className="filters-container">
             <p className="filter-header-bold">Sort By:</p>
             <div className="filter-selection-container">
-              <button className="filter-selection">Featured</button>
+              <button
+                className="filter-selection"
+                onClick={() => {
+                  setFeat(true);
+                  setRev(false);
+                  setSort(null);
+                }}
+                style={feat ? {textDecoration: 'underline'} : null}
+              >
+                Featured
+              </button>
               <button
                 className="filter-selection"
                 onClick={() => {
                   setSort('PRICE');
                   setRev('');
+                  setFeat(false);
                 }}
                 style={
                   sort === 'PRICE' && !rev
@@ -356,6 +395,7 @@ function FilterAside({isMobile, toggleFilter}) {
                 onClick={() => {
                   setSort('PRICE');
                   setRev('true');
+                  setFeat(false);
                 }}
                 style={
                   sort === 'PRICE' && rev === 'true'
@@ -374,6 +414,7 @@ function FilterAside({isMobile, toggleFilter}) {
                         pathname.includes('all') ? 'CREATED_AT' : 'CREATED',
                       );
                       setRev('true');
+                      setFeat(false);
                     }}
                     style={
                       (sort === 'CREATED_AT' || sort === 'CREATED') &&
@@ -391,6 +432,7 @@ function FilterAside({isMobile, toggleFilter}) {
                         pathname.includes('all') ? 'CREATED_AT' : 'CREATED',
                       );
                       setRev('');
+                      setFeat(false);
                     }}
                     style={
                       (sort === 'CREATED_AT' || sort === 'CREATED') && !rev
@@ -462,8 +504,13 @@ function FilterAside({isMobile, toggleFilter}) {
               className="show-results-button"
               onClick={() => {
                 if (sort) params.set('sortkey', sort);
-                params.set('reverse', rev);
+                else params.set('sortkey', '');
+                if (rev) params.set('reverse', true);
+                else params.set('reverse', '');
                 if (mat) params.set('filter', mat);
+                else params.set('filter', '');
+                if (feat) params.set('isFeatured', true);
+                else params.set('isFeatured', '');
                 setSearchParams(params, {
                   preventScrollReset: true,
                 });
