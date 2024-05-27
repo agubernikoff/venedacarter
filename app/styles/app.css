@@ -562,10 +562,66 @@ aside li {
   width: 70%;
   border: none;
   outline: none;
-  font-family: 'regular-font';
+  font-family: 'regular-font' !important;
   margin: 0;
-  padding: 0;
-  font-size: 0.75rem;
+  padding: 0 !important;
+  font-size: 0.75rem !important;
+}
+
+#email_114349298 {
+  padding: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid black !important;
+  font-family: 'regular-font' !important;
+  font-weight: normal !important;
+  font-size: 0.75rem !important;
+}
+
+#email_114349298::placeholder {
+  padding: 0 !important;
+  border: none !important;
+
+  font-family: 'regular-font' !important;
+  font-weight: normal !important;
+  font-size: 0.75rem !important;
+}
+
+#klaviyo_ariaid_2 {
+  display: none !important;
+}
+
+.needsclick.go3298969293.kl-private-reset-css-Xuajs1::before,
+.needsclick.go3298969293.kl-private-reset-css-Xuajs1 {
+  display: none !important;
+}
+
+.needsclick.kl-private-reset-css-Xuajs1::before {
+  display: none !important;
+}
+
+.needsclick.go3298969293.kl-private-reset-css-Xuajs1::before {
+  display: none !important;
+}
+
+.needsclick.kl-private-reset-css-Xuajs1::before {
+  display: none !important;
+}
+
+.klaviyo-form-XrMRY4.klaviyo-form.form-version-cid-1 {
+  padding-right: 1rem;
+}
+.needsclick.go3894874857.kl-private-reset-css-Xuajs1 {
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  background: none !important;
+  color: black !important;
+  border: none !important;
+  padding: 0 !important;
+  width: fit-content !important;
+  font-family: 'regular-font' !important;
+  font-weight: normal !important;
+  font-size: 0.75rem !important;
+  border-bottom: 1px solid black !important;
 }
 
 .newsletter-input-container > button,

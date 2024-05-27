@@ -35,6 +35,7 @@ export default async function handleRequest(
       'https://klaviyo.com',
       'https://*.klaviyo.com',
       'https://cdn.shopify.com',
+      'http://localhost:3100',
     ],
   });
 

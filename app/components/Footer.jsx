@@ -181,7 +181,9 @@ function Newsletter({footerImage, isMobile}) {
               : 'newsletter-form-footer'
           }
         >
-          <p>Join our newsletter for the latest news and releases.</p>
+          <p style={{marginBottom: '.25rem'}}>
+            Join our newsletter for the latest news and releases.
+          </p>
           {/* <form
             className={
               isMobile
