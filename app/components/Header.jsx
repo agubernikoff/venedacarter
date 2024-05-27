@@ -52,7 +52,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
             prefetch="intent"
             to="/"
             style={activeLinkStyle}
-            onClick={closeMenu}
+            // onClick={closeMenu}
             end
           >
             <img className="shop-name-mobile" src={mobIcon} />
