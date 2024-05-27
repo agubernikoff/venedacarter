@@ -64,7 +64,7 @@ export function Layout({
 function CartAside({cart}) {
   console.log(cart);
   return (
-    <Suspense fallback={<p>Loading cart ...</p>}>
+    <Suspense>
       <Await resolve={cart}>
         {(cart) => {
           return (

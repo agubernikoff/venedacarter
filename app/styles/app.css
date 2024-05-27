@@ -557,8 +557,7 @@ aside li {
 }
 
 .newsletter-input-container > input,
-.newsletter-input-container-mobile > input,
-#email_114346644 {
+.newsletter-input-container-mobile > input {
   width: 70%;
   border: none;
   outline: none;
@@ -568,7 +567,7 @@ aside li {
   font-size: 0.75rem !important;
 }
 
-#email_114349786 {
+#email_114352042 {
   padding: 0 !important;
   border: none !important;
   border-bottom: 1px solid black !important;
@@ -577,7 +576,7 @@ aside li {
   font-size: 0.75rem !important;
 }
 
-#email_114349786::placeholder {
+#email_114352042::placeholder {
   padding: 0 !important;
   border: none !important;
 
@@ -585,12 +584,18 @@ aside li {
   font-weight: normal !important;
   font-size: 0.75rem !important;
 }
-#email_114349786:focus {
+#email_114352042:focus {
   box-shadow: none !important;
 }
 
 #klaviyo_ariaid_2 {
   display: none !important;
+}
+
+#rich-text-114352044 {
+  font-family: 'regular-font' !important;
+  font-weight: normal !important;
+  font-size: 0.75rem !important;
 }
 
 .needsclick.go3298969293.kl-private-reset-css-Xuajs1::before,
