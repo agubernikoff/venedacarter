@@ -568,7 +568,7 @@ aside li {
   font-size: 0.75rem !important;
 }
 
-#email_114349298 {
+#email_114349786 {
   padding: 0 !important;
   border: none !important;
   border-bottom: 1px solid black !important;
@@ -577,13 +577,16 @@ aside li {
   font-size: 0.75rem !important;
 }
 
-#email_114349298::placeholder {
+#email_114349786::placeholder {
   padding: 0 !important;
   border: none !important;
 
   font-family: 'regular-font' !important;
   font-weight: normal !important;
   font-size: 0.75rem !important;
+}
+#email_114349786:focus {
+  box-shadow: none !important;
 }
 
 #klaviyo_ariaid_2 {
@@ -597,6 +600,10 @@ aside li {
 
 .needsclick.kl-private-reset-css-Xuajs1::before {
   display: none !important;
+}
+
+.go3894874857.go3894874857.go3894874857:focus {
+  box-shadow: none !important;
 }
 
 .needsclick.go3298969293.kl-private-reset-css-Xuajs1::before {
