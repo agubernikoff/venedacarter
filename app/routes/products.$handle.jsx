@@ -641,7 +641,6 @@ function AddToCartButton({
       })
       .catch((error) => console.log('error', error));
   }
-  console.log(selectedVariant);
   return (
     <>
       <CartForm
@@ -709,7 +708,6 @@ function AddToCartButton({
   );
 }
 function NotifyMePopUp({closePopUp, selectedVariant, subscribe}) {
-  console.log(selectedVariant);
   const [email, setEmail] = useState();
   return (
     <div onClick={closePopUp} className="notify-me-overlay">
