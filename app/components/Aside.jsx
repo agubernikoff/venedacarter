@@ -2,6 +2,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
+import x2 from '../assets/X2.png';
 /**
  * A side bar component with Overlay that works without JavaScript.
  * @example
@@ -83,7 +84,7 @@ function CloseAside() {
       href="#"
       onChange={() => history.go(-1)}
     >
-      &times;
+      <img src={x2} />
     </a>
   );
 }

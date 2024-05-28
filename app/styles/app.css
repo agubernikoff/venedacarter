@@ -2205,3 +2205,10 @@ body {
     overscroll-behavior-y: none;
   }
 }
+
+.close > img {
+  max-width: 3vw !important;
+  @media (min-width: 44em) {
+    max-width: 1.25vw !important;
+  }
+}

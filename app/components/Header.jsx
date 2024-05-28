@@ -406,7 +406,7 @@ function HeaderMenuMobileToggle({isOpen, toggleMenu}) {
   console.log(href);
   return (
     <a className="header-menu-mobile-toggle" href={href} onClick={toggleMenu}>
-      <img src={isOpen ? x : menu} style={isOpen ? {height: '50px'} : null} />
+      <img src={isOpen ? x : menu} />
     </a>
   );
 }
