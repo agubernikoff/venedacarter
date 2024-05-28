@@ -727,7 +727,9 @@ function NotifyMePopUp({closePopUp, selectedVariant, subscribe}) {
       <div className="notify-me-modal" onClick={(e) => e.stopPropagation()}>
         <img onClick={closePopUp} src={x2} className="notify-close" />
         <div className="notify-me-middle">
-          <p className="bold-cart">Notify Me When Available</p>
+          <p className="bold-cart" style={{marginBottom: '.5rem'}}>
+            Notify Me When Available
+          </p>
           <p style={{width: '100%'}}>
             We'll email you when this product is back in stock.
           </p>
