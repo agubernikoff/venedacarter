@@ -162,7 +162,11 @@ export default function Collection() {
           </motion.div>
         )}
       </AnimatePresence>
-      <div className={isMobile ? 'title-container-mobile' : 'title-container'}>
+      <motion.div
+        layout
+        layoutRoot
+        className={isMobile ? 'title-container-mobile' : 'title-container'}
+      >
         <p className="collection-title">
           <Link to="/" className="home-link">
             Home
@@ -182,7 +186,7 @@ export default function Collection() {
         >
           Filter +
         </motion.button>
-      </div>
+      </motion.div>
       <Pagination
         connection={
           (!pathname.includes('all') && !pathname.includes('new_arrivals')) ||
