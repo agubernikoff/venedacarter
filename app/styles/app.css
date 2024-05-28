@@ -409,14 +409,14 @@ aside li {
   border: 1px solid #eaeaea;
   border-left: none;
   height: 100%;
-  border-top: none;
+  /* border-top: none; */
 }
 .support-footer {
   grid-area: support;
   border: 1px solid #eaeaea;
   border-left: none;
   height: 100%;
-  border-top: none;
+  /* border-top: none; */
 }
 .newsletter-footer {
   grid-area: newsletter;
@@ -424,7 +424,7 @@ aside li {
   border-left: none;
   border-right: none;
   height: 100%;
-  border-top: none;
+  /* border-top: none; */
 }
 .predictive-search-results .brand-footer,
 .predictive-search-results .support-footer,
@@ -1184,7 +1184,7 @@ aside li {
   position: relative;
   width: 100%;
   border-top: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
+  /* border-bottom: 1px solid #eaeaea; */
 }
 .category-collection-mobile {
   position: relative;
@@ -1676,7 +1676,6 @@ aside li {
 .account-login {
   min-height: calc(100vh - var(--header-height));
   padding-top: 3rem;
-  border-bottom: 1px solid #eaeaea;
 }
 
 .account-logout {
@@ -1685,7 +1684,7 @@ aside li {
 
 .account {
   padding-top: 3rem;
-  border-bottom: 1px solid #eaeaea;
+
   min-height: calc(100vh - var(--header-height));
 }
 
@@ -2107,7 +2106,7 @@ fieldset > input {
 */
 
 .tospage {
-  border-bottom: 1px solid #eaeaea;
+  /* border-bottom: 1px solid #eaeaea; */
   margin: auto;
   padding-top: 3rem;
   padding-bottom: 2rem;
@@ -2264,7 +2263,7 @@ button.collection-title {
 }
 
 .page {
-  border-bottom: 1px solid #eaeaea;
+  /* border-bottom: 1px solid #eaeaea; */
   min-height: calc(100vh - var(--header-height));
 }
 
