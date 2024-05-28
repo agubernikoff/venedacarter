@@ -87,6 +87,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
               primaryDomainUrl={header.shop.primaryDomain.url}
               menu2={mobileMenu}
               menu3={supportMenu}
+              isLoggedIn={isLoggedIn}
             />
           </motion.div>
         )}
@@ -244,6 +245,7 @@ export function HeaderMenuMobile({
   viewport,
   menu2,
   menu3,
+  isLoggedIn,
 }) {
   const {publicStoreDomain} = useRootLoaderData();
   const className = `header-menu-${viewport}`;
@@ -326,6 +328,9 @@ export function HeaderMenuMobile({
             ? new URL(item.url).pathname
             : item.url;
 
+        const title =
+          item.title === 'Log In' && isLoggedIn ? 'Account' : item.title;
+
         return (
           <NavLink
             className="mobile-middle-menu-item"
@@ -336,7 +341,7 @@ export function HeaderMenuMobile({
             // style={activeLinkStyle}
             to={url}
           >
-            {item.title}
+            {title}
           </NavLink>
         );
       })}
