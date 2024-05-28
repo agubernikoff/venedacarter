@@ -848,7 +848,7 @@ aside li {
   position: sticky;
   top: 0;
   width: 90%;
-  margin-top: 1%;
+  /* margin-top: 1%; */
 }
 
 .predictive-search-result {
