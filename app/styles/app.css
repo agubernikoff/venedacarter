@@ -373,6 +373,7 @@ aside li {
 .shop-name {
   font-family: 'bold-font';
   font-size: 0.75rem;
+  font-weight: normal;
 }
 .shop-name-mobile {
   font-size: 0.75rem;
