@@ -245,6 +245,7 @@ function ProductsGrid({products, isMobile}) {
       {products.map((product, index) => {
         return (
           <FeaturedProduct
+            isMobile={isMobile}
             key={product.id}
             product={product}
             loading={index < 8 ? 'eager' : undefined}

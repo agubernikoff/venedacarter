@@ -379,6 +379,7 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
           key={item.id}
           product={item}
           goToSearchResult={goToSearchResult}
+          isMobile={isMobile}
         />
       ))}
     </div>
