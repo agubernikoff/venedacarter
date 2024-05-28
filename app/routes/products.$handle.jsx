@@ -3,6 +3,7 @@ import {defer, redirect} from '@shopify/remix-oxygen';
 import {Await, Link, useLoaderData} from '@remix-run/react';
 import size from '../assets/size.png';
 import colorPicker from '~/helper/ColorPicker';
+import x2 from '../assets/X2.png';
 
 import {
   Image,
@@ -167,12 +168,12 @@ function ProductImage({images, selectedVariant, isMobile}) {
   const [imageIndex, setImageIndex] = useState(0);
 
   const filteredImages = images.filter((i) => {
-    if (selectedVariant.availableForSale)
+    if (selectedVariant?.availableForSale)
       return i.altText === selectedVariant.image.altText;
     else
       return selectedVariant.title
         .toLowerCase()
-        .includes(i.altText.toLowerCase());
+        .includes(i.altText?.toLowerCase());
   });
 
   function cycleImages(delta) {
@@ -709,22 +710,31 @@ function AddToCartButton({
 }
 function NotifyMePopUp({closePopUp, selectedVariant, subscribe}) {
   const [email, setEmail] = useState();
+  console.log(selectedVariant);
   return (
     <div onClick={closePopUp} className="notify-me-overlay">
       <div className="notify-me-modal" onClick={(e) => e.stopPropagation()}>
-        <button onClick={closePopUp}>x</button>
-        <h4>Notify Me When Available</h4>
-        <p>We'll email you hwen this product is back in stock.</p>
-        <Image
-          data={selectedVariant?.image}
-          aspectRatio="1/1.2"
-          alt={selectedVariant?.image?.altText}
-        />
-        <p>{selectedVariant?.title}</p>
-        <div>
-          {selectedVariant?.selectedOptions?.map((o) => (
-            <p key={o.value}>{`${o.name}: ${o.value}`}</p>
-          ))}
+        <div className="notify-me-top">
+          <p className="bold-cart">Notify Me When Available</p>
+          <img onClick={closePopUp} src={x2} className="notify-close" />
+        </div>
+        <div className="notify-me-middle">
+          <p style={{width: '100%'}}>
+            We'll email you when this product is back in stock.
+          </p>
+          <Image
+            data={selectedVariant?.image}
+            aspectRatio="1/1.2"
+            alt={selectedVariant?.image?.altText}
+          />
+          <p className="bold-cart" style={{marginBottom: '1rem'}}>
+            {selectedVariant?.product.title}
+          </p>
+          <div>
+            {selectedVariant?.selectedOptions?.map((o) => (
+              <p key={o.value}>{`${o.name}: ${o.value}`}</p>
+            ))}
+          </div>
         </div>
         <input
           type="email"

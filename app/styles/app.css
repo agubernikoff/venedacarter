@@ -720,7 +720,7 @@ aside li {
 
 .bold-cart {
   font-size: 0.75rem;
-  font-family: 'bold-font';
+  font-family: 'bold-font' !important;
 }
 
 .cart-material-size {
@@ -1593,9 +1593,9 @@ aside li {
   width: 100%;
   padding: 1rem;
   margin-bottom: 0.5rem;
-  background-color: #eaeaea;
-  border: 1px solid black;
-  color: rgb(146, 146, 146);
+  background-color: #ffffff;
+  border: 1px solid #cbcbcb;
+  color: #cbcbcb;
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
   font-weight: normal;
@@ -1605,9 +1605,9 @@ aside li {
   width: 100%;
   padding: 2.5rem;
   margin-bottom: 0.5rem;
-  background-color: #eaeaea;
-  border: 1px solid black;
-  color: rgb(146, 146, 146);
+  background-color: #ffffff;
+  border: 1px solid #cbcbcb;
+  color: #cbcbcb;
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
   font-weight: normal;
@@ -1654,12 +1654,91 @@ aside li {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 .notify-me-modal {
   background: white;
   position: relative;
-  z-index: 5;
+  z-index: 999 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+  font-family: 'regular-font' !important;
+  font-size: 0.75rem !important;
+  width: 80%;
+  @media (min-width: 44em) {
+    width: 20%;
+  }
 }
+
+.notify-me-modal > input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: 'regular-font' !important;
+  margin: 0;
+  padding: 0 !important;
+  font-size: 0.75rem !important;
+  border-bottom: 1px solid black;
+  border-radius: none !important;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  @media (min-width: 44em) {
+  }
+}
+
+.notify-me-modal > button {
+  width: 100%;
+  padding: 1rem;
+  /* margin-bottom: 1rem; */
+  background-color: black;
+  color: white;
+  font-size: 0.75rem;
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+  @media (min-width: 44em) {
+  }
+}
+
+.notify-me-top {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  @media (min-width: 44em) {
+  }
+}
+
+.notify-me-middle > img {
+  width: 100% !important;
+  height: auto !important;
+  background-color: #f4f4f4;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  @media (min-width: 44em) {
+  }
+}
+.notify-me-middle {
+  width: 60%;
+}
+
+.notify-me-middle > p,
+.notify-me-middle > div > p {
+  font-family: 'regular-font' !important;
+  font-size: 0.75rem !important;
+}
+
+.notify-close {
+  max-width: 0.75em !important;
+  font-size: 1.5em !important;
+  cursor: pointer;
+  @media (min-width: 44em) {
+    max-width: 0.75em !important;
+    font-size: 1.6em !important;
+  }
+}
+
 /*
 * --------------------------------------------------
 * routes/blog._index.tsx
