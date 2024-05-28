@@ -846,7 +846,7 @@ aside li {
 .predictive-search-form {
   background: transparent;
   position: sticky;
-  top: 0;
+  /* top: 0; */
   width: 90%;
   /* margin-top: 1%; */
 }

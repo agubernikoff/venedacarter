@@ -50,7 +50,6 @@ export function SearchForm({searchTerm}) {
         ref={inputRef}
         type="search"
       />
-      &nbsp;
       <button type="submit">Search</button>
     </Form>
   );
