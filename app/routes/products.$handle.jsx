@@ -710,7 +710,18 @@ function AddToCartButton({
 }
 function NotifyMePopUp({closePopUp, selectedVariant, subscribe}) {
   const [email, setEmail] = useState();
-  console.log(selectedVariant);
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        closePopUp();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [closePopUp]);
   return (
     <div onClick={closePopUp} className="notify-me-overlay">
       <div className="notify-me-modal" onClick={(e) => e.stopPropagation()}>

@@ -1647,6 +1647,16 @@ aside li {
   font-weight: normal;
   margin-bottom: 5rem;
 }
+.out-stock-cart-button,
+.out-stock-cart-button-mobile {
+  outline: none;
+}
+.out-stock-cart-button:focus,
+.out-stock-cart-button-mobile:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .notify-me-overlay {
   position: fixed;
   inset: 0;
