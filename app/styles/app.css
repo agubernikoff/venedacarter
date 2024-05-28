@@ -1023,7 +1023,7 @@ aside li {
   background: white;
   grid-column: span 2;
   z-index: 2;
-  border-top: 1px solid #eaeaea;
+  /* border-top: 1px solid #eaeaea; */
   border-bottom: 1px solid #eaeaea;
   display: flex;
   flex-direction: row;
@@ -1075,7 +1075,7 @@ aside li {
 }
 .featured-product:nth-of-type(n + 4) {
   /* border-top: 1px solid #eaeaea; */
-  /* border-bottom: 1px solid #eaeaea; */
+  border-bottom: none;
 }
 .product-details-container {
   display: flex;
