@@ -1577,6 +1577,7 @@ aside li {
   padding: 1rem;
   margin-bottom: 0.5rem;
   background-color: #eaeaea;
+  border: 1px solid black;
   color: rgb(146, 146, 146);
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
@@ -1588,6 +1589,7 @@ aside li {
   padding: 2.5rem;
   margin-bottom: 0.5rem;
   background-color: #eaeaea;
+  border: 1px solid black;
   color: rgb(146, 146, 146);
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
