@@ -147,17 +147,6 @@ function Support({isMobile, menu, primaryDomainUrl}) {
   );
 }
 function Newsletter({footerImage, isMobile}) {
-  useEffect(() => {
-    const delayInMilliseconds = 3000;
-    function openFormWithDelay(formId, delay) {
-      setTimeout(function () {
-        window._klOnsite = window._klOnsite || [];
-        window._klOnsite.push(['openForm', formId]);
-      }, delay);
-    }
-
-    openFormWithDelay('XrMRY4', delayInMilliseconds);
-  }, []);
   return (
     <div className="newsletter-footer">
       <div className="footer-title-container">
