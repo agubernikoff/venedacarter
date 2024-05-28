@@ -571,7 +571,11 @@ function AddToCartButton({
             />
             <button
               className={
-                isMobile
+                selectedVariant?.availableForSale
+                  ? isMobile
+                    ? 'add-to-cart-button-mobile'
+                    : 'add-to-cart-button'
+                  : isMobile
                   ? 'sold-out-cart-button-mobile'
                   : 'sold-out-cart-button'
               }
