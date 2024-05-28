@@ -1735,7 +1735,7 @@ aside li {
 
 .notify-me-middle > p,
 .notify-me-middle > div > p {
-  font-family: 'regular-font' !important;
+  font-family: 'regular-font';
   font-size: 0.75rem !important;
 }
 
