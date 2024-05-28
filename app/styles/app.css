@@ -409,12 +409,14 @@ aside li {
   border: 1px solid #eaeaea;
   border-left: none;
   height: 100%;
+  border-top: none;
 }
 .support-footer {
   grid-area: support;
   border: 1px solid #eaeaea;
   border-left: none;
   height: 100%;
+  border-top: none;
 }
 .newsletter-footer {
   grid-area: newsletter;
@@ -422,6 +424,7 @@ aside li {
   border-left: none;
   border-right: none;
   height: 100%;
+  border-top: none;
 }
 .predictive-search-results .brand-footer,
 .predictive-search-results .support-footer,
@@ -919,7 +922,8 @@ aside li {
   justify-content: space-between;
   padding-left: 1rem;
   border-right: 1px solid #eaeaea;
-  border-color: #f0f0f0f4;
+  border-bottom: 1px solid #eaeaea;
+  border-color: #eaeaea;
 }
 .new-arrivals-container-p {
   font-size: 0.75rem;
@@ -977,6 +981,7 @@ aside li {
   margin-bottom: 2rem;
   position: relative; */
   grid-area: new-arrival-img;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .new-arrivals-collection-image {
@@ -1006,7 +1011,7 @@ aside li {
   background: white;
   grid-column: span 3;
   z-index: 2;
-  border-top: 1px solid #eaeaea;
+  /* border-top: 1px solid #eaeaea; */
   border-bottom: 1px solid #eaeaea;
   display: flex;
   flex-direction: row;
@@ -1068,7 +1073,7 @@ aside li {
 }
 .featured-product:nth-of-type(n + 4) {
   /* border-top: 1px solid #eaeaea; */
-  border-bottom: none;
+  border-bottom: 1px solid #eaeaea;
 }
 .product-details-container {
   display: flex;
@@ -1671,6 +1676,7 @@ aside li {
 .account-login {
   min-height: calc(100vh - var(--header-height));
   padding-top: 3rem;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .account-logout {
@@ -1679,6 +1685,7 @@ aside li {
 
 .account {
   padding-top: 3rem;
+  border-bottom: 1px solid #eaeaea;
   min-height: calc(100vh - var(--header-height));
 }
 
@@ -2100,6 +2107,7 @@ fieldset > input {
 */
 
 .tospage {
+  border-bottom: 1px solid #eaeaea;
   margin: auto;
   padding-top: 3rem;
   padding-bottom: 2rem;
@@ -2256,6 +2264,7 @@ button.collection-title {
 }
 
 .page {
+  border-bottom: 1px solid #eaeaea;
   min-height: calc(100vh - var(--header-height));
 }
 
