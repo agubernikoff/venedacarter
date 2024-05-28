@@ -35,7 +35,9 @@ export function Footer({menu, shop, footerImage, supportMenu}) {
       {isMobile ? (
         <div className="site-credit-mobile">
           <p>© Veneda Carter 2024, All Rights Reserved. </p>
-          <a>Site Credit</a>
+          <a href="https://www.swallstudios.com" target="_blank">
+            Site Credit
+          </a>
         </div>
       ) : null}
     </footer>
@@ -93,7 +95,9 @@ function Brand({isMobile, menu, primaryDomainUrl}) {
         {isMobile ? null : (
           <div className="site-credit">
             <p>© Veneda Carter 2024, All Rights Reserved. </p>
-            <a>Site Credit</a>
+            <a href="https://www.swallstudios.com" target="_blank">
+              Site Credit
+            </a>
           </div>
         )}
       </div>
