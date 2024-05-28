@@ -405,17 +405,26 @@ aside li {
   grid-auto-columns: 1fr;
 }
 .brand-footer {
-  grid-area: brand;
-  border: 1px solid #eaeaea;
-  border-left: none;
-  height: 100%;
+  border-top: none;
+  border-bottom: 1px solid #eaeaea;
   /* border-top: none; */
+  @media (min-width: 44em) {
+    grid-area: brand;
+    border: 1px solid #eaeaea;
+    border-left: none;
+    height: 100%;
+  }
 }
 .support-footer {
-  grid-area: support;
-  border: 1px solid #eaeaea;
-  border-left: none;
-  height: 100%;
+  border-top: none;
+  border-bottom: 1px solid #eaeaea;
+  border-left: 1px solid #eaeaea;
+  @media (min-width: 44em) {
+    grid-area: support;
+    border: 1px solid #eaeaea;
+    border-left: none;
+    height: 100%;
+  }
   /* border-top: none; */
 }
 .newsletter-footer {
