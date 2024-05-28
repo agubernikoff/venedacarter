@@ -914,6 +914,7 @@ aside li {
 }
 .mobile-new-arrivals {
   grid-area: new-arrivals-mobile;
+  border-bottom: 1px solid #eaeaea;
 }
 .new-arrivals-container {
   grid-area: new-arrival-markup;
