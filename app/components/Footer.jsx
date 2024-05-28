@@ -246,7 +246,7 @@ const FALLBACK_FOOTER_MENU = {
  */
 function activeLinkStyle({isActive, isPending}) {
   return {
-    fontWeight: isActive ? 'bold' : undefined,
+    fontWeight: isActive ? 'normal' : undefined,
     color: isPending ? 'grey' : 'black',
   };
 }
