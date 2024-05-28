@@ -44,3 +44,11 @@ export const CUSTOMER_DETAILS_QUERY = `#graphql
   }
   ${CUSTOMER_FRAGMENT}
 `;
+
+export const CUSTOMER_EMAIL_QUERY = `#graphql
+  query CustomerDetails($cutomerAccessToken: String!) {
+    customer(customerAccessToken: $cutomerAccessToken) {
+      email
+    }
+  }
+`;

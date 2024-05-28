@@ -1630,7 +1630,19 @@ aside li {
   font-weight: normal;
   margin-bottom: 5rem;
 }
-
+.notify-me-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.notify-me-modal {
+  background: white;
+  position: relative;
+  z-index: 5;
+}
 /*
 * --------------------------------------------------
 * routes/blog._index.tsx

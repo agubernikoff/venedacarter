@@ -25,6 +25,7 @@ export default async function handleRequest(
       'https://kitten-composed-notably.ngrok-free.app:*',
       'https://klaviyo.com',
       'https://*.klaviyo.com',
+      'https://*.klaviyo.com/*',
     ],
     styleSrc: [
       'https://klaviyo.com',
@@ -36,6 +37,7 @@ export default async function handleRequest(
       'https://*.klaviyo.com',
       'https://cdn.shopify.com',
       'http://localhost:3100',
+      'https://*.klaviyo.com/*',
     ],
   });
 

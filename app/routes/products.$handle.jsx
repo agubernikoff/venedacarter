@@ -13,6 +13,7 @@ import {
 } from '@shopify/hydrogen';
 import {getVariantUrl} from '~/lib/variants';
 import {FeaturedProduct} from './_index';
+import {CUSTOMER_EMAIL_QUERY} from '../graphql/customer-account/CustomerDetailsQuery';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -88,7 +89,14 @@ export async function loader({params, request, context}) {
     variables: {id: collectionId},
   });
 
-  return defer({product, variants, recs});
+  const token = context.session.get('customerAccessToken');
+  const customer = token
+    ? await storefront.query(CUSTOMER_EMAIL_QUERY, {
+        variables: {cutomerAccessToken: token},
+      })
+    : null;
+
+  return defer({product, variants, recs, customer});
 }
 
 /**
@@ -116,7 +124,7 @@ function redirectToFirstVariant({product, request}) {
 
 export default function Product() {
   /** @type {LoaderReturnData} */
-  const {product, variants, recs} = useLoaderData();
+  const {product, variants, recs, customer} = useLoaderData();
   const {selectedVariant} = product;
   const [isMobile, setIsMobile] = useState(false);
 
@@ -140,6 +148,7 @@ export default function Product() {
           product={product}
           variants={variants}
           isMobile={isMobile}
+          customer={customer}
         />
       </div>
       <ProductRecommendations
@@ -290,7 +299,7 @@ function ProductImage({images, selectedVariant, isMobile}) {
  *   variants: Promise<ProductVariantsQuery>;
  * }}
  */
-function ProductMain({selectedVariant, product, variants, isMobile}) {
+function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
   const {title, descriptionHtml} = product;
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const sizeGuideRef = useRef(null);
@@ -413,6 +422,7 @@ function ProductMain({selectedVariant, product, variants, isMobile}) {
         <AddToCartButtonComponent
           selectedVariant={selectedVariant}
           isMobile={isMobile}
+          customer={customer}
         />
       </div>
     </div>
@@ -474,7 +484,7 @@ function ProductForm({product, selectedVariant, variants, isMobile}) {
   );
 }
 
-function AddToCartButtonComponent({selectedVariant, isMobile}) {
+function AddToCartButtonComponent({selectedVariant, isMobile, customer}) {
   return (
     <AddToCartButton
       selectedVariant={selectedVariant}
@@ -496,6 +506,7 @@ function AddToCartButtonComponent({selectedVariant, isMobile}) {
           : []
       }
       isMobile={isMobile}
+      customer={customer}
     >
       {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
     </AddToCartButton>
@@ -559,7 +570,78 @@ function AddToCartButton({
   onClick,
   isMobile,
   selectedVariant,
+  customer,
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+  function closePopUp() {
+    setIsOpen(false);
+  }
+  function subscribe(email, btn, originalText) {
+    if (!email) {
+      btn.innerText = 'PLEASE ENTER AN EMAIL';
+      setTimeout(() => {
+        btn.innerText = originalText;
+      }, 1500);
+      return;
+    }
+    const payload = {
+      data: {
+        type: 'back-in-stock-subscription',
+        attributes: {
+          profile: {
+            data: {
+              type: 'profile',
+              attributes: {
+                email: `${email}`,
+              },
+            },
+          },
+          channels: ['EMAIL'],
+        },
+        relationships: {
+          variant: {
+            data: {
+              type: 'catalog-variant',
+              id: `$shopify:::$default:::${
+                selectedVariant.id.split('ProductVariant/')[1]
+              }`,
+            },
+          },
+        },
+      },
+    };
+
+    var requestOptions = {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        revision: '2023-12-15',
+      },
+      body: JSON.stringify(payload),
+    };
+    fetch(
+      'https://a.klaviyo.com/client/back-in-stock-subscriptions/?company_id=XFjCZj',
+      requestOptions,
+    )
+      .then((result) => {
+        if (result.ok) {
+          btn.innerText = 'YOUR NOTIFICATION HAS BEEN REGISTERED';
+          setTimeout(() => {
+            btn.innerText = originalText;
+            closePopUp();
+          }, 1500);
+        } else {
+          btn.innerText =
+            'YOUR REQUEST COULD NOT BE COMPLETED. PLEASE EMAIL test@test.com TO BE NOTIFIED';
+          setTimeout(() => {
+            btn.innerText = originalText;
+          }, 1500);
+        }
+      })
+      .catch((error) => console.log('error', error));
+  }
+  console.log(selectedVariant);
   return (
     <>
       <CartForm
@@ -601,18 +683,68 @@ function AddToCartButton({
                 ? 'out-stock-cart-button-mobile'
                 : 'out-stock-cart-button'
             }
-            type="submit"
-            onClick={onClick}
-            disabled={disabled ?? fetcher.state !== 'idle'}
+            style={{cursor: 'pointer'}}
+            onClick={(e) => {
+              if (customer?.customer?.email)
+                subscribe(
+                  customer.customer.email,
+                  e.target,
+                  e.target.innerText,
+                );
+              else setIsOpen(true);
+            }}
           >
             NOTIFY ME WHEN AVAILABLE
           </button>
         </div>
       )}
+      {isOpen ? (
+        <NotifyMePopUp
+          closePopUp={closePopUp}
+          selectedVariant={selectedVariant}
+          subscribe={subscribe}
+        />
+      ) : null}
     </>
   );
 }
-
+function NotifyMePopUp({closePopUp, selectedVariant, subscribe}) {
+  console.log(selectedVariant);
+  const [email, setEmail] = useState();
+  return (
+    <div onClick={closePopUp} className="notify-me-overlay">
+      <div className="notify-me-modal" onClick={(e) => e.stopPropagation()}>
+        <button onClick={closePopUp}>x</button>
+        <h4>Notify Me When Available</h4>
+        <p>We'll email you hwen this product is back in stock.</p>
+        <Image
+          data={selectedVariant?.image}
+          aspectRatio="1/1.2"
+          alt={selectedVariant?.image?.altText}
+        />
+        <p>{selectedVariant?.title}</p>
+        <div>
+          {selectedVariant?.selectedOptions?.map((o) => (
+            <p key={o.value}>{`${o.name}: ${o.value}`}</p>
+          ))}
+        </div>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+        ></input>
+        <button
+          onClick={(e) => {
+            subscribe(email, e.target, e.target.innerText);
+          }}
+        >
+          NOTIFY
+        </button>
+      </div>
+    </div>
+  );
+}
 function ProductRecommendations({recs, product, isMobile}) {
   const endOfSlice = isMobile ? 6 : 3;
   return (
