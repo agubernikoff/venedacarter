@@ -752,6 +752,7 @@ function NotifyMePopUp({closePopUp, selectedVariant, subscribe}) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
+          style={{borderRadius: '0'}}
         ></input>
         <button
           onClick={(e) => {
