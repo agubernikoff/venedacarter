@@ -128,7 +128,7 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
           Home
         </NavLink>
       )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => (
+      {menu.items.map((item) => (
         <HeaderMenuItem
           key={item.title}
           item={item}
@@ -265,7 +265,7 @@ export function HeaderMenuMobile({
         <p className="subheader-menu-item" style={{fontFamily: 'bold-font'}}>
           Shop
         </p>
-        {(menu || FALLBACK_HEADER_MENU).items
+        {menu.items
           .filter((item) => item.title !== 'About')
           .map((item) => {
             if (!item.url) return null;
@@ -317,7 +317,7 @@ export function HeaderMenuMobile({
             );
           })}
       </div>
-      {(menu2 || FALLBACK_HEADER_MENU).items.map((item) => {
+      {menu2.items.map((item) => {
         if (!item.url) return null;
 
         // if the url is internal, we strip the domain
@@ -355,7 +355,7 @@ export function HeaderMenuMobile({
         >
           Support
         </p>
-        {(menu3 || FALLBACK_HEADER_MENU).items.map((item) => {
+        {menu3.items.map((item) => {
           if (!item.url) return null;
 
           // if the url is internal, we strip the domain
