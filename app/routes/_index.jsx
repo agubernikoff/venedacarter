@@ -1,5 +1,6 @@
 import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
+
 import {Suspense, useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {motion, AnimatePresence} from 'framer-motion';
@@ -34,6 +35,14 @@ export async function loader({context}) {
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
+  const [isHomepage, setIsHomepage] = useState(false);
+
+  useEffect(() => {
+    // Check if the current URL path is the homepage
+    setIsHomepage(
+      window.location.pathname === '/' || window.location.pathname === '/#',
+    );
+  }, []);
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -53,6 +62,7 @@ export default function Homepage() {
       <FeaturedProducts
         products={data.featuredCollection.products.nodes}
         isMobile={isMobile}
+        isHomepage={isHomepage}
       />
       <Categories categories={data.restOfCollections} isMobile={isMobile} />
     </div>
@@ -137,7 +147,7 @@ function MobileNewArrivals({collection}) {
  *   products: Promise<RecommendedProductsQuery>;
  * }}
  */
-function FeaturedProducts({products, isMobile}) {
+function FeaturedProducts({products, isMobile, isHomepage}) {
   if (!products) return null;
   const endOfSlice = isMobile ? 9 : 6;
   return (
@@ -160,6 +170,7 @@ function FeaturedProducts({products, isMobile}) {
               product={product}
               key={product.id}
               isMobile={isMobile}
+              isHomepage={isHomepage}
             />
           );
       })}
@@ -235,6 +246,7 @@ export function FeaturedProduct({
   loading,
   emptyCellBelow,
   goToSearchResult,
+  isHomepage,
 }) {
   const [index, setIndex] = useState(0);
   const colorOptionsObj = product.options.find((o) => o.name === 'Material');
@@ -245,7 +257,13 @@ export function FeaturedProduct({
       to={`/products/${product.handle}`}
       onMouseEnter={() => setIndex(1)}
       onMouseLeave={() => setIndex(0)}
-      style={emptyCellBelow ? {borderBottom: '1px solid #eaeaea'} : {}}
+      style={
+        isHomepage
+          ? {borderBottom: '1px solid #eaeaea'}
+          : emptyCellBelow
+          ? {borderBottom: '1px solid #eaeaea'}
+          : {}
+      }
       onClick={() => {
         if (goToSearchResult) goToSearchResult();
       }}
