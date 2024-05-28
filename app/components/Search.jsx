@@ -316,12 +316,12 @@ export function PredictiveSearchResults({
           </p>
         </Link>
       )} */}
-      <Footer
+      {/* <Footer
         menu={menu}
         shop={shop}
         footerImage={footerImage}
         supportMenu={supportMenu}
-      />
+      /> */}
     </motion.div>
   );
 }
