@@ -157,9 +157,14 @@ export default function Product() {
 function ProductImage({images, selectedVariant, isMobile}) {
   const [imageIndex, setImageIndex] = useState(0);
 
-  const filteredImages = images.filter(
-    (i) => i.altText === selectedVariant.image.altText,
-  );
+  const filteredImages = images.filter((i) => {
+    if (selectedVariant.availableForSale)
+      return i.altText === selectedVariant.image.altText;
+    else
+      return selectedVariant.title
+        .toLowerCase()
+        .includes(i.altText.toLowerCase());
+  });
 
   function cycleImages(delta) {
     const newIndex = imageIndex + delta;
