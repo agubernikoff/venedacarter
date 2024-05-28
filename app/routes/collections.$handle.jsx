@@ -199,6 +199,7 @@ export default function Collection() {
               hasNextPage={hasNextPage}
               nextPageUrl={nextPageUrl}
               state={state}
+              isMobile={isMobile}
             />
             <NextLink ref={ref}>Load more</NextLink>
           </>
