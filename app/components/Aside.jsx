@@ -43,7 +43,7 @@ export function Aside({children, heading, id = 'aside'}) {
                     ref={inputRef}
                     type="search"
                   />
-                  &nbsp;
+
                   {/* <button
                     onClick={() => {
                       window.location.href = inputRef?.current?.value
