@@ -1572,6 +1572,63 @@ aside li {
   margin-bottom: 5rem;
 }
 
+.sold-out-cart-button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #eaeaea;
+  color: rgb(146, 146, 146);
+  font-size: 0.75rem;
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+}
+
+.sold-out-cart-button-mobile {
+  width: 100%;
+  padding: 2.5rem;
+  margin-bottom: 0.5rem;
+  background-color: #eaeaea;
+  color: rgb(146, 146, 146);
+  font-size: 0.75rem;
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+  margin-bottom: 0.5rem;
+}
+
+.out-stock-button-container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @media (min-width: 44em) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.out-stock-cart-button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  font-size: 0.75rem;
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+}
+
+.out-stock-cart-button-mobile {
+  width: 100%;
+  padding: 2.5rem;
+  margin-bottom: 1rem;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  font-size: 0.75rem;
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+  margin-bottom: 5rem;
+}
+
 /*
 * --------------------------------------------------
 * routes/blog._index.tsx

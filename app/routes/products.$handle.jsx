@@ -472,6 +472,7 @@ function ProductForm({product, selectedVariant, variants, isMobile}) {
 function AddToCartButtonComponent({selectedVariant, isMobile}) {
   return (
     <AddToCartButton
+      selectedVariant={selectedVariant}
       disabled={!selectedVariant || !selectedVariant.availableForSale}
       onClick={() => {
         window.location.hash = '#cart-aside';
@@ -552,29 +553,54 @@ function AddToCartButton({
   lines,
   onClick,
   isMobile,
+  selectedVariant,
 }) {
   return (
-    <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
-      {(fetcher) => (
-        <>
-          <input
-            name="analytics"
-            type="hidden"
-            value={JSON.stringify(analytics)}
-          />
+    <>
+      <CartForm
+        route="/cart"
+        inputs={{lines}}
+        action={CartForm.ACTIONS.LinesAdd}
+      >
+        {(fetcher) => (
+          <>
+            <input
+              name="analytics"
+              type="hidden"
+              value={JSON.stringify(analytics)}
+            />
+            <button
+              className={
+                isMobile
+                  ? 'sold-out-cart-button-mobile'
+                  : 'sold-out-cart-button'
+              }
+              type="submit"
+              onClick={onClick}
+              disabled={disabled ?? fetcher.state !== 'idle'}
+            >
+              {children.toUpperCase()}
+            </button>
+          </>
+        )}
+      </CartForm>
+      {selectedVariant?.availableForSale ? null : (
+        <div className="out-stock-button-container">
           <button
             className={
-              isMobile ? 'add-to-cart-button-mobile' : 'add-to-cart-button'
+              isMobile
+                ? 'out-stock-cart-button-mobile'
+                : 'out-stock-cart-button'
             }
             type="submit"
             onClick={onClick}
             disabled={disabled ?? fetcher.state !== 'idle'}
           >
-            {children.toUpperCase()}
+            NOTIFY ME WHEN AVAILABLE
           </button>
-        </>
+        </div>
       )}
-    </CartForm>
+    </>
   );
 }
 
