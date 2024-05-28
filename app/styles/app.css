@@ -1740,8 +1740,8 @@ aside li {
 }
 
 .notify-close {
-  max-width: 0.75em !important;
-  font-size: 1.5em !important;
+  max-width: 0.85em !important;
+  font-size: 1.65em !important;
   cursor: pointer;
   @media (min-width: 44em) {
     max-width: 0.75em !important;
