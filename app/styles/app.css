@@ -1062,6 +1062,7 @@ aside li {
   grid-column: span 2;
   grid-row: 5;
   border-block: 1px solid #eaeaea;
+  border-top: none;
 }
 .main-featured-product:hover {
   text-decoration: none;
