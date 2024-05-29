@@ -420,12 +420,12 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
                   alt={`${collectionType} Size Guide`}
                   className="size-guide-image"
                 />
-                <button
+
+                <img
+                  src={x2}
                   className="close-button"
                   onClick={() => setIsSizeGuideOpen(false)}
-                >
-                  X
-                </button>
+                />
               </div>
             </div>
           )}
