@@ -1534,7 +1534,7 @@ aside li {
   cursor: pointer;
   color: #333;
   z-index: 1200;
-  max-width: 2vw;
+  max-width: 1.5vw;
   @media (min-width: 44em) {
     max-width: 1vw;
     top: 1rem;
