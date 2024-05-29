@@ -22,13 +22,15 @@ export function Aside({children, heading, id = 'aside'}) {
   console.log(heading);
   return (
     <div aria-modal className="overlay" id={id} role="dialog">
-      <button
-        className="close-outside"
-        onClick={() => {
-          history.go(-1);
-          window.location.hash = '';
-        }}
-      />
+      {heading != 'menu' ? null : (
+        <button
+          className="close-outside"
+          onClick={() => {
+            history.go(-1);
+            window.location.hash = '';
+          }}
+        />
+      )}
       <aside>
         {heading === 'MENU' ? null : heading === 'SEARCH' ? (
           <header>
