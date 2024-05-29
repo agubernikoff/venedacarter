@@ -410,9 +410,13 @@ function HeaderMenuMobileToggle({isOpen, toggleMenu}) {
   const href = !isOpen ? '#x' : '#mobile-menu-aside';
   console.log(href);
   return (
-    <a className="header-menu-mobile-toggle" href={href} onClick={toggleMenu}>
-      <img src={isOpen ? x : menu} />
-    </a>
+    <button
+      style={{background: 'transparent', border: 'none', padding: 0}}
+      className="header-menu-mobile-toggle"
+      onClick={toggleMenu}
+    >
+      <img src={isOpen ? x : menu} alt="menu-toggle" />
+    </button>
   );
 }
 
