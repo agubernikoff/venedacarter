@@ -1749,7 +1749,7 @@ aside li {
   top: 1rem;
   right: 1rem;
   @media (min-width: 44em) {
-    max-width: 1.25vw !important;
+    max-width: 1vw !important;
   }
 }
 
@@ -2394,6 +2394,6 @@ body {
 .close > img {
   max-width: 3vw !important;
   @media (min-width: 44em) {
-    max-width: 1.25vw !important;
+    max-width: 1vw !important;
   }
 }

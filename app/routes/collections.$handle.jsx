@@ -17,6 +17,7 @@ import {FeaturedProduct} from './_index';
 import {useState, useEffect} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
 import {useInView} from 'react-intersection-observer';
+import x2 from '../assets/X2.png';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -362,7 +363,7 @@ function FilterAside({isMobile, toggleFilter}) {
               }}
               onClick={toggleFilter}
             >
-              &times;
+              <img src={x2} style={{maxWidth: '1vw'}} />
             </button>
           </header>
         )}
