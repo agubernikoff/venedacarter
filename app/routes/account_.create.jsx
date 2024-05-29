@@ -199,7 +199,7 @@ export default function AccountProfile() {
                     </Link>
                   </small>
                 ) : (
-                  <small>{action.error}</small>
+                  <small style={{lineHeight: '1'}}>{action.error}</small>
                 )}
               </mark>
             </p>
