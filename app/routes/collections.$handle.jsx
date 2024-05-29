@@ -185,7 +185,7 @@ export default function Collection() {
           className="collection-title"
           onClick={() => toggleFilter()}
         >
-          Filter +
+          {isFilterOpen && isMobile ? 'Close -' : 'Filter +'}
         </motion.button>
       </motion.div>
       <Pagination
