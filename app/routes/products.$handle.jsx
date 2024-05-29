@@ -4,6 +4,9 @@ import {Await, Link, useLoaderData} from '@remix-run/react';
 import size from '../assets/size.png';
 import colorPicker from '~/helper/ColorPicker';
 import x2 from '../assets/X2.png';
+import rings from '../assets/ring-guide.png';
+import bracelets from '../assets/bracelet-guide.png';
+import necklaces from '../assets/necklace-guide.png';
 
 import {
   Image,
@@ -337,6 +340,37 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
   const firstPart = title.slice(0, firstSpaceIndex + 1);
   const secondPart = title.slice(firstSpaceIndex + 1);
 
+  const getRelevantCollectionType = (product) => {
+    const keywords = ['rings', 'bracelets', 'necklaces', 'earrings'];
+    const nodes = product.collections.nodes;
+
+    for (let i = 0; i < nodes.length; i++) {
+      const titleWords = nodes[i].title.toLowerCase().split(' ');
+
+      for (let keyword of keywords) {
+        if (titleWords.includes(keyword)) {
+          return keyword;
+        }
+      }
+    }
+    return null;
+  };
+
+  const collectionType = getRelevantCollectionType(product);
+
+  let imageSrc;
+  if (collectionType === 'rings') {
+    imageSrc = rings;
+  } else if (collectionType === 'bracelets') {
+    imageSrc = bracelets;
+  } else if (collectionType === 'necklaces') {
+    imageSrc = necklaces;
+  } else if (collectionType === 'earrings') {
+    imageSrc = null;
+  }
+
+  console.log('product', product);
+  console.log('collectiontype', collectionType);
   return (
     <div className={isMobile ? 'product-main-mobile' : 'product-main'}>
       <div
@@ -370,16 +404,22 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
           dangerouslySetInnerHTML={{__html: descriptionHtml}}
         />
         <div className={isMobile ? 'size-guide-mobile' : 'size-guide'}>
-          <p
-            style={{textDecoration: 'underline', cursor: 'pointer'}}
-            onClick={() => setIsSizeGuideOpen(true)}
-          >
-            Size Guide
-          </p>
+          {collectionType !== 'earrings' && (
+            <p
+              style={{textDecoration: 'underline', cursor: 'pointer'}}
+              onClick={() => setIsSizeGuideOpen(true)}
+            >
+              Size Guide
+            </p>
+          )}
           {isSizeGuideOpen && (
             <div className="size-guide-overlay">
               <div className="size-guide-popup" ref={sizeGuideRef}>
-                <img src={size} alt="Size Guide" className="size-guide-image" />
+                <img
+                  src={imageSrc}
+                  alt={`${collectionType} Size Guide`}
+                  className="size-guide-image"
+                />
                 <button
                   className="close-button"
                   onClick={() => setIsSizeGuideOpen(false)}
