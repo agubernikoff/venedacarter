@@ -1526,8 +1526,8 @@ aside li {
 
 .close-button {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.65rem;
+  right: 0.65rem;
   border: none;
   background-color: transparent;
   font-size: 0.75rem;
