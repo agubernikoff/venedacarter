@@ -356,6 +356,9 @@ aside li {
   /* font-size: 0.75rem; */
   font-family: 'regular-font';
 }
+.header-menu-mobile .subheader-menu-item {
+  font-size: 0.75rem;
+}
 .mobile-middle-menu-item {
   cursor: pointer;
   font-family: 'bold-font';
