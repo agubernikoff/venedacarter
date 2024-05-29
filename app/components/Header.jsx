@@ -9,6 +9,7 @@ import menu from '../assets/menu.png';
 import x from '../assets/X.png';
 import {useLocation} from '@remix-run/react';
 import {usePredictiveSearch} from './Search';
+import {useNavigate} from 'react-router-dom';
 
 /**
  * @param {HeaderProps}
@@ -247,12 +248,14 @@ export function HeaderMenuMobile({
   menu3,
   isLoggedIn,
 }) {
+  const navigate = useNavigate();
   const {publicStoreDomain} = useRootLoaderData();
   const className = `header-menu-${viewport}`;
-  function closeAside(event) {
+
+  function closeAside(event, url) {
     if (viewport === 'mobile') {
       event.preventDefault();
-      window.location.href = event.currentTarget.href;
+      navigate(url);
     }
   }
 
@@ -293,9 +296,8 @@ export function HeaderMenuMobile({
                     className="subheader-menu-item"
                     end
                     key={item.id}
-                    onClick={closeAside}
+                    onClick={(event) => closeAside(event, url)}
                     prefetch="intent"
-                    // style={activeLinkStyle}
                     to={url}
                   >
                     {item.title}
@@ -307,9 +309,8 @@ export function HeaderMenuMobile({
                 className="subheader-menu-item"
                 end
                 key={item.id}
-                onClick={closeAside}
+                onClick={(event) => closeAside(event, url)}
                 prefetch="intent"
-                // style={activeLinkStyle}
                 to={url}
               >
                 {item.title}
@@ -336,9 +337,8 @@ export function HeaderMenuMobile({
             className="mobile-middle-menu-item"
             end
             key={item.id}
-            onClick={closeAside}
+            onClick={(event) => closeAside(event, url)}
             prefetch="intent"
-            // style={activeLinkStyle}
             to={url}
           >
             {title}
@@ -371,9 +371,8 @@ export function HeaderMenuMobile({
               className="subheader-menu-item"
               end
               key={item.id}
-              onClick={closeAside}
+              onClick={(event) => closeAside(event, url)}
               prefetch="intent"
-              // style={activeLinkStyle}
               to={url}
             >
               {item.title}
