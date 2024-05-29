@@ -59,6 +59,13 @@ export const ORDER_ITEM_FRAGMENT = `#graphql
     }
     financialStatus
     fulfillmentStatus
+    successfulFulfillments(first:10){
+      trackingCompany
+      trackingInfo(first:10){
+        number
+        url
+      }
+    }
     id
     name
     processedAt
