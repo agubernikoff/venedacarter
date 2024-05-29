@@ -637,7 +637,8 @@ aside li {
   display: none !important;
 }
 
-.klaviyo-form-XrMRY4.klaviyo-form.form-version-cid-1 {
+.klaviyo-form-XrMRY4.klaviyo-form.form-version-cid-1,
+.klaviyo-form-XrMRY4.klaviyo-form.form-version-cid-2 {
   padding-right: 0rem;
   @media (min-width: 44em) {
     padding-right: 1rem;
@@ -669,6 +670,11 @@ aside li {
   font-family: 'regular-font' !important;
   font-weight: normal;
   font-size: 0.75rem;
+}
+
+.newsletter-mobile-page {
+  width: 33.3%;
+  margin: auto;
 }
 /*
 * --------------------------------------------------
