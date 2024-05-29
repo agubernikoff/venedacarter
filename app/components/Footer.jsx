@@ -52,7 +52,7 @@ function Brand({isMobile, menu, primaryDomainUrl}) {
   const {publicStoreDomain} = useRootLoaderData();
   function closeAside(event) {
     if (isMobile) {
-      // event.preventDefault();
+      event.preventDefault();
       window.location.href = event.currentTarget.href;
     }
   }
@@ -106,7 +106,7 @@ function Support({isMobile, menu, primaryDomainUrl}) {
   const {publicStoreDomain} = useRootLoaderData();
   function closeAside(event) {
     if (isMobile) {
-      // event.preventDefault();
+      event.preventDefault();
       window.location.href = event.currentTarget.href;
     }
   }
