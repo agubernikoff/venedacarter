@@ -131,7 +131,11 @@ export default function Product() {
   const {product, variants, recs, customer} = useLoaderData();
   const {selectedVariant} = product;
   const [isMobile, setIsMobile] = useState(false);
+  const productDiv = useRef();
 
+  function scrollToTopOfProductImages() {
+    productDiv.current.scrollTop = 0;
+  }
   useEffect(() => {
     window
       .matchMedia('(max-width:44em)')
@@ -139,9 +143,11 @@ export default function Product() {
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
 
+  useEffect(() => scrollToTopOfProductImages(), [product]);
+
   return (
     <>
-      <div className={isMobile ? 'product-mobile' : 'product'}>
+      <div ref={productDiv} className={isMobile ? 'product-mobile' : 'product'}>
         <ProductImage
           images={product?.images.nodes}
           selectedVariant={selectedVariant}
@@ -169,10 +175,10 @@ export default function Product() {
  */
 function ProductImage({images, selectedVariant, isMobile}) {
   const [imageIndex, setImageIndex] = useState(0);
-
+  console.log(images, selectedVariant);
   const filteredImages = images.filter((i) => {
-    if (selectedVariant?.availableForSale)
-      return i.altText === selectedVariant.image.altText;
+    if (selectedVariant?.availableForSale || !i.altText)
+      return i.altText === selectedVariant?.image?.altText;
     else
       return selectedVariant.title
         .toLowerCase()
@@ -230,9 +236,9 @@ function ProductImage({images, selectedVariant, isMobile}) {
     return (
       <div className="product-image">
         <Image
-          alt={selectedVariant.image.altText || 'Product Image'}
+          alt={selectedVariant?.image?.altText || 'Product Image'}
           aspectRatio="1/1"
-          data={selectedVariant.image}
+          data={selectedVariant?.image}
           sizes="(min-width: 45em) 50vw, 100vw"
         />
       </div>
