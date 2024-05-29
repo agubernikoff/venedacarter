@@ -107,13 +107,14 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
   const {publicStoreDomain} = useRootLoaderData();
   const className = `header-menu-${viewport}`;
 
-  // function closeAside(event) {
-  //   if (viewport === 'mobile') {
-  //     event.preventDefault();
-  //     window.location.href = event.currentTarget.href;
-  //   }
-  // }
+  function closeAside(event) {
+    if (viewport === 'mobile') {
+      event.preventDefault();
+      window.location.href = event.currentTarget.href;
+    }
+  }
   const [hovered, setHovered] = useState(false);
+  console.log('menu', menu);
   return (
     <motion.nav className={className} role="navigation" layout layoutRoot>
       {viewport === 'mobile' && (
@@ -133,7 +134,7 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
           item={item}
           publicStoreDomain={publicStoreDomain}
           primaryDomainUrl={primaryDomainUrl}
-          // closeAside={closeAside}
+          closeAside={closeAside}
           hovered={hovered}
           setHovered={setHovered}
         />
@@ -248,12 +249,12 @@ export function HeaderMenuMobile({
 }) {
   const {publicStoreDomain} = useRootLoaderData();
   const className = `header-menu-${viewport}`;
-  // function closeAside(event) {
-  //   if (viewport === 'mobile') {
-  //     event.preventDefault();
-  //     window.location.href = event.currentTarget.href;
-  //   }
-  // }
+  function closeAside(event) {
+    if (viewport === 'mobile') {
+      event.preventDefault();
+      window.location.href = event.currentTarget.href;
+    }
+  }
 
   return (
     <nav className={className} role="navigation">
@@ -292,7 +293,7 @@ export function HeaderMenuMobile({
                     className="subheader-menu-item"
                     end
                     key={item.id}
-                    // onClick={closeAside}
+                    onClick={closeAside}
                     prefetch="intent"
                     // style={activeLinkStyle}
                     to={url}
@@ -306,7 +307,7 @@ export function HeaderMenuMobile({
                 className="subheader-menu-item"
                 end
                 key={item.id}
-                // onClick={closeAside}
+                onClick={closeAside}
                 prefetch="intent"
                 // style={activeLinkStyle}
                 to={url}
@@ -335,7 +336,7 @@ export function HeaderMenuMobile({
             className="mobile-middle-menu-item"
             end
             key={item.id}
-            // onClick={closeAside}
+            onClick={closeAside}
             prefetch="intent"
             // style={activeLinkStyle}
             to={url}
@@ -370,7 +371,7 @@ export function HeaderMenuMobile({
               className="subheader-menu-item"
               end
               key={item.id}
-              // onClick={closeAside}
+              onClick={closeAside}
               prefetch="intent"
               // style={activeLinkStyle}
               to={url}
