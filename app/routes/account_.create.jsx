@@ -64,14 +64,14 @@ export async function action({request, context}) {
         variables: {input: {email: input.email, password: input.password}},
       },
     );
-    console.log(customerCreate, customerAccessTokenCreate);
+
     if (
-      customerCreate?.customerUserErrors.length ||
-      customerAccessTokenCreate?.customerUserErrors.length
+      customerCreate?.customerUserErrors?.length ||
+      customerAccessTokenCreate?.customerUserErrors?.length
     ) {
       throw new Error(
-        customerCreate?.customerUserErrors[0].message ||
-          customerAccessTokenCreate?.customerUserErrors[0].message,
+        customerCreate?.customerUserErrors[0]?.message ||
+          customerAccessTokenCreate?.customerUserErrors[0]?.message,
       );
     }
     // return json({1: customerCreate, 2: customerAccessTokenCreate});
