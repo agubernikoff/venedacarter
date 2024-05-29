@@ -673,8 +673,11 @@ aside li {
 }
 
 .newsletter-mobile-page {
-  width: 33.3%;
+  width: 92.5%;
   margin: auto;
+  @media (min-width: 44em) {
+    width: 33.3%;
+  }
 }
 /*
 * --------------------------------------------------
