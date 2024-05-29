@@ -1,6 +1,7 @@
 import {redirect, json} from '@shopify/remix-oxygen';
 import {
   Form,
+  Link,
   NavLink,
   useActionData,
   useNavigate,
@@ -183,7 +184,23 @@ export default function AccountProfile() {
           {action?.error ? (
             <p>
               <mark>
-                <small>{action.error}</small>
+                {action.error === 'Email has already been taken' ? (
+                  <small>
+                    An account already exists for this email address. Please{' '}
+                    <Link
+                      style={{color: 'red', textDecoration: 'underline'}}
+                      to={'/account/login'}
+                    >
+                      log in
+                    </Link>{' '}
+                    or{' '}
+                    <Link style={{color: 'red', textDecoration: 'underline'}}>
+                      reset your password.
+                    </Link>
+                  </small>
+                ) : (
+                  <small>{action.error}</small>
+                )}
               </mark>
             </p>
           ) : (

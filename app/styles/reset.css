@@ -146,3 +146,8 @@ code {
 a > img {
   display: block;
 }
+
+mark {
+  background: transparent;
+  color: red;
+}
