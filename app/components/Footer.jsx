@@ -120,7 +120,7 @@ function Support({isMobile, menu, primaryDomainUrl}) {
       </div>
       <div className="footer-content-container">
         <div className="brand-list">
-          {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
+          {(menu || FALLBACK_FOOTER_SUPPORT_MENU).items.map((item) => {
             if (!item.url) return null;
 
             // if the url is internal, we strip the domain
@@ -206,34 +206,95 @@ function Newsletter({footerImage, isMobile}) {
 }
 
 const FALLBACK_FOOTER_MENU = {
-  id: 'gid://shopify/Menu/199655620664',
+  id: 'gid://shopify/Menu/191401525326',
   items: [
     {
-      id: 'gid://shopify/MenuItem/461633093688',
-      resourceId: 'gid://shopify/ShopPolicy/23358013496',
-      tags: [],
-      title: 'Refund Policy',
-      type: 'SHOP_POLICY',
-      url: '/policies/refund-policy',
+      id: 'gid://shopify/MenuItem/444996419662',
       items: [],
+      resourceId: null,
+      tags: [],
+      title: 'New Arrivals',
+      type: 'HTTP',
+      url: 'https://dumby-veneda.myshopify.com/collections/new_arrivals',
     },
     {
-      id: 'gid://shopify/MenuItem/461633126456',
-      resourceId: 'gid://shopify/ShopPolicy/23358111800',
-      tags: [],
-      title: 'Shipping Policy',
-      type: 'SHOP_POLICY',
-      url: '/policies/shipping-policy',
+      id: 'gid://shopify/MenuItem/445769252942',
       items: [],
+      resourceId: null,
+      tags: [],
+      title: 'Shop',
+      type: 'CATALOG',
+      url: 'https://dumby-veneda.myshopify.com/collections/all',
     },
     {
-      id: 'gid://shopify/MenuItem/461633159224',
-      resourceId: 'gid://shopify/ShopPolicy/23358079032',
+      id: 'gid://shopify/MenuItem/445769285710',
+      items: [],
+      resourceId: 'gid://shopify/Page/93070065742',
+      tags: [],
+      title: 'About',
+      type: 'PAGE',
+      url: 'https://dumby-veneda.myshopify.com/pages/about',
+    },
+    {
+      id: 'gid://shopify/MenuItem/445769318478',
+      items: [],
+      resourceId: 'gid://shopify/Page/93680959566',
+      tags: [],
+      title: 'Stockists',
+      type: 'PAGE',
+      url: 'https://dumby-veneda.myshopify.com/pages/stockists',
+    },
+    {
+      id: 'gid://shopify/MenuItem/445769351246',
+      items: [],
+      resourceId: null,
+      tags: [],
+      title: 'Instagram',
+      type: 'HTTP',
+      url: 'https://www.instagram.com/venedaacarter/',
+    },
+  ],
+};
+
+const FALLBACK_FOOTER_SUPPORT_MENU = {
+  id: 'gid://shopify/Menu/191706923086',
+  items: [
+    {
+      id: 'gid://shopify/MenuItem/445768728654',
+      items: [],
+      resourceId: 'gid://shopify/Page/93681025102',
       tags: [],
       title: 'Terms of Service + Privacy',
-      type: 'SHOP_POLICY',
-      url: '/policies/terms-of-service-+-privacy',
+      type: 'PAGE',
+      url: 'https://dumby-veneda.myshopify.com/pages/terms-of-service',
+    },
+
+    {
+      id: 'gid://shopify/MenuItem/445768794190',
       items: [],
+      resourceId: 'gid://shopify/Page/93681188942',
+      tags: [],
+      title: 'Refund Policy',
+      type: 'PAGE',
+      url: 'https://dumby-veneda.myshopify.com/pages/refund-policy',
+    },
+    {
+      id: 'gid://shopify/MenuItem/445768826958',
+      items: [],
+      resourceId: 'gid://shopify/Page/93681156174',
+      tags: [],
+      title: 'Claim Portal',
+      type: 'PAGE',
+      url: 'https://dumby-veneda.myshopify.com/pages/claim-portal',
+    },
+    {
+      id: 'gid://shopify/MenuItem/445768859726',
+      items: [],
+      resourceId: 'gid://shopify/Page/92875718734',
+      tags: [],
+      title: 'Contact',
+      type: 'PAGE',
+      url: 'https://dumby-veneda.myshopify.com/pages/contact',
     },
   ],
 };
