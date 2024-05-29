@@ -8,9 +8,6 @@ import {Await} from '@remix-run/react';
  * @param {FooterQuery & {shop: HeaderQuery['shop']}}
  */
 export function Footer({menu, shop, footerImage, supportMenu}) {
-  // DONT DELETE UNTIL YOU USE THESE LOGS TO CREATE TWO SEPERATE FALLBACK MENUS
-  console.log(menu);
-  console.log(supportMenu);
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     window
