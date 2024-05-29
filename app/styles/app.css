@@ -234,7 +234,7 @@ aside li {
   padding: 0 1rem;
   position: sticky;
   top: 0;
-  font-size: 0.75rem;
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
   font-family: 'regular-font';
   border-bottom: 1px solid #eaeaea;
   border-right: none;
@@ -254,8 +254,8 @@ aside li {
   border-bottom: 1px solid #eaeaea;
   border-right: none;
 }
-.header-left,
-.header-right {
+.header-mobile .header-left,
+.header-mobile .header-right {
   flex: 1;
 }
 
@@ -274,7 +274,8 @@ aside li {
 
 .header-catalog-submenu-container {
   display: flex;
-  gap: 2rem;
+  gap: clamp(0.8rem, 2vw, 1.5rem);
+  align-items: center;
 }
 .mobile-menu-container {
   position: fixed;
@@ -307,9 +308,9 @@ aside li {
 
 .header-menu-desktop {
   display: none;
-  grid-gap: 1.5rem;
+  grid-gap: clamp(0.8rem, 2vw, 1.5rem);
   justify-content: center;
-
+  align-items: center;
   @media (min-width: 44em) {
     display: flex;
     margin-left: auto;
@@ -352,7 +353,7 @@ aside li {
 }
 .subheader-menu-item {
   cursor: pointer;
-  font-size: 0.75rem;
+  /* font-size: 0.75rem; */
   font-family: 'regular-font';
 }
 .mobile-middle-menu-item {
@@ -378,6 +379,7 @@ aside li {
 .shop-name-mobile {
   font-size: 0.75rem;
   font-family: 'regular-font';
+  margin: auto;
 }
 .header-left > a:-webkit-any-link {
   text-decoration: none !important;

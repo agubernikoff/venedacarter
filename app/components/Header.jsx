@@ -185,7 +185,7 @@ function HeaderMenuItem({
       className={
         item.title === 'Shop' ? 'header-catalog-submenu-container' : null
       }
-      style={{paddingBlock: '.5rem'}}
+      style={{paddingBlock: '.5em'}}
     >
       <motion.div layout="position" transition={{ease: 'easeInOut'}}>
         <NavLink
@@ -260,7 +260,7 @@ export function HeaderMenuMobile({
     <nav className={className} role="navigation">
       <div
         className={className}
-        style={{borderBottom: '1px solid #eaeaea', paddingBottom: '1rem'}}
+        style={{borderBottom: '1px solid #eaeaea', paddingBottom: '1em'}}
       >
         <p className="subheader-menu-item" style={{fontFamily: 'bold-font'}}>
           Shop
@@ -347,11 +347,11 @@ export function HeaderMenuMobile({
       })}
       <div
         className={className}
-        style={{borderBottom: '1px solid #eaeaea', paddingBottom: '1rem'}}
+        style={{borderBottom: '1px solid #eaeaea', paddingBottom: '1em'}}
       >
         <p
           className="subheader-menu-item"
-          style={{fontFamily: 'bold-font', marginTop: '.5rem'}}
+          style={{fontFamily: 'bold-font', marginTop: '.5em'}}
         >
           Support
         </p>
