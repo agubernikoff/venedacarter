@@ -114,7 +114,7 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
     }
   }
   const [hovered, setHovered] = useState(false);
-
+  console.log('menu', menu);
   return (
     <motion.nav className={className} role="navigation" layout layoutRoot>
       {viewport === 'mobile' && (
@@ -534,43 +534,75 @@ function CartToggle({cart, isMobile, closeMenu}) {
 }
 
 const FALLBACK_HEADER_MENU = {
-  id: 'gid://shopify/Menu/199655587896',
+  id: 'gid://shopify/Menu/191401492558',
   items: [
     {
-      id: 'gid://shopify/MenuItem/461609500728',
+      id: 'gid://shopify/MenuItem/444996321358',
+      items: [],
       resourceId: null,
       tags: [],
-      title: 'Collections',
+      title: 'New Arrivals',
       type: 'HTTP',
-      url: '/collections',
-      items: [],
+      url: 'https://dumby-veneda.myshopify.com/collections/new_arrivals',
     },
     {
-      id: 'gid://shopify/MenuItem/461609533496',
+      id: 'gid://shopify/MenuItem/444996354126',
+      items: [
+        {
+          id: 'gid://shopify/MenuItem/445625139278',
+          resourceId: 'gid://shopify/Collection/277859336270',
+          tags: [],
+          title: 'Rings',
+          type: 'COLLECTION',
+          url: 'https://dumby-veneda.myshopify.com/collections/rings',
+        },
+        {
+          id: 'gid://shopify/MenuItem/445623304270',
+          resourceId: 'gid://shopify/Collection/277859369038',
+          tags: [],
+          title: 'Necklaces',
+          type: 'COLLECTION',
+          url: 'https://dumby-veneda.myshopify.com/collections/necklaces',
+        },
+        {
+          id: 'gid://shopify/MenuItem/445625073742',
+          resourceId: 'gid://shopify/Collection/277859401806',
+          tags: [],
+          title: 'Earrings',
+          type: 'COLLECTION',
+          url: 'https://dumby-veneda.myshopify.com/collections/earrings',
+        },
+        {
+          id: 'gid://shopify/MenuItem/445625106510',
+          resourceId: 'gid://shopify/Collection/278376218702',
+          tags: [],
+          title: 'Bracelets',
+          type: 'COLLECTION',
+          url: 'https://dumby-veneda.myshopify.com/collections/bracelets',
+        },
+        {
+          id: 'gid://shopify/MenuItem/445625172046',
+          resourceId: null,
+          tags: [],
+          title: 'All',
+          type: 'CATALOG',
+          url: 'https://dumby-veneda.myshopify.com/collections/all',
+        },
+      ],
       resourceId: null,
       tags: [],
-      title: 'Blog',
-      type: 'HTTP',
-      url: '/blogs/journal',
-      items: [],
+      title: 'Shop',
+      type: 'CATALOG',
+      url: 'https://dumby-veneda.myshopify.com/collections/all',
     },
     {
-      id: 'gid://shopify/MenuItem/461609566264',
-      resourceId: null,
-      tags: [],
-      title: 'Policies',
-      type: 'HTTP',
-      url: '/policies',
+      id: 'gid://shopify/MenuItem/444996386894',
       items: [],
-    },
-    {
-      id: 'gid://shopify/MenuItem/461609599032',
-      resourceId: 'gid://shopify/Page/92591030328',
+      resourceId: 'gid://shopify/Page/93070065742',
       tags: [],
       title: 'About',
       type: 'PAGE',
-      url: '/pages/about',
-      items: [],
+      url: 'https://dumby-veneda.myshopify.com/pages/about',
     },
   ],
 };
