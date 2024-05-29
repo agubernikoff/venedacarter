@@ -1280,6 +1280,8 @@ aside li {
   overflow: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  position: relative;
+  z-index: 3;
 }
 
 .product-mobile {
@@ -1466,6 +1468,7 @@ aside li {
   padding-bottom: 1rem;
   border-bottom: 1px solid #eaeaea;
   width: 100%;
+  z-index: 100 !important;
 }
 
 .size-guide-mobile {
@@ -1488,7 +1491,7 @@ aside li {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1000 !important;
 }
 
 .size-guide-popup {
