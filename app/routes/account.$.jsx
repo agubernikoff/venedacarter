@@ -1,4 +1,4 @@
-import {json, redirect} from '@shopify/remix-oxygen';
+import {redirect} from '@shopify/remix-oxygen';
 
 // fallback wild card for all unauthenticated routes in account section
 /**
@@ -13,7 +13,7 @@ export async function loader({context, request}) {
           'Set-Cookie': await context.session.commit(),
         },
       });
-    else return json({});
+    else return redirect('/account/reset');
   }
 }
 
