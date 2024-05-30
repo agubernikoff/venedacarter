@@ -7,7 +7,7 @@ import {
   useNavigation,
   useOutletContext,
 } from '@remix-run/react';
-import {CUSTOMER_RESET_BY_URL_MUTATION} from '../graphql/customer-account/CustomerResetByUrl';
+import {CUSTOMER_RECOVER_BY_URL_MUTATION} from '../graphql/customer-account/CustomerResetByUrl';
 import {useEffect} from 'react';
 
 /**
@@ -45,7 +45,7 @@ export async function action({request, context}) {
   }
 
   try {
-    const response = await storefront.mutate(CUSTOMER_RESET_BY_URL_MUTATION, {
+    const response = await storefront.mutate(CUSTOMER_RECOVER_BY_URL_MUTATION, {
       variables: {email},
     });
 
