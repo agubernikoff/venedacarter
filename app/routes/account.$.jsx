@@ -4,10 +4,10 @@ import {json, redirect} from '@shopify/remix-oxygen';
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({context}) {
+export async function loader({context, request}) {
   // await context.customerAccount.handleAuthStatus();
   if (!context.session.get('customerAccessToken')) {
-    if (context.session.get('customerAccessToken'))
+    if (!request.url.includes('/account/reset'))
       return redirect('/account/login', {
         headers: {
           'Set-Cookie': await context.session.commit(),
