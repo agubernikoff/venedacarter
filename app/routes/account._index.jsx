@@ -1,10 +1,7 @@
-import {redirect} from '@shopify/remix-oxygen';
+import {json, redirect} from '@shopify/remix-oxygen';
 
-export async function loader({context}) {
-  const currentURL = context.req.url;
-  console.log('currenturl', currentURL);
-
-  if (!currentURL.includes('/account/reset')) {
+export async function loader({context, request}) {
+  if (!request.url.includes('/account/reset')) {
     if (context.session.get('customerAccessToken'))
       return redirect('/account/profile');
     else return redirect('/account/login');
