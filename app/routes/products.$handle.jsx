@@ -175,7 +175,7 @@ export default function Product() {
  */
 function ProductImage({images, selectedVariant, isMobile}) {
   const [imageIndex, setImageIndex] = useState(0);
-  console.log(images, selectedVariant);
+
   const filteredImages = images.filter((i) => {
     if (selectedVariant?.availableForSale || !i.altText)
       return i.altText === selectedVariant?.image?.altText;
@@ -375,8 +375,6 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
     imageSrc = null;
   }
 
-  console.log('product', product);
-  console.log('collectiontype', collectionType);
   return (
     <div className={isMobile ? 'product-main-mobile' : 'product-main'}>
       <div
@@ -769,7 +767,6 @@ function NotifyMePopUp({closePopUp, selectedVariant, subscribe}) {
     };
   }, [closePopUp]);
 
-  console.log('selectedVariant', selectedVariant);
   return (
     <div onClick={closePopUp} className="notify-me-overlay">
       <div className="notify-me-modal" onClick={(e) => e.stopPropagation()}>
