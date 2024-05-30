@@ -768,6 +768,8 @@ function NotifyMePopUp({closePopUp, selectedVariant, subscribe}) {
       document.removeEventListener('keydown', handleEscape);
     };
   }, [closePopUp]);
+
+  console.log('selectedVariant', selectedVariant);
   return (
     <div onClick={closePopUp} className="notify-me-overlay">
       <div className="notify-me-modal" onClick={(e) => e.stopPropagation()}>
@@ -788,9 +790,12 @@ function NotifyMePopUp({closePopUp, selectedVariant, subscribe}) {
             {selectedVariant?.product.title}
           </p>
           <div>
-            {selectedVariant?.selectedOptions?.map((o) => (
-              <p key={o.value}>{`${o.name}: ${o.value}`}</p>
-            ))}
+            {selectedVariant?.selectedOptions?.map(
+              (o) =>
+                o.value !== 'Default Title' && (
+                  <p key={o.value}>{`${o.name}: ${o.value}`}</p>
+                ),
+            )}
           </div>
         </div>
         <input
