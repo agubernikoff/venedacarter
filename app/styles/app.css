@@ -374,6 +374,9 @@ aside li {
   margin-left: auto;
   justify-content: flex-end;
 }
+.header-ctas > a {
+  font-weight: normal !important;
+}
 .shop-name {
   font-family: 'bold-font';
   font-size: 0.75rem;
