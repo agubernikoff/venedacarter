@@ -9,7 +9,7 @@ export function shouldRevalidate() {
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({context}) {
+export async function loader({context, request}) {
   if (context.session.get('customerAccessToken')) {
     const token = context.session.get('customerAccessToken');
 
@@ -26,7 +26,8 @@ export async function loader({context}) {
         },
       },
     );
-  } else return redirect('/account/login');
+  } else if (request.url.includes('/account/reset')) return json({});
+  else return redirect('/account/login');
 }
 
 export default function AccountLayout() {
