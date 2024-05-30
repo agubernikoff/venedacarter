@@ -215,12 +215,12 @@ export default function AccountProfile() {
           </button>
         </Form>
         <div className="login-links">
-          <a prefetch="intent" to="/account/reset">
+          <a prefetch="intent" href="/account/reset">
             Reset Password
           </a>
-          <NavLink prefetch="intent" to="/account/create">
+          {/* <NavLink prefetch="intent" to="/account/create">
             Create an Account
-          </NavLink>
+          </NavLink> */}
         </div>
       </div>
     </div>
