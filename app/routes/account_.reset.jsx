@@ -20,11 +20,11 @@ export const meta = () => {
 /**
  * @param {LoaderFunctionArgs}
  */
-// export async function loader({context}) {
-//   if (context.session.get('customerAccessToken'))
-//     return redirect('/account/profile');
-//   return json({});
-// }
+export async function loader({context}) {
+  if (context.session.get('customerAccessToken'))
+    return redirect('/account/profile');
+  return json({});
+}
 
 /**
  * @param {ActionFunctionArgs}
