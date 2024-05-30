@@ -125,7 +125,6 @@ function OrderItem({order}) {
     if (!expanded) animate(arrow.current, {transform: 'rotate(0deg)'});
     if (expanded) animate(arrow.current, {transform: 'rotate(-90deg)'});
   }
-  // const fulfillmentStatus = flattenConnection(order.fulfillments)[0]?.status;
 
   return (
     <>
@@ -238,7 +237,20 @@ function OrderItem({order}) {
             ))}
             <div className="account-orders-expanded-totals-row">
               <br />
-              <a className="track-order">TRACK ORDER</a>
+              {order.successfulFulfillments?.[0]?.trackingInfo?.[0]?.url !=
+              null ? (
+                <a
+                  target="_blank"
+                  className="track-order"
+                  href={
+                    order.successfulFulfillments?.[0]?.trackingInfo?.[0]?.url
+                  }
+                >
+                  TRACK ORDER
+                </a>
+              ) : (
+                <p className="track-order">PROCESSING ORDER</p>
+              )}
               <br />
               <div>
                 <div style={{marginBottom: '1rem'}}>
