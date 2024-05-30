@@ -6,12 +6,15 @@ import {redirect} from '@shopify/remix-oxygen';
  */
 export async function loader({context}) {
   // await context.customerAccount.handleAuthStatus();
-  if (!context.session.get('customerAccessToken'))
-    return redirect('/account/login', {
-      headers: {
-        'Set-Cookie': await context.session.commit(),
-      },
-    });
+  if (!context.session.get('customerAccessToken')) {
+    if (context.session.get('customerAccessToken'))
+      return redirect('/account/login', {
+        headers: {
+          'Set-Cookie': await context.session.commit(),
+        },
+      });
+    else return null;
+  }
 }
 
 /** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */
