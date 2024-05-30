@@ -13,7 +13,7 @@ export async function loader({context, request}) {
         },
       });
     } else {
-      const path = request.url.split('.com')[1];
+      const path = new URL(request.url).pathname;
       return redirect(path);
     }
   }
