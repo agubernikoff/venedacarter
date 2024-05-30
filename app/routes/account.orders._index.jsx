@@ -195,7 +195,7 @@ function OrderItem({order}) {
               >
                 <br />
                 <Image data={n.variant.image} aspectRatio="1:1.1" />
-                <div>
+                <div style={{width: '90%'}}>
                   <p style={{fontFamily: 'bold-font'}}>Description</p>
                   <br />
                   <p>{n.title}</p>
