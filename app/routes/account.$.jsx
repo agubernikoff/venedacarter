@@ -20,7 +20,7 @@ export async function loader({context, request}) {
       const params = url.search; // Extract query parameters
 
       // Redirect to the original URL with preserved path and query parameters
-      return redirect(`${path}${params}`);
+      return redirect(`/account/reset${params}`);
     }
   }
 }
