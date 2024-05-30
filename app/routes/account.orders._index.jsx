@@ -161,7 +161,13 @@ function OrderItem({order}) {
           </p>
         </div>
         <div className="account-orders-grid-box-container">
-          <p>{order.fulfillmentStatus}</p>
+          <p>
+            {order.fulfillmentStatus === 'UNFULFILLED'
+              ? 'Processing'
+              : order.fulfillmentStatus === 'FULFILLED'
+              ? 'Shipped'
+              : order.fulfillmentStatus}
+          </p>
         </div>
         {/* {fulfillmentStatus && <p>{fulfillmentStatus}</p>} */}
         <Money data={order.totalPrice} />
