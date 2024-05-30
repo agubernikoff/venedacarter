@@ -89,6 +89,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
               menu2={mobileMenu}
               menu3={supportMenu}
               isLoggedIn={isLoggedIn}
+              closeMenu={closeMenu}
             />
           </motion.div>
         )}
@@ -247,6 +248,7 @@ export function HeaderMenuMobile({
   menu2,
   menu3,
   isLoggedIn,
+  closeMenu,
 }) {
   const navigate = useNavigate();
   const {publicStoreDomain} = useRootLoaderData();
@@ -296,7 +298,7 @@ export function HeaderMenuMobile({
                     className="subheader-menu-item"
                     end
                     key={item.id}
-                    onClick={(event) => closeAside(event, url)}
+                    onClick={() => setTimeout(() => closeMenu(), 250)}
                     prefetch="intent"
                     to={url}
                   >
@@ -309,7 +311,7 @@ export function HeaderMenuMobile({
                 className="subheader-menu-item"
                 end
                 key={item.id}
-                onClick={(event) => closeAside(event, url)}
+                onClick={() => setTimeout(() => closeMenu(), 250)}
                 prefetch="intent"
                 to={url}
               >
@@ -337,7 +339,7 @@ export function HeaderMenuMobile({
             className="mobile-middle-menu-item"
             end
             key={item.id}
-            onClick={(event) => closeAside(event, url)}
+            onClick={() => setTimeout(() => closeMenu(), 250)}
             prefetch="intent"
             to={url}
           >
@@ -371,7 +373,7 @@ export function HeaderMenuMobile({
               className="subheader-menu-item"
               end
               key={item.id}
-              onClick={(event) => closeAside(event, url)}
+              onClick={() => setTimeout(() => closeMenu(), 250)}
               prefetch="intent"
               to={url}
             >
