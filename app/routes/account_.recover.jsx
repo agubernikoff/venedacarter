@@ -48,10 +48,13 @@ export async function action({request, context}) {
     const response = await storefront.mutate(CUSTOMER_RECOVER_BY_URL_MUTATION, {
       variables: {email},
     });
-
-    const errors = response.customerRecover.customerUserErrors;
-    if (errors.length > 0) {
-      throw new Error(errors[0].message);
+    console.log(
+      response?.customerRecover?.customerUserErrors,
+      response?.customerRecover,
+    );
+    const errors = response?.customerRecover?.customerUserErrors;
+    if (errors?.length > 0) {
+      throw new Error(errors[0]?.message);
     }
 
     return json({success: true}, {status: 200});
@@ -68,6 +71,11 @@ export default function RecoverAccount() {
     <div className="account-login">
       <p className="stockists-title">FORGOT PASSWORD</p>
       <div className="account-profile">
+        <p>
+          {action?.success
+            ? 'Thank you. An email has been sent containing your reset password link.'
+            : "Please enter your login email and we'll email you a link to reset your password."}
+        </p>
         <Form method="POST">
           {' '}
           {/* Changed method to POST */}
@@ -100,11 +108,6 @@ export default function RecoverAccount() {
           >
             {state !== 'idle' ? 'SUBMITTING' : 'SUBMIT'}
           </button>
-          {action?.success && (
-            <p>
-              <small>Check your email for a reset link</small>
-            </p>
-          )}
         </Form>
         <div className="login-links">
           <NavLink prefetch="intent" to="/account/create">
