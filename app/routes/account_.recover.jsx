@@ -48,10 +48,7 @@ export async function action({request, context}) {
     const response = await storefront.mutate(CUSTOMER_RECOVER_BY_URL_MUTATION, {
       variables: {email},
     });
-    console.log(
-      response?.customerRecover?.customerUserErrors,
-      response?.customerRecover,
-    );
+
     const errors = response?.customerRecover?.customerUserErrors;
     if (errors?.length > 0) {
       throw new Error(errors[0]?.message);
