@@ -27,7 +27,7 @@ export default function AccountProfile() {
     <div className="account-login">
       <p className="stockists-title">NEWSLETTER</p>
       <div className="newsletter-mobile-page">
-        <div class="klaviyo-form-XrMRY4"></div>
+        <div class="klaviyo-form-XrMRY4 klaviyo-form form-version-cid-1"></div>
       </div>
     </div>
   );
