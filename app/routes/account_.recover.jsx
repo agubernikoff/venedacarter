@@ -66,7 +66,7 @@ export default function RecoverAccount() {
 
   return (
     <div className="account-login">
-      <p className="stockists-title">RESET ACCOUNT</p>
+      <p className="stockists-title">FORGOT PASSWORD</p>
       <div className="account-profile">
         <Form method="POST">
           {' '}

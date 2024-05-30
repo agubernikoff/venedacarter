@@ -158,7 +158,7 @@ export default function AccountProfile() {
           </button>
         </Form>
         <div className="login-links">
-          <a href="/account/recover">Reset Password</a>
+          <a href="/account/recover">Forgot Password?</a>
           <NavLink prefetch="intent" to="/account/create">
             Create an Account
           </NavLink>
