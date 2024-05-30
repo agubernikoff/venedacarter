@@ -7,19 +7,15 @@ import {redirect} from '@shopify/remix-oxygen';
 export async function loader({context, request}) {
   if (!context.session.get('customerAccessToken')) {
     if (!request.url.includes('/account/reset')) {
-      // Redirect to login page if not already on reset page
       return redirect('/account/login', {
         headers: {
           'Set-Cookie': await context.session.commit(),
         },
       });
     } else {
-      // Extract path and query parameters from the request URL
       const url = new URL(request.url);
-      const path = url.pathname; // Extract path
-      const params = url.search; // Extract query parameters
-
-      // Redirect to the original URL with preserved path and query parameters
+      const path = url.pathname;
+      const params = url.search;
       return redirect(`/account/reset${params}`);
     }
   }
