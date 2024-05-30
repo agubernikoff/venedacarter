@@ -68,15 +68,20 @@ export default function RecoverAccount() {
     <div className="account-login">
       <p className="stockists-title">FORGOT PASSWORD</p>
       <div className="account-profile">
-        <p>
-          {action?.success
-            ? 'Thank you. An email has been sent containing your reset password link.'
-            : "Please enter your login email and we'll email you a link to reset your password."}
-        </p>
         <Form method="POST">
-          {' '}
           {/* Changed method to POST */}
           <fieldset className="profile-fieldset">
+            <p
+              style={{
+                textAlign: 'left',
+                fontSize: '.75rem',
+                marginBottom: '.75rem',
+              }}
+            >
+              {action?.success
+                ? 'Thank you. An email has been sent containing your reset password link.'
+                : "Please enter your login email and we'll email you a link to reset your password."}
+            </p>
             <input
               className="profile-input"
               id="email"
