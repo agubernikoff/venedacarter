@@ -108,7 +108,7 @@ export default function RecoverAccount() {
             type="submit"
             disabled={state !== 'idle'}
           >
-            {state !== 'idle' ? 'SUBMITTING' : 'SUBMIT'}
+            {state !== 'idle' ? 'SUBMIT' : 'SUBMIT'}
           </button>
         </Form>
         <div className="login-links">
