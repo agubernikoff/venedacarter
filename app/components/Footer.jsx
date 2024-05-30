@@ -49,14 +49,13 @@ export function Footer({menu, shop, footerImage, supportMenu}) {
  * }}
  */
 
-function Brand({isMobile, menu, primaryDomainUrl, closeAsidePanel}) {
+function Brand({isMobile, menu, primaryDomainUrl}) {
   const navigate = useNavigate();
   const {publicStoreDomain} = useRootLoaderData();
 
   function closeAside(event, url) {
     if (isMobile) {
       event.preventDefault();
-      closeAsidePanel();
       navigate(url);
     }
   }
@@ -109,14 +108,13 @@ function Brand({isMobile, menu, primaryDomainUrl, closeAsidePanel}) {
   );
 }
 
-function Support({isMobile, menu, primaryDomainUrl, closeAsidePanel}) {
+function Support({isMobile, menu, primaryDomainUrl}) {
   const navigate = useNavigate();
   const {publicStoreDomain} = useRootLoaderData();
 
   function closeAside(event, url) {
     if (isMobile) {
       event.preventDefault();
-      closeAsidePanel();
       navigate(url);
     }
   }
