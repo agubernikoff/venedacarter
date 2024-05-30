@@ -17,7 +17,7 @@ export const meta = () => {
   return [{title: 'Newsletter'}];
 };
 
-export default function AccountProfile() {
+export default function Newsletter() {
   const account = useOutletContext();
   const {state} = useNavigation();
   /** @type {ActionReturnData} */
