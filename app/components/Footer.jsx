@@ -3,6 +3,7 @@ import {NavLink} from '@remix-run/react';
 import {useRootLoaderData} from '~/root';
 import {Image} from '@shopify/hydrogen';
 import {Await} from '@remix-run/react';
+import {useNavigate} from 'react-router-dom';
 
 /**
  * @param {FooterQuery & {shop: HeaderQuery['shop']}}
@@ -48,14 +49,18 @@ export function Footer({menu, shop, footerImage, supportMenu}) {
  * }}
  */
 
-function Brand({isMobile, menu, primaryDomainUrl}) {
+function Brand({isMobile, menu, primaryDomainUrl, closeAsidePanel}) {
+  const navigate = useNavigate();
   const {publicStoreDomain} = useRootLoaderData();
-  function closeAside(event) {
+
+  function closeAside(event, url) {
     if (isMobile) {
       event.preventDefault();
-      window.location.href = event.currentTarget.href;
+      closeAsidePanel();
+      navigate(url);
     }
   }
+
   return (
     <div className="brand-footer">
       <div className="footer-title-container">
@@ -66,7 +71,6 @@ function Brand({isMobile, menu, primaryDomainUrl}) {
           {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
             if (!item.url) return null;
 
-            // if the url is internal, we strip the domain
             const url =
               item.url.includes('myshopify.com') ||
               item.url.includes(publicStoreDomain) ||
@@ -76,10 +80,9 @@ function Brand({isMobile, menu, primaryDomainUrl}) {
 
             return (
               <NavLink
-                // className="header-menu-item"
                 end
                 key={item.id}
-                onClick={closeAside}
+                onClick={(event) => closeAside(event, url)}
                 prefetch="intent"
                 style={activeLinkStyle}
                 to={url}
@@ -92,7 +95,11 @@ function Brand({isMobile, menu, primaryDomainUrl}) {
         {isMobile ? null : (
           <div className="site-credit">
             <p>© Veneda Carter 2024, All Rights Reserved. </p>
-            <a href="https://www.swallstudios.com" target="_blank">
+            <a
+              href="https://www.swallstudios.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Site Credit
             </a>
           </div>
@@ -102,14 +109,18 @@ function Brand({isMobile, menu, primaryDomainUrl}) {
   );
 }
 
-function Support({isMobile, menu, primaryDomainUrl}) {
+function Support({isMobile, menu, primaryDomainUrl, closeAsidePanel}) {
+  const navigate = useNavigate();
   const {publicStoreDomain} = useRootLoaderData();
-  function closeAside(event) {
+
+  function closeAside(event, url) {
     if (isMobile) {
       event.preventDefault();
-      window.location.href = event.currentTarget.href;
+      closeAsidePanel();
+      navigate(url);
     }
   }
+
   return (
     <div className="support-footer">
       <div className="footer-title-container">
@@ -120,7 +131,6 @@ function Support({isMobile, menu, primaryDomainUrl}) {
           {(menu || FALLBACK_FOOTER_SUPPORT_MENU).items.map((item) => {
             if (!item.url) return null;
 
-            // if the url is internal, we strip the domain
             const url =
               item.url.includes('myshopify.com') ||
               item.url.includes(publicStoreDomain) ||
@@ -130,10 +140,9 @@ function Support({isMobile, menu, primaryDomainUrl}) {
 
             return (
               <NavLink
-                // className="header-menu-item"
                 end
                 key={item.id}
-                onClick={closeAside}
+                onClick={(event) => closeAside(event, url)}
                 prefetch="intent"
                 style={activeLinkStyle}
                 to={url}
