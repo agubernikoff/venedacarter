@@ -142,9 +142,6 @@ export default function RecoverAccount() {
               {state !== 'idle' ? 'SUBMIT' : 'SUBMIT'}
             </button>
           </Form>
-          <div className="login-links">
-            <a href="/account/login">Log In</a>
-          </div>
         </div>
       </div>
     </div>
