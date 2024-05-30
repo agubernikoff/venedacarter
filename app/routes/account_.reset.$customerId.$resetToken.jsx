@@ -100,11 +100,19 @@ export default function RecoverAccount() {
       <p className="stockists-title">RESET PASSWORD</p>
       <div className="account-profile">
         <div className="account-profile">
-          <p>Please enter a new password.</p>
           <Form method="POST">
             {' '}
             {/* Changed method to POST */}
             <fieldset className="profile-fieldset">
+              <p
+                style={{
+                  textAlign: 'left',
+                  fontSize: '.75rem',
+                  marginBottom: '.75rem',
+                }}
+              >
+                Please enter a new password.
+              </p>
               <input
                 className="profile-input"
                 id="password"
@@ -134,6 +142,9 @@ export default function RecoverAccount() {
               {state !== 'idle' ? 'SUBMITTING' : 'SUBMIT'}
             </button>
           </Form>
+          <div className="login-links">
+            <a href="/account/login">Log In</a>
+          </div>
         </div>
       </div>
     </div>
