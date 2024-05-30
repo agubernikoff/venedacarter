@@ -83,7 +83,7 @@ function CartLineItem({layout, line}) {
         />
       )}
 
-      <div>
+      <div style={{width: '50%'}}>
         <Link
           prefetch="intent"
           to={lineItemUrl}
