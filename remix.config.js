@@ -15,7 +15,7 @@ module.exports = {
   serverDependenciesToBundle: 'all',
   serverModuleFormat: 'esm',
   serverPlatform: 'neutral',
-  serverMinify: process.env.NODE_ENV === 'production',
+  serverMinify: process.env.NODE_ENV === 'development',
   future: {
     v3_fetcherPersist: true,
     v3_relativeSplatpath: true,
