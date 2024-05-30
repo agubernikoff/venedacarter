@@ -2,6 +2,7 @@ import {redirect} from '@shopify/remix-oxygen';
 
 export async function loader({context}) {
   const currentURL = context.req.url;
+  console.log('currenturl', currentURL);
 
   if (!currentURL.includes('/account/reset')) {
     if (context.session.get('customerAccessToken'))
