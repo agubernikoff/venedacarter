@@ -200,21 +200,28 @@ function OrderItem({order}) {
                   <br />
                   <p>{n.title}</p>
                   <br />
-                  <p>
-                    Color:{' '}
-                    {
-                      n.variant.selectedOptions?.find(
-                        (o) => o.name === 'Material',
-                      )?.value
-                    }
-                  </p>
-                  <p>
-                    Size:{' '}
-                    {
-                      n.variant.selectedOptions?.find((o) => o.name === 'Size')
-                        ?.value
-                    }
-                  </p>
+                  {n.variant.selectedOptions?.find(
+                    (o) => o.name === 'Material',
+                  ) ? (
+                    <p>
+                      Color:{' '}
+                      {
+                        n.variant.selectedOptions?.find(
+                          (o) => o.name === 'Material',
+                        )?.value
+                      }
+                    </p>
+                  ) : null}
+                  {n.variant.selectedOptions?.find((o) => o.name === 'Size') ? (
+                    <p>
+                      Size:{' '}
+                      {
+                        n.variant.selectedOptions?.find(
+                          (o) => o.name === 'Size',
+                        )?.value
+                      }
+                    </p>
+                  ) : null}
                   {n.variant.selectedOptions?.find(
                     (o) => o.name === 'Thickness',
                   ) ? (
