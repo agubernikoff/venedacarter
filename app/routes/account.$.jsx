@@ -13,7 +13,7 @@ export async function loader({context, request}) {
           'Set-Cookie': await context.session.commit(),
         },
       });
-    else return redirect(request.split('.com')[1]);
+    else return redirect(request.url.split('.com')[1]);
   }
 }
 
