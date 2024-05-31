@@ -128,6 +128,10 @@ function OrderItem({order}) {
 
   console.log('order', order);
 
+  const unitTotal = order?.lineItems?.nodes
+    .map((lineitem) => lineitem.quantity * lineitem.originalTotalPrice?.amount)
+    .reduce((partialSum, a) => partialSum + a, 0);
+  console.log(unitTotal);
   return (
     <>
       {/* <fieldset> */}
@@ -246,7 +250,7 @@ function OrderItem({order}) {
                 <div>
                   <p style={{fontFamily: 'bold-font'}}>Item Total</p>
                   <br />
-                  <Money data={n.variant.price} />
+                  <Money data={n.originalTotalPrice} />
                 </div>
               </div>
             ))}
@@ -285,9 +289,19 @@ function OrderItem({order}) {
                       currencyCode: order.totalPrice.currencyCode,
                     }}
                   /> */}
-                  <p>n/a</p>
+                  <Money
+                    data={{
+                      amount: `${unitTotal}`,
+                      currencyCode: order.totalPrice.currencyCode,
+                    }}
+                  />
                   <Money data={order.totalTax} />
-                  <p>n/a</p>
+                  <Money
+                    data={{
+                      amount: `${order.totalPrice.amount - unitTotal}`,
+                      currencyCode: order.totalPrice.currencyCode,
+                    }}
+                  />
                   {/* <Money
                     data={{
                       amount: (
