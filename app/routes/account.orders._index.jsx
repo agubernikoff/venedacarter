@@ -126,12 +126,10 @@ function OrderItem({order}) {
     if (expanded) animate(arrow.current, {transform: 'rotate(-90deg)'});
   }
 
-  console.log('order', order);
-
   const unitTotal = order?.lineItems?.nodes
     .map((lineitem) => lineitem.quantity * lineitem.originalTotalPrice?.amount)
     .reduce((partialSum, a) => partialSum + a, 0);
-  console.log(unitTotal);
+
   return (
     <>
       {/* <fieldset> */}
