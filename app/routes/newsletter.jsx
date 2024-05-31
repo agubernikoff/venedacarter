@@ -27,7 +27,7 @@ export default function Newsletter() {
     <div className="account-login">
       <p className="stockists-title">NEWSLETTER</p>
       <div className="newsletter-mobile-page">
-        <div className="klaviyo-form-XrMRY4 klaviyo-form form-version-cid-1"></div>
+        <div className="klaviyo-form-XrMRY4"></div>
       </div>
     </div>
   );

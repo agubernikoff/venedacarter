@@ -130,6 +130,14 @@ function OrderItem({order}) {
     .map((lineitem) => lineitem.quantity * lineitem.originalTotalPrice?.amount)
     .reduce((partialSum, a) => partialSum + a, 0);
 
+  const aspectRatio = '1:1.1';
+  const [aspectWidth, aspectHeight] = aspectRatio.split(':').map(Number);
+
+  const calculateHeight = (width) => (width / aspectWidth) * aspectHeight;
+
+  const imageWidth = order.variant?.image?.width || 100;
+  const imageHeight = calculateHeight(imageWidth);
+
   return (
     <>
       {/* <fieldset> */}
@@ -200,7 +208,11 @@ function OrderItem({order}) {
                 <br />
                 <Image
                   data={n.variant.image}
-                  aspectRatio="1:1.1"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    aspectRatio: `${aspectWidth}/${aspectHeight}`,
+                  }}
                   height={n.variant?.image?.height}
                 />
                 <div style={{width: '90%'}}>

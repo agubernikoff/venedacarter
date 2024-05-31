@@ -202,7 +202,7 @@ function Newsletter({footerImage, isMobile}) {
             <input placeholder="Email" name="email"></input>
             <button type="submit">Submit</button>
           </form> */}
-          <div className="klaviyo-form-XrMRY4 klaviyo-form form-version-cid-2"></div>
+          <div className="klaviyo-form-XrMRY4"></div>
         </div>
       </div>
     </div>
