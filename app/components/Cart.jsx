@@ -100,13 +100,16 @@ function CartLineItem({layout, line}) {
         </Link>
         <CartLinePrice line={line} as="span" />
         <ul className="cart-material-size">
-          {selectedOptions.map((option) => (
-            <li key={option.name}>
-              <p>
-                {option.name}: {option.value}
-              </p>
-            </li>
-          ))}
+          {selectedOptions.map(
+            (option) =>
+              option.value !== 'Default Title' && (
+                <li key={option.name}>
+                  <p>
+                    {option.name}: {option.value}
+                  </p>
+                </li>
+              ),
+          )}
         </ul>
         <CartLineQuantity line={line} />
       </div>

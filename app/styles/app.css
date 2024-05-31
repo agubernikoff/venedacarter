@@ -817,6 +817,7 @@ aside li {
   color: black;
   z-index: 100;
   font-weight: normal;
+  cursor: pointer;
 }
 
 .cart-discount {
@@ -1604,6 +1605,7 @@ aside li {
   font-size: 0.75rem;
   font-family: 'regular-font' !important;
   font-weight: normal;
+  cursor: pointer;
 }
 
 .add-to-cart-button-mobile {
