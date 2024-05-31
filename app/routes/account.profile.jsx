@@ -117,7 +117,6 @@ export default function AccountProfile() {
   const {formMethod} = useNavigation();
   const stateForMethod = (method) => (formMethod === method ? state : 'idle');
 
-  console.log(account);
   return (
     <div className="account-profile">
       <Form method="PUT">

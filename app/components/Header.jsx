@@ -116,7 +116,7 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
     }
   }
   const [hovered, setHovered] = useState(false);
-  console.log('menu', menu);
+
   return (
     <motion.nav className={className} role="navigation" layout layoutRoot>
       {viewport === 'mobile' && (
@@ -411,7 +411,7 @@ function HeaderCtas({isLoggedIn, cart, isMobile, closeMenu}) {
 
 function HeaderMenuMobileToggle({isOpen, toggleMenu}) {
   const href = !isOpen ? '#x' : '#mobile-menu-aside';
-  console.log(href);
+
   return (
     <button
       style={{background: 'transparent', border: 'none', padding: 0}}
@@ -441,7 +441,6 @@ function SearchToggle({isMobile, closeMenu}) {
     // close the aside
     window.location.href = event.currentTarget.href;
   }
-  console.log(searchInputRef);
 
   function clearSearch() {
     if (searchInputRef.current) {

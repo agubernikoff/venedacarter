@@ -122,7 +122,7 @@ function CartLineItem({layout, line}) {
  */
 function CartCheckoutActions({checkoutUrl}) {
   if (!checkoutUrl) return null;
-  console.log(checkoutUrl);
+
   return (
     <div>
       <button className="cart-checkout-button">
@@ -144,8 +144,6 @@ function CartCheckoutActions({checkoutUrl}) {
 export function CartSummary({cost, layout, children = null}) {
   const className =
     layout === 'page' ? 'cart-summary-page' : 'cart-summary-aside';
-
-  console.log(children);
 
   return (
     <div aria-labelledby="cart-summary" className={className}>

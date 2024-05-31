@@ -62,7 +62,6 @@ export function Layout({
  * @param {{cart: LayoutProps['cart']}}
  */
 function CartAside({cart}) {
-  console.log(cart);
   return (
     <Suspense>
       <Await resolve={cart}>
