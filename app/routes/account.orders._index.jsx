@@ -194,11 +194,15 @@ function OrderItem({order}) {
                     ? {paddingBottom: '.75rem'}
                     : null
                 }
-                key={n.id}
+                key={n.title}
                 className="account-orders-expanded-row"
               >
                 <br />
-                <Image data={n.variant.image} aspectRatio="1:1.1" />
+                <Image
+                  data={n.variant.image}
+                  aspectRatio="1:1.1"
+                  height={n.variant?.image?.height}
+                />
                 <div style={{width: '90%'}}>
                   <p style={{fontFamily: 'bold-font'}}>Description</p>
                   <br />
