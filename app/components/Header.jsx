@@ -335,16 +335,18 @@ export function HeaderMenuMobile({
           item.title === 'Log In' && isLoggedIn ? 'Account' : item.title;
 
         return (
-          <NavLink
-            className="mobile-middle-menu-item"
-            end
-            key={item.id}
-            onClick={() => setTimeout(() => closeMenu(), 250)}
-            prefetch="intent"
-            to={url}
-          >
-            {title}
-          </NavLink>
+          <div className="mobile-middle-menu-item-container">
+            <NavLink
+              className="mobile-middle-menu-item"
+              end
+              key={item.id}
+              onClick={() => setTimeout(() => closeMenu(), 250)}
+              prefetch="intent"
+              to={url}
+            >
+              {title}
+            </NavLink>
+          </div>
         );
       })}
       <div

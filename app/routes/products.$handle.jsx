@@ -410,7 +410,11 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
         <div className={isMobile ? 'size-guide-mobile' : 'size-guide'}>
           {collectionType !== 'earrings' && (
             <p
-              style={{textDecoration: 'underline', cursor: 'pointer'}}
+              style={{
+                textDecoration: 'underline',
+                cursor: 'pointer',
+                width: 'fit-content',
+              }}
               onClick={() => setIsSizeGuideOpen(true)}
             >
               Size Guide

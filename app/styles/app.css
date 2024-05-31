@@ -355,16 +355,22 @@ aside li {
   cursor: pointer;
   /* font-size: 0.75rem; */
   font-family: 'regular-font';
+  width: fit-content;
 }
+
 .header-menu-mobile .subheader-menu-item {
   font-size: 0.75rem;
+}
+.mobile-middle-menu-item-container {
+  padding-bottom: 0.75rem;
+  padding-top: 0.25rem;
+  border-bottom: 1px solid #eaeaea;
 }
 .mobile-middle-menu-item {
   cursor: pointer;
   font-family: 'bold-font';
-  padding-bottom: 0.75rem;
-  padding-top: 0.25rem;
-  border-bottom: 1px solid #eaeaea;
+
+  width: fit-content;
 }
 
 .header-ctas {
@@ -487,6 +493,9 @@ aside li {
 .brand-list {
   display: flex;
   flex-direction: column;
+}
+.brand-list > a {
+  width: fit-content;
 }
 .site-credit-mobile {
   grid-column: span 2;
@@ -741,6 +750,7 @@ aside li {
 .bold-cart {
   font-size: 0.75rem;
   font-family: 'bold-font' !important;
+  width: fit-content;
 }
 
 .cart-material-size {
