@@ -126,6 +126,8 @@ function OrderItem({order}) {
     if (expanded) animate(arrow.current, {transform: 'rotate(-90deg)'});
   }
 
+  console.log('order', order);
+
   return (
     <>
       {/* <fieldset> */}
