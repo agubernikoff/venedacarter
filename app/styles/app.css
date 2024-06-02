@@ -1331,6 +1331,10 @@ aside li {
   scroll-snap-align: start;
   background: linear-gradient(to bottom, #eaeaea, #dadada);
 }
+.product-image:first-of-type {
+  position: absolute;
+  top: 0;
+}
 
 .product-mobile .product-image {
   width: 100%;
