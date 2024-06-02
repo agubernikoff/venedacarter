@@ -148,17 +148,17 @@ export default function Product() {
   return (
     <>
       <div ref={productDiv} className={isMobile ? 'product-mobile' : 'product'}>
-        <ProductImage
-          images={product?.images.nodes}
-          selectedVariant={selectedVariant}
-          isMobile={isMobile}
-        />
         <ProductMain
           selectedVariant={selectedVariant}
           product={product}
           variants={variants}
           isMobile={isMobile}
           customer={customer}
+        />
+        <ProductImage
+          images={product?.images.nodes}
+          selectedVariant={selectedVariant}
+          isMobile={isMobile}
         />
       </div>
       <ProductRecommendations
@@ -234,71 +234,76 @@ function ProductImage({images, selectedVariant, isMobile}) {
 
   if (!images) {
     return (
-      <div className="product-image">
-        <Image
-          alt={selectedVariant?.image?.altText || 'Product Image'}
-          aspectRatio="1/1"
-          data={selectedVariant?.image}
-          sizes="(min-width: 45em) 50vw, 100vw"
-        />
-      </div>
+      // <div className="product-image">
+      <Image
+        className="product-image"
+        alt={selectedVariant?.image?.altText || 'Product Image'}
+        aspectRatio="1/1"
+        data={selectedVariant?.image}
+        sizes="(min-width: 45em) 50vw, 100vw"
+      />
+      // </div>
     );
   }
   return (
-    <div className="product-image">
-      {isMobile ? (
-        <>
-          <div
-            className="left-image-button-container"
-            onClick={() => {
-              cycleImages(-1);
-            }}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-          />
-          <div
-            className="right-image-button-container"
-            onClick={() => {
-              cycleImages(1);
-            }}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-          />
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              width: 'fit-content',
-              gap: '.2rem',
-              position: 'absolute',
-              bottom: '5%',
-              left: '50%',
-              transform: 'translateX(-50%)',
-            }}
-          >
-            {mappedIndicators}
-          </div>
-          <Image
-            alt={filteredImages[imageIndex].altText || 'Product Image'}
-            aspectRatio="1/1"
-            data={filteredImages[imageIndex]}
-            sizes="(min-width: 45em) 50vw, 100vw"
-          />
-        </>
-      ) : (
-        filteredImages.map((image) => (
-          <Image
-            alt={image.altText || 'Product Image'}
-            aspectRatio="1/1"
-            data={image}
-            key={image.id}
-            sizes="(min-width: 45em) 50vw, 100vw"
-          />
-        ))
-      )}
-    </div>
+    // <div className="product-image">
+    //   {
+    isMobile ? (
+      <div style={{position: 'relative'}}>
+        <Image
+          className="product-image"
+          alt={filteredImages[imageIndex].altText || 'Product Image'}
+          aspectRatio="1/1"
+          data={filteredImages[imageIndex]}
+          sizes="(min-width: 45em) 50vw, 100vw"
+        />
+        <div
+          className="left-image-button-container"
+          onClick={() => {
+            cycleImages(-1);
+          }}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        />
+        <div
+          className="right-image-button-container"
+          onClick={() => {
+            cycleImages(1);
+          }}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: 'fit-content',
+            gap: '.2rem',
+            position: 'absolute',
+            bottom: '5%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+          }}
+        >
+          {mappedIndicators}
+        </div>
+      </div>
+    ) : (
+      filteredImages.map((image) => (
+        <Image
+          className="product-image"
+          alt={image.altText || 'Product Image'}
+          aspectRatio="1/1"
+          data={image}
+          key={image.id}
+          sizes="(min-width: 45em) 50vw, 100vw"
+        />
+      ))
+    )
+    //   }
+    // </div>
   );
 }
 
