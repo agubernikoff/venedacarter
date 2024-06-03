@@ -154,7 +154,20 @@ function Support({isMobile, menu, primaryDomainUrl}) {
     </div>
   );
 }
+
+function KlaviyoForm() {
+  useEffect(() => {}, []);
+
+  return <div className="klaviyo-form-XrMRY4"></div>;
+}
+
 function Newsletter({footerImage, isMobile}) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <div className="newsletter-footer">
       <div className="footer-title-container">
@@ -168,19 +181,20 @@ function Newsletter({footerImage, isMobile}) {
               : 'newsletter-image-container'
           }
         >
-          {/* <img src={lisa} /> */}
-          <Suspense>
-            <Await resolve={footerImage}>
-              {(footerImage) => (
-                <Image
-                  data={
-                    footerImage.metaobjects.edges[0].node.fields[0].reference
-                      .image
-                  }
-                />
-              )}
-            </Await>
-          </Suspense>
+          {isClient && (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Await resolve={footerImage}>
+                {(footerImage) => (
+                  <Image
+                    data={
+                      footerImage.metaobjects.edges[0].node.fields[0].reference
+                        .image
+                    }
+                  />
+                )}
+              </Await>
+            </Suspense>
+          )}
         </div>
         <div
           className={
@@ -192,17 +206,11 @@ function Newsletter({footerImage, isMobile}) {
           <p style={{marginBottom: '.25rem'}}>
             Join our newsletter for the latest news and releases.
           </p>
-          {/* <form
-            className={
-              isMobile
-                ? 'newsletter-input-container-mobile'
-                : 'newsletter-input-container'
-            }
-          >
-            <input placeholder="Email" name="email"></input>
-            <button type="submit">Submit</button>
-          </form> */}
-          <div className="klaviyo-form-XrMRY4"></div>
+          {isClient && (
+            <Suspense fallback={<div>...</div>}>
+              <KlaviyoForm />
+            </Suspense>
+          )}
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ import {
   useOutletContext,
 } from '@remix-run/react';
 import {CUSTOMER_LOGIN_MUTATION} from '../graphql/customer-account/CustomerLogin';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 
 /**
  * @type {MetaFunction}
@@ -23,11 +23,17 @@ export default function Newsletter() {
   /** @type {ActionReturnData} */
   const action = useActionData();
 
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <div className="account-login">
       <p className="stockists-title">NEWSLETTER</p>
       <div className="newsletter-mobile-page">
-        <div className="klaviyo-form-XrMRY4"></div>
+        {isClient && <div className="klaviyo-form-XrMRY4"></div>}
       </div>
     </div>
   );
