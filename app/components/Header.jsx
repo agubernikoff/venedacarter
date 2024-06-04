@@ -123,7 +123,15 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <motion.nav className={className} role="navigation" layout layoutRoot>
+    <motion.nav
+      onMouseLeave={() => {
+        setHovered(false);
+      }}
+      className={className}
+      role="navigation"
+      layout
+      layoutRoot
+    >
       {viewport === 'mobile' && (
         <NavLink
           end
@@ -185,9 +193,6 @@ function HeaderMenuItem({
       key={item.id}
       onMouseEnter={() => {
         if (item.title === 'Shop') setHovered(true);
-      }}
-      onMouseLeave={() => {
-        if (item.title === 'Shop') setHovered(false);
       }}
       className={
         item.title === 'Shop' ? 'header-catalog-submenu-container' : null
