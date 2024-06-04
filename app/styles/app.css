@@ -215,9 +215,6 @@ aside li {
   transform: translateX(var(--aside-width));
   opacity: 1;
 }
-#search-aside:target aside {
-  /* transform: translateY(calc(2 * var(--header-height))); */
-}
 
 /*
 * --------------------------------------------------
