@@ -295,9 +295,7 @@ export function PredictiveSearchResults({
     <motion.div
       className="predictive-search-results"
       initial={{height: 0}}
-      animate={{
-        height: 'calc(--webkit-fill-available - 2 * var(--header-height))',
-      }}
+      animate={{height: 'calc(100vh - 2 * var(--header-height))'}}
     >
       <div>
         {results.map(({type, items}) => (
