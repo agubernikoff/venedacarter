@@ -163,11 +163,7 @@ export default function Collection() {
           </motion.div>
         )}
       </AnimatePresence>
-      <motion.div
-        layout
-        layoutRoot
-        className={isMobile ? 'title-container-mobile' : 'title-container'}
-      >
+      <div className={isMobile ? 'title-container-mobile' : 'title-container'}>
         <p className="collection-title">
           <Link to="/" className="home-link">
             Home
@@ -179,15 +175,10 @@ export default function Collection() {
             ? 'New Arrivals'
             : 'All'}
         </p>
-        <motion.button
-          layoutId="abc"
-          transition={{ease: 'easeInOut'}}
-          className="collection-title"
-          onClick={() => toggleFilter()}
-        >
+        <button className="collection-title" onClick={() => toggleFilter()}>
           {isFilterOpen && isMobile ? 'Close -' : 'Filter +'}
-        </motion.button>
-      </motion.div>
+        </button>
+      </div>
       <Pagination
         connection={
           (!pathname.includes('all') && !pathname.includes('new_arrivals')) ||
@@ -336,23 +327,12 @@ function FilterAside({isMobile, toggleFilter}) {
           }}
         />
       )}
-      <motion.div
-        // initial={!isMobile ? {x: 400} : null}
-        // animate={!isMobile ? {x: 0} : null}
-        // exit={!isMobile ? {x: 400} : null}
-        transition={{ease: 'easeInOut'}}
-        className="filter-container"
-      >
+      <div className="filter-container">
         {isMobile ? null : (
           <header className="title-container">
-            <motion.button
-              // layoutId="abc"
-              transition={{ease: 'easeInOut'}}
-              className="collection-title"
-              style={{cursor: 'auto'}}
-            >
+            <button className="collection-title" style={{cursor: 'auto'}}>
               Filter +
-            </motion.button>
+            </button>
             <button
               style={{
                 background: 'transparent',
@@ -542,7 +522,7 @@ function FilterAside({isMobile, toggleFilter}) {
             </button>
           </div>
         </main>
-      </motion.div>
+      </div>
     </div>
   );
 }
