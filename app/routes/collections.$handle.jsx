@@ -337,16 +337,16 @@ function FilterAside({isMobile, toggleFilter}) {
         />
       )}
       <motion.div
-        initial={!isMobile ? {x: 400} : null}
-        animate={!isMobile ? {x: 0} : null}
-        exit={!isMobile ? {x: 400} : null}
+        // initial={!isMobile ? {x: 400} : null}
+        // animate={!isMobile ? {x: 0} : null}
+        // exit={!isMobile ? {x: 400} : null}
         transition={{ease: 'easeInOut'}}
         className="filter-container"
       >
         {isMobile ? null : (
           <header className="title-container">
             <motion.button
-              layoutId="abc"
+              // layoutId="abc"
               transition={{ease: 'easeInOut'}}
               className="collection-title"
               style={{cursor: 'auto'}}
