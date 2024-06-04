@@ -239,6 +239,7 @@ aside li {
   border-bottom: 1px solid #eaeaea;
   border-right: none;
 }
+
 .header-mobile {
   z-index: 50;
   align-items: center;
@@ -316,6 +317,9 @@ aside li {
     margin-left: auto;
   }
 }
+.header-menu-desktop > div > div > a:hover {
+  text-decoration: none !important;
+}
 
 .header-menu-item {
   cursor: pointer;
@@ -382,6 +386,9 @@ aside li {
 }
 .header-ctas > a {
   font-weight: normal !important;
+}
+.header-ctas > a:hover {
+  text-decoration: none !important;
 }
 .shop-name {
   font-family: 'bold-font';
@@ -2128,6 +2135,12 @@ fieldset > input {
 * --------------------------------------------------
 */
 
+.about-page {
+  @media (min-width: 44em) {
+    margin-bottom: 8rem;
+  }
+}
+
 .about-image {
   width: 100%;
   /* aspect-ratio: 1 / 1.5; */
@@ -2220,6 +2233,7 @@ fieldset > input {
   min-height: calc(100vh - var(--header-height));
   @media (min-width: 44em) {
     width: 31.3%;
+    margin-bottom: 8rem;
   }
 }
 
@@ -2280,6 +2294,7 @@ fieldset > input {
   min-height: calc(100vh - var(--header-height));
   @media (min-width: 44em) {
     width: 31.3%;
+    margin-bottom: 8rem;
   }
 }
 
