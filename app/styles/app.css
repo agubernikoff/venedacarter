@@ -34,7 +34,7 @@ aside {
   max-width: var(--aside-width);
   min-width: var(--aside-width);
   position: fixed;
-  right: calc(-1 * var(--aside-width));
+  right: 0;
   top: 0;
   transition: transform 200ms ease-in-out;
 }
@@ -209,7 +209,7 @@ aside li {
 }
 /* reveal aside */
 .overlay:target aside {
-  transform: translateX(calc(var(--aside-width) * -1));
+  /* transform: translateX(calc(var(--aside-width) * -1)); */
 }
 #mobile-menu-aside:target aside {
   transform: translateX(var(--aside-width));
