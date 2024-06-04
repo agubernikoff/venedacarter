@@ -23,12 +23,17 @@ export async function loader({context}) {
   const newArrivalsCollection = collections.nodes[1];
   const restOfCollections = [...collections.nodes].slice(2);
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-
+  const handle = 'hero-image-mt5e2hu0';
+  const key = 'hero_image';
+  const heroImage = await storefront.query(HERO_IMAGE_QUERY, {
+    variables: {handle, key},
+  });
   return defer({
     featuredCollection,
     newArrivalsCollection,
     restOfCollections,
     recommendedProducts,
+    heroImage,
   });
 }
 
@@ -51,13 +56,19 @@ export default function Homepage() {
       .addEventListener('change', (e) => setIsMobile(e.matches));
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
-
+  console.log(data.heroImage.metaobject.field.reference.image);
   return (
     <div className={isMobile ? 'home-mobile' : 'home'}>
       {isMobile ? (
-        <MobileNewArrivals collection={data.newArrivalsCollection} />
+        <MobileNewArrivals
+          collection={data.newArrivalsCollection}
+          image={data?.heroImage?.metaobject?.field?.reference?.image}
+        />
       ) : (
-        <NewArrivals collection={data.newArrivalsCollection} />
+        <NewArrivals
+          collection={data.newArrivalsCollection}
+          image={data?.heroImage?.metaobject?.field?.reference?.image}
+        />
       )}
       <FeaturedProducts
         products={data.featuredCollection.products.nodes}
@@ -74,9 +85,10 @@ export default function Homepage() {
  *   collection: FeaturedCollectionFragment;
  * }}
  */
-function NewArrivals({collection}) {
+function NewArrivals({collection, image}) {
   if (!collection) return null;
-  const image = collection?.image;
+  // const image = collection?.image;
+  console.log(image);
   return (
     <>
       <div className="new-arrivals-container">
@@ -457,6 +469,36 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
       }
     }
   }
+`;
+
+const MEDIA_IMAGE_FRAGMENT = `#graphql
+fragment MediaImage on MediaImage{
+	alt
+  id
+  image{
+    altText
+    height
+    id
+    width
+    url
+  }
+  presentation{
+    asJson(format:IMAGE)
+  }
+}
+`;
+
+const HERO_IMAGE_QUERY = `#graphql
+query heroImage($handle: String!, $key: String!){
+  metaobject(handle: {handle:$handle , type: $key}) {
+    field(key: $key) {
+      reference{
+        ...MediaImage
+      }
+    }
+  }
+}
+${MEDIA_IMAGE_FRAGMENT}
 `;
 
 /** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */
