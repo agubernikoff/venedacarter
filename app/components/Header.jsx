@@ -1,4 +1,10 @@
-import {Await, NavLink, useFetcher, useParams} from '@remix-run/react';
+import {
+  Await,
+  NavLink,
+  useFetcher,
+  useParams,
+  useLocation,
+} from '@remix-run/react';
 import {Suspense, useState, useEffect} from 'react';
 import {useRootLoaderData} from '~/root';
 import {motion, AnimatePresence} from 'framer-motion';
@@ -7,7 +13,6 @@ import cart from '../assets/cart.png';
 import mobIcon from '../assets/mobile-icon.png';
 import menu from '../assets/menu.png';
 import x from '../assets/X.png';
-import {useLocation} from '@remix-run/react';
 import {usePredictiveSearch} from './Search';
 import {useNavigate} from 'react-router-dom';
 
