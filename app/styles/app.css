@@ -460,15 +460,16 @@ aside li {
 }
 .footer-title-container {
   border-bottom: 1px solid #eaeaea;
+  position: sticky;
+  top: 51px;
+  background: white;
 }
 .footer-title {
   font-size: 0.75rem;
   font-family: 'regular-font';
   position: relative;
-  padding-left: 15px;
-  margin-left: 1rem !important;
-  margin-top: 1rem !important;
-  margin-bottom: 1rem !important;
+  padding: 1rem;
+  margin-left: 1rem;
 }
 .footer-title::before {
   content: '';
@@ -2206,7 +2207,8 @@ fieldset > input {
   justify-content: center;
 }
 
-.contact-container > p {
+.contact-container > p,
+.contact-container > a {
   font-size: 0.75rem;
   font-family: 'regular-font';
 }
