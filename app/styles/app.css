@@ -2289,7 +2289,7 @@ fieldset > input {
   margin: auto;
   padding-top: 3rem;
   padding-bottom: 2rem;
-  width: 92.5%;
+  width: 93.5%;
   min-height: calc(100vh - var(--header-height));
   @media (min-width: 44em) {
     width: 31.3%;
