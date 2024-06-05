@@ -733,7 +733,7 @@ aside li {
 .newsletter-form button {
   font-family: 'regular-font' !important;
   font-weight: normal;
-  font-size: 0.75rem;
+  font-size: 16px !important;
   width: 92.5%;
   margin: 0 auto;
   display: block;
