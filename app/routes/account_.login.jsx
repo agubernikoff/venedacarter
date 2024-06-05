@@ -143,7 +143,11 @@ export default function AccountProfile() {
           {action?.error ? (
             <p>
               <mark>
-                <small>{action.error}</small>
+                <small>
+                  {action.error === 'Unidentified customer'
+                    ? 'Incorrect username and password'
+                    : action.error}
+                </small>
               </mark>
             </p>
           ) : (
