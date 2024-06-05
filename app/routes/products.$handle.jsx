@@ -713,10 +713,10 @@ function AddToCartButton({
               className={
                 selectedVariant?.availableForSale
                   ? isMobile
-                    ? 'profile-button'
+                    ? 'profile-button-pdp'
                     : 'add-to-cart-button'
                   : isMobile
-                  ? 'profile-button'
+                  ? 'profile-button-sold-out'
                   : 'sold-out-cart-button'
               }
               type="submit"
@@ -732,9 +732,7 @@ function AddToCartButton({
         <div className="out-stock-button-container">
           <button
             className={
-              isMobile
-                ? 'out-stock-cart-button-mobile'
-                : 'out-stock-cart-button'
+              isMobile ? 'profile-button-clear-pdp' : 'out-stock-cart-button'
             }
             style={{cursor: 'pointer'}}
             onClick={(e) => {

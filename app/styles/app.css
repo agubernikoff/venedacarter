@@ -2025,6 +2025,28 @@ fieldset > input {
   color: white;
   margin-top: 1rem;
 }
+.profile-button-pdp {
+  width: 100%;
+  border-radius: 0 !important;
+  padding: 1rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+  background-color: black;
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+}
+.profile-button-sold-out {
+  width: 100%;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #cbcbcb;
+  color: #cbcbcb;
+  font-size: 0.75rem;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
 .profile-button-clear {
   width: 100%;
   border-radius: 0 !important;
@@ -2035,6 +2057,20 @@ fieldset > input {
   background-color: white;
   color: black;
   margin-top: 0.5rem;
+  border: 1px solid black;
+}
+.profile-button-clear-pdp {
+  width: 100%;
+  border-radius: 0 !important;
+  padding: 1rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+  background-color: white;
+  color: black;
+  margin-top: 0.5rem;
+  border: 1px solid black;
+  margin-bottom: 5rem;
 }
 .add-new-address {
   font-size: 0.75rem;
