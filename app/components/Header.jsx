@@ -43,13 +43,26 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
   }
   const {shop, menu} = header;
 
+  function closeAside(event) {
+    if (viewport === 'desktop') {
+      event.preventDefault();
+      window.location.href = `${event.currentTarget.href}#x`;
+    }
+  }
+
   return (
     <header className={isMobile ? 'header-mobile' : 'header'}>
       <div className="header-left">
         {isMobile ? (
           <HeaderMenuMobileToggle isOpen={isOpen} toggleMenu={toggleMenu} />
         ) : (
-          <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+          <NavLink
+            onClick={closeAside}
+            prefetch="intent"
+            to="/"
+            style={activeLinkStyle}
+            end
+          >
             <p className="shop-name">VENEDA CARTER</p>
           </NavLink>
         )}
@@ -79,6 +92,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
           cart={cart}
           isMobile={isMobile}
           closeMenu={closeMenu}
+          closeAside={closeAside}
         />
       </div>
       <AnimatePresence mode="wait">
@@ -120,6 +134,9 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
     if (viewport === 'mobile') {
       event.preventDefault();
       window.location.href = event.currentTarget.href;
+    } else if (viewport === 'desktop') {
+      event.preventDefault();
+      window.location.href = `${event.currentTarget.href}#x`;
     }
   }
   const [hovered, setHovered] = useState(false);
@@ -410,7 +427,7 @@ export function HeaderMenuMobile({
 /**
  * @param {Pick<HeaderProps, 'isLoggedIn' | 'cart'>}
  */
-function HeaderCtas({isLoggedIn, cart, isMobile, closeMenu}) {
+function HeaderCtas({isLoggedIn, cart, isMobile, closeMenu, closeAside}) {
   return (
     <nav className="header-ctas" role="navigation">
       <SearchToggle isMobile={isMobile} closeMenu={closeMenu} />
@@ -419,6 +436,7 @@ function HeaderCtas({isLoggedIn, cart, isMobile, closeMenu}) {
           prefetch="intent"
           to={isLoggedIn ? '/account/profile' : '/account/login'}
           style={activeLinkStyle}
+          onClick={closeAside}
         >
           {isLoggedIn ? 'Account' : 'Log in'}
         </NavLink>

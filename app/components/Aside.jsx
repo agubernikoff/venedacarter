@@ -19,7 +19,6 @@ import x2 from '../assets/X2.png';
  * }}
  */
 export function Aside({children, heading, id = 'aside'}) {
-  
   return (
     <div aria-modal className="overlay" id={id} role="dialog">
       {heading != 'menu' ? null : (
