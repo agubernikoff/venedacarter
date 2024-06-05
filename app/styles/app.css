@@ -1857,7 +1857,7 @@ aside li {
 
 .account {
   padding-top: 3rem;
-
+  margin-bottom: 7rem;
   min-height: calc(100vh - var(--header-height));
 }
 
@@ -1949,7 +1949,13 @@ aside li {
   margin: auto;
 }
 .existing-address {
-  margin-top: 1rem;
+  margin-top: 1rem !important;
+  border-bottom: 1px solid #eaeaea;
+  width: 33.3%;
+  margin: auto;
+  @media (min-width: 44em) {
+    width: 20%;
+  }
 }
 .existing-address > form,
 .account-profile > form,

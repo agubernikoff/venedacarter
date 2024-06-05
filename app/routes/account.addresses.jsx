@@ -506,7 +506,12 @@ export function ExistingAddresses({
               )}
             </AddressForm>
           ) : (
-            <div style={{display: editAddressId !== null ? 'none' : 'block'}}>
+            <div
+              style={{
+                display: editAddressId !== null ? 'none' : 'block',
+                marginBottom: '1rem',
+              }}
+            >
               <AddressDisplay address={address} />
               <div className="address-action-container">
                 <button onClick={() => onEditClick(address.id)}>EDIT</button>
