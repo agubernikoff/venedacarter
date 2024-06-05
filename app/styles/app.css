@@ -1540,7 +1540,7 @@ aside li {
 
 .size-guide-popup {
   background-color: white;
-  width: 75%;
+  width: 93%;
   position: relative;
   z-index: 1100;
   @media (min-width: 44em) {
