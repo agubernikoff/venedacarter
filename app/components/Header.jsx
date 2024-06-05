@@ -32,6 +32,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
   function toggleMenu() {
     setIsOpen(!isOpen);
     document.body.classList.toggle('no-scroll', !isOpen);
+    window.location.href = `${window.location.href}#x`;
   }
 
   function closeMenu() {
@@ -325,7 +326,6 @@ export function HeaderMenuMobile({
                     key={item.id}
                     onClick={(event) => {
                       setTimeout(() => closeMenu(), 250);
-                      closeAside(event);
                     }}
                     prefetch="intent"
                     to={url}
@@ -341,7 +341,6 @@ export function HeaderMenuMobile({
                 key={item.id}
                 onClick={(event) => {
                   setTimeout(() => closeMenu(), 250);
-                  closeAside(event);
                 }}
                 prefetch="intent"
                 to={url}
@@ -373,7 +372,6 @@ export function HeaderMenuMobile({
               key={item.id}
               onClick={(event) => {
                 setTimeout(() => closeMenu(), 250);
-                closeAside(event);
               }}
               prefetch="intent"
               to={url}
@@ -411,7 +409,6 @@ export function HeaderMenuMobile({
               key={item.id}
               onClick={(event) => {
                 setTimeout(() => closeMenu(), 250);
-                closeAside(event);
               }}
               prefetch="intent"
               to={url}
