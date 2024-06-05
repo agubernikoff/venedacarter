@@ -423,7 +423,7 @@ aside li {
   grid-auto-columns: 1fr;
 }
 .brand-footer {
-  border-top: none;
+  border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
   /* border-top: none; */
   @media (min-width: 44em) {
@@ -434,7 +434,7 @@ aside li {
   }
 }
 .support-footer {
-  border-top: none;
+  border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
   border-left: 1px solid #eaeaea;
   @media (min-width: 44em) {
