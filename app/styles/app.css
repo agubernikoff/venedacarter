@@ -689,13 +689,63 @@ aside li {
   font-size: 0.75rem;
 }
 
-.newsletter-mobile-page {
+.newsletter-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--header-height));
+  box-sizing: border-box;
+}
+
+.newsletter-header {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.newsletter-header > p {
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+  font-size: 0.75rem;
+}
+
+.newsletter-content {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.newsletter-content > p {
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+  font-size: 0.75rem;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.newsletter-form input,
+.newsletter-form button {
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+  font-size: 0.75rem;
   width: 92.5%;
-  margin: auto;
-  @media (min-width: 44em) {
+  margin: 0 auto;
+  display: block;
+}
+
+@media (min-width: 44em) {
+  .newsletter-form input,
+  .newsletter-form button {
     width: 33.3%;
   }
 }
+
 /*
 * --------------------------------------------------
 * components/Cart

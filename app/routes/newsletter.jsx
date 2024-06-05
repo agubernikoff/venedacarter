@@ -20,24 +20,27 @@ export const meta = () => {
 export default function Newsletter() {
   const account = useOutletContext();
   const {state} = useNavigation();
-  /** @type {ActionReturnData} */
   const action = useActionData();
 
   const [isClient, setIsClient] = useState(false);
   const [email, setEmail] = useState('');
+  const [messageText, setMessageText] = useState(
+    'Join our newsletter for the latest news and releases.',
+  ); // State for managing the message text
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  function subscribe(email, btn, originalText) {
+  function subscribe(email) {
     if (!email) {
-      btn.innerText = 'PLEASE ENTER AN EMAIL';
+      setMessageText('PLEASE ENTER AN EMAIL');
       setTimeout(() => {
-        btn.innerText = originalText;
+        setMessageText('Join our newsletter for the latest news and releases.');
       }, 1500);
       return;
     }
+
     const payload = {
       data: {
         type: 'subscription',
@@ -72,45 +75,44 @@ export default function Newsletter() {
       },
       body: JSON.stringify(payload),
     };
+
     fetch(
       'https://a.klaviyo.com/client/subscriptions/?company_id=XFjCZj',
       requestOptions,
     )
       .then((result) => {
         console.log(result);
-        // if (result.ok) {
-        //   btn.innerText = 'YOUR NOTIFICATION HAS BEEN REGISTERED';
-        //   setTimeout(() => {
-        //     btn.innerText = originalText;
-        //   }, 1500);
-        // } else {
-        //   btn.innerText =
-        //     'YOUR REQUEST COULD NOT BE COMPLETED. PLEASE EMAIL test@test.com TO BE NOTIFIED';
-        //   setTimeout(() => {
-        //     btn.innerText = originalText;
-        //   }, 1500);
-        // }
+        setMessageText('Thank you for subscribing.'); // Change the paragraph text after submitting
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        console.log('error', error);
+        setMessageText('Error, please try again.');
+        setTimeout(() => {
+          setMessageText(
+            'Join our newsletter for the latest news and releases.',
+          );
+        }, 1500);
+      });
   }
 
   return (
-    <div className="account-login">
-      <p className="stockists-title">NEWSLETTER</p>
-      <div className="newsletter-mobile-page">
-        {isClient && <div className="klaviyo-form-XrMRY4"></div>}
+    <div className="newsletter-container">
+      <div className="newsletter-header">
+        <p>NEWSLETTER</p>
+      </div>
+      <div className="newsletter-content">
+        <p>{messageText}</p>
+      </div>
+      <div className="newsletter-form">
         <input
+          id="email_114352042"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
-          style={{borderRadius: '0'}}
+          style={{marginBottom: '1rem'}}
         ></input>
-        <button
-          onClick={(e) => {
-            subscribe(email, e.target, e.target.innerText);
-          }}
-        >
+        <button className="profile-button" onClick={() => subscribe(email)}>
           NOTIFY
         </button>
       </div>
