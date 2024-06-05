@@ -90,9 +90,7 @@ function OrdersTable({orders}) {
                     {nodes.map((order) => {
                       return <OrderItem key={order.id} order={order} />;
                     })}
-                    <NextLink>
-                      {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-                    </NextLink>
+                    <NextLink>{isLoading ? 'Loading...' : null}</NextLink>
                   </>
                 );
               }}

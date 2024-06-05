@@ -31,9 +31,7 @@ export default function Collections() {
               {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
             </PreviousLink>
             <CollectionsGrid collections={nodes} />
-            <NextLink>
-              {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-            </NextLink>
+            <NextLink>{isLoading ? 'Loading...' : null}</NextLink>
           </div>
         )}
       </Pagination>

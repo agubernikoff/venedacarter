@@ -197,7 +197,7 @@ export default function Collection() {
               state={state}
               isMobile={isMobile}
             />
-            <NextLink ref={ref}>Load more</NextLink>
+            <NextLink ref={ref}></NextLink>
           </>
         )}
       </Pagination>

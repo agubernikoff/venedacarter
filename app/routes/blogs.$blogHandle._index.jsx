@@ -60,9 +60,7 @@ export default function Blog() {
                     />
                   );
                 })}
-                <NextLink>
-                  {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-                </NextLink>
+                <NextLink>{isLoading ? 'Loading...' : null}</NextLink>
               </>
             );
           }}

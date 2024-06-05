@@ -155,9 +155,7 @@ function SearchResultsProductsGrid({products, searchTerm}) {
                 <br />
               </div>
               <div>
-                <NextLink>
-                  {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-                </NextLink>
+                <NextLink>{isLoading ? 'Loading...' : null}</NextLink>
               </div>
             </div>
           );
