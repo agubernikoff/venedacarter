@@ -44,17 +44,19 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
   const {shop, menu} = header;
 
   function closeAside(event) {
-    if (viewport === 'desktop') {
-      event.preventDefault();
-      window.location.href = `${event.currentTarget.href}#x`;
-    }
+    event.preventDefault();
+    window.location.href = `${event.currentTarget.href}#x`;
   }
 
   return (
     <header className={isMobile ? 'header-mobile' : 'header'}>
       <div className="header-left">
         {isMobile ? (
-          <HeaderMenuMobileToggle isOpen={isOpen} toggleMenu={toggleMenu} />
+          <HeaderMenuMobileToggle
+            isOpen={isOpen}
+            toggleMenu={toggleMenu}
+            closeAside={closeAside}
+          />
         ) : (
           <NavLink
             onClick={closeAside}
@@ -70,6 +72,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
       <div className={isMobile ? 'header-center-mobile' : 'header-center'}>
         {isMobile ? (
           <NavLink
+            onClick={closeAside}
             prefetch="intent"
             to="/"
             style={activeLinkStyle}
@@ -111,6 +114,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
               menu3={supportMenu}
               isLoggedIn={isLoggedIn}
               closeMenu={closeMenu}
+              closeAside={closeAside}
             />
           </motion.div>
         )}
@@ -134,7 +138,7 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
     if (viewport === 'mobile') {
       event.preventDefault();
       window.location.href = event.currentTarget.href;
-    } else if (viewport === 'desktop') {
+    } else {
       event.preventDefault();
       window.location.href = `${event.currentTarget.href}#x`;
     }
@@ -278,24 +282,11 @@ export function HeaderMenuMobile({
   menu3,
   isLoggedIn,
   closeMenu,
+  closeAside,
 }) {
   const navigate = useNavigate();
   const {publicStoreDomain} = useRootLoaderData();
   const className = `header-menu-${viewport}`;
-
-  function closeAside(event, url) {
-    if (viewport === 'mobile') {
-      event.preventDefault();
-      if (url === '/newsletter') {
-        window.location.href = '/newsletter';
-        setTimeout(() => {
-          window.location.href = '/newsletter';
-        }, 100);
-      } else {
-        navigate(url);
-      }
-    }
-  }
 
   return (
     <nav className={className} role="navigation">
@@ -334,7 +325,10 @@ export function HeaderMenuMobile({
                     className="subheader-menu-item"
                     end
                     key={item.id}
-                    onClick={() => setTimeout(() => closeMenu(), 250)}
+                    onClick={(event) => {
+                      closeAside(event);
+                      setTimeout(() => closeMenu(), 250);
+                    }}
                     prefetch="intent"
                     to={url}
                   >
@@ -347,7 +341,10 @@ export function HeaderMenuMobile({
                 className="subheader-menu-item"
                 end
                 key={item.id}
-                onClick={() => setTimeout(() => closeMenu(), 250)}
+                onClick={(event) => {
+                  closeAside(event);
+                  setTimeout(() => closeMenu(), 250);
+                }}
                 prefetch="intent"
                 to={url}
               >
@@ -376,7 +373,10 @@ export function HeaderMenuMobile({
               className="mobile-middle-menu-item"
               end
               key={item.id}
-              onClick={() => setTimeout(() => closeMenu(), 250)}
+              onClick={(event) => {
+                closeAside(event);
+                setTimeout(() => closeMenu(), 250);
+              }}
               prefetch="intent"
               to={url}
             >
@@ -411,7 +411,10 @@ export function HeaderMenuMobile({
               className="subheader-menu-item"
               end
               key={item.id}
-              onClick={() => setTimeout(() => closeMenu(), 250)}
+              onClick={(event) => {
+                closeAside(event);
+                setTimeout(() => closeMenu(), 250);
+              }}
               prefetch="intent"
               to={url}
             >
