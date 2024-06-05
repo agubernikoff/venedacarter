@@ -44,7 +44,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
   const {shop, menu} = header;
 
   function closeAside(event) {
-    window.location.href = `${event.currentTarget.href}#x`;
+    console.log('thing');
   }
 
   return (
