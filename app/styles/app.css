@@ -1128,7 +1128,7 @@ aside li {
   padding-bottom: 0.75rem;
 }
 .product-details-container-mobile {
-  margin-left: 1rem;
+  padding-inline: 1rem;
   margin-top: 0.75rem;
   margin-bottom: 1.25rem;
 }
