@@ -713,10 +713,10 @@ function AddToCartButton({
               className={
                 selectedVariant?.availableForSale
                   ? isMobile
-                    ? 'add-to-cart-button-mobile'
+                    ? 'profile-button'
                     : 'add-to-cart-button'
                   : isMobile
-                  ? 'sold-out-cart-button-mobile'
+                  ? 'profile-button'
                   : 'sold-out-cart-button'
               }
               type="submit"

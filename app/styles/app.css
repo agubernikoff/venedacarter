@@ -2025,6 +2025,17 @@ fieldset > input {
   color: white;
   margin-top: 1rem;
 }
+.profile-button-clear {
+  width: 100%;
+  border-radius: 0 !important;
+  padding: 1rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font' !important;
+  font-weight: normal;
+  background-color: white;
+  color: black;
+  margin-top: 0.5rem;
+}
 .add-new-address {
   font-size: 0.75rem;
   font-family: 'regular-font';

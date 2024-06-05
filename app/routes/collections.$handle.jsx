@@ -488,7 +488,7 @@ function FilterAside({isMobile, toggleFilter}) {
           </div>
           <div className="filter-submit-container">
             <button
-              className="show-results-button"
+              className={isMobile ? 'profile-button' : 'show-results-button'}
               onClick={() => {
                 if (sort) params.set('sortkey', sort);
                 else params.set('sortkey', '');
@@ -507,7 +507,9 @@ function FilterAside({isMobile, toggleFilter}) {
               Show Results
             </button>
             <button
-              className="clear-flter-button"
+              className={
+                isMobile ? 'profile-button-clear' : 'clear-flter-button'
+              }
               onClick={() => {
                 setSearchParams(
                   {},
