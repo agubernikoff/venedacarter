@@ -218,35 +218,37 @@ function MainFeaturedProduct({product, isMobile}) {
         </motion.div>
         {/* </AnimatePresence> */}
       </div>
-      <div
-        className={
-          isMobile
-            ? 'product-details-container-mobile'
-            : 'product-details-container'
-        }
-      >
+      <div style={{marginBottom: '1.25rem'}}>
         <div
           className={
-            isMobile ? 'product-title-price-mobile' : 'product-title-price'
+            isMobile
+              ? 'product-details-container-mobile'
+              : 'product-details-container'
           }
         >
-          <p>{product.title}</p>
-          <small>
-            <Money data={product.priceRange.minVariantPrice} />
-          </small>
+          <div
+            className={
+              isMobile ? 'product-title-price-mobile' : 'product-title-price'
+            }
+          >
+            <p>{product.title}</p>
+            <small>
+              <Money data={product.priceRange.minVariantPrice} />
+            </small>
+          </div>
         </div>
-      </div>
-      <div
-        className={
-          isMobile
-            ? 'product-title-description-mobile'
-            : 'product-title-description'
-        }
-      >
-        <p>{product.description}</p>
-        <p style={{textDecoration: 'underline', marginTop: '.5rem'}}>
-          View Product
-        </p>
+        <div
+          className={
+            isMobile
+              ? 'product-title-description-mobile'
+              : 'product-title-description'
+          }
+        >
+          <p style={{marginTop: '-1rem'}}>{product.description}</p>
+          <p style={{textDecoration: 'underline', marginTop: '.5rem'}}>
+            View Product
+          </p>
+        </div>
       </div>
     </Link>
   );
