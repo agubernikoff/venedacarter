@@ -324,8 +324,8 @@ export function HeaderMenuMobile({
                     end
                     key={item.id}
                     onClick={(event) => {
-                      closeAside(event);
                       setTimeout(() => closeMenu(), 250);
+                      closeAside(event);
                     }}
                     prefetch="intent"
                     to={url}
@@ -340,8 +340,8 @@ export function HeaderMenuMobile({
                 end
                 key={item.id}
                 onClick={(event) => {
-                  closeAside(event);
                   setTimeout(() => closeMenu(), 250);
+                  closeAside(event);
                 }}
                 prefetch="intent"
                 to={url}
@@ -372,8 +372,8 @@ export function HeaderMenuMobile({
               end
               key={item.id}
               onClick={(event) => {
-                closeAside(event);
                 setTimeout(() => closeMenu(), 250);
+                closeAside(event);
               }}
               prefetch="intent"
               to={url}
@@ -410,8 +410,8 @@ export function HeaderMenuMobile({
               end
               key={item.id}
               onClick={(event) => {
-                closeAside(event);
                 setTimeout(() => closeMenu(), 250);
+                closeAside(event);
               }}
               prefetch="intent"
               to={url}
