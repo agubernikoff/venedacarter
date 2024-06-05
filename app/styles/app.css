@@ -1029,7 +1029,7 @@ aside li {
 
 .new-arrivals-collection-image {
   display: block;
-  height: 60vh;
+  height: 58vh;
   max-height: calc(100vh - var(--header-height));
   object-fit: cover;
   aspect-ratio: 1 / 1;
