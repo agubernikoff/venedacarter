@@ -730,7 +730,8 @@ aside li {
 }
 
 .newsletter-form input,
-.newsletter-form input::placeholder {
+.newsletter-form input::placeholder,
+.newsletter-form input[type='email'] {
   font-family: 'regular-font' !important;
   font-weight: normal;
   font-size: 16px !important;
