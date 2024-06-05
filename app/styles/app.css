@@ -1049,7 +1049,7 @@ aside li {
 }
 .title-container {
   position: sticky;
-  top: calc(1 + var(--header-height));
+  top: calc(1px + var(--header-height));
   background: white;
   grid-column: span 3;
   z-index: 2;
