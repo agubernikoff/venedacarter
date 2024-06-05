@@ -145,7 +145,7 @@ export default function AccountProfile() {
               <mark>
                 <small>
                   {action.error === 'Unidentified customer'
-                    ? 'Incorrect username and password'
+                    ? 'Login unsuccessful. Please check the username and password. If the error persists, please contact our support.'
                     : action.error}
                 </small>
               </mark>
