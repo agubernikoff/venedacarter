@@ -24,16 +24,95 @@ export default function Newsletter() {
   const action = useActionData();
 
   const [isClient, setIsClient] = useState(false);
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  function subscribe(email, btn, originalText) {
+    if (!email) {
+      btn.innerText = 'PLEASE ENTER AN EMAIL';
+      setTimeout(() => {
+        btn.innerText = originalText;
+      }, 1500);
+      return;
+    }
+    const payload = {
+      data: {
+        type: 'subscription',
+        attributes: {
+          custom_source: 'Newsletter',
+          profile: {
+            data: {
+              type: 'profile',
+              attributes: {
+                email: `${email}`,
+              },
+            },
+          },
+        },
+        relationships: {
+          list: {
+            data: {
+              type: 'list',
+              id: 'Tby4b3',
+            },
+          },
+        },
+      },
+    };
+
+    var requestOptions = {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        revision: '2023-12-15',
+      },
+      body: JSON.stringify(payload),
+    };
+    fetch(
+      'https://a.klaviyo.com/client/subscriptions/?company_id=XFjCZj',
+      requestOptions,
+    )
+      .then((result) => {
+        console.log(result);
+        // if (result.ok) {
+        //   btn.innerText = 'YOUR NOTIFICATION HAS BEEN REGISTERED';
+        //   setTimeout(() => {
+        //     btn.innerText = originalText;
+        //   }, 1500);
+        // } else {
+        //   btn.innerText =
+        //     'YOUR REQUEST COULD NOT BE COMPLETED. PLEASE EMAIL test@test.com TO BE NOTIFIED';
+        //   setTimeout(() => {
+        //     btn.innerText = originalText;
+        //   }, 1500);
+        // }
+      })
+      .catch((error) => console.log('error', error));
+  }
 
   return (
     <div className="account-login">
       <p className="stockists-title">NEWSLETTER</p>
       <div className="newsletter-mobile-page">
         {isClient && <div className="klaviyo-form-XrMRY4"></div>}
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          style={{borderRadius: '0'}}
+        ></input>
+        <button
+          onClick={(e) => {
+            subscribe(email, e.target, e.target.innerText);
+          }}
+        >
+          NOTIFY
+        </button>
       </div>
     </div>
   );
