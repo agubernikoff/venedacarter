@@ -726,7 +726,7 @@ aside li {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
 }
 
 .newsletter-form input,

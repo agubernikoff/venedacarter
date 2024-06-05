@@ -110,7 +110,7 @@ export default function Newsletter() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
-          style={{marginBottom: '1rem'}}
+          style={{marginBottom: '1rem', borderRadius: '0'}}
         ></input>
         <button className="profile-button" onClick={() => subscribe(email)}>
           NOTIFY
