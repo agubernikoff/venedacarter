@@ -26,7 +26,7 @@ export default function Newsletter() {
   const [email, setEmail] = useState('');
   const [messageText, setMessageText] = useState(
     'Join our newsletter for the latest news and releases.',
-  ); // State for managing the message text
+  );
 
   useEffect(() => {
     setIsClient(true);
@@ -82,7 +82,7 @@ export default function Newsletter() {
     )
       .then((result) => {
         console.log(result);
-        setMessageText('Thank you for subscribing.'); // Change the paragraph text after submitting
+        setMessageText('Thank you for signing up.');
       })
       .catch((error) => {
         console.log('error', error);
