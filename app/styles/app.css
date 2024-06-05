@@ -729,7 +729,8 @@ aside li {
   margin-bottom: 7rem;
 }
 
-.newsletter-form input {
+.newsletter-form input,
+.newsletter-form input::placeholder {
   font-family: 'regular-font' !important;
   font-weight: normal;
   font-size: 16px !important;
