@@ -37,8 +37,10 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
   function closeMenu() {
     setIsOpen(false);
     document.body.classList.toggle('no-scroll', !isOpen);
+    if (window.location.pathname === '/newsletter') {
+      window.location.reload();
+    }
   }
-
   const {shop, menu} = header;
 
   return (
@@ -267,7 +269,14 @@ export function HeaderMenuMobile({
   function closeAside(event, url) {
     if (viewport === 'mobile') {
       event.preventDefault();
-      navigate(url);
+      if (url === '/newsletter') {
+        window.location.href = '/newsletter';
+        setTimeout(() => {
+          window.location.href = '/newsletter';
+        }, 100);
+      } else {
+        navigate(url);
+      }
     }
   }
 
