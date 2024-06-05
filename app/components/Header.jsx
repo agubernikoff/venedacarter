@@ -449,7 +449,12 @@ function HeaderMenuMobileToggle({isOpen, toggleMenu}) {
 
   return (
     <button
-      style={{background: 'transparent', border: 'none', padding: 0}}
+      style={{
+        background: 'transparent',
+        border: 'none',
+        padding: 0,
+        marginTop: '5px',
+      }}
       className="header-menu-mobile-toggle"
       onClick={toggleMenu}
     >
