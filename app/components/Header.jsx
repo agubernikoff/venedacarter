@@ -44,7 +44,6 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
   const {shop, menu} = header;
 
   function closeAside(event) {
-    event.preventDefault();
     window.location.href = `${event.currentTarget.href}#x`;
   }
 
@@ -139,7 +138,6 @@ export function HeaderMenu({menu, primaryDomainUrl, viewport}) {
       event.preventDefault();
       window.location.href = event.currentTarget.href;
     } else {
-      event.preventDefault();
       window.location.href = `${event.currentTarget.href}#x`;
     }
   }
@@ -326,7 +324,7 @@ export function HeaderMenuMobile({
                     end
                     key={item.id}
                     onClick={(event) => {
-                      // closeAside(event);
+                      closeAside(event);
                       setTimeout(() => closeMenu(), 250);
                     }}
                     prefetch="intent"
@@ -342,7 +340,7 @@ export function HeaderMenuMobile({
                 end
                 key={item.id}
                 onClick={(event) => {
-                  // closeAside(event);
+                  closeAside(event);
                   setTimeout(() => closeMenu(), 250);
                 }}
                 prefetch="intent"
@@ -374,7 +372,7 @@ export function HeaderMenuMobile({
               end
               key={item.id}
               onClick={(event) => {
-                // closeAside(event);
+                closeAside(event);
                 setTimeout(() => closeMenu(), 250);
               }}
               prefetch="intent"
@@ -412,7 +410,7 @@ export function HeaderMenuMobile({
               end
               key={item.id}
               onClick={(event) => {
-                // closeAside(event);
+                closeAside(event);
                 setTimeout(() => closeMenu(), 250);
               }}
               prefetch="intent"
