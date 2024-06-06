@@ -599,7 +599,7 @@ aside li {
   font-family: 'regular-font' !important;
   margin: 0;
   padding: 0 !important;
-  font-size: 0.75rem !important;
+  font-size: 16px !important;
 }
 
 #email_114352042 {
@@ -608,7 +608,7 @@ aside li {
   border-bottom: 1px solid black !important;
   font-family: 'regular-font' !important;
   font-weight: normal !important;
-  font-size: 0.75rem !important;
+  font-size: 16px !important;
 }
 
 #email_114352042::placeholder {
@@ -617,7 +617,7 @@ aside li {
 
   font-family: 'regular-font' !important;
   font-weight: normal !important;
-  font-size: 0.75rem !important;
+  font-size: 16px !important;
 }
 #email_114352042:focus {
   box-shadow: none !important;
