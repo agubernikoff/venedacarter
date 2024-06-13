@@ -1,7 +1,8 @@
 import {CartForm, Image, Money} from '@shopify/hydrogen';
 import {Link} from '@remix-run/react';
 import {useVariantUrl} from '~/lib/variants';
-
+import {SimplyWidget} from './SimplyWidget';
+import {useEffect, useState} from 'react';
 /**
  * @param {CartMainProps}
  */
@@ -24,14 +25,52 @@ export function CartMain({layout, cart}) {
  * @param {CartMainProps}
  */
 function CartDetails({layout, cart}) {
+  const [insurancePlan, setInsurancePlan] = useState({});
+  const [SkipProduct, setSkipProduct] = useState({});
+
+  useEffect(() => {
+    var myHeaders = new Headers();
+    myHeaders.append('shopname', '478902-43.myshopify.com');
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'https://478902-43.myshopify.com/apps/simplyinsurance/storefront-api/metafields/',
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log('result : ', result);
+        // setting state
+        setInsurancePlan(result.data.InsurancePlan);
+        setSkipProduct(result.data.SkipProduct);
+      })
+      .catch((error) => console.log('error', error));
+  }, []);
   const cartHasItems = !!cart && cart.totalQuantity > 0;
 
   return (
     <div className="cart-details">
-      <CartLines lines={cart?.lines} layout={layout} />
+      <CartLines
+        lines={cart?.lines}
+        layout={layout}
+        insurancePlan={insurancePlan}
+      />
+      {insurancePlan && insurancePlan.planArray && SkipProduct && (
+        <SimplyWidget
+          cart={cart}
+          insurancePlan={insurancePlan}
+          SkipProduct={SkipProduct}
+        />
+      )}
       {cartHasItems && (
         <CartSummary cost={cart.cost} layout={layout}>
           {/* <CartDiscounts discountCodes={cart.discountCodes} /> */}
+
           <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
         </CartSummary>
       )}
@@ -45,14 +84,19 @@ function CartDetails({layout, cart}) {
  *   lines: CartApiQueryFragment['lines'] | undefined;
  * }}
  */
-function CartLines({lines, layout}) {
+function CartLines({lines, layout, insurancePlan}) {
   if (!lines) return null;
 
   return (
     <div aria-labelledby="cart-lines" className="cart-lines">
       <ul>
         {lines.nodes.map((line) => (
-          <CartLineItem key={line.id} line={line} layout={layout} />
+          <CartLineItem
+            key={line.id}
+            line={line}
+            layout={layout}
+            insurancePlan={insurancePlan}
+          />
         ))}
       </ul>
     </div>
@@ -65,11 +109,32 @@ function CartLines({lines, layout}) {
  *   line: CartLine;
  * }}
  */
-function CartLineItem({layout, line}) {
+function CartLineItem({layout, line, insurancePlan}) {
   const {id, merchandise} = line;
   const {product, title, image, selectedOptions} = merchandise;
   const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
+  const getProductId = (item) => {
+    let merchandiseId = item.merchandise.id;
+    let variantId = merchandiseId.replace('gid://shopify/ProductVariant/', '');
+    let id = parseInt(variantId);
+    return id;
+  };
+  const getInsuranceProduct = () => {
+    let variant_id = getProductId(line);
+    let plans = insurancePlan.planArray;
 
+    let currentPlan = plans.find((plan) => {
+      if (plan.variant_id == variant_id) {
+        return plan;
+      }
+    });
+    return currentPlan;
+  };
+
+  let currentInsurancePlan;
+  if (insurancePlan && insurancePlan.planArray) {
+    currentInsurancePlan = getInsuranceProduct();
+  }
   return (
     <li key={id} className="cart-line">
       {image && (
@@ -111,7 +176,10 @@ function CartLineItem({layout, line}) {
               ),
           )}
         </ul>
-        <CartLineQuantity line={line} />
+        <CartLineQuantity
+          line={line}
+          currentInsurancePlan={currentInsurancePlan}
+        />
       </div>
     </li>
   );
@@ -168,14 +236,18 @@ export function CartSummary({cost, layout, children = null}) {
 /**
  * @param {{lineIds: string[]}}
  */
-function CartLineRemoveButton({lineIds}) {
+function CartLineRemoveButton({lineIds, currentInsurancePlan}) {
   return (
     <CartForm
       route="/cart"
       action={CartForm.ACTIONS.LinesRemove}
       inputs={{lineIds}}
     >
-      <button className="cart-remove-button" type="submit">
+      <button
+        className="cart-remove-button"
+        type="submit"
+        disabled={currentInsurancePlan ? true : false}
+      >
         Remove
       </button>
     </CartForm>
@@ -185,7 +257,7 @@ function CartLineRemoveButton({lineIds}) {
 /**
  * @param {{line: CartLine}}
  */
-function CartLineQuantity({line}) {
+function CartLineQuantity({line, currentInsurancePlan}) {
   if (!line || typeof line?.quantity === 'undefined') return null;
   const {id: lineId, quantity} = line;
   const prevQuantity = Number(Math.max(0, quantity - 1).toFixed(0));
@@ -198,7 +270,7 @@ function CartLineQuantity({line}) {
         <CartLineUpdateButton lines={[{id: lineId, quantity: prevQuantity}]}>
           <button
             aria-label="Decrease quantity"
-            disabled={quantity <= 1}
+            disabled={currentInsurancePlan ? true : quantity <= 1}
             name="decrease-quantity"
             value={prevQuantity}
             className="quantity-button"
@@ -209,6 +281,7 @@ function CartLineQuantity({line}) {
         &nbsp;
         <CartLineUpdateButton lines={[{id: lineId, quantity: nextQuantity}]}>
           <button
+            disabled={currentInsurancePlan ? true : false}
             aria-label="Increase quantity"
             name="increase-quantity"
             value={nextQuantity}
@@ -219,7 +292,10 @@ function CartLineQuantity({line}) {
         </CartLineUpdateButton>
         &nbsp;
       </div>
-      <CartLineRemoveButton lineIds={[lineId]} />
+      <CartLineRemoveButton
+        lineIds={[lineId]}
+        currentInsurancePlan={currentInsurancePlan}
+      />
     </div>
   );
 }

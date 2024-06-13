@@ -56,7 +56,7 @@ export default function Homepage() {
       .addEventListener('change', (e) => setIsMobile(e.matches));
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
-  console.log(data.heroImage.metaobject.field.reference.image);
+  // console.log(data.heroImage.metaobject.field.reference.image);
   return (
     <div className={isMobile ? 'home-mobile' : 'home'}>
       {isMobile ? (
@@ -88,7 +88,7 @@ export default function Homepage() {
 function NewArrivals({collection, image}) {
   if (!collection) return null;
   // const image = collection?.image;
-  console.log(image);
+
   return (
     <>
       <div className="new-arrivals-container">

@@ -25,7 +25,8 @@
     "isbot": "^3.6.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intersection-observer": "^9.8.2"
+    "react-intersection-observer": "^9.8.2",
+    "universal-cookie": "^7.1.4"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.8.0",

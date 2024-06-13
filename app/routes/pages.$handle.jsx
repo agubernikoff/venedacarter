@@ -1,6 +1,6 @@
 import {json} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
-
+import {ClaimPage} from '~/components/ClaimPage';
 /**
  * @type {MetaFunction<typeof loader>}
  */
@@ -22,7 +22,7 @@ export async function loader({params, context}) {
     },
   });
 
-  if (!page) {
+  if (!page && params.handle !== 'claim-portal') {
     throw new Response('Not Found', {status: 404});
   }
 
@@ -31,11 +31,15 @@ export async function loader({params, context}) {
 
 export default function Page() {
   /** @type {LoaderReturnData} */
-  const {page} = useLoaderData();
+  const {page, handle} = useLoaderData();
 
   return (
     <div className="page">
-      <main dangerouslySetInnerHTML={{__html: page.body}} />
+      {handle == 'pages/claim-portal' ? (
+        <ClaimPage />
+      ) : (
+        <main dangerouslySetInnerHTML={{__html: page.body}} />
+      )}
     </div>
   );
 }

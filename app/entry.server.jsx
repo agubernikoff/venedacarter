@@ -17,7 +17,6 @@ export default async function handleRequest(
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
     connectSrc: [
-      // (ie. 'wss://<your-ngrok-domain>.app:*')
       'wss://engaged-orca-warm.ngrok-free.app:*',
       'https://engaged-orca-warm.ngrok-free.app:*',
       'http://127.0.0.1:4040',
@@ -26,6 +25,7 @@ export default async function handleRequest(
       'https://klaviyo.com',
       'https://*.klaviyo.com',
       'https://*.klaviyo.com/*',
+      'https://478902-43.myshopify.com/apps/simplyinsurance/storefront-api/metafields/',
     ],
     styleSrc: [
       'https://klaviyo.com',

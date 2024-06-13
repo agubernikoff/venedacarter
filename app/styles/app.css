@@ -2566,3 +2566,976 @@ body {
     max-width: 0.8vw !important;
   }
 }
+
+/* Order claim page css START */
+.simply-insurance {
+  padding: 15px 0;
+  margin-left: auto;
+}
+.simply-insurance.loaded {
+  display: block;
+}
+.simply-insurance .header-wrap {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  width: 100%;
+}
+.simply-insurance .header-wrap .plan_info_btn {
+  width: 40px;
+}
+.simply-insurance .header-wrap .title-image-wrap {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  text-align: left;
+  gap: 15px;
+}
+.simply-insurance .header-wrap .title-image-wrap img {
+  width: 40px;
+}
+.simply-insurance .header-wrap h3 {
+  padding-right: 5px;
+  font-size: 15px;
+}
+.simply-insurance .header-wrap .tooltipCstm {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #000;
+}
+.simply-insurance .header-wrap .tooltipCstm .toolltiptextCstm {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+.simply-insurance .header-wrap .tooltipCstm:hover .toolltiptextCstm {
+  visibility: visible;
+}
+.simply-insurance .header-wrap .tooltipCstm .toolltiptextCstm {
+  font-size: 12px;
+  text-align: left;
+  width: 200px !important;
+  height: auto;
+  display: inline-block;
+  line-height: 14px;
+  min-width: 100px;
+  word-break: break-word;
+  white-space: normal;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+}
+.simply-insurance .header-wrap .btnCstm.tooltipCstm {
+  width: auto;
+  background: none;
+  border: none;
+  display: inline-block;
+}
+.simply-insurance p {
+  font-size: 12px;
+}
+.simply-insurance .plan_title {
+  font-weight: 700;
+  margin: 0;
+}
+.simply-insurance .plan_subtitle {
+  margin: 0;
+}
+.simply-insurance .plan-description {
+  text-align: left;
+}
+.simply-insurance .plan-description.hide {
+  display: none;
+}
+.simply-insurance .switch-button .cart-insurance-input {
+  display: none;
+}
+.simply-insurance .switch {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 20px;
+  border-radius: 20px;
+  background: #dfd9ea;
+  transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: middle;
+  cursor: pointer;
+}
+.simply-insurance .switch::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  width: 17px;
+  height: 17px;
+  background: #fafafa;
+  border-radius: 50%;
+  transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.simply-insurance .switch:active::before {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 20px rgba(128, 128, 128, 0.1);
+}
+.simply-insurance input:checked + .switch {
+  background: #72da67;
+}
+.simply-insurance input:checked + .switch::before {
+  left: 20px;
+  background: #fff;
+}
+.simply-insurance input:checked + .switch:active::before {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 20px rgba(0, 150, 136, 0.2);
+}
+.plan_info_btn {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #000;
+  width: auto;
+  background: none;
+  border: none;
+  display: inline-block;
+}
+.plan_info_btn .plan_info {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+.plan_info_btn:hover .plan_info {
+  visibility: visible;
+}
+.plan_info_btn .plan_info {
+  font-size: 12px;
+  text-align: left;
+  width: 200px !important;
+  height: auto;
+  display: inline-block;
+  line-height: 14px;
+  min-width: 100px;
+  word-break: break-word;
+  white-space: normal;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+}
+.order-claim-page-wrap {
+  margin: -30px 0;
+}
+
+.order-claim-page-wrap .simply-container {
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+@media (min-width: 651px) {
+  .order-claim-page-wrap .simply-container {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 428px) {
+  .order-claim-page-wrap .simply-container {
+    padding: 0 20px;
+  }
+}
+
+.order-claim-page-wrap .header-section {
+  padding: 32px 0 16px;
+}
+
+.order-claim-page-wrap .header-section .title-wrap {
+  padding-right: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
+.order-claim-page-wrap .bottom-form-section {
+  margin: 20px 0;
+}
+
+.order-claim-page-wrap
+  .bottom-form-section
+  .bottom-form-section-inner
+  .label-input-wrap-main {
+  padding: 20px;
+}
+
+.order-claim-page-wrap
+  .bottom-form-section
+  .bottom-form-section-inner
+  .label-input-wrap-main
+  .label-input-wrap:last-child {
+  margin-top: 16px;
+}
+
+.order-claim-page-wrap
+  .bottom-form-section
+  .bottom-form-section-inner
+  .label-input-wrap-main
+  .label-input-wrap:last-child
+  input {
+  margin: 0;
+}
+
+.order-claim-page-wrap
+  .bottom-form-section
+  .bottom-form-section-inner
+  .label-input-wrap-main
+  .label-input-wrap
+  .label-wrap {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.order-claim-page-wrap
+  .bottom-form-section
+  .bottom-form-section-inner
+  .label-input-wrap-main
+  .label-input-wrap
+  .input-wrap
+  input {
+  text-indent: 5px;
+  font-size: 14px;
+  line-height: 24px;
+  border: 1px solid #c4cdd5;
+  width: 100%;
+  border-radius: 3px;
+  padding: 5px;
+  min-height: 34px;
+  background-color: #fff;
+}
+
+.order-claim-page-wrap
+  .bottom-form-section
+  .bottom-form-section-inner
+  .submit-button-wrap {
+  padding: 0 20px 20px;
+}
+
+.order-claim-page-wrap
+  .bottom-form-section
+  .bottom-form-section-inner
+  .submit-button-wrap
+  .submit-button-inner
+  button {
+  font-size: 14px;
+  line-height: 1;
+  padding: 0.7rem 1.6rem;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.order-claim-page-wrap
+  .bottom-form-section
+  .bottom-form-section-inner
+  .submit-button-wrap
+  .submit-button-inner
+  button.submit-button {
+  border: 1px solid #000;
+  background-color: #000;
+  color: white;
+}
+
+.order-claim-page-wrap
+  .bottom-form-section
+  .bottom-form-section-inner
+  .incorrect-value-order {
+  color: #ff0000;
+  padding: 0 20px;
+}
+
+@keyframes btnSpinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  width: auto;
+  outline: 0;
+  line-height: 1;
+  margin: 0;
+  transition: 0.3s all;
+}
+
+button.loading {
+  color: transparent;
+  position: relative;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-indent: -9999px;
+  min-width: 104px;
+}
+
+button.loading:after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  border-top-color: #000;
+  animation: btnSpinner 0.6s linear infinite;
+}
+
+body.overflow-hidden {
+  overflow: hidden;
+}
+
+.manage-claim-request-wrap .manage-claim-container {
+  max-width: 998px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+@media (min-width: 306px) {
+  .manage-claim-request-wrap .manage-claim-container {
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 465px) {
+  .manage-claim-request-wrap .manage-claim-container {
+    padding: 0 32px;
+  }
+}
+
+.manage-claim-request-wrap .manage-claim-container .top-section {
+  padding-top: 30px;
+}
+
+.manage-claim-request-wrap .manage-claim-container .top-section .back-button {
+  margin-bottom: 5px;
+}
+
+.manage-claim-request-wrap .manage-claim-container .top-section .back-button a {
+  color: #637381;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .top-section
+  .order-number-wrap
+  .order-wrap-text {
+  font-size: 28px;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .top-section
+  .order-top-section {
+  margin: 20px 0;
+  background: #ffffff;
+  border: 1px solid #e1e3e5;
+  border-radius: 3px;
+  box-shadow: 5px 5px 5px #c5c5c5;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .top-section
+  .order-top-section
+  table
+  thead {
+  border-bottom: 1px solid #c4cdd5;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .top-section
+  .order-top-section
+  table
+  thead
+  th {
+  font-weight: 700;
+  color: #212b36;
+  text-align: left;
+  white-space: normal;
+  padding: 16px;
+  border: 0;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .top-section
+  .order-top-section
+  table
+  tbody
+  td {
+  font-weight: 400;
+  color: #212b36;
+  text-align: left;
+  white-space: normal;
+  padding: 16px;
+  border: 0;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .top-section
+  .order-top-section
+  table
+  tbody
+  td
+  .badge-date {
+  background-color: #b4e1fa;
+  color: #3e4e57;
+  padding: 3px 8px;
+  border: 2px solid white;
+  border-radius: 20px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .top-section
+  .order-top-section
+  table
+  tbody
+  td
+  .badge-order-status {
+  padding: 3px 8px;
+  background-color: #dfe3e8;
+  border: 2px solid white;
+  border-radius: 20px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #454f5b;
+  font-weight: 400;
+}
+
+.manage-claim-request-wrap .manage-claim-container .bottom-section {
+  margin: 20px 0;
+  background: #ffffff;
+  border: 1px solid #e1e3e5;
+  border-radius: 3px;
+  box-shadow: 5px 5px 5px #c5c5c5;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .tracking-section {
+  border-bottom: 1px solid #c4cdd5;
+  padding: 20px;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .tracking-section
+  .tracking-heading
+  .tracking-heading-inner {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .tracking-section
+  .tracking-heading
+  .tracking-heading-inner
+  .order-number {
+  color: #637381;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .tracking-section
+  .order-tracking-wrap {
+  color: #000000;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .tracking-section
+  .order-tracking-wrap
+  .order-tracking-url
+  svg {
+  display: block;
+  fill: #006fbb;
+  width: 20px;
+  height: 20px;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .order-items-section {
+  padding: 20px;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .order-items-section
+  .claim-status-wrap {
+  padding-bottom: 20px;
+  color: #000000;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .order-items-section
+  .claim-status-wrap
+  .badge-requested {
+  padding: 3px 8px;
+  background-color: #dfe3e8;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #454f5b;
+  font-weight: 400;
+  margin-left: 10px;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .order-items-section
+  .claim-status-wrap
+  .badge-requested.requested {
+  background-color: #b4e1fa;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .order-items-section
+  table {
+  box-shadow: 1px 1px 5px #c5c5c5;
+  border: 1px solid #c5c5c5;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .order-items-section
+  table
+  thead
+  th {
+  border-bottom: 1px solid #c4cdd5;
+  font-weight: 700;
+  color: #212b36;
+  text-align: left;
+  white-space: normal;
+  padding: 16px;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .order-items-section
+  table
+  thead
+  th:not(:first-child) {
+  text-align: right;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .order-items-section
+  table
+  tbody
+  td {
+  font-weight: 400;
+  color: #212b36;
+  text-align: left;
+  white-space: normal;
+  padding: 16px;
+}
+.manage-claim-request-wrap table {
+  width: 100%;
+  overflow: hidden;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .order-items-section
+  table
+  tbody
+  td:not(:first-child) {
+  text-align: right;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .order-items-section
+  table
+  tbody
+  td
+  .currency-code {
+  color: #637381;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .generate-claim-section {
+  padding: 0 20px 20px;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .generate-claim-section
+  .generate-claim-button {
+  margin-top: 8px;
+  margin-left: 8px;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0.7rem 1.6rem;
+  border-radius: 3px;
+  border: 1px solid #000;
+  background-color: #000;
+  color: white;
+}
+
+.manage-claim-request-wrap
+  .manage-claim-container
+  .bottom-section
+  .bottom-section-inner
+  .generate-claim-section
+  .generate-claim-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.custom-popup-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #00000054;
+  z-index: 1111;
+}
+
+.custom-popup-wrap .custom-popup-inner .custom-popup-sub-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  width: 100%;
+  max-height: calc(100vh - 60px);
+  border-radius: 10px;
+}
+
+@media (min-width: 480px) {
+  .custom-popup-wrap .custom-popup-inner .custom-popup-sub-inner {
+    max-width: calc(100% - 6.4rem);
+  }
+}
+
+@media (min-width: 652px) {
+  .custom-popup-wrap .custom-popup-inner .custom-popup-sub-inner {
+    max-width: 980px;
+  }
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .top-section-wrap {
+  padding: 16px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  border-bottom: 1px solid #dfe3e8;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .top-section-wrap
+  .title-wrap {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .top-section-wrap
+  .close-btn {
+  background: none;
+  border: 0;
+  padding: 8px;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .top-section-wrap
+  .close-btn
+  svg {
+  width: 20px;
+  height: 20px;
+  fill: #637381;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .center-section-wrap {
+  max-height: calc(100vh - 60px - 150px);
+  overflow-y: auto;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .center-section-wrap
+  .customer-note-section {
+  border-bottom: 1px solid #dfe3e8;
+  padding: 20px;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .center-section-wrap
+  .customer-note-section
+  .label-wrap {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: #212b36;
+  text-transform: capitalize;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .center-section-wrap
+  .customer-note-section
+  .textarea-wrap {
+  display: block;
+  width: 100%;
+  border: 1px solid #dfe3e8;
+  border-radius: 3px;
+  background: #ffffff;
+  margin-top: 0.25rem;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .center-section-wrap
+  .customer-note-section
+  .customer-note-issue {
+  color: #ff0000;
+  padding: 5px;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .center-section-wrap
+  .image-upload-section {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .center-section-wrap
+  .image-upload-section
+  .label-wrap {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: #212b36;
+  text-transform: capitalize;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .center-section-wrap
+  .image-upload-section
+  form {
+  display: flex;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .center-section-wrap
+  .image-upload-section
+  form
+  input {
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  min-height: 200px;
+  border: 2px dashed #c4cdd5;
+  background: #ffffff;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .bottom-section-wrap {
+  display: flex;
+  justify-content: end;
+  padding: 20px;
+  border-top: 1px solid #dfe3e8;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .bottom-section-wrap
+  .submit-claim-button {
+  font-size: 14px;
+  line-height: 1;
+  padding: 0.7rem 1.6rem;
+  border-radius: 3px;
+  border: 1px solid #000;
+  background-color: #000;
+  color: #ffffff;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .bottom-section-wrap
+  .submit-claim-button:disabled {
+  opacity: 0.6;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .bottom-section-wrap
+  .submit-claim-button.loading {
+  position: relative;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-indent: -9999px;
+  min-width: 104px;
+}
+
+.custom-popup-wrap
+  .custom-popup-inner
+  .custom-popup-sub-inner
+  .bottom-section-wrap
+  .submit-claim-button.loading:after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  border-top-color: #000;
+  animation: btnSpinner 0.6s linear infinite;
+}
+
+/* Order claim page css END */
