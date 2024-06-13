@@ -834,7 +834,7 @@ aside li {
 }
 
 .cart-lines {
-  /* padding-bottom: 20%; */
+  padding-bottom: 20%;
   @media (min-width: 44em) {
     padding-bottom: 0;
   }
