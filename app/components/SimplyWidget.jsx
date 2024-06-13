@@ -65,7 +65,7 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
       let filterItems = skipProducts();
       let cartTotal = 0;
 
-      filterItems.map((item) => {
+      filterItems.forEach((item) => {
         cartTotal = cartTotal + parseInt(item.cost.totalAmount.amount) * 100;
       });
 
@@ -116,7 +116,7 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
 
   const setCookie = function (cname, cvalue, exdays) {
     const expires = new Date(Date.now() + exdays * 24 * 60 * 60 * 1000);
-    cookies.set(cname, cvalue, {path: '/', expires: expires});
+    cookies.set(cname, cvalue, {path: '/', expires});
   };
 
   const getCookie = function (cname) {
@@ -184,14 +184,10 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
         let variant_id = getProductId(item);
 
         const plans = insurancePlan.planArray;
-        let currentPlan = plans.find((plan) => {
-          if (plan.variant_id == variant_id) {
-            return plan;
-          }
-        });
+        let currentPlan = plans.find((plan) => plan.variant_id == variant_id);
         if (!currentPlan) {
-          return item;
-        }
+          return true;
+        } else return false;
       });
     }
     return items;
@@ -199,21 +195,18 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
 
   const skipProducts = () => {
     let filter_items = filterInsuranceProduct();
-    let items = filter_items.filter((item) => {
-      if (
+    let items = filter_items.filter(
+      (item) =>
         skipSkus.indexOf(item.sku) == -1 &&
         skipPids.indexOf(item.product_id) == -1 &&
-        skipHandles.indexOf(item.handle) == -1
-      ) {
-        return item;
-      }
-    });
+        skipHandles.indexOf(item.handle) == -1,
+    );
     return items;
   };
 
   const planTypeFixed = (cartTotal) => {
     let planArray = simplyInsurance.insurancePlan.planArray;
-    planArray.map((plan) => {
+    planArray.forEach((plan) => {
       let min_order_price = convertMoneyToCents(plan.min_order_price);
       let max_order_price = convertMoneyToCents(plan.max_order_price);
       if (cartTotal > min_order_price && cartTotal <= max_order_price) {
@@ -222,7 +215,7 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
       }
     });
     if (!eligible) {
-      planArray.map((plan) => {
+      planArray.forEach((plan) => {
         let iplan_global = plan.is_gloabal_rule;
         if (iplan_global == 'Yes') {
           currentPlan = plan;
@@ -238,7 +231,7 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
     let planArray = insurancePlan.planArray;
     let percentageOfTotal = (cartTotal * parseFloat(percentage)) / 100;
     let selectedPlan;
-
+    console.log(percentageOfTotal);
     for (let i = 0; i < planArray.length; i++) {
       let currPlan = planArray[i];
       let prevPlan = planArray[i];
@@ -268,14 +261,10 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
         let variant_id = getProductId(item);
 
         const plans = simplyInsurance.insurancePlan.planArray;
-        let currentPlan = plans.find((plan) => {
-          if (plan.variant_id == variant_id) {
-            return plan;
-          }
-        });
+        let currentPlan = plans.find((plan) => plan.variant_id == variant_id);
         if (currentPlan) {
-          return item;
-        }
+          return true;
+        } else return false;
       });
     }
     return items;
@@ -286,9 +275,7 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
     let filterItems = skipProducts();
     let cartTotal = 0;
 
-    filterItems.map((item) => {
-      cartTotal = cartTotal + parseInt(item.cost.totalAmount.amount) * 100;
-    });
+    cartTotal = parseFloat(cart?.cost?.totalAmount?.amount);
 
     if (cartTotal === 0) {
       return;
@@ -296,7 +283,6 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
     if (minOrderValue > cartTotal) {
       return;
     }
-
     if (insurancePlan.insurance_plan_type == 'percentage') {
       planTypePercentage(cartTotal);
     } else {
@@ -377,7 +363,11 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
     });
   }
 
+  console.log(cart);
   console.log(insurancePlan);
+  console.log(currentPlan);
+  console.log(lines);
+  console.log(getInsuranceProduct());
   return (
     <>
       <div className="si-widget">

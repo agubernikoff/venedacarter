@@ -60,13 +60,16 @@ function CartDetails({layout, cart}) {
         layout={layout}
         insurancePlan={insurancePlan}
       />
-      {insurancePlan && insurancePlan.planArray && SkipProduct && (
-        <SimplyWidget
-          cart={cart}
-          insurancePlan={insurancePlan}
-          SkipProduct={SkipProduct}
-        />
-      )}
+      {cartHasItems &&
+        insurancePlan &&
+        insurancePlan.planArray &&
+        SkipProduct && (
+          <SimplyWidget
+            cart={cart}
+            insurancePlan={insurancePlan}
+            SkipProduct={SkipProduct}
+          />
+        )}
       {cartHasItems && (
         <CartSummary cost={cart.cost} layout={layout}>
           {/* <CartDiscounts discountCodes={cart.discountCodes} /> */}
