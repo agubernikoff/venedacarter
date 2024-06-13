@@ -5,7 +5,7 @@ import {ClaimPage} from '~/components/ClaimPage';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Hydrogen | ${data?.page.title ?? ''}`}];
+  return [{title: `Hydrogen | ${data?.page?.title ?? ''}`}];
 };
 
 /**
@@ -26,7 +26,7 @@ export async function loader({params, context}) {
     throw new Response('Not Found', {status: 404});
   }
 
-  return json({page});
+  return json({page, handle: params.handle});
 }
 
 export default function Page() {
@@ -35,7 +35,7 @@ export default function Page() {
 
   return (
     <div className="page">
-      {handle == 'pages/claim-portal' ? (
+      {handle == 'claim-portal' ? (
         <ClaimPage />
       ) : (
         <main dangerouslySetInnerHTML={{__html: page.body}} />
