@@ -2639,7 +2639,8 @@ body {
   visibility: visible;
 }
 .simply-insurance .header-wrap .tooltipCstm .toolltiptextCstm {
-  font-size: 12px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   text-align: left;
   width: 200px !important;
   height: auto;
@@ -2660,7 +2661,8 @@ body {
   display: inline-block;
 }
 .simply-insurance p {
-  font-size: 12px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 .simply-insurance .plan_title {
   font-weight: 700;
@@ -2742,7 +2744,8 @@ body {
   visibility: visible;
 }
 .plan_info_btn .plan_info {
-  font-size: 12px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   text-align: left;
   width: 200px !important;
   height: auto;
@@ -2756,58 +2759,41 @@ body {
   padding-right: 10px;
   border-radius: 10px;
 }
-.order-claim-page-wrap {
-  margin: -30px 0;
-}
 
 .order-claim-page-wrap .simply-container {
-  max-width: 600px;
-  margin: 30px auto;
-}
-
-@media (min-width: 651px) {
-  .order-claim-page-wrap .simply-container {
-    padding: 0 32px;
-  }
-}
-
-@media (min-width: 428px) {
-  .order-claim-page-wrap .simply-container {
-    padding: 0 20px;
-  }
-}
-
-.order-claim-page-wrap .header-section {
-  padding: 32px 0 16px;
+  margin: 3rem auto;
 }
 
 .order-claim-page-wrap .header-section .title-wrap {
-  padding-right: 20px;
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   margin: 0;
   text-align: center;
 }
 
 .order-claim-page-wrap .bottom-form-section {
   margin: 20px 0;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
-
-.order-claim-page-wrap
-  .bottom-form-section
-  .bottom-form-section-inner
-  .label-input-wrap-main {
-  padding: 20px;
-}
-
 .order-claim-page-wrap
   .bottom-form-section
   .bottom-form-section-inner
   .label-input-wrap-main
   .label-input-wrap:last-child {
   margin-top: 16px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
+.bottom-form-section {
+  width: 92.5% !important;
+  margin: auto !important;
+  margin-top: 6rem !important;
+  @media (min-width: 44em) {
+    width: 31.3% !important;
+  }
+}
 .order-claim-page-wrap
   .bottom-form-section
   .bottom-form-section-inner
@@ -2815,6 +2801,8 @@ body {
   .label-input-wrap:last-child
   input {
   margin: 0;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .order-claim-page-wrap
@@ -2824,7 +2812,8 @@ body {
   .label-input-wrap
   .label-wrap {
   margin-bottom: 5px;
-  font-size: 14px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .order-claim-page-wrap
@@ -2835,7 +2824,8 @@ body {
   .input-wrap
   input {
   text-indent: 5px;
-  font-size: 14px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   line-height: 24px;
   border: 1px solid #c4cdd5;
   width: 100%;
@@ -2849,7 +2839,8 @@ body {
   .bottom-form-section
   .bottom-form-section-inner
   .submit-button-wrap {
-  padding: 0 20px 20px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .order-claim-page-wrap
@@ -2858,7 +2849,8 @@ body {
   .submit-button-wrap
   .submit-button-inner
   button {
-  font-size: 14px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   line-height: 1;
   padding: 0.7rem 1.6rem;
   border-radius: 3px;
@@ -2881,7 +2873,7 @@ body {
   .bottom-form-section-inner
   .incorrect-value-order {
   color: #ff0000;
-  padding: 0 20px;
+  /* padding: 0 20px; */
 }
 
 @keyframes btnSpinner {
@@ -2969,7 +2961,8 @@ body.overflow-hidden {
   .top-section
   .order-number-wrap
   .order-wrap-text {
-  font-size: 28px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .manage-claim-request-wrap
@@ -3035,7 +3028,8 @@ body.overflow-hidden {
   padding: 3px 8px;
   border: 2px solid white;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   line-height: 20px;
 }
 
@@ -3051,7 +3045,7 @@ body.overflow-hidden {
   background-color: #dfe3e8;
   border: 2px solid white;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 0.75rem;
   line-height: 20px;
   color: #454f5b;
   font-weight: 400;
@@ -3081,7 +3075,8 @@ body.overflow-hidden {
   .tracking-section
   .tracking-heading
   .tracking-heading-inner {
-  font-size: 16px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   margin-bottom: 20px;
 }
 
@@ -3153,7 +3148,7 @@ body.overflow-hidden {
   background-color: #dfe3e8;
   border: 2px solid #fff;
   border-radius: 20px;
-  font-size: 13px;
+  font-family: 'regular-font';
   line-height: 20px;
   color: #454f5b;
   font-weight: 400;
@@ -3265,7 +3260,8 @@ body.overflow-hidden {
   .generate-claim-button {
   margin-top: 8px;
   margin-left: 8px;
-  font-size: 14px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   line-height: 1;
   padding: 0.7rem 1.6rem;
   border-radius: 3px;
@@ -3346,8 +3342,8 @@ body.overflow-hidden {
   .custom-popup-sub-inner
   .top-section-wrap
   .title-wrap {
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   margin: 0;
 }
 
@@ -3396,7 +3392,8 @@ body.overflow-hidden {
   .customer-note-section
   .label-wrap {
   display: block;
-  font-size: 14px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   font-weight: 400;
   color: #212b36;
   text-transform: capitalize;
@@ -3443,7 +3440,8 @@ body.overflow-hidden {
   .image-upload-section
   .label-wrap {
   display: block;
-  font-size: 14px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   font-weight: 400;
   color: #212b36;
   text-transform: capitalize;
@@ -3488,7 +3486,8 @@ body.overflow-hidden {
   .custom-popup-sub-inner
   .bottom-section-wrap
   .submit-claim-button {
-  font-size: 14px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
   line-height: 1;
   padding: 0.7rem 1.6rem;
   border-radius: 3px;

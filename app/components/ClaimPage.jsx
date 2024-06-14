@@ -154,7 +154,7 @@ export function ClaimPage() {
         <div className="order-claim-page-wrap">
           <div className="simply-container">
             <div className="header-section">
-              <h1 className="title-wrap">Raise order claim</h1>
+              <p className="title-wrap">CLAIM PORTAL</p>
             </div>
             <div className="bottom-form-section">
               <div className="bottom-form-section-inner">
@@ -167,7 +167,7 @@ export function ClaimPage() {
                     </div>
                     <div className="input-wrap">
                       <input
-                        id="email-field-input"
+                        className="profile-input"
                         name="customer_email"
                         value={userEmail}
                         onChange={(e) => setUserEmail(e.target.value)}
@@ -185,7 +185,7 @@ export function ClaimPage() {
                     </div>
                     <div className="input-wrap">
                       <input
-                        id="order-field-input"
+                        className="profile-input"
                         name="order_number"
                         value={orderNumber}
                         onChange={(e) => setOrderNumber(e.target.value)}
