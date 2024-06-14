@@ -25,7 +25,8 @@ export default async function handleRequest(
       'https://klaviyo.com',
       'https://*.klaviyo.com',
       'https://*.klaviyo.com/*',
-      'https://478902-43.myshopify.com/apps/simplyinsurance/storefront-api/metafields/',
+      'https://478902-43.myshopify.com',
+      'https://478902-43.myshopify.com/*',
     ],
     styleSrc: [
       'https://klaviyo.com',
