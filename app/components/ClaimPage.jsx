@@ -160,36 +160,29 @@ export function ClaimPage() {
               <div className="bottom-form-section-inner">
                 <div className="label-input-wrap-main">
                   <div className="email-input-wrap label-input-wrap">
-                    <div className="label-wrap">
-                      <label id="email-field-label" htmlFor="email-field-input">
-                        Enter your email
-                      </label>
-                    </div>
-                    <div className="input-wrap">
+                    <div
+                      className="input-wrap"
+                      style={{marginBottom: '.35rem'}}
+                    >
                       <input
                         className="profile-input"
                         name="customer_email"
                         value={userEmail}
                         onChange={(e) => setUserEmail(e.target.value)}
-                        placeholder="Enter your email"
+                        placeholder="Email"
                         type="email"
                         required
                       />
                     </div>
                   </div>
                   <div className="order-input-wrap label-input-wrap">
-                    <div className="label-wrap">
-                      <label id="order-field-label" htmlFor="order-field-input">
-                        Order Number
-                      </label>
-                    </div>
                     <div className="input-wrap">
                       <input
                         className="profile-input"
                         name="order_number"
                         value={orderNumber}
                         onChange={(e) => setOrderNumber(e.target.value)}
-                        placeholder="#Order Number"
+                        placeholder="Order Number"
                         required
                       />
                     </div>
@@ -199,12 +192,12 @@ export function ClaimPage() {
                   <div className="submit-button-inner">
                     <button
                       type="button"
-                      className="submit-button"
+                      className="profile-button"
                       onClick={() => orderClaimEvent()}
                       disabled={claimButtonLoading}
                     >
                       <span className="button-text">
-                        {claimButtonLoading ? 'Loading' : 'Submit'}
+                        {claimButtonLoading ? 'LOADING' : 'SUBMIT'}
                       </span>
                     </button>
                   </div>

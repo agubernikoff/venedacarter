@@ -2781,7 +2781,6 @@ body {
   .bottom-form-section-inner
   .label-input-wrap-main
   .label-input-wrap:last-child {
-  margin-top: 16px;
   font-size: 0.75rem;
   font-family: 'regular-font';
 }
@@ -2823,16 +2822,9 @@ body {
   .label-input-wrap
   .input-wrap
   input {
-  text-indent: 5px;
   font-size: 0.75rem;
   font-family: 'regular-font';
-  line-height: 24px;
-  border: 1px solid #c4cdd5;
   width: 100%;
-  border-radius: 3px;
-  padding: 5px;
-  min-height: 34px;
-  background-color: #fff;
 }
 
 .order-claim-page-wrap
@@ -2851,9 +2843,7 @@ body {
   button {
   font-size: 0.75rem;
   font-family: 'regular-font';
-  line-height: 1;
-  padding: 0.7rem 1.6rem;
-  border-radius: 3px;
+  margin-top: 2.6rem;
   width: 100%;
 }
 
