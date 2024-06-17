@@ -152,12 +152,12 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
       });
 
       if (b) {
-        let ele = plan_desc_opt_in.current;
+        let ele = plan_desc_opt_out.current;
         if (ele) {
           ele.classList.remove('hide');
         }
       } else {
-        let ele = plan_desc_opt_out.current;
+        let ele = plan_desc_opt_in.current;
         if (ele) {
           ele.classList.remove('hide');
         }
