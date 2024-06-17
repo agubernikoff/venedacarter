@@ -89,18 +89,22 @@ function CartDetails({layout, cart}) {
  */
 function CartLines({lines, layout, insurancePlan}) {
   if (!lines) return null;
-
   return (
     <div aria-labelledby="cart-lines" className="cart-lines">
       <ul>
-        {lines.nodes.map((line) => (
-          <CartLineItem
-            key={line.id}
-            line={line}
-            layout={layout}
-            insurancePlan={insurancePlan}
-          />
-        ))}
+        {lines.nodes
+          .filter(
+            (line) =>
+              line.merchandise?.product?.handle !== 'shipping-protection',
+          )
+          .map((line) => (
+            <CartLineItem
+              key={line.id}
+              line={line}
+              layout={layout}
+              insurancePlan={insurancePlan}
+            />
+          ))}
       </ul>
     </div>
   );
