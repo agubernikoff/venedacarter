@@ -239,22 +239,24 @@ function ProductsGrid({products, isMobile}) {
   const lastItemInSecondLastRow = firstItemInLastRow - 1;
   return (
     <>
-      {products.map((product, index) => {
-        return (
-          <FeaturedProduct
-            isMobile={isMobile}
-            key={product.id}
-            product={product}
-            loading={index < 8 ? 'eager' : undefined}
-            emptyCellBelow={
-              itemsInLastRow !== 0 &&
-              index >= firstItemInSecondLastRow &&
-              index <= lastItemInSecondLastRow &&
-              index + columns >= products.length
-            }
-          />
-        );
-      })}
+      {products
+        .filter((p) => p.handle !== 'shipping-protection')
+        .map((product, index) => {
+          return (
+            <FeaturedProduct
+              isMobile={isMobile}
+              key={product.id}
+              product={product}
+              loading={index < 8 ? 'eager' : undefined}
+              emptyCellBelow={
+                itemsInLastRow !== 0 &&
+                index >= firstItemInSecondLastRow &&
+                index <= lastItemInSecondLastRow &&
+                index + columns >= products.length
+              }
+            />
+          );
+        })}
     </>
   );
 }
