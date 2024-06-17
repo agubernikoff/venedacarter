@@ -66,7 +66,7 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
       let cartTotal = 0;
 
       filterItems.forEach((item) => {
-        cartTotal = cartTotal + parseInt(item.cost.totalAmount.amount) * 100;
+        cartTotal = cartTotal + parseFloat(item.cost.totalAmount.amount) * 100;
       });
 
       let insuranceProducts = getInsuranceProduct();
@@ -185,6 +185,7 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
 
         const plans = insurancePlan.planArray;
         let currentPlan = plans.find((plan) => plan.variant_id == variant_id);
+
         if (!currentPlan) {
           return true;
         } else return false;
@@ -231,7 +232,7 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
     let planArray = insurancePlan.planArray;
     let percentageOfTotal = (cartTotal * parseFloat(percentage)) / 100;
     let selectedPlan;
-    console.log(percentageOfTotal);
+
     for (let i = 0; i < planArray.length; i++) {
       let currPlan = planArray[i];
       let prevPlan = planArray[i];
@@ -275,7 +276,9 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
     let filterItems = skipProducts();
     let cartTotal = 0;
 
-    cartTotal = parseFloat(cart?.cost?.totalAmount?.amount);
+    filterItems.forEach((item) => {
+      cartTotal = cartTotal + parseFloat(item.cost.totalAmount.amount) * 100;
+    });
 
     if (cartTotal === 0) {
       return;
@@ -363,11 +366,6 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
     });
   }
 
-  console.log(cart);
-  console.log(insurancePlan);
-  console.log(currentPlan);
-  console.log(lines);
-  console.log(getInsuranceProduct());
   return (
     <>
       <div className="si-widget">
