@@ -1,5 +1,5 @@
 import {CartForm, Image, Money} from '@shopify/hydrogen';
-import {Link} from '@remix-run/react';
+import {Link, useLocation} from '@remix-run/react';
 import {useVariantUrl} from '~/lib/variants';
 import {SimplyWidget} from './SimplyWidget';
 import {useEffect, useState} from 'react';
@@ -52,6 +52,7 @@ function CartDetails({layout, cart}) {
       .catch((error) => console.log('error', error));
   }, []);
   const cartHasItems = !!cart && cart.totalQuantity > 0;
+  const {pathname} = useLocation();
 
   return (
     <div className="cart-details">
@@ -70,13 +71,15 @@ function CartDetails({layout, cart}) {
             SkipProduct={SkipProduct}
           />
         )}
-      {cartHasItems && (
-        <CartSummary cost={cart.cost} layout={layout}>
-          {/* <CartDiscounts discountCodes={cart.discountCodes} /> */}
+      <CartSummary cost={cart.cost} layout={layout}>
+        {/* <CartDiscounts discountCodes={cart.discountCodes} /> */}
 
-          <CartCheckoutActions checkoutUrl={cart.checkoutUrl} />
-        </CartSummary>
-      )}
+        <CartCheckoutActions
+          checkoutUrl={cart.checkoutUrl}
+          cartHasItems={cartHasItems}
+          pathname={pathname}
+        />
+      </CartSummary>
     </div>
   );
 }
@@ -195,13 +198,13 @@ function CartLineItem({layout, line, insurancePlan}) {
 /**
  * @param {{checkoutUrl: string}}
  */
-function CartCheckoutActions({checkoutUrl}) {
+function CartCheckoutActions({checkoutUrl, cartHasItems, pathname}) {
   if (!checkoutUrl) return null;
 
   return (
     <div>
       <button className="cart-checkout-button">
-        <a href={checkoutUrl} target="_self">
+        <a href={cartHasItems ? checkoutUrl : pathname} target="_self">
           <p className="cart-checkout-button-text">CHECKOUT</p>
         </a>
       </button>
@@ -348,18 +351,20 @@ export function CartEmpty({hidden = false, layout = 'aside'}) {
   return (
     <div className="empty-bag" hidden={hidden}>
       <br />
-      <p>Your bag is empty.</p>
+      <p>
+        {'Your cart is empty. Shop New Arrivals'}{' '}
+        <Link
+          to="/collections/all"
+          onClick={() => {
+            if (layout === 'aside') {
+              window.location.href = '/collections/new_arrivals';
+            }
+          }}
+        >
+          here.
+        </Link>
+      </p>
       <br />
-      <Link
-        to="/collections/all"
-        onClick={() => {
-          if (layout === 'aside') {
-            window.location.href = '/collections/all';
-          }
-        }}
-      >
-        Continue shopping →
-      </Link>
     </div>
   );
 }
