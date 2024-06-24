@@ -203,10 +203,22 @@ function CartCheckoutActions({checkoutUrl, cartHasItems, pathname}) {
 
   return (
     <div>
-      <button className="cart-checkout-button">
-        <a href={cartHasItems ? checkoutUrl : pathname} target="_self">
+      <button
+        className="cart-checkout-button"
+        onClick={() => {
+          if (!cartHasItems) {
+            history.go(-1);
+            window.location.hash = '';
+          }
+        }}
+      >
+        {cartHasItems ? (
+          <a href={checkoutUrl} target="_self">
+            <p className="cart-checkout-button-text">CHECKOUT</p>
+          </a>
+        ) : (
           <p className="cart-checkout-button-text">CHECKOUT</p>
-        </a>
+        )}
       </button>
     </div>
   );
