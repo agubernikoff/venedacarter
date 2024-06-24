@@ -367,6 +367,7 @@ export function CartEmpty({hidden = false, layout = 'aside'}) {
         {'Your cart is empty. Shop New Arrivals'}{' '}
         <Link
           to="/collections/all"
+          style={{textDecoration: 'underline'}}
           onClick={() => {
             if (layout === 'aside') {
               window.location.href = '/collections/new_arrivals';
