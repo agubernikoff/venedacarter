@@ -2704,6 +2704,8 @@ body {
 .simply-insurance .plan_title {
   font-weight: 700;
   margin: 0;
+  font-size: 0.75rem;
+  font-family: 'bold-font' !important;
 }
 .simply-insurance .plan_subtitle {
   margin: 0;
