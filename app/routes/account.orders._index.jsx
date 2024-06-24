@@ -176,6 +176,8 @@ function OrderItem({order}) {
               ? 'Processing'
               : order.fulfillmentStatus === 'FULFILLED'
               ? 'Shipped'
+              : order.fulfillmentStatus === 'PARTIALLY_FULFILLED'
+              ? 'Partially Fulfilled'
               : order.fulfillmentStatus}
           </p>
         </div>
