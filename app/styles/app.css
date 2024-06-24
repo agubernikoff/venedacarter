@@ -20,6 +20,7 @@
 .route-error fieldset a {
   font-family: 'regular-font';
   font-size: 0.75rem;
+  line-height: auto;
 }
 .route-error fieldset {
   margin-top: calc(50vh - var(--header-height) * 3);
