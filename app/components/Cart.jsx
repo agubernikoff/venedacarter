@@ -368,6 +368,11 @@ export function CartEmpty({hidden = false, layout = 'aside'}) {
         <Link
           to="/collections/new_arrivals"
           style={{textDecoration: 'underline'}}
+          onClick={() => {
+            if (layout === 'aside') {
+              window.location.href = '/collections/new_arrivals';
+            }
+          }}
         >
           here.
         </Link>
