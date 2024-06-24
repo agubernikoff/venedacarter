@@ -3385,6 +3385,8 @@ body.overflow-hidden {
   .customer-note-section {
   border-bottom: 1px solid #dfe3e8;
   padding: 20px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .custom-popup-wrap
@@ -3413,6 +3415,8 @@ body.overflow-hidden {
   border-radius: 3px;
   background: #ffffff;
   margin-top: 0.25rem;
+  font-size: 0.75rem;
+  font-family: 'regular-font' !important;
 }
 
 .custom-popup-wrap
@@ -3423,6 +3427,8 @@ body.overflow-hidden {
   .customer-note-issue {
   color: #ff0000;
   padding: 5px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .custom-popup-wrap
@@ -3433,6 +3439,13 @@ body.overflow-hidden {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
+}
+
+.textarea-wrap::placeholder {
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .custom-popup-wrap
@@ -3456,6 +3469,8 @@ body.overflow-hidden {
   .image-upload-section
   form {
   display: flex;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .custom-popup-wrap
@@ -3471,6 +3486,8 @@ body.overflow-hidden {
   min-height: 200px;
   border: 2px dashed #c4cdd5;
   background: #ffffff;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .custom-popup-wrap

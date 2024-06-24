@@ -148,6 +148,14 @@ export function ClaimPage() {
         setClaimSubmitLoading(false);
       });
   };
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    window
+      .matchMedia('(max-width:44em)')
+      .addEventListener('change', (e) => setIsMobile(e.matches));
+    if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
+  }, []);
   return (
     <div>
       {pageStep === 0 && (
@@ -230,7 +238,7 @@ export function ClaimPage() {
                         <th>Order placed at</th>
                         <th>Order status</th>
                         <th>Name</th>
-                        <th>Email</th>
+                        {isMobile ? null : <th>Email</th>}
                       </tr>
                     </thead>
                     <tbody>
@@ -244,7 +252,11 @@ export function ClaimPage() {
                         <td className="order-name-text">
                           {orderData.customer_name}
                         </td>
-                        <td className="order-email-text">{orderData.email}</td>
+                        {isMobile ? null : (
+                          <td className="order-email-text">
+                            {orderData.email}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
