@@ -2943,7 +2943,8 @@ body.overflow-hidden {
 }
 
 .manage-claim-request-wrap .manage-claim-container .top-section .back-button a {
-  color: #637381;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .manage-claim-request-wrap
@@ -2964,6 +2965,8 @@ body.overflow-hidden {
   border: 1px solid #e1e3e5;
   border-radius: 3px;
   box-shadow: 5px 5px 5px #c5c5c5;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .manage-claim-request-wrap
@@ -2988,6 +2991,8 @@ body.overflow-hidden {
   white-space: normal;
   padding: 16px;
   border: 0;
+  font-size: 0.75rem;
+  font-family: 'bold-font';
 }
 
 .manage-claim-request-wrap
@@ -3115,6 +3120,8 @@ body.overflow-hidden {
   .bottom-section-inner
   .order-items-section {
   padding: 20px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .manage-claim-request-wrap
@@ -3179,6 +3186,7 @@ body.overflow-hidden {
   text-align: left;
   white-space: normal;
   padding: 16px;
+  font-family: 'bold-font';
 }
 
 .manage-claim-request-wrap
@@ -3240,6 +3248,8 @@ body.overflow-hidden {
   .bottom-section-inner
   .generate-claim-section {
   padding: 0 20px 20px;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .manage-claim-request-wrap
@@ -3268,6 +3278,8 @@ body.overflow-hidden {
   .generate-claim-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  font-size: 0.75rem;
+  font-family: 'regular-font';
 }
 
 .custom-popup-wrap {
