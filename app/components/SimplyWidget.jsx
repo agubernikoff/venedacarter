@@ -379,10 +379,7 @@ export function SimplyWidget({cart, insurancePlan, SkipProduct}) {
                 <img src={insurancePlan.widget_image_url} alt="widget" />
               )}
               <div className="insurance-title-wrap">
-                <p
-                  className="plan_title"
-                  style={{fontFamily: 'bold-font', fontSize: '.75rem'}}
-                >
+                <p className="plan_title">
                   {insurancePlan.insurance_plan_title}
                   {/* <i className="btnCstm tooltipCstm">
                     <svg
