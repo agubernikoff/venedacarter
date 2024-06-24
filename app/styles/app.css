@@ -861,6 +861,15 @@ aside li {
   }
 }
 
+.cart-main::-webkit-scrollbar {
+  display: none;
+}
+
+.cart-main {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .cart-lines {
   /* padding-bottom: 20%; */
   @media (min-width: 44em) {
