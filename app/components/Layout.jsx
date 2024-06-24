@@ -62,6 +62,7 @@ export function Layout({
  * @param {{cart: LayoutProps['cart']}}
  */
 function CartAside({cart}) {
+  console.log(cart);
   return (
     <Suspense>
       <Await resolve={cart}>
@@ -69,7 +70,7 @@ function CartAside({cart}) {
           return (
             <Aside
               id="cart-aside"
-              heading={`Bag (${cart?.lines?.nodes?.length || 0})`}
+              heading={`Bag (${cart?.totalQuantity || 0})`}
             >
               <CartMain cart={cart} layout="aside" />{' '}
             </Aside>
