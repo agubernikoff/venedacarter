@@ -71,11 +71,11 @@ function CartDetails({layout, cart}) {
             SkipProduct={SkipProduct}
           />
         )}
-      <CartSummary cost={cart.cost} layout={layout}>
+      <CartSummary cost={cart?.cost} layout={layout}>
         {/* <CartDiscounts discountCodes={cart.discountCodes} /> */}
 
         <CartCheckoutActions
-          checkoutUrl={cart.checkoutUrl}
+          checkoutUrl={cart?.checkoutUrl}
           cartHasItems={cartHasItems}
           pathname={pathname}
         />
