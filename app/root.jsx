@@ -193,9 +193,8 @@ export function ErrorBoundary() {
               <fieldset>
                 <pre>
                   <p>The page you are looking for has been moved or renamed.</p>
-                  <p>
-                    Return <a href="/">home.</a>
-                  </p>
+                  <span>Return </span>
+                  <a href="/">home.</a>
                 </pre>
               </fieldset>
             )}

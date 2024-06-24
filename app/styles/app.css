@@ -16,7 +16,7 @@
   margin-top: var(--header-height);
 }
 .route-error p,
-.route-error fieldset p,
+.route-error fieldset span,
 .route-error fieldset a {
   font-family: 'regular-font';
   font-size: 0.75rem;
