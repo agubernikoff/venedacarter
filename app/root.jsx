@@ -188,11 +188,15 @@ export function ErrorBoundary() {
       <body>
         <Layout {...rootData}>
           <div className="route-error">
-            <h1>Oops</h1>
-            <h2>{errorStatus}</h2>
+            <p>{errorStatus}</p>
             {errorMessage && (
               <fieldset>
-                <pre>{errorMessage}</pre>
+                <pre>
+                  <p>The page you are looking for has been moved or renamed.</p>
+                  <p>
+                    Return <a href="/">home.</a>
+                  </p>
+                </pre>
               </fieldset>
             )}
           </div>

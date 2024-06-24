@@ -8,6 +8,26 @@
   --color-light: #fff;
 }
 
+.route-error {
+  min-height: calc(100vh - var(--header-height));
+  text-align: center;
+  font-family: 'regular-font';
+  font-size: 0.75rem;
+  margin-top: var(--header-height);
+}
+.route-error p,
+.route-error fieldset p,
+.route-error fieldset a {
+  font-family: 'regular-font';
+  font-size: 0.75rem;
+}
+.route-error fieldset {
+  margin-top: calc(50vh - var(--header-height) * 3);
+}
+.route-error fieldset a {
+  text-decoration: underline;
+}
+
 /* img {
   border-radius: 4px;
 } */
