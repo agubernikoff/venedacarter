@@ -855,7 +855,7 @@ aside li {
 }
 
 .cart-lines {
-  padding-bottom: 20%;
+  /* padding-bottom: 20%; */
   @media (min-width: 44em) {
     padding-bottom: 0;
   }
@@ -2610,6 +2610,7 @@ body {
   justify-content: space-between;
   -webkit-justify-content: space-between;
   width: 100%;
+  padding-bottom: 20%;
 }
 .simply-insurance .header-wrap .plan_info_btn {
   width: 40px;
