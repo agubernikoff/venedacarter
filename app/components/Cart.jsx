@@ -199,7 +199,7 @@ function CartLineItem({layout, line, insurancePlan}) {
  * @param {{checkoutUrl: string}}
  */
 function CartCheckoutActions({checkoutUrl, cartHasItems, pathname}) {
-  if (!checkoutUrl) return null;
+  // if (!checkoutUrl) return null;
 
   return (
     <div>
@@ -243,7 +243,7 @@ export function CartSummary({cost, layout, children = null}) {
           {cost?.subtotalAmount?.amount ? (
             <Money data={cost?.subtotalAmount} />
           ) : (
-            '-'
+            '$0.00'
           )}
         </dd>
       </dl>
@@ -366,13 +366,8 @@ export function CartEmpty({hidden = false, layout = 'aside'}) {
       <p>
         {'Your cart is empty. Shop New Arrivals'}{' '}
         <Link
-          to="/collections/all"
+          to="/collections/new_arrivals"
           style={{textDecoration: 'underline'}}
-          onClick={() => {
-            if (layout === 'aside') {
-              window.location.href = '/collections/new_arrivals';
-            }
-          }}
         >
           here.
         </Link>
