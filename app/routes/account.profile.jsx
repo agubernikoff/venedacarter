@@ -66,11 +66,13 @@ export async function action({request, context}) {
         },
       },
     );
+    console.log(errors, customerUpdate?.customerUserErrors);
+    if (errors?.length) {
+      throw new Error(errors[0]?.message);
+    }
 
-    if (errors?.length || customerUpdate?.customerUserErrors?.length) {
-      throw new Error(
-        errors[0].message || customerUpdate?.customerUserErrors[0].message,
-      );
+    if (customerUpdate?.customerUserErrors?.length) {
+      throw new Error(customerUpdate?.customerUserErrors[0]?.message);
     }
 
     if (!customerUpdate?.customer) {
