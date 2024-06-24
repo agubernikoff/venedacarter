@@ -370,7 +370,7 @@ export function CartEmpty({hidden = false, layout = 'aside'}) {
           style={{textDecoration: 'underline'}}
           onClick={() => {
             if (layout === 'aside') {
-              window.location.href = '/collections/new_arrivals';
+              window.location.hash = '';
             }
           }}
         >
