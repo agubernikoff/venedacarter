@@ -70,13 +70,36 @@ function Brand({isMobile, menu, primaryDomainUrl}) {
           {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
             if (!item.url) return null;
 
-            const url =
+            const isInstagramLink = item.url.includes('instagram.com');
+
+            let url = item.url;
+            if (isInstagramLink) {
+              const instagramUrl = new URL(item.url);
+              url = instagramUrl.href.substring(
+                instagramUrl.href.indexOf('https://www.instagram.com'),
+              );
+            }
+
+            const isInternalLink =
               item.url.includes('myshopify.com') ||
               item.url.includes(publicStoreDomain) ||
-              item.url.includes(primaryDomainUrl)
-                ? new URL(item.url).pathname
-                : item.url;
+              item.url.includes(primaryDomainUrl);
 
+            url = isInternalLink ? new URL(item.url).pathname : url;
+
+            if (isInstagramLink) {
+              return (
+                <a
+                  key={item.id}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={activeLinkStyle({isActive: false, isPending: false})}
+                >
+                  {item.title}
+                </a>
+              );
+            }
             return (
               <NavLink
                 end
@@ -126,16 +149,45 @@ function Support({isMobile, menu, primaryDomainUrl}) {
       </div>
       <div className="footer-content-container">
         <div className="brand-list">
-          {(menu || FALLBACK_FOOTER_SUPPORT_MENU).items.map((item) => {
+          {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
             if (!item.url) return null;
 
-            const url =
+            // Check if the link is an Instagram link
+            const isInstagramLink = item.url.includes('instagram.com');
+
+            // Trim any unnecessary parts from the Instagram URL
+            let url = item.url;
+            if (isInstagramLink) {
+              const instagramUrl = new URL(item.url);
+              url = instagramUrl.href.substring(
+                instagramUrl.href.indexOf('https://www.instagram.com'),
+              );
+            }
+
+            // Determine if the link is internal or external
+            const isInternalLink =
               item.url.includes('myshopify.com') ||
               item.url.includes(publicStoreDomain) ||
-              item.url.includes(primaryDomainUrl)
-                ? new URL(item.url).pathname
-                : item.url;
+              item.url.includes(primaryDomainUrl);
 
+            url = isInternalLink ? new URL(item.url).pathname : url;
+
+            // Return an anchor tag for Instagram link
+            if (isInstagramLink) {
+              return (
+                <a
+                  key={item.id}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={activeLinkStyle}
+                >
+                  {item.title}
+                </a>
+              );
+            }
+
+            // Return NavLink for internal links
             return (
               <NavLink
                 end
