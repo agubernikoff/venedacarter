@@ -23,7 +23,7 @@ import {CUSTOMER_EMAIL_QUERY} from '../graphql/customer-account/CustomerDetailsQ
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
+  return [{title: `Veneda Carter | ${data?.product.title ?? ''}`}];
 };
 
 /**

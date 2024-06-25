@@ -5,7 +5,7 @@ import {ClaimPage} from '~/components/ClaimPage';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Hydrogen | ${data?.page?.title ?? ''}`}];
+  return [{title: `Veneda Carter | ${data?.page?.title ?? ''}`}];
 };
 
 /**

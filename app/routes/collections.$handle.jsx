@@ -23,7 +23,7 @@ import x2 from '../assets/X2.png';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Hydrogen | ${data?.collection?.title ?? ''} Collection`}];
+  return [{title: `Veneda Carter | ${data?.collection?.title ?? ''} Collection`}];
 };
 
 /**

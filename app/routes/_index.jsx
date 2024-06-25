@@ -10,7 +10,7 @@ import colorPicker from '~/helper/ColorPicker';
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{title: 'Veneda Carter | Home'}];
 };
 
 /**

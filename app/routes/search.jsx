@@ -8,7 +8,7 @@ import {SearchForm, SearchResults, NoSearchResults} from '~/components/Search';
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: `Hydrogen | Search`}];
+  return [{title: `Veneda Carter | Search`}];
 };
 
 /**
