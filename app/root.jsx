@@ -146,7 +146,7 @@ export default function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta property="og:title" content="Veneda Carter" />
         <meta property="og:description" content="Veneda Carter" />
-        <meta property="og:image" content="/vc_logo.png" />
+        <meta property="og:image" content="/mobile-icon.png" />
         <Meta />
         <Links />
       </head>
