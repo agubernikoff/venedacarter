@@ -146,7 +146,10 @@ export default function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta property="og:title" content="Veneda Carter" />
         <meta property="og:description" content="Veneda Carter" />
-        <meta property="og:image" content="/assets/mobile-icon.png" />
+        <meta
+          property="og:image"
+          content="https://cdn.shopify.com/oxygen-v2/31914/20579/42562/643843/build/_assets/mobile-icon-PGX7XZZH.png"
+        />
         <Meta />
         <Links />
       </head>
