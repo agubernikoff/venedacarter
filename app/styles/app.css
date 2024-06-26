@@ -1634,7 +1634,7 @@ aside li {
   position: relative;
   z-index: 1100;
   @media (min-width: 44em) {
-    width: 40%;
+    width: 35%;
   }
 }
 
