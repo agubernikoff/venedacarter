@@ -5,12 +5,16 @@ import {Suspense, useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {motion, AnimatePresence} from 'framer-motion';
 import colorPicker from '~/helper/ColorPicker';
+import mobileIcon from '../assets/mobile-icon.png';
 
 /**
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Veneda Carter | Home'}];
+  return [
+    {title: 'Veneda Carter | Home'},
+    {property: 'og:image', content: mobileIcon},
+  ];
 };
 
 /**
