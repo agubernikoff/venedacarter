@@ -11,6 +11,7 @@ import {motion, AnimatePresence} from 'framer-motion';
 import search from '../assets/search.png';
 import cart from '../assets/cart.png';
 import mobIcon from '../assets/mobile-icon.png';
+import mobIcon2 from '../assets/vc-logo.png';
 import menu from '../assets/menu.png';
 import x from '../assets/X.png';
 import {usePredictiveSearch} from './Search';
@@ -76,7 +77,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
             // onClick={closeMenu}
             end
           >
-            <img className="shop-name-mobile" src={mobIcon} />
+            <img className="shop-name-mobile" src={mobIcon2} />
           </NavLink>
         ) : (
           <HeaderMenu
