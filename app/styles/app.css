@@ -512,6 +512,9 @@ aside li {
   justify-content: space-between;
   height: calc(100% - 2rem - var(--header-height));
   padding-block: 1rem;
+  @media (min-width: 44em) {
+    height: calc(100vh - 2rem - var(--header-height) * 2);
+  }
 }
 .brand-list {
   display: flex;
@@ -557,7 +560,7 @@ aside li {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  height: calc(100% - var(--header-height));
+  height: calc(100vh - var(--header-height) * 2);
 }
 .newsletter-image-container,
 .newsletter-image-container-mobile {
