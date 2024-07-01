@@ -63,7 +63,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
             style={activeLinkStyle}
             end
           >
-            <img src={mobIcon2} />
+            <img src={mobIcon2} style={{width: '30px'}} />
             {/* <p className="shop-name">VENEDA CARTER</p> */}
           </NavLink>
         )}

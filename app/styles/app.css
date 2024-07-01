@@ -277,7 +277,7 @@ aside li {
 
 .header-left img,
 .header-right img {
-  width: 30px;
+  max-width: 5vw;
 }
 
 .header-center-mobile img {
