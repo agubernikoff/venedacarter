@@ -281,7 +281,7 @@ aside li {
 }
 
 .header-center-mobile img {
-  width: 30px;
+  max-width: 44vw;
 }
 
 .header-center {
