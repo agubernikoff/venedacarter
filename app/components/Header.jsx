@@ -63,8 +63,8 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
             style={activeLinkStyle}
             end
           >
-            {/* <img src={mobIcon2} /> */}
-            <p className="shop-name">VENEDA CARTER</p>
+            <img src={mobIcon2} />
+            {/* <p className="shop-name">VENEDA CARTER</p> */}
           </NavLink>
         )}
       </div>
@@ -78,7 +78,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
             // onClick={closeMenu}
             end
           >
-            <img className="shop-name-mobile" src={mobIcon} />
+            <img className="shop-name-mobile" src={mobIcon2} />
           </NavLink>
         ) : (
           <HeaderMenu

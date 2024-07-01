@@ -277,11 +277,11 @@ aside li {
 
 .header-left img,
 .header-right img {
-  max-width: 5vw;
+  width: 30px;
 }
 
 .header-center-mobile img {
-  max-width: 44vw;
+  width: 30px;
 }
 
 .header-center {
