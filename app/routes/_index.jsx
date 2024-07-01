@@ -5,7 +5,7 @@ import {Suspense, useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {motion, AnimatePresence} from 'framer-motion';
 import colorPicker from '~/helper/ColorPicker';
-import mobileIcon from '../assets/mobile-icon.png';
+import mobileIcon from '../assets/VC-Opengraph.jpg';
 
 /**
  * @type {MetaFunction}
