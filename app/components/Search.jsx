@@ -369,7 +369,11 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
   }, []);
   const filteredItems = items.filter((p) => p.handle !== 'shipping-protection');
   return (
-    <div className={isMobile ? 'home-mobile' : 'home'} key={type}>
+    <div
+      className={isMobile ? 'home-mobile' : 'home'}
+      key={type}
+      style={{paddingBottom: isMobile ? '20%' : null}}
+    >
       {/* <Link prefetch="intent" to={categoryUrl} onClick={goToSearchResult}> */}
       <p
         style={{
