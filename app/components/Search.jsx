@@ -285,6 +285,17 @@ export function PredictiveSearchResults({
   //   return <div>Loading...</div>;
   // }
 
+  useEffect(() => {
+    if (totalResults) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, [totalResults]);
+
   if (!totalResults) {
     return <NoPredictiveSearchResults searchTerm={searchTerm} />;
   }

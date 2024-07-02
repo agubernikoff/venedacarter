@@ -44,7 +44,6 @@ function CartDetails({layout, cart}) {
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log('result : ', result);
         // setting state
         setInsurancePlan(result.data.InsurancePlan);
         setSkipProduct(result.data.SkipProduct);

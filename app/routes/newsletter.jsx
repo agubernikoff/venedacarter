@@ -81,7 +81,6 @@ export default function Newsletter() {
       requestOptions,
     )
       .then((result) => {
-        console.log(result);
         setMessageText('Thank you for signing up.');
       })
       .catch((error) => {

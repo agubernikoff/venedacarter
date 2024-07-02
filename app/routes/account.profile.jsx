@@ -66,7 +66,7 @@ export async function action({request, context}) {
         },
       },
     );
-    console.log(errors, customerUpdate?.customerUserErrors);
+
     if (errors?.length) {
       throw new Error(errors[0]?.message);
     }
