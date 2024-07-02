@@ -63,7 +63,13 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
             style={activeLinkStyle}
             end
           >
-            <img src={mobIcon2} style={{width: '30px'}} />
+            <img
+              src={mobIcon2}
+              style={{width: '30px'}}
+              onClick={() => {
+                document.body.classList.remove('no-scroll');
+              }}
+            />
             {/* <p className="shop-name">VENEDA CARTER</p> */}
           </NavLink>
         )}
@@ -82,6 +88,9 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
               className="shop-name-mobile"
               src={mobIcon2}
               style={{width: '34px'}}
+              onClick={() => {
+                document.body.classList.remove('no-scroll');
+              }}
             />
           </NavLink>
         ) : (
