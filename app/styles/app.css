@@ -2287,17 +2287,20 @@ fieldset > input {
 
 .account-orders-subgrid {
   display: grid;
+  grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: subgrid;
   grid-column: span 6;
   margin-top: 0.75rem;
 }
 .account-orders-subgrid-2 {
   display: grid;
+  grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: subgrid;
   grid-column: span 6;
 }
 .account-orders-grey-row {
   display: grid;
+  grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: subgrid;
   grid-column: span 6;
   background: #f4f4f4;
@@ -2311,6 +2314,7 @@ fieldset > input {
 }
 .account-orders-expanded-row {
   display: grid;
+  grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: subgrid;
   grid-column: span 6;
   margin-top: 0.75rem;
@@ -2321,6 +2325,7 @@ fieldset > input {
 }
 .account-orders-expanded-totals-row {
   display: grid;
+  grid-template-columns: 0.25fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-columns: subgrid;
   grid-column: span 6;
   padding-block: 0.75rem;
