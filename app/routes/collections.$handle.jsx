@@ -23,7 +23,9 @@ import x2 from '../assets/X2.png';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Veneda Carter | ${data?.collection?.title ?? ''} Collection`}];
+  return [
+    {title: `Veneda Carter | ${data?.collection?.title ?? ''} Collection`},
+  ];
 };
 
 /**
@@ -232,14 +234,17 @@ function ProductsLoadedOnScroll({
  * @param {{products: ProductItemFragment[]}}
  */
 function ProductsGrid({products, isMobile}) {
+  const filteredProducts = products.filter(
+    (p) => p.handle !== 'shipping-protection',
+  );
   const columns = isMobile ? 2 : 3;
-  const itemsInLastRow = products.length % columns;
-  const firstItemInLastRow = products.length - itemsInLastRow;
+  const itemsInLastRow = filteredProducts.length % columns;
+  const firstItemInLastRow = filteredProducts.length - itemsInLastRow;
   const firstItemInSecondLastRow = firstItemInLastRow - columns;
   const lastItemInSecondLastRow = firstItemInLastRow - 1;
   return (
     <>
-      {products
+      {filteredProducts
         .filter((p) => p.handle !== 'shipping-protection')
         .map((product, index) => {
           return (
@@ -252,7 +257,7 @@ function ProductsGrid({products, isMobile}) {
                 itemsInLastRow !== 0 &&
                 index >= firstItemInSecondLastRow &&
                 index <= lastItemInSecondLastRow &&
-                index + columns >= products.length
+                index + columns >= filteredProducts.length
               }
             />
           );
