@@ -92,7 +92,7 @@ export default function Homepage() {
 function NewArrivals({collection, image}) {
   if (!collection) return null;
   // const image = collection?.image;
-
+  console.log(collection);
   return (
     <>
       <div className="new-arrivals-container">
@@ -100,12 +100,7 @@ function NewArrivals({collection, image}) {
           <p className="new-arrivals-container-p">{collection.title}</p>
         </div>
         <div className="new-arrivals-text">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
-            risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing
-            nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas
-            ligula massa, varius a, semper congue, euismod non, mi.
-          </p>
+          <p>{collection.description}</p>
           <Link to={'/collections/new_arrivals'}>Discover</Link>
         </div>
       </div>
@@ -146,12 +141,7 @@ function MobileNewArrivals({collection}) {
         )}
       </Link>
       <div className="mobile-new-arrivals-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
-          risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec,
-          ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula
-          massa, varius a, semper congue, euismod non, mi.
-        </p>
+        <p>{collection.description}</p>
         <Link to={'/collections/new_arrivals'}>Discover</Link>
       </div>
     </div>
@@ -400,6 +390,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   fragment FeaturedCollection on Collection {
     id
     title
+    description
     products(first: 9) {
       nodes {
         id
