@@ -367,7 +367,14 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
       .addEventListener('change', (e) => setIsMobile(e.matches));
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
+
+  const columns = isMobile ? 2 : 3;
   const filteredItems = items.filter((p) => p.handle !== 'shipping-protection');
+  const itemsInLastRow = filteredItems.length % columns;
+  const firstItemInLastRow = filteredItems.length - itemsInLastRow;
+  const firstItemInSecondLastRow = firstItemInLastRow - columns;
+  const lastItemInSecondLastRow = firstItemInLastRow - 1;
+
   return (
     <div
       className={isMobile ? 'home-mobile' : 'home'}
@@ -387,12 +394,18 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
         {`Showing ${filteredItems.length} results for "${searchTerm.current}"`}
       </p>
       {/* </Link> */}
-      {filteredItems.map((item) => (
+      {filteredItems.map((item, index) => (
         <FeaturedProduct
           key={item.id}
           product={item}
           goToSearchResult={goToSearchResult}
           isMobile={isMobile}
+          emptyCellBelow={
+            itemsInLastRow !== 0 &&
+            index >= firstItemInSecondLastRow &&
+            index <= lastItemInSecondLastRow &&
+            index + columns >= filteredItems.length
+          }
         />
       ))}
     </div>
