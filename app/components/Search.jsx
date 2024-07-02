@@ -356,7 +356,7 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
       .addEventListener('change', (e) => setIsMobile(e.matches));
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
-
+  const filteredItems = items.filter((p) => p.handle !== 'shipping-protection');
   return (
     <div className={isMobile ? 'home-mobile' : 'home'} key={type}>
       {/* <Link prefetch="intent" to={categoryUrl} onClick={goToSearchResult}> */}
@@ -369,10 +369,10 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
           color: '#bebebe',
         }}
       >
-        {`Showing ${items.length} results for "${searchTerm.current}"`}
+        {`Showing ${filteredItems.length} results for "${searchTerm.current}"`}
       </p>
       {/* </Link> */}
-      {items.map((item) => (
+      {filteredItems.map((item) => (
         <FeaturedProduct
           key={item.id}
           product={item}
