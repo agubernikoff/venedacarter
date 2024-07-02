@@ -498,7 +498,7 @@ function SearchToggle({isMobile, closeMenu}) {
       : searchAction;
 
     fetcher.submit(
-      {q: newSearchTerm, limit: '4'},
+      {q: newSearchTerm, limit: '6'},
       {method: 'GET', action: localizedAction},
     );
   }
