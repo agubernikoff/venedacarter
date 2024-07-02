@@ -64,7 +64,6 @@ export function ClaimPage() {
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         setOrderData(result.data);
         setShopifyOrderNumber(result.data.shopify_order_id);
         setPageStep(1);
