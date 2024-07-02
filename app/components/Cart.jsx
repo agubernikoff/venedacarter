@@ -359,6 +359,10 @@ function CartLinePrice({line, priceType = 'regular', ...passthroughProps}) {
  * }}
  */
 export function CartEmpty({hidden = false, layout = 'aside'}) {
+  function toggleScroll() {
+    document.body.classList.remove('no-scroll');
+  }
+
   return (
     <div className="empty-bag" hidden={hidden}>
       <br />
@@ -371,6 +375,7 @@ export function CartEmpty({hidden = false, layout = 'aside'}) {
             if (layout === 'aside') {
               window.location.hash = '';
             }
+            toggleScroll();
           }}
         >
           here.
