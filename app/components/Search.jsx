@@ -236,7 +236,7 @@ export function PredictiveSearchForm({
       : searchAction;
 
     fetcher.submit(
-      {q: newSearchTerm, limit: '4'},
+      {q: newSearchTerm, limit: '18'},
       {method: 'GET', action: localizedAction},
     );
   }
