@@ -2189,6 +2189,7 @@ fieldset > input {
   background-color: black;
   color: white;
   margin-top: 1rem;
+  border-style: solid;
 }
 .profile-button-pdp {
   width: 100%;
