@@ -138,7 +138,6 @@ export default function Collection() {
   const {pathname, search} = useLocation();
   if (products && pathname.includes('new-arrivals')) {
     products.pageInfo.hasNextPage = false;
-    console.log(products);
   }
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
