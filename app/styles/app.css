@@ -1279,6 +1279,7 @@ aside li {
 .featured-product img {
   height: auto;
   background-color: #f4f4f4;
+  width: 100%;
 }
 .product-title-price {
   margin-left: 1rem;

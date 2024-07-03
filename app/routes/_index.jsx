@@ -324,6 +324,8 @@ export function FeaturedProduct({
               style={{
                 background: index === 0 ? '#f4f4f4' : '#ededed',
               }}
+              height={2000}
+              width={2000}
             />
           </motion.div>
         )}

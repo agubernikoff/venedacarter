@@ -241,6 +241,8 @@ function ProductImage({images, selectedVariant, isMobile}) {
         aspectRatio="1/1"
         data={selectedVariant?.image}
         sizes="(min-width: 45em) 50vw, 100vw"
+        height={2000}
+        width={2000}
       />
       // </div>
     );
@@ -256,6 +258,8 @@ function ProductImage({images, selectedVariant, isMobile}) {
           aspectRatio="1/1"
           data={filteredImages[imageIndex]}
           sizes="(min-width: 45em) 50vw, 100vw"
+          height={2000}
+          width={2000}
         />
         <div
           className="left-image-button-container"
@@ -299,6 +303,8 @@ function ProductImage({images, selectedVariant, isMobile}) {
           data={image}
           key={image.id}
           sizes="(min-width: 45em) 50vw, 100vw"
+          height={2000}
+          width={2000}
         />
       ))
     )
