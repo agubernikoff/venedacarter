@@ -211,7 +211,7 @@ function MainFeaturedProduct({product, isMobile}) {
         >
           <Image
             data={product.images.nodes[index]}
-            aspectRatio="1/1.2"
+            aspectRatio="1/1"
             crop={false}
             sizes="(min-width: 45em) 20vw, 50vw"
           />
@@ -264,7 +264,6 @@ export function FeaturedProduct({
 }) {
   const [index, setIndex] = useState(0);
   const colorOptionsObj = product.options.find((o) => o.name === 'Material');
-
   return (
     <Link
       className="featured-product"
@@ -282,12 +281,18 @@ export function FeaturedProduct({
         if (goToSearchResult) goToSearchResult();
       }}
     >
-      <div style={{background: index === 0 ? '#f4f4f4' : '#ededed'}}>
+      <div
+        style={{
+          background: index === 0 ? '#f4f4f4' : '#ededed',
+          aspectRatio: '1/1.2',
+          display: 'flex',
+        }}
+      >
         {/* <AnimatePresence mode="wait" initial={false}> */}
         {isMobile ? (
           <Image
             data={product.images.nodes[0]}
-            aspectRatio="1/1.2"
+            aspectRatio="1/1"
             crop={false}
             loading={loading}
             sizes="(min-width: 45em) 20vw, 50vw"
@@ -299,14 +304,26 @@ export function FeaturedProduct({
             animate={{opacity: 1}}
             exit={{opacity: 0}}
             transition={{duration: 0.2}}
+            style={{
+              margin: 'auto',
+              width: '100%',
+              marginTop:
+                (product.title.includes('CHAIN') ||
+                  product.title.includes('NECKLACE')) &&
+                index === 0
+                  ? 0
+                  : 'auto',
+            }}
           >
             <Image
               data={product.images.nodes[index]}
-              aspectRatio="1/1.2"
+              aspectRatio="1/1"
               crop={false}
               loading={loading}
               sizes="(min-width: 45em) 20vw, 50vw"
-              style={{background: index === 0 ? '#f4f4f4' : '#ededed'}}
+              style={{
+                background: index === 0 ? '#f4f4f4' : '#ededed',
+              }}
             />
           </motion.div>
         )}
