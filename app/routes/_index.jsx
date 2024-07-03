@@ -363,7 +363,7 @@ function Categories({categories, isMobile}) {
       <div className="title-container">
         <p className="title">Categories</p>
       </div>
-      {categories.slice(0, 3).map((category) => (
+      {/* {categories.slice(0, 3).map((category) => (
         <Link
           key={category.handle}
           className={
@@ -381,7 +381,7 @@ function Categories({categories, isMobile}) {
             style={{fontFamily: 'regular-font', fontSize: '.75rem'}}
           >{`Shop ${category.title}`}</p>
         </Link>
-      ))}
+      ))} */}
     </>
   );
 }

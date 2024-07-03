@@ -233,7 +233,7 @@ function Newsletter({footerImage, isMobile}) {
               : 'newsletter-image-container'
           }
         >
-          {isClient && (
+          {/* {isClient && (
             <Suspense fallback={<div>Loading...</div>}>
               <Await resolve={footerImage}>
                 {(footerImage) => (
@@ -246,7 +246,7 @@ function Newsletter({footerImage, isMobile}) {
                 )}
               </Await>
             </Suspense>
-          )}
+          )} */}
         </div>
         <div
           className={
