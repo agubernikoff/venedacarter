@@ -23,9 +23,12 @@ export const meta = () => {
 export async function loader({context}) {
   const {storefront} = context;
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
-  const featuredCollection = collections.nodes[0];
-  const newArrivalsCollection = collections.nodes[1];
-  const restOfCollections = [...collections.nodes].slice(2);
+  const featuredCollection = collections.nodes[6];
+  const newArrivalsCollection = collections.nodes[5];
+  const restOfCollections = [...collections.nodes].filter(
+    (c) =>
+      c.handle === 'ring' || c.handle === 'earring' || c.handle === 'necklace',
+  );
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const handle = 'hero-image-mt5e2hu0';
   const key = 'hero_image';
@@ -363,7 +366,7 @@ function Categories({categories, isMobile}) {
       <div className="title-container">
         <p className="title">Categories</p>
       </div>
-      {/* {categories.slice(0, 3).map((category) => (
+      {categories.map((category) => (
         <Link
           key={category.handle}
           className={
@@ -381,7 +384,7 @@ function Categories({categories, isMobile}) {
             style={{fontFamily: 'regular-font', fontSize: '.75rem'}}
           >{`Shop ${category.title}`}</p>
         </Link>
-      ))} */}
+      ))}
     </>
   );
 }
@@ -429,7 +432,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
   }
   query FeaturedCollection($country: CountryCode, $language: LanguageCode)
     @inContext(country: $country, language: $language) {
-    collections(first: 6, sortKey: ID) {
+    collections(first: 7, sortKey: ID) {
       nodes {
         ...FeaturedCollection
       }
