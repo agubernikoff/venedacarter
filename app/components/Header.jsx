@@ -206,7 +206,7 @@ function HeaderMenuItem({
   useEffect(() => {
     if (new URL(item.url).pathname === pathname) setIsActive(true);
     else if (pathname.includes('collections') && item.title === 'Shop') {
-      if (pathname.includes('new_arrivals')) setIsActive(false);
+      if (pathname.includes('new-arrivals')) setIsActive(false);
       else setIsActive(true);
     } else setIsActive(false);
   }, [pathname, item.title, item.url]);
@@ -601,7 +601,7 @@ const FALLBACK_HEADER_MENU = {
       tags: [],
       title: 'New Arrivals',
       type: 'HTTP',
-      url: 'https://venedacarter.myshopify.com/collections/new_arrivals',
+      url: 'https://venedacarter.myshopify.com/collections/new-arrivals',
     },
     {
       id: 'gid://shopify/MenuItem/444996354126',

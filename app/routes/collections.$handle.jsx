@@ -57,7 +57,7 @@ export async function loader({request, params, context}) {
     },
   };
 
-  if (isFeatured && handle !== 'all' && handle !== 'new_arrivals')
+  if (isFeatured && handle !== 'all' && handle !== 'new-arrivals')
     filter.push(featuredFilter);
 
   const filterAll = filterFromParams
@@ -74,14 +74,14 @@ export async function loader({request, params, context}) {
   const {collection} = await storefront.query(COLLECTION_QUERY, {
     variables: {
       sortKey:
-        handle !== 'all' && handle !== 'new_arrivals'
+        handle !== 'all' && handle !== 'new-arrivals'
           ? sortKey
-          : handle === 'new_arrivals'
+          : handle === 'new-arrivals'
           ? 'CREATED'
           : null,
-      reverse: handle !== 'new_arrivals' ? reverse : true,
+      reverse: handle !== 'new-arrivals' ? reverse : true,
       handle:
-        (handle === 'all' || handle === 'new_arrivals') && isFeatured
+        (handle === 'all' || handle === 'new-arrivals') && isFeatured
           ? 'frontpage'
           : handle,
       productFilter: filter,
@@ -93,7 +93,7 @@ export async function loader({request, params, context}) {
       ? await storefront.query(ALL_QUERY, {
           variables: {
             sortKey:
-              handle === 'all' || handle === 'new_arrivals'
+              handle === 'all' || handle === 'new-arrivals'
                 ? sortKey || null
                 : null,
             reverse,
@@ -107,7 +107,7 @@ export async function loader({request, params, context}) {
           },
         });
 
-  if (handle === 'new_arrivals' && sortKey === 'PRICE') {
+  if (handle === 'new-arrivals' && sortKey === 'PRICE') {
     if (reverse)
       products.nodes.sort(
         (a, b) =>
@@ -122,12 +122,12 @@ export async function loader({request, params, context}) {
       );
   }
 
-  if (!collection && handle !== 'all' && handle !== 'new_arrivals') {
+  if (!collection && handle !== 'all' && handle !== 'new-arrivals') {
     throw new Response(`Collection ${handle} not found`, {
       status: 404,
     });
   }
-  if (collection) return json({collection});
+  if (collection && handle !== 'new-arrivals') return json({collection});
   else return json({products});
 }
 
@@ -135,8 +135,11 @@ export default function Collection() {
   /** @type {LoaderReturnData} */
   const {ref, inView, entry} = useInView();
   const {collection, products} = useLoaderData();
-
   const {pathname, search} = useLocation();
+  if (products && pathname.includes('new-arrivals')) {
+    products.pageInfo.hasNextPage = false;
+    console.log(products);
+  }
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   function toggleFilter() {
@@ -171,9 +174,9 @@ export default function Collection() {
             Home
           </Link>{' '}
           /{' '}
-          {!pathname.includes('all') && !pathname.includes('new_arrivals')
+          {!pathname.includes('all') && !pathname.includes('new-arrivals')
             ? collection.title
-            : pathname.includes('new_arrivals')
+            : pathname.includes('new-arrivals')
             ? 'New Arrivals'
             : 'All'}
         </p>
@@ -183,7 +186,7 @@ export default function Collection() {
       </div>
       <Pagination
         connection={
-          (!pathname.includes('all') && !pathname.includes('new_arrivals')) ||
+          (!pathname.includes('all') && !pathname.includes('new-arrivals')) ||
           search.includes('isFeatured=true')
             ? collection.products
             : products
@@ -399,7 +402,7 @@ function FilterAside({isMobile, toggleFilter}) {
               >
                 Price: High to Low
               </button>
-              {!pathname.includes('new_arrivals') ? (
+              {!pathname.includes('new-arrivals') ? (
                 <>
                   <button
                     className="filter-selection"

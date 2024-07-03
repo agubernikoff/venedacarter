@@ -281,7 +281,7 @@ const FALLBACK_FOOTER_MENU = {
       tags: [],
       title: 'New Arrivals',
       type: 'HTTP',
-      url: 'https://venedacarter.myshopify.com/collections/new_arrivals',
+      url: 'https://venedacarter.myshopify.com/collections/new-arrivals',
     },
     {
       id: 'gid://shopify/MenuItem/445769252942',

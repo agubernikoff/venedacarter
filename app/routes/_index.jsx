@@ -105,7 +105,7 @@ function NewArrivals({collection, image}) {
         </div>
         <div className="new-arrivals-text">
           <p>{collection.description}</p>
-          <Link to={'/collections/new_arrivals'}>Discover</Link>
+          <Link to={'/collections/new-arrivals'}>Discover</Link>
         </div>
       </div>
       <Link
@@ -148,7 +148,7 @@ function MobileNewArrivals({collection}) {
       </Link>
       <div className="mobile-new-arrivals-text">
         <p>{collection.description}</p>
-        <Link to={'/collections/new_arrivals'}>Discover</Link>
+        <Link to={'/collections/new-arrivals'}>Discover</Link>
       </div>
     </div>
   );

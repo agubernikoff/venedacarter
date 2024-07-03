@@ -369,7 +369,7 @@ export function CartEmpty({hidden = false, layout = 'aside'}) {
       <p>
         {'Your cart is empty. Shop New Arrivals'}{' '}
         <Link
-          to="/collections/new_arrivals"
+          to="/collections/new-arrivals"
           style={{textDecoration: 'underline'}}
           onClick={() => {
             if (layout === 'aside') {
