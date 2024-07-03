@@ -1532,9 +1532,18 @@ aside li {
   font-family: 'regular-font';
 }
 
-.breadcrumbs {
+.breadcrumbs,
+.breadcrumbs-hover {
   color: #878787;
   padding-top: 1rem;
+}
+
+.breadcrumbs-hover:hover {
+  text-decoration: underline !important;
+}
+
+.home-link:hover {
+  text-decoration: underline !important;
 }
 
 .title-dissect {

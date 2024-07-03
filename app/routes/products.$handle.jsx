@@ -385,7 +385,14 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
       <div
         className={isMobile ? 'product-main-top-mobile' : 'product-main-top'}
       >
-        {isMobile ? null : <p className="breadcrumbs">Shop / {title}</p>}
+        {isMobile ? null : (
+          <p className="breadcrumbs">
+            <Link to="/collections/all" className="breadcrumbs-hover">
+              Shop
+            </Link>{' '}
+            / {title}
+          </p>
+        )}
       </div>
       <div
         className={
