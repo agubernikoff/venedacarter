@@ -211,7 +211,7 @@ function Support({isMobile, menu, primaryDomainUrl}) {
 function KlaviyoForm() {
   useEffect(() => {}, []);
 
-  return <div className="klaviyo-form-RgKbni"></div>;
+  return <div className="klaviyo-form-X5dMwF"></div>;
 }
 
 function Newsletter({footerImage, isMobile}) {

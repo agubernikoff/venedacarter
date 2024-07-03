@@ -634,7 +634,7 @@ aside li {
   font-size: 0.75rem !important;
 }
 
-#email_119046740 {
+#email_119222381 {
   padding: 0 !important;
   border: none !important;
   border-bottom: 1px solid black !important;
@@ -643,7 +643,7 @@ aside li {
   font-size: 0.75rem !important;
 }
 
-#email_119046740::placeholder {
+#email_119222381::placeholder {
   padding: 0 !important;
   border: none !important;
 
@@ -651,7 +651,7 @@ aside li {
   font-weight: normal !important;
   font-size: 0.75rem !important;
 }
-#email_119046740:focus {
+#email_119222381:focus {
   box-shadow: none !important;
 }
 
@@ -686,13 +686,13 @@ aside li {
   display: none !important;
 }
 
-.klaviyo-form-RgKbni.klaviyo-form.form-version-cid-1,
-.klaviyo-form-RgKbni.klaviyo-form.form-version-cid-2 {
+.klaviyo-form-X5dMwF.klaviyo-form.form-version-cid-1,
+.klaviyo-form-X5dMwF.klaviyo-form.form-version-cid-2 {
   padding-right: 0rem;
 }
 @media (min-width: 44em) {
-  .klaviyo-form-RgKbni.klaviyo-form.form-version-cid-1,
-  .klaviyo-form-RgKbni.klaviyo-form.form-version-cid-2 {
+  .klaviyo-form-X5dMwF.klaviyo-form.form-version-cid-1,
+  .klaviyo-form-X5dMwF.klaviyo-form.form-version-cid-2 {
     padding-right: 1rem;
   }
 }
@@ -710,7 +710,7 @@ aside li {
   border-bottom: 1px solid black !important;
 }
 
-.ql-font-nunito-sans {
+.kl-private-reset-css-Xuajs1.go3176171171 > p > span {
   width: fit-content !important;
   font-family: 'regular-font' !important;
   font-weight: normal !important;
