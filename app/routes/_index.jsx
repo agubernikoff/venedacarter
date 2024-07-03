@@ -6,6 +6,7 @@ import {Image, Money} from '@shopify/hydrogen';
 import {motion, AnimatePresence} from 'framer-motion';
 import colorPicker from '~/helper/ColorPicker';
 import mobileIcon from '../assets/VC-Opengraph.jpg';
+import hero from '../assets/hero.png';
 
 /**
  * @type {MetaFunction}
@@ -111,12 +112,14 @@ function NewArrivals({collection, image}) {
         className="new-arrivals-collection"
         to={`/collections/${collection.handle}`}
       >
-        {image && (
+        {image ? (
           <Image
             data={image}
             sizes="66vw"
             className="new-arrivals-collection-image"
           />
+        ) : (
+          <img src={hero} className="new-arrivals-collection-image" />
         )}
       </Link>
     </>
