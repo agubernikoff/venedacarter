@@ -17,14 +17,18 @@ export default async function handleRequest(
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
     connectSrc: [
+      'wss://engaged-orca-warm.ngrok-free.app:*',
+      'https://engaged-orca-warm.ngrok-free.app:*',
       'http://127.0.0.1:4040',
+      'wss://kitten-composed-notably.ngrok-free.app:*',
+      'https://kitten-composed-notably.ngrok-free.app:*',
       'https://klaviyo.com',
       'https://*.klaviyo.com',
       'https://*.klaviyo.com/*',
-      'https://venedacarter.com',
-      'https://venedacarter.com/*',
       'https://venedacarter.myshopify.com',
       'https://venedacarter.myshopify.com/*',
+      'https://venedacarter.com',
+      'https://venedacarter.com/*',
     ],
     styleSrc: [
       'https://klaviyo.com',
@@ -36,7 +40,6 @@ export default async function handleRequest(
       'https://*.klaviyo.com',
       'https://cdn.shopify.com',
       'http://localhost:3100',
-      'http://localhost:3000',
       'https://*.klaviyo.com/*',
     ],
   });
