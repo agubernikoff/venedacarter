@@ -710,6 +710,14 @@ aside li {
   border-bottom: 1px solid black !important;
 }
 
+.ql-font-nunito-sans {
+  width: fit-content !important;
+  font-family: 'regular-font' !important;
+  font-weight: normal !important;
+  font-size: 0.75rem !important;
+  color: black !important;
+}
+
 .newsletter-input-container > button,
 .newsletter-input-container-mobile > button {
   white-space: nowrap;
