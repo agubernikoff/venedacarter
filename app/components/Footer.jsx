@@ -210,7 +210,7 @@ function Support({isMobile, menu, primaryDomainUrl}) {
 function KlaviyoForm() {
   useEffect(() => {}, []);
 
-  return <div className="klaviyo-form-XrMRY4"></div>;
+  return <div className="klaviyo-form-RgKbni"></div>;
 }
 
 function Newsletter({footerImage, isMobile}) {
@@ -279,7 +279,7 @@ const FALLBACK_FOOTER_MENU = {
       tags: [],
       title: 'New Arrivals',
       type: 'HTTP',
-      url: 'https://dumby-veneda.myshopify.com/collections/new_arrivals',
+      url: 'https://venedacarter.myshopify.com/collections/new_arrivals',
     },
     {
       id: 'gid://shopify/MenuItem/445769252942',
@@ -288,7 +288,7 @@ const FALLBACK_FOOTER_MENU = {
       tags: [],
       title: 'Shop',
       type: 'CATALOG',
-      url: 'https://dumby-veneda.myshopify.com/collections/all',
+      url: 'https://venedacarter.myshopify.com/collections/all',
     },
     {
       id: 'gid://shopify/MenuItem/445769285710',
@@ -297,7 +297,7 @@ const FALLBACK_FOOTER_MENU = {
       tags: [],
       title: 'About',
       type: 'PAGE',
-      url: 'https://dumby-veneda.myshopify.com/pages/about',
+      url: 'https://venedacarter.myshopify.com/pages/about',
     },
     {
       id: 'gid://shopify/MenuItem/445769318478',
@@ -306,7 +306,7 @@ const FALLBACK_FOOTER_MENU = {
       tags: [],
       title: 'Stockists',
       type: 'PAGE',
-      url: 'https://dumby-veneda.myshopify.com/pages/stockists',
+      url: 'https://venedacarter.myshopify.com/pages/stockists',
     },
     {
       id: 'gid://shopify/MenuItem/445769351246',
@@ -330,7 +330,7 @@ const FALLBACK_FOOTER_SUPPORT_MENU = {
       tags: [],
       title: 'Terms of Service + Privacy',
       type: 'PAGE',
-      url: 'https://dumby-veneda.myshopify.com/pages/terms-of-service',
+      url: 'https://venedacarter.myshopify.com/pages/terms-of-service',
     },
 
     {
@@ -340,7 +340,7 @@ const FALLBACK_FOOTER_SUPPORT_MENU = {
       tags: [],
       title: 'Refund Policy',
       type: 'PAGE',
-      url: 'https://dumby-veneda.myshopify.com/pages/refund-policy',
+      url: 'https://venedacarter.myshopify.com/pages/refund-policy',
     },
     {
       id: 'gid://shopify/MenuItem/445768826958',
@@ -349,7 +349,7 @@ const FALLBACK_FOOTER_SUPPORT_MENU = {
       tags: [],
       title: 'Claim Portal',
       type: 'PAGE',
-      url: 'https://dumby-veneda.myshopify.com/pages/claim-portal',
+      url: 'https://venedacarter.myshopify.com/pages/claim-portal',
     },
     {
       id: 'gid://shopify/MenuItem/445768859726',
@@ -358,7 +358,7 @@ const FALLBACK_FOOTER_SUPPORT_MENU = {
       tags: [],
       title: 'Contact',
       type: 'PAGE',
-      url: 'https://dumby-veneda.myshopify.com/pages/contact',
+      url: 'https://venedacarter.myshopify.com/pages/contact',
     },
   ],
 };

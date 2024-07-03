@@ -26,7 +26,7 @@ export function ClaimPage() {
     setClaimButtonLoading(true);
     var myHeaders = new Headers();
     myHeaders.append('content-type', 'application/json');
-    myHeaders.append('shopname', '478902-43.myshopify.com');
+    myHeaders.append('shopname', 'venedacarter.myshopify.com');
     var raw = JSON.stringify({
       customer_email: userEmail,
       order_number: orderNumber,
@@ -38,7 +38,7 @@ export function ClaimPage() {
     };
 
     fetch(
-      'https://478902-43.myshopify.com/apps/simplyinsurance/storefront-api/getOrderfulfilmentdata',
+      'https://venedacarter.myshopify.com/apps/simplyinsurance/storefront-api/getOrderfulfilmentdata',
       requestOptions,
     )
       .then((response) => response.json())
@@ -54,11 +54,11 @@ export function ClaimPage() {
   };
   const fetchOrderData = () => {
     fetch(
-      `https://478902-43.myshopify.com/apps/simplyinsurance/storefront-api/getOrderfulfilmentFront?requested_token=${customerToken}`,
+      `https://venedacarter.myshopify.com/apps/simplyinsurance/storefront-api/getOrderfulfilmentFront?requested_token=${customerToken}`,
       {
         method: 'GET',
         headers: {
-          shopname: '478902-43.myshopify.com',
+          shopname: 'venedacarter.myshopify.com',
         },
       },
     )
@@ -93,9 +93,9 @@ export function ClaimPage() {
     }
     var myHeaders = new Headers();
     myHeaders.append('accept', 'application/json, text/plain, */*');
-    myHeaders.append('shopname', '478902-43.myshopify.com');
+    myHeaders.append('shopname', 'venedacarter.myshopify.com');
     fetch(
-      'https://478902-43.myshopify.com/apps/simplyinsurance/storefront-api/handleimages',
+      'https://venedacarter.myshopify.com/apps/simplyinsurance/storefront-api/handleimages',
       {
         method: 'POST',
         headers: myHeaders,
@@ -128,12 +128,12 @@ export function ClaimPage() {
       shopify_order_id: shopifyOrderNumber,
       zendesk_images: [],
     };
-    let actionUrl = `https://478902-43.myshopify.com/apps/simplyinsurance/storefront-api/getInsuranceclaimrequests`;
+    let actionUrl = `https://venedacarter.myshopify.com/apps/simplyinsurance/storefront-api/getInsuranceclaimrequests`;
     fetch(actionUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        shopname: '478902-43.myshopify.com',
+        shopname: 'venedacarter.myshopify.com',
       },
       body: JSON.stringify(passObj),
     })

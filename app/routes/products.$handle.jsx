@@ -675,7 +675,7 @@ function AddToCartButton({
       body: JSON.stringify(payload),
     };
     fetch(
-      'https://a.klaviyo.com/client/back-in-stock-subscriptions/?company_id=XFjCZj',
+      'https://a.klaviyo.com/client/back-in-stock-subscriptions/?company_id=WzY7Xy',
       requestOptions,
     )
       .then((result) => {

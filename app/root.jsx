@@ -156,7 +156,7 @@ export default function App() {
         <Script
           async
           type="text/javascript"
-          src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=XFjCZj"
+          src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=WzY7Xy"
         />
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
@@ -206,7 +206,7 @@ export function ErrorBoundary() {
         <Script
           async
           type="text/javascript"
-          src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=XFjCZj"
+          src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=WzY7Xy"
         />
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />

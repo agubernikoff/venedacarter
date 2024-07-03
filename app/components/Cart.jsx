@@ -30,7 +30,7 @@ function CartDetails({layout, cart}) {
 
   useEffect(() => {
     var myHeaders = new Headers();
-    myHeaders.append('shopname', '478902-43.myshopify.com');
+    myHeaders.append('shopname', 'venedacarter.myshopify.com');
 
     var requestOptions = {
       method: 'GET',
@@ -39,7 +39,7 @@ function CartDetails({layout, cart}) {
     };
 
     fetch(
-      'https://478902-43.myshopify.com/apps/simplyinsurance/storefront-api/metafields/',
+      'https://venedacarter.myshopify.com/apps/simplyinsurance/storefront-api/metafields/',
       requestOptions,
     )
       .then((response) => response.json())

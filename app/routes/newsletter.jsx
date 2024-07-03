@@ -59,7 +59,7 @@ export default function Newsletter() {
           list: {
             data: {
               type: 'list',
-              id: 'Tby4b3',
+              id: 'YnZfwp',
             },
           },
         },
@@ -77,7 +77,7 @@ export default function Newsletter() {
     };
 
     fetch(
-      'https://a.klaviyo.com/client/subscriptions/?company_id=XFjCZj',
+      'https://a.klaviyo.com/client/subscriptions/?company_id=WzY7Xy',
       requestOptions,
     )
       .then((result) => {

@@ -601,7 +601,7 @@ const FALLBACK_HEADER_MENU = {
       tags: [],
       title: 'New Arrivals',
       type: 'HTTP',
-      url: 'https://dumby-veneda.myshopify.com/collections/new_arrivals',
+      url: 'https://venedacarter.myshopify.com/collections/new_arrivals',
     },
     {
       id: 'gid://shopify/MenuItem/444996354126',
@@ -612,7 +612,7 @@ const FALLBACK_HEADER_MENU = {
           tags: [],
           title: 'Rings',
           type: 'COLLECTION',
-          url: 'https://dumby-veneda.myshopify.com/collections/rings',
+          url: 'https://venedacarter.myshopify.com/collections/rings',
         },
         {
           id: 'gid://shopify/MenuItem/445623304270',
@@ -620,7 +620,7 @@ const FALLBACK_HEADER_MENU = {
           tags: [],
           title: 'Necklaces',
           type: 'COLLECTION',
-          url: 'https://dumby-veneda.myshopify.com/collections/necklaces',
+          url: 'https://venedacarter.myshopify.com/collections/necklaces',
         },
         {
           id: 'gid://shopify/MenuItem/445625073742',
@@ -628,7 +628,7 @@ const FALLBACK_HEADER_MENU = {
           tags: [],
           title: 'Earrings',
           type: 'COLLECTION',
-          url: 'https://dumby-veneda.myshopify.com/collections/earrings',
+          url: 'https://venedacarter.myshopify.com/collections/earrings',
         },
         {
           id: 'gid://shopify/MenuItem/445625106510',
@@ -636,7 +636,7 @@ const FALLBACK_HEADER_MENU = {
           tags: [],
           title: 'Bracelets',
           type: 'COLLECTION',
-          url: 'https://dumby-veneda.myshopify.com/collections/bracelets',
+          url: 'https://venedacarter.myshopify.com/collections/bracelets',
         },
         {
           id: 'gid://shopify/MenuItem/445625172046',
@@ -644,14 +644,14 @@ const FALLBACK_HEADER_MENU = {
           tags: [],
           title: 'All',
           type: 'CATALOG',
-          url: 'https://dumby-veneda.myshopify.com/collections/all',
+          url: 'https://venedacarter.myshopify.com/collections/all',
         },
       ],
       resourceId: null,
       tags: [],
       title: 'Shop',
       type: 'CATALOG',
-      url: 'https://dumby-veneda.myshopify.com/collections/all',
+      url: 'https://venedacarter.myshopify.com/collections/all',
     },
     {
       id: 'gid://shopify/MenuItem/444996386894',
@@ -660,7 +660,7 @@ const FALLBACK_HEADER_MENU = {
       tags: [],
       title: 'About',
       type: 'PAGE',
-      url: 'https://dumby-veneda.myshopify.com/pages/about',
+      url: 'https://venedacarter.myshopify.com/pages/about',
     },
   ],
 };
