@@ -27,6 +27,8 @@ export default async function handleRequest(
       'https://*.klaviyo.com/*',
       'https://venedacarter.myshopify.com',
       'https://venedacarter.myshopify.com/*',
+      'https://venedacarter-3b9f53741b41fcbae5cb.o2.myshopify.dev',
+      'https://venedacarter-3b9f53741b41fcbae5cb.o2.myshopify.dev/*',
     ],
     styleSrc: [
       'https://klaviyo.com',
