@@ -254,6 +254,10 @@ aside li {
   border-bottom: 1px solid #eaeaea;
   border-right: none;
 }
+.header-left,
+.header-right {
+  width: 15%;
+}
 
 .header-mobile {
   z-index: 50;
