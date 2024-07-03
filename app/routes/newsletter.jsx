@@ -104,7 +104,7 @@ export default function Newsletter() {
       </div>
       <div className="newsletter-form">
         <input
-          id="email_119222381"
+          id="email_119222590"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
