@@ -2608,6 +2608,14 @@ button.collection-title {
   cursor: pointer;
   color: black;
 }
+.title-container > button > img {
+  max-width: 3vw !important;
+}
+@media (min-width: 44em) {
+  .title-container > button > img {
+    max-width: 0.8vw !important;
+  }
+}
 
 #filter-aside .filter-container > main {
   padding: 0;

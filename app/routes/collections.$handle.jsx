@@ -352,7 +352,7 @@ function FilterAside({isMobile, toggleFilter}) {
               }}
               onClick={toggleFilter}
             >
-              <img src={x2} style={{maxWidth: '1vw'}} />
+              <img src={x2} alt="close-aside-button" />
             </button>
           </header>
         )}
