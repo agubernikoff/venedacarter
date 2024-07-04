@@ -39,7 +39,7 @@ function CartDetails({layout, cart}) {
     };
 
     fetch(
-      'https://venedacarter.com/apps/simplyinsurance/storefront-api/metafields/',
+      'https://venedacarter.myshopify.com/apps/simplyinsurance/storefront-api/metafields/',
       requestOptions,
     )
       .then((response) => response.json())
