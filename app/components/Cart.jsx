@@ -151,9 +151,9 @@ function CartLineItem({layout, line, insurancePlan}) {
           alt={title}
           aspectRatio="1/1"
           data={image}
-          height={100}
+          height={333}
           loading="lazy"
-          width={100}
+          width={333}
         />
       )}
 
