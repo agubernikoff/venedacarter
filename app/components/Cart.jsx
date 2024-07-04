@@ -30,7 +30,7 @@ function CartDetails({layout, cart}) {
 
   useEffect(() => {
     var myHeaders = new Headers();
-    myHeaders.append('shopname', 'venedacarter.com');
+    myHeaders.append('shopname', 'venedacarter.myshopify.com');
 
     var requestOptions = {
       method: 'GET',
