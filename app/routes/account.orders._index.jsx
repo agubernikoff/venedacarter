@@ -221,13 +221,13 @@ function OrderItem({order}) {
                   <p>{n.title}</p>
                   <br />
                   {n.variant.selectedOptions?.find(
-                    (o) => o.name === 'Material',
+                    (o) => o.name === 'Metal',
                   ) ? (
                     <p>
                       Color:{' '}
                       {
                         n.variant.selectedOptions?.find(
-                          (o) => o.name === 'Material',
+                          (o) => o.name === 'Metal',
                         )?.value
                       }
                     </p>

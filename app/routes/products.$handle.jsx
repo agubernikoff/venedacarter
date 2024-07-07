@@ -178,7 +178,10 @@ function ProductImage({images, selectedVariant, isMobile}) {
 
   const filteredImages = images.filter((i) => {
     if (selectedVariant?.availableForSale || !i.altText)
-      return i.altText === selectedVariant?.image?.altText;
+      return (
+        i.altText?.toLowerCase() ===
+        selectedVariant?.image?.altText?.toLowerCase()
+      );
     else
       return selectedVariant.title
         .toLowerCase()
@@ -603,7 +606,7 @@ function ProductOptions({option}) {
                 opacity: isAvailable ? 1 : 0.3,
               }}
             >
-              {option.name === 'Material' ? (
+              {option.name === 'Metal' ? (
                 <div
                   className="circle"
                   style={{background: colorPicker(value)}}

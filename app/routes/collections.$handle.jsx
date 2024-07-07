@@ -45,7 +45,7 @@ export async function loader({request, params, context}) {
   const filter = filterFromParams
     ? [
         {
-          variantOption: {name: 'Material', value: filterFromParams},
+          variantOption: {name: 'Metal', value: filterFromParams},
         },
       ]
     : [];
@@ -441,7 +441,7 @@ function FilterAside({isMobile, toggleFilter}) {
                 </>
               ) : null}
             </div>
-            <p className="filter-header-bold">Materials:</p>
+            <p className="filter-header-bold">Metals:</p>
             <div className="filter-selection-container">
               <button
                 className="filter-selection"
