@@ -4,7 +4,6 @@ import {useRootLoaderData} from '~/root';
 import {Image} from '@shopify/hydrogen';
 import {Await} from '@remix-run/react';
 import {useNavigate} from 'react-router-dom';
-import footer from '../assets/footer.png';
 
 /**
  * @param {FooterQuery & {shop: HeaderQuery['shop']}}
@@ -234,8 +233,7 @@ function Newsletter({footerImage, isMobile}) {
               : 'newsletter-image-container'
           }
         >
-          <img src={footer} alt="" style={{width: '100%'}} />
-          {/* {isClient && (
+          {isClient && (
             <Suspense fallback={<div>Loading...</div>}>
               <Await resolve={footerImage}>
                 {(footerImage) => (
@@ -248,7 +246,7 @@ function Newsletter({footerImage, isMobile}) {
                 )}
               </Await>
             </Suspense>
-          )} */}
+          )}
         </div>
         <div
           className={

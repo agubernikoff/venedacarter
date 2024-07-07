@@ -6,7 +6,6 @@ import {Image, Money} from '@shopify/hydrogen';
 import {motion, AnimatePresence} from 'framer-motion';
 import colorPicker from '~/helper/ColorPicker';
 import mobileIcon from '../assets/VC-Opengraph.jpg';
-import hero from '../assets/hero.png';
 
 /**
  * @type {MetaFunction}
@@ -31,7 +30,7 @@ export async function loader({context}) {
       c.handle === 'ring' || c.handle === 'earring' || c.handle === 'necklace',
   );
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-  const handle = 'hero-image-mt5e2hu0';
+  const handle = 'hero-image-ju8lmyyz';
   const key = 'hero_image';
   const heroImage = await storefront.query(HERO_IMAGE_QUERY, {
     variables: {handle, key},
@@ -112,14 +111,12 @@ function NewArrivals({collection, image}) {
         className="new-arrivals-collection"
         to={`/collections/${collection.handle}`}
       >
-        {image ? (
+        {image && (
           <Image
             data={image}
             sizes="66vw"
             className="new-arrivals-collection-image"
           />
-        ) : (
-          <img src={hero} className="new-arrivals-collection-image" />
         )}
       </Link>
     </>
