@@ -260,7 +260,12 @@ export function FeaturedProduct({
   isHomepage,
 }) {
   const [index, setIndex] = useState(0);
-  const colorOptionsObj = product.options.find((o) => o.name === 'Metal');
+  const colorOptionsObj = product.options.find(
+    (o) =>
+      o.name.toLowercase() === 'metal' ||
+      o.name.toLowercase() === 'color' ||
+      o.name.toLowercase() === 'material',
+  );
   return (
     <Link
       className="featured-product"
