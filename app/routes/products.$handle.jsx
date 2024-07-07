@@ -589,7 +589,13 @@ function AddToCartButtonComponent({selectedVariant, isMobile, customer}) {
 function ProductOptions({option}) {
   return (
     <div className="product-options" key={option.name}>
-      <p style={{marginBottom: '1%'}}>{option.name.toUpperCase()}</p>
+      <p style={{marginBottom: '1%'}}>
+        {option.name.toLowerCase() === 'metal' ||
+        option.name.toLowerCase() === 'color' ||
+        option.name.toLowerCase() === 'material'
+          ? 'MATERIAL'
+          : option.name.toUpperCase()}
+      </p>
       <div className="product-options-grid">
         {option.values.map(({value, isAvailable, isActive, to}) => {
           return (
@@ -606,7 +612,9 @@ function ProductOptions({option}) {
                 opacity: isAvailable ? 1 : 0.3,
               }}
             >
-              {option.name === 'Metal' ? (
+              {option.name.toLowerCase() === 'metal' ||
+              option.name.toLowerCase() === 'color' ||
+              option.name.toLowerCase() === 'material' ? (
                 <div
                   className="circle"
                   style={{background: colorPicker(value)}}
