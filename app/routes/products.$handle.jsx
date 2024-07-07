@@ -84,13 +84,13 @@ export async function loader({params, request, context}) {
     variables: {handle},
   });
 
-  const collectionId = product.collections.nodes.find(
+  const collectionHandle = product.collections.nodes.find(
     (node) =>
       node.title !== 'Featured Products' || node.title !== 'New Arrivals',
-  ).id;
+  )?.handle;
 
   const recs = storefront.query(RECOMMENDATIONS_QUERY, {
-    variables: {id: collectionId},
+    variables: {handle: collectionHandle || 'featured-products'},
   });
 
   const token = context.session.get('customerAccessToken');
@@ -859,7 +859,7 @@ function ProductRecommendations({recs, product, isMobile}) {
             >
               <p className="title">Recommended Products</p>
             </div>
-            {recs.collection.products.nodes
+            {recs?.collection?.products?.nodes
               .filter((rec) => rec.id !== product.id)
               .slice(0, endOfSlice)
               .map((rec) => (
@@ -925,6 +925,7 @@ const PRODUCT_FRAGMENT = `#graphql
       nodes{
         title
         id
+        handle
       }
     }
     images(first: 8) {
@@ -995,8 +996,8 @@ const VARIANTS_QUERY = `#graphql
 `;
 
 const RECOMMENDATIONS_QUERY = `#graphql
-query ($id: ID) {
-  collection(id: $id) {
+query ($handle: String) {
+  collection(handle: $handle) {
     title
     products(first: 7) {
       nodes {
