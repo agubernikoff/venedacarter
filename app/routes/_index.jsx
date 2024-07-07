@@ -262,9 +262,9 @@ export function FeaturedProduct({
   const [index, setIndex] = useState(0);
   const colorOptionsObj = product.options.find(
     (o) =>
-      o.name.toLowercase() === 'metal' ||
-      o.name.toLowercase() === 'color' ||
-      o.name.toLowercase() === 'material',
+      o.name.toLowerCase() === 'metal' ||
+      o.name.toLowerCase() === 'color' ||
+      o.name.toLowerCase() === 'material',
   );
   return (
     <Link
