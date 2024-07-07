@@ -42,6 +42,14 @@ export default async function handleRequest(
       'http://localhost:3100',
       'https://*.klaviyo.com/*',
     ],
+    fontSrc: [
+      'https://fonts.gstatic.com/*',
+      'https://fonts.gstatic.com/',
+      'http://localhost:3100',
+      'http://localhost:3100/*',
+      'https://static.klaviyo.com/',
+      'https://static.klaviyo.com/*',
+    ],
   });
 
   const body = await renderToReadableStream(
