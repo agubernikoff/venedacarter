@@ -2068,8 +2068,13 @@ aside li {
   text-align: center;
 }
 .account-addresses > form > fieldset {
-  width: 31.3%;
+  width: 92.5%;
   margin: auto;
+}
+@media (min-width: 44em) {
+  .account-addresses > form > fieldset {
+    width: 31.3%;
+  }
 }
 
 .account-address-bold {
@@ -2112,7 +2117,7 @@ aside li {
 }
 @media (min-width: 44em) {
   .existing-address {
-    width: 20%;
+    width: 100%;
   }
 }
 .existing-address > form,
