@@ -224,7 +224,7 @@ function MainFeaturedProduct({product, isMobile}) {
               ? 'product-details-container-mobile'
               : 'product-details-container'
           }
-          style={{marginBottom: '.5rem', marginTop: '1.25rem'}}
+          style={{marginBottom: '.5rem', marginTop: '1rem'}}
         >
           <div
             className={
@@ -259,6 +259,7 @@ function MainFeaturedProduct({product, isMobile}) {
             marginLeft: '1rem',
             fontFamily: 'regular-font',
             fontSize: '.75rem',
+            marginBottom: '-.25rem',
           }}
         >
           View Product
