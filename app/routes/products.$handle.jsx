@@ -427,8 +427,8 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
           }
           dangerouslySetInnerHTML={{__html: descriptionHtml}}
         />
-        <div className={isMobile ? 'size-guide-mobile' : 'size-guide'}>
-          {collectionType !== 'earrings' && (
+        {collectionType && collectionType !== 'earrings' ? (
+          <div className={isMobile ? 'size-guide-mobile' : 'size-guide'}>
             <p
               style={{
                 textDecoration: 'underline',
@@ -439,25 +439,28 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
             >
               Size Guide
             </p>
-          )}
-          {isSizeGuideOpen && (
-            <div className="size-guide-overlay">
-              <div className="size-guide-popup" ref={sizeGuideRef}>
-                <img
-                  src={imageSrc}
-                  alt={`${collectionType} Size Guide`}
-                  className="size-guide-image"
-                />
-
-                <img
-                  src={x2}
-                  className="close-button"
-                  onClick={() => setIsSizeGuideOpen(false)}
-                />
+            {isSizeGuideOpen && (
+              <div className="size-guide-overlay">
+                <div className="size-guide-popup" ref={sizeGuideRef}>
+                  <img
+                    src={imageSrc}
+                    alt={`${collectionType} Size Guide`}
+                    className="size-guide-image"
+                  />
+                  <img
+                    src={x2}
+                    className="close-button"
+                    onClick={() => setIsSizeGuideOpen(false)}
+                  />
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        ) : (
+          <div style={{borderBottom: '1px solid #eaeaea'}}>
+            {/* Other content if needed */}
+          </div>
+        )}
         <Suspense
           fallback={
             <ProductForm
