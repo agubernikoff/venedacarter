@@ -301,17 +301,21 @@ function ProductImage({images, selectedVariant, isMobile}) {
         </div>
       </div>
     ) : (
-      filteredImages.map((image) => (
-        <Image
-          className="product-image"
-          alt={image.altText || 'Product Image'}
-          aspectRatio="1/1"
-          data={image}
+      filteredImages.map((image, i) => (
+        <div
           key={image.id}
-          sizes="(min-width: 45em) 50vw, 100vw"
-          height={2000}
-          width={2000}
-        />
+          className="product-image"
+          style={i === 0 ? {position: 'absolute', top: 0} : null}
+        >
+          <Image
+            alt={image.altText || 'Product Image'}
+            aspectRatio="1/1"
+            data={image}
+            sizes="(min-width: 45em) 50vw, 100vw"
+            height={2000}
+            width={2000}
+          />
+        </div>
       ))
     )
     //   }

@@ -1457,12 +1457,15 @@ aside li {
 .product-image {
   display: block;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* border-right: 1px solid #eaeaea; */
   /* overflow: auto; */
 }
 @media (min-width: 44em) {
   .product-image {
-    width: 50% !important;
+    width: 50vw !important;
   }
 }
 .product-image {
@@ -1511,7 +1514,7 @@ aside li {
 }
 
 .product-image img {
-  height: 100%;
+  height: auto;
   width: 100%;
 }
 
