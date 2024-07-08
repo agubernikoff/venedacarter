@@ -314,6 +314,8 @@ export function FeaturedProduct({
                 product.title.toUpperCase().includes('NECKLACE')
                   ? 0
                   : 'auto',
+              maxHeight: '100%',
+              overflow: 'hidden',
             }}
           >
             <Image
