@@ -378,15 +378,14 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
 
   const collectionType = getRelevantCollectionType(product);
 
-  let imageSrc;
+  let imageSrc = null;
+
   if (collectionType === 'rings') {
     imageSrc = rings;
   } else if (collectionType === 'bracelets') {
     imageSrc = bracelets;
   } else if (collectionType === 'necklaces') {
     imageSrc = necklaces;
-  } else if (collectionType === 'earrings') {
-    imageSrc = null;
   }
 
   return (
