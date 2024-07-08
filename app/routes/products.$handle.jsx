@@ -204,17 +204,20 @@ function ProductImage({images, selectedVariant, isMobile}) {
     }
   }
 
-  const mappedIndicators = filteredImages.map((e, i) => (
-    <div
-      key={e.id}
-      className="circle"
-      style={{
-        background: i === imageIndex ? 'black' : 'grey',
-        height: '10px',
-        width: '10px',
-      }}
-    ></div>
-  ));
+  const mappedIndicators =
+    filteredImages.length > 1
+      ? filteredImages.map((e, i) => (
+          <div
+            key={e.id}
+            className="circle"
+            style={{
+              background: i === imageIndex ? 'black' : 'grey',
+              height: '10px',
+              width: '10px',
+            }}
+          ></div>
+        ))
+      : null;
 
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
