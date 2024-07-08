@@ -1,6 +1,6 @@
 import React, {Suspense, useState, useEffect, useRef} from 'react';
 import {defer, redirect} from '@shopify/remix-oxygen';
-import {Await, Link, useLoaderData} from '@remix-run/react';
+import {Await, Link, useLoaderData, useLocation} from '@remix-run/react';
 import size from '../assets/size.png';
 import colorPicker from '~/helper/ColorPicker';
 import x2 from '../assets/X2.png';
@@ -187,6 +187,9 @@ function ProductImage({images, selectedVariant, isMobile}) {
         .toLowerCase()
         .includes(i.altText?.toLowerCase());
   });
+
+  if (useLocation().pathname.includes('gift-card'))
+    filteredImages.splice(0, filteredImages.length - 1);
 
   function cycleImages(delta) {
     const newIndex = imageIndex + delta;
