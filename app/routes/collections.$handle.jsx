@@ -471,28 +471,28 @@ function FilterAside({isMobile, toggleFilter}) {
               <button
                 className="filter-selection"
                 onClick={() => {
-                  setMat('14k Solid Yellow Gold');
+                  setMat('14K (Solid Yellow Gold)');
                 }}
                 style={
-                  mat === '14k Solid Yellow Gold'
+                  mat === '14K (Solid Yellow Gold)'
                     ? {textDecoration: 'underline'}
                     : null
                 }
               >
-                14k Solid Yellow Gold
+                14K (Solid Yellow Gold)
               </button>
               <button
                 className="filter-selection"
                 onClick={() => {
-                  setMat('14k Solid White Gold');
+                  setMat('14K (Solid White Gold)');
                 }}
                 style={
-                  mat === '14k Solid White Gold'
+                  mat === '14K (Solid White Gold)'
                     ? {textDecoration: 'underline'}
                     : null
                 }
               >
-                14k Solid White Gold
+                14K (Solid White Gold)
               </button>
             </div>
           </div>
