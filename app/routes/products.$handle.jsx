@@ -312,7 +312,11 @@ function ProductImage({images, selectedVariant, isMobile}) {
             i === 0
               ? pathname.includes('gift-card')
                 ? {position: 'absolute', top: 0, background: '#eaeaea'}
+                : pathname.includes('necklace') || pathname.includes('chain')
+                ? {position: 'absolute', top: 0, alignItems: 'start'}
                 : {position: 'absolute', top: 0}
+              : pathname.includes('necklace') || pathname.includes('chain')
+              ? {alignItems: 'start'}
               : null
           }
         >
