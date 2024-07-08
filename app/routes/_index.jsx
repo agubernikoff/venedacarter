@@ -310,9 +310,8 @@ export function FeaturedProduct({
               margin: 'auto',
               width: '100%',
               marginTop:
-                (product.title.toUpperCase().includes('CHAIN') ||
-                  product.title.toUpperCase().includes('NECKLACE')) &&
-                index === 0
+                product.title.toUpperCase().includes('CHAIN') ||
+                product.title.toUpperCase().includes('NECKLACE')
                   ? 0
                   : 'auto',
             }}
