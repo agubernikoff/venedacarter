@@ -187,8 +187,8 @@ function ProductImage({images, selectedVariant, isMobile}) {
         .toLowerCase()
         .includes(i.altText?.toLowerCase());
   });
-
-  if (useLocation().pathname.includes('gift-card'))
+  const {pathname} = useLocation();
+  if (pathname.includes('gift-card'))
     filteredImages.splice(0, filteredImages.length - 1);
 
   function cycleImages(delta) {
@@ -308,7 +308,13 @@ function ProductImage({images, selectedVariant, isMobile}) {
         <div
           key={image.id}
           className="product-image"
-          style={i === 0 ? {position: 'absolute', top: 0} : null}
+          style={
+            i === 0
+              ? pathname.includes('gift-card')
+                ? {position: 'absolute', top: 0, background: '#eaeaea'}
+                : {position: 'absolute', top: 0}
+              : null
+          }
         >
           <Image
             alt={image.altText || 'Product Image'}
