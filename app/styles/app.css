@@ -2111,8 +2111,6 @@ aside li {
 }
 .existing-address {
   margin-top: 1rem !important;
-  border-bottom: 1px solid #eaeaea;
-  width: 33.3%;
   margin: auto;
 }
 @media (min-width: 44em) {
