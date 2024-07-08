@@ -82,7 +82,7 @@ export async function loader({request, params, context}) {
       reverse: handle !== 'new-arrivals' ? reverse : true,
       handle:
         (handle === 'all' || handle === 'new-arrivals') && isFeatured
-          ? 'frontpage'
+          ? 'featured-products'
           : handle,
       productFilter: filter,
       ...paginationVariables,
@@ -128,6 +128,7 @@ export async function loader({request, params, context}) {
     });
   }
   if (collection && handle !== 'new-arrivals') return json({collection});
+  else if (isFeatured) return json({collection});
   else return json({products});
 }
 
