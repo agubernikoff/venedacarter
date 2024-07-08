@@ -159,6 +159,7 @@ export default function Product() {
           images={product?.images.nodes}
           selectedVariant={selectedVariant}
           isMobile={isMobile}
+          productTitle={product.title}
         />
       </div>
       <ProductRecommendations
@@ -173,7 +174,7 @@ export default function Product() {
 /**
  * @param {{image: ProductVariantFragment['image']}}
  */
-function ProductImage({images, selectedVariant, isMobile}) {
+function ProductImage({images, selectedVariant, isMobile, productTitle}) {
   const [imageIndex, setImageIndex] = useState(0);
 
   const filteredImages = images.filter((i) => {
@@ -316,10 +317,12 @@ function ProductImage({images, selectedVariant, isMobile}) {
             i === 0
               ? pathname.includes('gift-card')
                 ? {position: 'absolute', top: 0, background: '#eaeaea'}
-                : pathname.includes('necklace') || pathname.includes('chain')
+                : productTitle.toLowerCase().includes('necklace') ||
+                  productTitle.toLowerCase().includes('chain')
                 ? {position: 'absolute', top: 0, alignItems: 'start'}
                 : {position: 'absolute', top: 0}
-              : pathname.includes('necklace') || pathname.includes('chain')
+              : productTitle.toLowerCase().includes('necklace') ||
+                productTitle.toLowerCase().includes('chain')
               ? {alignItems: 'start'}
               : null
           }
