@@ -192,17 +192,12 @@ function ProductImage({images, selectedVariant, isMobile, productTitle}) {
   if (pathname.includes('gift-card'))
     filteredImages.splice(0, filteredImages.length - 1);
 
-  function cycleImages(delta) {
-    const newIndex = imageIndex + delta;
-    if (newIndex >= 0 && newIndex < filteredImages.length) {
-      setImageIndex(imageIndex + delta);
-    }
-    if (newIndex < 0) {
-      setImageIndex(filteredImages.length - 1);
-    }
-    if (newIndex >= filteredImages.length) {
-      setImageIndex(0);
-    }
+  function handleScroll(scrollWidth, scrollLeft) {
+    const widthOfAnImage = scrollWidth / filteredImages.length;
+    const dividend = scrollLeft / widthOfAnImage;
+    const rounded = parseFloat((scrollLeft / widthOfAnImage).toFixed(0));
+
+    if (Math.abs(dividend - rounded) < 0.001) setImageIndex(rounded);
   }
 
   const mappedIndicators =
@@ -219,28 +214,6 @@ function ProductImage({images, selectedVariant, isMobile, productTitle}) {
           ></div>
         ))
       : null;
-
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
-
-  // the required distance between touchStart and touchEnd to be detected as a swipe
-  const minSwipeDistance = 50;
-
-  const onTouchStart = (e) => {
-    setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-    if (isRightSwipe) cycleImages(-1);
-    if (isLeftSwipe) cycleImages(1);
-  };
 
   useEffect(() => {
     setImageIndex(0);
@@ -261,85 +234,80 @@ function ProductImage({images, selectedVariant, isMobile, productTitle}) {
       // </div>
     );
   }
-  return (
-    // <div className="product-image">
-    //   {
-    isMobile ? (
-      <div style={{position: 'relative'}}>
+  return isMobile ? (
+    <>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          width: 'fit-content',
+          gap: '.2rem',
+          transform: 'translateY(-400%)',
+          zIndex: 2,
+          margin: 'auto',
+        }}
+      >
+        {mappedIndicators}
+      </div>
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          width: '100vw',
+          overflow: 'scroll',
+          scrollSnapType: 'x mandatory',
+          alignItems: 'flex-end',
+        }}
+        className="mobile-images-div-just-need-a-classname-to-remove-scrollbar"
+        onScroll={(e) =>
+          handleScroll(e.target.scrollWidth, e.target.scrollLeft)
+        }
+      >
+        {filteredImages.map((i) => (
+          <div key={i.id}>
+            <Image
+              className="product-image"
+              alt={i.altText || 'Product Image'}
+              aspectRatio="1/1"
+              data={i}
+              sizes="(min-width: 45em) 50vw, 100vw"
+              height={2000}
+              width={2000}
+              style={{width: '100vw'}}
+            />
+          </div>
+        ))}
+      </div>
+    </>
+  ) : (
+    filteredImages.map((image, i) => (
+      <div
+        key={image.id}
+        className="product-image"
+        style={
+          i === 0
+            ? pathname.includes('gift-card')
+              ? {position: 'absolute', top: 0, background: '#eaeaea'}
+              : productTitle.toLowerCase().includes('necklace') ||
+                productTitle.toLowerCase().includes('chain')
+              ? {position: 'absolute', top: 0, alignItems: 'start'}
+              : {position: 'absolute', top: 0}
+            : productTitle.toLowerCase().includes('necklace') ||
+              productTitle.toLowerCase().includes('chain')
+            ? {alignItems: 'start'}
+            : null
+        }
+      >
         <Image
-          className="product-image"
-          alt={filteredImages[imageIndex]?.altText || 'Product Image'}
+          alt={image?.altText || 'Product Image'}
           aspectRatio="1/1"
-          data={filteredImages[imageIndex]}
+          data={image}
           sizes="(min-width: 45em) 50vw, 100vw"
           height={2000}
           width={2000}
         />
-        <div
-          className="left-image-button-container"
-          onClick={() => {
-            cycleImages(-1);
-          }}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-        />
-        <div
-          className="right-image-button-container"
-          onClick={() => {
-            cycleImages(1);
-          }}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-        />
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            width: 'fit-content',
-            gap: '.2rem',
-            position: 'absolute',
-            bottom: '5%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-          }}
-        >
-          {mappedIndicators}
-        </div>
       </div>
-    ) : (
-      filteredImages.map((image, i) => (
-        <div
-          key={image.id}
-          className="product-image"
-          style={
-            i === 0
-              ? pathname.includes('gift-card')
-                ? {position: 'absolute', top: 0, background: '#eaeaea'}
-                : productTitle.toLowerCase().includes('necklace') ||
-                  productTitle.toLowerCase().includes('chain')
-                ? {position: 'absolute', top: 0, alignItems: 'start'}
-                : {position: 'absolute', top: 0}
-              : productTitle.toLowerCase().includes('necklace') ||
-                productTitle.toLowerCase().includes('chain')
-              ? {alignItems: 'start'}
-              : null
-          }
-        >
-          <Image
-            alt={image?.altText || 'Product Image'}
-            aspectRatio="1/1"
-            data={image}
-            sizes="(min-width: 45em) 50vw, 100vw"
-            height={2000}
-            width={2000}
-          />
-        </div>
-      ))
-    )
-    //   }
-    // </div>
+    ))
   );
 }
 
