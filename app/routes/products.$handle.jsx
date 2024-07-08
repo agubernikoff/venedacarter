@@ -177,15 +177,15 @@ function ProductImage({images, selectedVariant, isMobile}) {
   const [imageIndex, setImageIndex] = useState(0);
 
   const filteredImages = images.filter((i) => {
-    if (selectedVariant?.availableForSale || !i.altText)
+    if (selectedVariant?.availableForSale || !i?.altText)
       return (
-        i.altText?.toLowerCase() ===
+        i?.altText?.toLowerCase() ===
         selectedVariant?.image?.altText?.toLowerCase()
       );
     else
       return selectedVariant.title
         .toLowerCase()
-        .includes(i.altText?.toLowerCase());
+        .includes(i?.altText?.toLowerCase());
   });
   const {pathname} = useLocation();
   if (pathname.includes('gift-card'))
@@ -241,6 +241,10 @@ function ProductImage({images, selectedVariant, isMobile}) {
     if (isLeftSwipe) cycleImages(1);
   };
 
+  useEffect(() => {
+    setImageIndex(0);
+  }, [selectedVariant]);
+
   if (!images) {
     return (
       // <div className="product-image">
@@ -263,7 +267,7 @@ function ProductImage({images, selectedVariant, isMobile}) {
       <div style={{position: 'relative'}}>
         <Image
           className="product-image"
-          alt={filteredImages[imageIndex].altText || 'Product Image'}
+          alt={filteredImages[imageIndex]?.altText || 'Product Image'}
           aspectRatio="1/1"
           data={filteredImages[imageIndex]}
           sizes="(min-width: 45em) 50vw, 100vw"
@@ -321,7 +325,7 @@ function ProductImage({images, selectedVariant, isMobile}) {
           }
         >
           <Image
-            alt={image.altText || 'Product Image'}
+            alt={image?.altText || 'Product Image'}
             aspectRatio="1/1"
             data={image}
             sizes="(min-width: 45em) 50vw, 100vw"
