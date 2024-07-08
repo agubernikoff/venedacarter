@@ -45,7 +45,7 @@ export async function loader({request, params, context}) {
   const filter = filterFromParams
     ? [
         {
-          variantOption: {name: 'Metal', value: filterFromParams},
+          variantOption: {name: 'MATERIAL', value: filterFromParams},
         },
       ]
     : [];
