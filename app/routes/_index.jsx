@@ -211,6 +211,8 @@ function MainFeaturedProduct({product, isMobile}) {
             aspectRatio="1/1"
             crop={false}
             sizes="(min-width: 45em) 20vw, 50vw"
+            height={2000}
+            width={2000}
           />
         </motion.div>
         {/* </AnimatePresence> */}
@@ -222,6 +224,7 @@ function MainFeaturedProduct({product, isMobile}) {
               ? 'product-details-container-mobile'
               : 'product-details-container'
           }
+          style={{marginBottom: '.5rem', marginTop: '1rem'}}
         >
           <div
             className={
@@ -240,12 +243,27 @@ function MainFeaturedProduct({product, isMobile}) {
               ? 'product-title-description-mobile'
               : 'product-title-description'
           }
+          dangerouslySetInnerHTML={{__html: product.descriptionHtml}}
         >
-          <p style={{marginTop: '-1rem'}}>{product.description}</p>
-          <p style={{textDecoration: 'underline', marginTop: '.5rem'}}>
-            View Product
-          </p>
+          {/* <p
+            style={{marginTop: '-1rem'}}
+            dangerouslySetInnerHTML={{__html: descriptionHtml}}
+          >
+            {product.description}
+          </p> */}
         </div>
+        <p
+          style={{
+            textDecoration: 'underline',
+            marginTop: '.5rem',
+            marginLeft: '1rem',
+            fontFamily: 'regular-font',
+            fontSize: '.75rem',
+            marginBottom: '-.25rem',
+          }}
+        >
+          View Product
+        </p>
       </div>
     </Link>
   );
@@ -425,6 +443,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
         title
         handle
         description
+        descriptionHtml
         options {
           name
           values
