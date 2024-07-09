@@ -473,6 +473,7 @@ function FilterAside({isMobile, toggleFilter, filters}) {
                     ? 'pointer'
                     : 'auto',
                 }}
+                disabled={!matFilterIsAvailable('Sterling Silver')}
               >
                 Sterling Silver
               </button>
@@ -491,6 +492,7 @@ function FilterAside({isMobile, toggleFilter, filters}) {
                     ? 'pointer'
                     : 'auto',
                 }}
+                disabled={!matFilterIsAvailable('Gold Vermeil')}
               >
                 Gold Vermeil
               </button>
@@ -510,6 +512,7 @@ function FilterAside({isMobile, toggleFilter, filters}) {
                     ? 'pointer'
                     : 'auto',
                 }}
+                disabled={!matFilterIsAvailable('14K (Solid Yellow Gold)')}
               >
                 14K (Solid Yellow Gold)
               </button>
@@ -529,6 +532,7 @@ function FilterAside({isMobile, toggleFilter, filters}) {
                     ? 'pointer'
                     : 'auto',
                 }}
+                disabled={!matFilterIsAvailable('14K (Solid White Gold)')}
               >
                 14K (Solid White Gold)
               </button>
