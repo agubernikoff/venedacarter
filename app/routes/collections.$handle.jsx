@@ -164,7 +164,11 @@ export default function Collection() {
             exit={{opacity: 0}}
             style={{zIndex: 5}}
           >
-            <FilterAside isMobile={isMobile} toggleFilter={toggleFilter} />
+            <FilterAside
+              isMobile={isMobile}
+              toggleFilter={toggleFilter}
+              filters={collection?.products?.filters}
+            />
           </motion.div>
         )}
       </AnimatePresence>
@@ -302,7 +306,16 @@ function ProductItem({product, loading}) {
   );
 }
 
-function FilterAside({isMobile, toggleFilter}) {
+function FilterAside({isMobile, toggleFilter, filters}) {
+  const availalbeMaterials = filters
+    ?.find((f) => f.label === 'MATERIAL')
+    ?.values.map((v) => v.label);
+  function matFilterIsAvailable(mat) {
+    if (availalbeMaterials?.length > 0) {
+      if (availalbeMaterials.includes(mat)) return true;
+      else return false;
+    } else return true;
+  }
   const {pathname, search, hash} = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(search);
@@ -447,50 +460,75 @@ function FilterAside({isMobile, toggleFilter}) {
               <button
                 className="filter-selection"
                 onClick={() => {
-                  setMat('Sterling Silver');
+                  if (matFilterIsAvailable('Sterling Silver'))
+                    setMat('Sterling Silver');
                 }}
-                style={
-                  mat === 'Sterling Silver'
-                    ? {textDecoration: 'underline'}
-                    : null
-                }
+                style={{
+                  textDecoration:
+                    mat === 'Sterling Silver' ? 'underline' : null,
+                  color: matFilterIsAvailable('Sterling Silver')
+                    ? 'black'
+                    : 'grey',
+                  cursor: matFilterIsAvailable('Sterling Silver')
+                    ? 'pointer'
+                    : 'auto',
+                }}
               >
                 Sterling Silver
               </button>
               <button
                 className="filter-selection"
                 onClick={() => {
-                  setMat('Gold Vermeil');
+                  if (matFilterIsAvailable('Gold Vermeil'))
+                    setMat('Gold Vermeil');
                 }}
-                style={
-                  mat === 'Gold Vermeil' ? {textDecoration: 'underline'} : null
-                }
+                style={{
+                  textDecoration: mat === 'Gold Vermeil' ? 'underline' : null,
+                  color: matFilterIsAvailable('Gold Vermeil')
+                    ? 'black'
+                    : 'grey',
+                  cursor: matFilterIsAvailable('Gold Vermeil')
+                    ? 'pointer'
+                    : 'auto',
+                }}
               >
                 Gold Vermeil
               </button>
               <button
                 className="filter-selection"
                 onClick={() => {
-                  setMat('14K (Solid Yellow Gold)');
+                  if (matFilterIsAvailable('14K (Solid Yellow Gold)'))
+                    setMat('14K (Solid Yellow Gold)');
                 }}
-                style={
-                  mat === '14K (Solid Yellow Gold)'
-                    ? {textDecoration: 'underline'}
-                    : null
-                }
+                style={{
+                  textDecoration:
+                    mat === '14K (Solid Yellow Gold)' ? 'underline' : null,
+                  color: matFilterIsAvailable('14K (Solid Yellow Gold)')
+                    ? 'black'
+                    : 'grey',
+                  cursor: matFilterIsAvailable('14K (Solid Yellow Gold)')
+                    ? 'pointer'
+                    : 'auto',
+                }}
               >
                 14K (Solid Yellow Gold)
               </button>
               <button
                 className="filter-selection"
                 onClick={() => {
-                  setMat('14K (Solid White Gold)');
+                  if (matFilterIsAvailable('14K (Solid White Gold)'))
+                    setMat('14K (Solid White Gold)');
                 }}
-                style={
-                  mat === '14K (Solid White Gold)'
-                    ? {textDecoration: 'underline'}
-                    : null
-                }
+                style={{
+                  textDecoration:
+                    mat === '14K (Solid White Gold)' ? 'underline' : null,
+                  color: matFilterIsAvailable('14K (Solid White Gold)')
+                    ? 'black'
+                    : 'grey',
+                  cursor: matFilterIsAvailable('14K (Solid White Gold)')
+                    ? 'pointer'
+                    : 'auto',
+                }}
               >
                 14K (Solid White Gold)
               </button>
@@ -616,6 +654,12 @@ const COLLECTION_QUERY = `#graphql
         reverse: $reverse,
         filters: $productFilter
       ) {
+        filters{
+          label
+          values{
+            label
+          }
+        }
         nodes {
           ...ProductItem
         }
