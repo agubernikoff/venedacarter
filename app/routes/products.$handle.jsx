@@ -558,9 +558,6 @@ function AddToCartButtonComponent({selectedVariant, isMobile, customer}) {
       disabled={!selectedVariant || !selectedVariant.availableForSale}
       onClick={() => {
         window.location.hash = '#cart-aside';
-        if (window.innerWidth <= 768) {
-          document.body.classList.toggle('no-scroll');
-        }
       }}
       lines={
         selectedVariant

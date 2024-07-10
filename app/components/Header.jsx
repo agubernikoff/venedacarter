@@ -32,13 +32,11 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
   const [isOpen, setIsOpen] = useState(false);
   function toggleMenu() {
     setIsOpen(!isOpen);
-    document.body.classList.toggle('no-scroll', !isOpen);
     window.location.href = `${window.location.href}#x`;
   }
 
   function closeMenu() {
     setIsOpen(false);
-    document.body.classList.toggle('no-scroll', !isOpen);
   }
   const {shop, menu} = header;
 
@@ -66,9 +64,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
             <img
               src={mobIcon2}
               style={{width: '30px'}}
-              onClick={() => {
-                document.body.classList.remove('no-scroll');
-              }}
+              alt="Veneda Carter Logo"
             />
             {/* <p className="shop-name">VENEDA CARTER</p> */}
           </NavLink>
@@ -88,9 +84,7 @@ export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
               className="shop-name-mobile"
               src={mobIcon2}
               style={{width: '34px'}}
-              onClick={() => {
-                document.body.classList.remove('no-scroll');
-              }}
+              alt="Veneda Carter Logo"
             />
           </NavLink>
         ) : (
@@ -298,6 +292,13 @@ export function HeaderMenuMobile({
   const navigate = useNavigate();
   const {publicStoreDomain} = useRootLoaderData();
   const className = `header-menu-${viewport}`;
+
+  useEffect(() => {
+    document.body.classList.add('no-scroll');
+    return () => {
+      document.body.classList.remove('no-scroll');
+    };
+  }, []);
 
   return (
     <nav className={className} role="navigation">
@@ -540,16 +541,12 @@ function SearchToggle({isMobile, closeMenu}) {
  * @param {{count: number}}
  */
 function CartBadge({count, isMobile, closeMenu}) {
-  function toggleScroll() {
-    document.body.classList.toggle('no-scroll');
-  }
   return (
     <>
       {isMobile ? (
         <a
           href="#cart-aside"
           onClick={() => {
-            toggleScroll();
             closeMenu();
           }}
           style={{position: 'relative'}}
