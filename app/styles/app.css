@@ -891,7 +891,7 @@ aside li {
   left: 1rem;
   right: 1rem;
   padding-top: 0.75rem;
-  padding-bottom: 20%;
+  /* padding-bottom: 20%; */
   position: absolute;
 }
 @media (min-width: 44em) {
