@@ -256,7 +256,7 @@ aside li {
 }
 .header-left,
 .header-right {
-  width: 15%;
+  width: 17.1%;
 }
 
 .header-mobile {
@@ -282,6 +282,16 @@ aside li {
 .header-left img,
 .header-right img {
   max-width: 5vw;
+}
+
+.mobile-cart-number {
+  position: absolute;
+  color: black;
+  text-align: center;
+  margin: 0;
+  bottom: 10%;
+  left: 38%;
+  font-size: 12px;
 }
 
 .header-center-mobile img {

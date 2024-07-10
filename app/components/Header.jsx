@@ -552,8 +552,10 @@ function CartBadge({count, isMobile, closeMenu}) {
             toggleScroll();
             closeMenu();
           }}
+          style={{position: 'relative'}}
         >
           <img src={cart} />
+          <div className="mobile-cart-number">{count}</div>
         </a>
       ) : (
         <a href="#cart-aside">Bag ({count})</a>
