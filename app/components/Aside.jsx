@@ -4,6 +4,8 @@ import {
   PredictiveSearchResults,
 } from '~/components/Search';
 import x2 from '../assets/X2.png';
+
+import {useLocation} from '@remix-run/react';
 /**
  * A side bar component with Overlay that works without JavaScript.
  * @example
@@ -20,12 +22,13 @@ import x2 from '../assets/X2.png';
  * }}
  */
 export function Aside({children, heading, id = 'aside'}) {
+  const {hash} = useLocation();
   useEffect(() => {
-    document.body.classList.add('no-scroll');
+    if (hash.includes(id)) document.body.classList.add('no-scroll');
     return () => {
       document.body.classList.remove('no-scroll');
     };
-  }, []);
+  }, [hash, id]);
   return (
     <div aria-modal className="overlay" id={id} role="dialog">
       {heading != 'menu' ? null : (
