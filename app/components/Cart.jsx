@@ -54,24 +54,22 @@ function CartDetails({layout, cart}) {
   const {pathname} = useLocation();
 
   return (
-    <div>
-      <div className="cart-details">
-        <CartLines
-          lines={cart?.lines}
-          layout={layout}
-          insurancePlan={insurancePlan}
-        />
-        {cartHasItems &&
-          insurancePlan &&
-          insurancePlan.planArray &&
-          SkipProduct && (
-            <SimplyWidget
-              cart={cart}
-              insurancePlan={insurancePlan}
-              SkipProduct={SkipProduct}
-            />
-          )}
-      </div>
+    <div className="cart-details">
+      <CartLines
+        lines={cart?.lines}
+        layout={layout}
+        insurancePlan={insurancePlan}
+      />
+      {cartHasItems &&
+        insurancePlan &&
+        insurancePlan.planArray &&
+        SkipProduct && (
+          <SimplyWidget
+            cart={cart}
+            insurancePlan={insurancePlan}
+            SkipProduct={SkipProduct}
+          />
+        )}
       <CartSummary cost={cart?.cost} layout={layout}>
         {/* <CartDiscounts discountCodes={cart.discountCodes} /> */}
 
