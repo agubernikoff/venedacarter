@@ -714,7 +714,8 @@ aside li {
     padding-right: 1rem;
   }
 }
-.newsletter-form-footer button {
+.newsletter-form-footer button,
+.newsletter-form-footer-mobile button {
   white-space: nowrap !important;
   cursor: pointer !important;
   background: none !important;
