@@ -13,7 +13,7 @@ import {
   ScrollRestoration,
   isRouteErrorResponse,
 } from '@remix-run/react';
-import favicon from './assets/favicon.svg';
+// import favicon from './assets/favicon.svg';
 import vclogo from './assets/vc_logo.png';
 import resetStyles from './styles/reset.css';
 import appStyles from './styles/app.css';
@@ -144,8 +144,8 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta property="og:title" content="Veneda Carter" />
-        <meta property="og:description" content="Veneda Carter" />
+        {/* <meta property="og:title" content="Veneda Carter" /> */}
+        {/* <meta property="og:description" content="Veneda Carter" /> */}
         <Meta />
         <Links />
       </head>

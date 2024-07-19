@@ -14,6 +14,7 @@ export const meta = () => {
   return [
     {title: 'Veneda Carter | Home'},
     {property: 'og:image', content: mobileIcon},
+    {property: 'og:title', content: 'Veneda Carter'},
   ];
 };
 
