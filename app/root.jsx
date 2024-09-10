@@ -65,7 +65,7 @@ export const useRootLoaderData = () => {
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({context}) {
+export async function loader({context, request}) {
   const {storefront, cart, session} = context;
 
   const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN;
@@ -115,6 +115,11 @@ export async function loader({context}) {
     },
   });
 
+  const userAgent = request.headers.get('User-Agent');
+
+  // Basic check for mobile devices (can be extended)
+  const isMobile = /Mobile|Android|iP(hone|od)/i.test(userAgent);
+
   return defer(
     {
       cart: cartPromise,
@@ -125,6 +130,7 @@ export async function loader({context}) {
       header: await headerPromise,
       isLoggedIn: isLoggedInPromise,
       publicStoreDomain,
+      isMobile,
     },
     {
       headers: {

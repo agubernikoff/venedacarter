@@ -21,6 +21,7 @@ import {useNavigate} from 'react-router-dom';
  * @param {HeaderProps}
  */
 export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
+  console.log(useRootLoaderData());
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     window
