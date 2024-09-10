@@ -130,9 +130,8 @@ function NewArrivals({collection, image}) {
   );
 }
 
-function MobileNewArrivals({collection}) {
+function MobileNewArrivals({collection, image}) {
   if (!collection) return null;
-  const image = collection?.image;
   return (
     <div className="mobile-new-arrivals">
       <div className="title-container">
