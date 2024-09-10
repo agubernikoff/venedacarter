@@ -18,6 +18,7 @@ import {
 import {getVariantUrl} from '~/lib/variants';
 import {FeaturedProduct} from './_index';
 import {CUSTOMER_EMAIL_QUERY} from '../graphql/customer-account/CustomerDetailsQuery';
+import {useRootLoaderData} from '~/root';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -134,7 +135,8 @@ export default function Product() {
   /** @type {LoaderReturnData} */
   const {product, variants, recs, customer} = useLoaderData();
   const {selectedVariant} = product;
-  const [isMobile, setIsMobile] = useState(false);
+  const {isMobileRoot} = useRootLoaderData();
+  const [isMobile, setIsMobile] = useState(isMobileRoot);
   const productDiv = useRef();
 
   function scrollToTopOfProductImages() {

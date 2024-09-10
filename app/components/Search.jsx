@@ -4,6 +4,7 @@ import {motion} from 'framer-motion';
 import React, {useRef, useEffect} from 'react';
 import {useState} from 'react';
 import {applyTrackingParams} from '~/lib/search';
+import {useRootLoaderData} from '~/root';
 import {FeaturedProduct} from '../routes/_index';
 import {Footer} from './Footer';
 
@@ -360,7 +361,8 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
     searchTerm.current
   }&type=${pluralToSingularSearchType(type)}`;
 
-  const [isMobile, setIsMobile] = useState(false);
+  const {isMobileRoot} = useRootLoaderData();
+  const [isMobile, setIsMobile] = useState(isMobileRoot);
   useEffect(() => {
     window
       .matchMedia('(max-width:44em)')

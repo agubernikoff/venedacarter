@@ -118,7 +118,7 @@ export async function loader({context, request}) {
   const userAgent = request.headers.get('User-Agent');
 
   // Basic check for mobile devices (can be extended)
-  const isMobile = /Mobile|Android|iP(hone|od)/i.test(userAgent);
+  const isMobileRoot = /Mobile|Android|iP(hone|od)/i.test(userAgent);
 
   return defer(
     {
@@ -130,7 +130,7 @@ export async function loader({context, request}) {
       header: await headerPromise,
       isLoggedIn: isLoggedInPromise,
       publicStoreDomain,
-      isMobile,
+      isMobileRoot,
     },
     {
       headers: {

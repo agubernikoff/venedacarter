@@ -21,8 +21,8 @@ import {useNavigate} from 'react-router-dom';
  * @param {HeaderProps}
  */
 export function Header({header, isLoggedIn, cart, supportMenu, mobileMenu}) {
-  console.log(useRootLoaderData());
-  const [isMobile, setIsMobile] = useState(false);
+  const {isMobileRoot} = useRootLoaderData();
+  const [isMobile, setIsMobile] = useState(isMobileRoot);
   useEffect(() => {
     window
       .matchMedia('(max-width:44em)')

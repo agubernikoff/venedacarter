@@ -6,6 +6,7 @@ import {Image, Money} from '@shopify/hydrogen';
 import {motion, AnimatePresence} from 'framer-motion';
 import colorPicker from '~/helper/ColorPicker';
 import mobileIcon from '../assets/VC-Opengraph.jpg';
+import {useRootLoaderData} from '~/root';
 
 /**
  * @type {MetaFunction}
@@ -57,7 +58,8 @@ export default function Homepage() {
     );
   }, []);
 
-  const [isMobile, setIsMobile] = useState(false);
+  const {isMobileRoot} = useRootLoaderData();
+  const [isMobile, setIsMobile] = useState(isMobileRoot);
   useEffect(() => {
     window
       .matchMedia('(max-width:44em)')

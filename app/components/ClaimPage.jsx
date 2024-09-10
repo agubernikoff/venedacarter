@@ -1,4 +1,5 @@
 import React, {useEffect, useState, Suspense} from 'react';
+import {useRootLoaderData} from '~/root';
 export function ClaimPage() {
   const [pageStep, setPageStep] = useState(0);
   const [userEmail, setUserEmail] = useState('');
@@ -148,7 +149,8 @@ export function ClaimPage() {
       });
   };
 
-  const [isMobile, setIsMobile] = useState(false);
+  const {isMobileRoot} = useRootLoaderData();
+  const [isMobile, setIsMobile] = useState(isMobileRoot);
   useEffect(() => {
     window
       .matchMedia('(max-width:44em)')

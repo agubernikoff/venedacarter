@@ -18,6 +18,7 @@ import {useState, useEffect} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
 import {useInView} from 'react-intersection-observer';
 import x2 from '../assets/X2.png';
+import {useRootLoaderData} from '~/root';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -146,7 +147,8 @@ export default function Collection() {
     setIsFilterOpen(!isFilterOpen);
     document.body.classList.toggle('no-scroll', !isFilterOpen);
   }
-  const [isMobile, setIsMobile] = useState(false);
+  const {isMobileRoot} = useRootLoaderData();
+  const [isMobile, setIsMobile] = useState(isMobileRoot);
   useEffect(() => {
     window
       .matchMedia('(max-width:44em)')

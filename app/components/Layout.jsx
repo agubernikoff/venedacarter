@@ -8,6 +8,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
+import {useRootLoaderData} from '~/root';
 
 /**
  * @param {LayoutProps}
@@ -22,7 +23,8 @@ export function Layout({
   header,
   isLoggedIn,
 }) {
-  const [isMobile, setIsMobile] = useState(false);
+  const {isMobileRoot} = useRootLoaderData();
+  const [isMobile, setIsMobile] = useState(isMobileRoot);
   useEffect(() => {
     window
       .matchMedia('(max-width:44em)')
