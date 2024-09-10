@@ -615,7 +615,13 @@ function ProductOptions({option}) {
               option.name.toLowerCase() === 'material' ? (
                 <div
                   className="circle"
-                  style={{background: colorPicker(value)}}
+                  style={{
+                    background: colorPicker(value),
+                    outline:
+                      colorPicker(value) === 'black'
+                        ? '1px solid white'
+                        : 'none',
+                  }}
                   key={value}
                 />
               ) : null}

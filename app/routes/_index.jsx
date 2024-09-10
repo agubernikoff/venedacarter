@@ -105,12 +105,18 @@ function NewArrivals({collection, image}) {
         </div>
         <div className="new-arrivals-text">
           <p>{collection.description}</p>
-          <Link to={'/collections/new-arrivals'}>Discover</Link>
+          <Link
+            to={
+              '/products/veneda-carter-x-timberland-6-inch-boot?Size=4&Color=Wheat'
+            }
+          >
+            Discover
+          </Link>
         </div>
       </div>
       <Link
         className="new-arrivals-collection"
-        to={`/collections/${collection.handle}`}
+        to={`/products/veneda-carter-x-timberland-6-inch-boot?Size=4&Color=Wheat`}
       >
         {image && (
           <Image
@@ -134,7 +140,7 @@ function MobileNewArrivals({collection}) {
       </div>
       <Link
         className="new-arrivals-collection"
-        to={`/collections/${collection.handle}`}
+        to={`/products/veneda-carter-x-timberland-6-inch-boot?Size=4&Color=Wheat`}
       >
         {image && (
           <Image
@@ -146,7 +152,13 @@ function MobileNewArrivals({collection}) {
       </Link>
       <div className="mobile-new-arrivals-text">
         <p>{collection.description}</p>
-        <Link to={'/collections/new-arrivals'}>Discover</Link>
+        <Link
+          to={
+            '/products/veneda-carter-x-timberland-6-inch-boot?Size=4&Color=Wheat'
+          }
+        >
+          Discover
+        </Link>
       </div>
     </div>
   );
@@ -388,7 +400,13 @@ export function FeaturedProduct({
                   {colorOptionsObj.values.map((v) => (
                     <div
                       className="circle"
-                      style={{background: colorPicker(v)}}
+                      style={{
+                        background: colorPicker(v),
+                        outline:
+                          colorPicker(v) === 'black'
+                            ? '1px solid white'
+                            : 'none',
+                      }}
                       key={v}
                     />
                   ))}

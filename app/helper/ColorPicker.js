@@ -3,4 +3,6 @@ export default function colorPicker(metal) {
   if (metal.toLowerCase().includes('yellow')) return '#ffd700';
   if (metal.toLowerCase().includes('white')) return '#E5E4E2';
   if (metal.toLowerCase().includes('gold')) return '#d4af37';
+  if (metal.toLowerCase().includes('wheat')) return '#d4af37';
+  if (metal.toLowerCase().includes('black')) return 'black';
 }
