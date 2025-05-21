@@ -308,9 +308,13 @@ export function FeaturedProduct({
           background: index === 0 ? '#f4f4f4' : '#ededed',
           aspectRatio: '1/1.2',
           display: 'flex',
-          alignItems: product.tags.includes('necklace')
-            ? 'flex-start'
-            : 'center',
+          alignItems:
+            product.tags.includes('necklace') ||
+            product.title.toUpperCase().includes('CHAIN') ||
+            product.title.toUpperCase().includes('NECKLACE') ||
+            product.title.toUpperCase().includes('PENDANT')
+              ? 'flex-start'
+              : 'center',
         }}
       >
         {/* <AnimatePresence mode="wait" initial={false}> */}
@@ -496,6 +500,7 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
   fragment RecommendedProduct on Product {
     id
     title
+    tags
     handle
     priceRange {
       minVariantPrice {

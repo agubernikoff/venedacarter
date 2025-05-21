@@ -80,6 +80,7 @@ const SEARCH_QUERY = `#graphql
     id
     publishedAt
     title
+    tags
     trackingParameters
     vendor
     variants(first: 1) {

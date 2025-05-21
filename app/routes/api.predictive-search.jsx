@@ -106,6 +106,7 @@ export function normalizePredictiveSearchResults(predictiveSearch, locale) {
           url: `${localePrefix}/products/${product.handle}${trackingParams}`,
           price: product.variants.nodes[0].price,
           options: product.options,
+          tags: product.tags,
         };
       }),
     });
@@ -119,6 +120,7 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
     __typename
     id
     title
+    tags
     handle
     trackingParameters
     options{

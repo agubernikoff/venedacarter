@@ -923,6 +923,7 @@ const PRODUCT_FRAGMENT = `#graphql
   fragment Product on Product {
     id
     title
+    tags
     vendor
     handle
     descriptionHtml
@@ -1009,6 +1010,7 @@ query ($handle: String) {
       nodes {
         id
         title
+        tags
         handle
         options {
           name
