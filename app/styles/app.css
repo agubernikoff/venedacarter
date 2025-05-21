@@ -1300,6 +1300,7 @@ aside li {
   height: auto;
   background-color: #f4f4f4;
   width: 100%;
+  object-fit: cover;
 }
 .product-title-price {
   margin-left: 1rem;
