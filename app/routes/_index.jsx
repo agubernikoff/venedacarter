@@ -107,18 +107,12 @@ function NewArrivals({collection, image}) {
         </div>
         <div className="new-arrivals-text">
           <p>{collection.description}</p>
-          <Link
-            to={
-              '/products/veneda-carter-x-timberland-6-inch-boot?Size=4&Color=Wheat'
-            }
-          >
-            Discover
-          </Link>
+          <Link to={'/collections/new-arrivals'}>Discover</Link>
         </div>
       </div>
       <Link
         className="new-arrivals-collection"
-        to={`/products/veneda-carter-x-timberland-6-inch-boot?Size=4&Color=Wheat`}
+        to={`/collections/${collection.handle}`}
       >
         {image && (
           <Image
@@ -141,7 +135,7 @@ function MobileNewArrivals({collection, image}) {
       </div>
       <Link
         className="new-arrivals-collection"
-        to={`/products/veneda-carter-x-timberland-6-inch-boot?Size=4&Color=Wheat`}
+        to={`/collections/${collection.handle}`}
       >
         {image && (
           <Image
@@ -153,13 +147,7 @@ function MobileNewArrivals({collection, image}) {
       </Link>
       <div className="mobile-new-arrivals-text">
         <p>{collection.description}</p>
-        <Link
-          to={
-            '/products/veneda-carter-x-timberland-6-inch-boot?Size=4&Color=Wheat'
-          }
-        >
-          Discover
-        </Link>
+        <Link to={'/collections/new-arrivals'}>Discover</Link>
       </div>
     </div>
   );
