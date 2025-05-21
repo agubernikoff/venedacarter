@@ -308,6 +308,9 @@ export function FeaturedProduct({
           background: index === 0 ? '#f4f4f4' : '#ededed',
           aspectRatio: '1/1.2',
           display: 'flex',
+          alignItems: product.tags.includes('necklace')
+            ? 'flex-start'
+            : 'center',
         }}
       >
         {/* <AnimatePresence mode="wait" initial={false}> */}
@@ -329,13 +332,7 @@ export function FeaturedProduct({
             exit={{opacity: 0}}
             transition={{duration: 0.2}}
             style={{
-              margin: 'auto',
               width: '100%',
-              marginTop:
-                product.title.toUpperCase().includes('CHAIN') ||
-                product.title.toUpperCase().includes('NECKLACE')
-                  ? 0
-                  : 'auto',
               maxHeight: '100%',
               overflow: 'hidden',
             }}
@@ -450,6 +447,7 @@ const FEATURED_COLLECTION_QUERY = `#graphql
     products(first: 9) {
       nodes {
         id
+        tags
         title
         handle
         description
