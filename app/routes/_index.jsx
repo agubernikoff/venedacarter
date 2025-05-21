@@ -312,13 +312,15 @@ export function FeaturedProduct({
       >
         {/* <AnimatePresence mode="wait" initial={false}> */}
         {isMobile ? (
-          <Image
-            data={product.images.nodes[0]}
-            aspectRatio="1/1"
-            crop={false}
-            loading={loading}
-            sizes="(min-width: 45em) 20vw, 50vw"
-          />
+          <div style={{width: '100%'}}>
+            <Image
+              data={product.images.nodes[0]}
+              aspectRatio="1/1"
+              crop={false}
+              loading={loading}
+              sizes="(min-width: 45em) 20vw, 50vw"
+            />
+          </div>
         ) : (
           <motion.div
             key={index}
