@@ -200,24 +200,24 @@ function MainFeaturedProduct({product, isMobile}) {
   return (
     <Link className="main-featured-product" to={`/products/${product.handle}`}>
       <div style={{background: '#f4f4f4'}}>
-        {/* <AnimatePresence mode="wait" initial={false}> */}
-        <motion.div
-          key={index}
-          initial={{opacity: 0}}
-          animate={{opacity: 1}}
-          exit={{opacity: 0}}
-          transition={{duration: 0.2}}
-        >
-          <Image
-            data={product.images.nodes[index]}
-            aspectRatio="1/1"
-            crop={false}
-            sizes="(min-width: 45em) 20vw, 50vw"
-            height={2000}
-            width={2000}
-          />
-        </motion.div>
-        {/* </AnimatePresence> */}
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div
+            key={index}
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{duration: 0.2}}
+          >
+            <Image
+              data={product.images.nodes[index]}
+              aspectRatio="1/1"
+              crop={false}
+              sizes="(min-width: 45em) 20vw, 50vw"
+              height={500}
+              width={500}
+            />
+          </motion.div>
+        </AnimatePresence>
       </div>
       <div style={{marginBottom: '1.25rem'}}>
         <div
@@ -321,7 +321,6 @@ export function FeaturedProduct({
           overflow: 'hidden',
         }}
       >
-        {/* <AnimatePresence mode="wait" initial={false}> */}
         {isMobile ? (
           <div style={{width: '100%'}}>
             <Image
@@ -333,33 +332,49 @@ export function FeaturedProduct({
             />
           </div>
         ) : (
-          <motion.div
-            key={index}
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
-            transition={{duration: 0.2}}
-            style={{
-              width: '100%',
-              maxHeight: '100%',
-              overflow: 'hidden',
-            }}
-          >
-            <Image
-              data={product.images.nodes[index]}
-              aspectRatio="1/1"
-              crop={false}
-              loading={loading}
-              sizes="(min-width: 45em) 20vw, 50vw"
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.div
+              key={index}
+              initial={{opacity: 0}}
+              animate={{opacity: 1}}
+              exit={{opacity: 0}}
+              // transition={{duration: 0.2}}
               style={{
-                background: index === 0 ? '#f4f4f4' : '#ededed',
+                width: '100%',
+                maxHeight: '100%',
+                overflow: 'hidden',
+                position: 'relative',
               }}
-              height={2000}
-              width={2000}
-            />
-          </motion.div>
+            >
+              <Image
+                data={product.images.nodes[index]}
+                aspectRatio="1/1"
+                crop={false}
+                loading={loading}
+                sizes="(min-width: 45em) 20vw, 50vw"
+                style={{
+                  background: index === 0 ? '#f4f4f4' : '#ededed',
+                }}
+                // height={2000}
+                width={700}
+              />
+              <Image
+                data={product.images.nodes[1]}
+                aspectRatio="1/1"
+                crop={false}
+                loading={loading}
+                sizes="(min-width: 45em) 20vw, 50vw"
+                style={{
+                  background: index === 0 ? '#f4f4f4' : '#ededed',
+                  position: 'absolute',
+                  opacity: 0,
+                }}
+                // height={2000}
+                width={700}
+              />
+            </motion.div>
+          </AnimatePresence>
         )}
-        {/* </AnimatePresence> */}
       </div>
       <div
         className={
