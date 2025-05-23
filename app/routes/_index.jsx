@@ -317,6 +317,8 @@ export function FeaturedProduct({
             product.title.toUpperCase().includes('PENDANT')
               ? 'flex-start'
               : 'center',
+          width: '100%',
+          overflow: 'hidden',
         }}
       >
         {/* <AnimatePresence mode="wait" initial={false}> */}
@@ -324,7 +326,7 @@ export function FeaturedProduct({
           <div style={{width: '100%'}}>
             <Image
               data={product.images.nodes[0]}
-              aspectRatio="1/1"
+              // aspectRatio="1/1"
               crop={false}
               loading={loading}
               sizes="(min-width: 45em) 20vw, 50vw"
