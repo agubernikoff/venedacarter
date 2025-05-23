@@ -1493,6 +1493,19 @@ aside li {
   /* border-right: 1px solid #eaeaea; */
   /* overflow: auto; */
 }
+.ready-to-wear {
+  height: auto;
+}
+.pin-to-top {
+  position: absolute;
+  top: 0;
+}
+.gift-card {
+  background: #eaeaea;
+}
+.is-necklace {
+  align-items: start;
+}
 @media (min-width: 44em) {
   .product-image {
     width: 50vw !important;

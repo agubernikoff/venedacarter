@@ -137,7 +137,31 @@ export default function Product() {
   const {selectedVariant} = product;
   const {isMobileRoot} = useRootLoaderData();
   const [isMobile, setIsMobile] = useState(isMobileRoot);
-  const productDiv = useRef();
+  const productDiv = useRef(null);
+  const [dimensions, setDimensions] = useState({width: 0, height: 0});
+
+  useEffect(() => {
+    if (
+      !product?.collections?.nodes
+        ?.map((n) => n.title)
+        ?.includes('Ready-To-Wear')
+    )
+      return;
+
+    const updateDimensions = () => {
+      if (productDiv.current) {
+        const {width, height} = productDiv.current.getBoundingClientRect();
+        setDimensions({width, height});
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, []);
 
   function scrollToTopOfProductImages() {
     productDiv.current.scrollTop = 0;
@@ -150,6 +174,8 @@ export default function Product() {
   }, []);
 
   useEffect(() => scrollToTopOfProductImages(), [product]);
+
+  console.log(product);
 
   return (
     <>
@@ -166,6 +192,11 @@ export default function Product() {
           selectedVariant={selectedVariant}
           isMobile={isMobile}
           productTitle={product.title}
+          isReadyToWear={product?.collections?.nodes
+            ?.map((n) => n.title)
+            ?.includes('Ready-To-Wear')}
+          productMain={productDiv.current}
+          dimensions={dimensions}
         />
       </div>
       <ProductRecommendations
@@ -180,7 +211,15 @@ export default function Product() {
 /**
  * @param {{image: ProductVariantFragment['image']}}
  */
-function ProductImage({images, selectedVariant, isMobile, productTitle}) {
+function ProductImage({
+  images,
+  selectedVariant,
+  isMobile,
+  productTitle,
+  isReadyToWear,
+  productMain,
+  dimensions,
+}) {
   const [imageIndex, setImageIndex] = useState(0);
 
   const filteredImages = images.filter((i) => {
@@ -225,17 +264,30 @@ function ProductImage({images, selectedVariant, isMobile, productTitle}) {
     setImageIndex(0);
   }, [selectedVariant]);
 
+  const [adjustment, setAdjustment] = useState(0);
+
+  useEffect(() => {
+    console.log(productMain?.offsetHeight);
+    const firstRTWImg = productMain?.querySelector('.ready-to-wear');
+    console.log(firstRTWImg?.offsetHeight);
+
+    if (productMain && firstRTWImg)
+      setAdjustment(dimensions.height - firstRTWImg.offsetHeight);
+  }, [productMain, dimensions]);
+
+  console.log(`${-adjustment}px`);
+
   if (!images) {
     return (
       // <div className="product-image">
       <Image
         className="product-image"
         alt={selectedVariant?.image?.altText || 'Product Image'}
-        aspectRatio="1/1"
+        // aspectRatio="1/1"
         data={selectedVariant?.image}
         sizes="(min-width: 45em) 50vw, 100vw"
-        height={2000}
-        width={2000}
+        // height={2000}
+        width={900}
       />
       // </div>
     );
@@ -274,11 +326,11 @@ function ProductImage({images, selectedVariant, isMobile, productTitle}) {
             <Image
               className="product-image"
               alt={i.altText || 'Product Image'}
-              aspectRatio="1/1"
+              // aspectRatio="1/1"
               data={i}
               sizes="(min-width: 45em) 50vw, 100vw"
-              height={2000}
-              width={2000}
+              // height={2000}
+              width={900}
               style={{width: '100vw'}}
             />
           </div>
@@ -289,28 +341,36 @@ function ProductImage({images, selectedVariant, isMobile, productTitle}) {
     filteredImages.map((image, i) => (
       <div
         key={image.id}
-        className="product-image"
-        style={
-          i === 0
-            ? pathname.includes('gift-card')
-              ? {position: 'absolute', top: 0, background: '#eaeaea'}
-              : productTitle.toLowerCase().includes('necklace') ||
-                productTitle.toLowerCase().includes('chain')
-              ? {position: 'absolute', top: 0, alignItems: 'start'}
-              : {position: 'absolute', top: 0}
-            : productTitle.toLowerCase().includes('necklace') ||
-              productTitle.toLowerCase().includes('chain')
-            ? {alignItems: 'start'}
-            : null
-        }
+        className={`product-image ${isReadyToWear ? 'ready-to-wear' : ''} ${
+          i === 0 ? 'pin-to-top' : ''
+        } ${pathname.includes('gift-card') ? 'gift-card' : ''} ${
+          productTitle.toLowerCase().includes('necklace') ||
+          productTitle.toLowerCase().includes('chain')
+            ? 'is-necklace'
+            : ''
+        }`}
+        style={i !== 0 && isReadyToWear ? {marginTop: `${-adjustment}px`} : {}}
+        // style={
+        //   i === 0
+        //     ? pathname.includes('gift-card')
+        //       ? {position: 'absolute', top: 0, background: '#eaeaea'}
+        //       : productTitle.toLowerCase().includes('necklace') ||
+        //         productTitle.toLowerCase().includes('chain')
+        //       ? {position: 'absolute', top: 0, alignItems: 'start'}
+        //       : {position: 'absolute', top: 0}
+        //     : productTitle.toLowerCase().includes('necklace') ||
+        //       productTitle.toLowerCase().includes('chain')
+        //     ? {alignItems: 'start'}
+        //     : null
+        // }
       >
         <Image
           alt={image?.altText || 'Product Image'}
-          aspectRatio="1/1"
+          // aspectRatio="1/1"
           data={image}
           sizes="(min-width: 45em) 50vw, 100vw"
-          height={2000}
-          width={2000}
+          // height={2000}
+          width={900}
         />
       </div>
     ))
@@ -928,7 +988,7 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
-    collections(first:3){
+    collections(first:10){
       nodes{
         title
         id
