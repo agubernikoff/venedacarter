@@ -602,8 +602,14 @@ const COLLECTION_QUERY = `#graphql
         filters: $productFilter
       ) {
         filters{
+          id
           label
-          values{
+          presentation
+          type
+          values {
+            id
+            count
+            input
             label
           }
         }
