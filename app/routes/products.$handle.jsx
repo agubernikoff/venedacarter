@@ -425,7 +425,13 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
   const secondPart = title.slice(firstSpaceIndex + 1);
 
   const getRelevantCollectionType = (product) => {
-    const keywords = ['rings', 'bracelets', 'necklaces', 'earrings'];
+    const keywords = [
+      'rings',
+      'bracelets',
+      'necklaces',
+      'earrings',
+      'ready-to-wear',
+    ];
     const nodes = product.collections.nodes;
 
     for (let i = 0; i < nodes.length; i++) {
