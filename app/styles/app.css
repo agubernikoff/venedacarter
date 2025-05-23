@@ -1500,9 +1500,6 @@ aside li {
   position: absolute;
   top: 0;
 }
-.gift-card {
-  background: #eaeaea;
-}
 .is-necklace {
   align-items: start;
 }
@@ -1514,6 +1511,9 @@ aside li {
 .product-image {
   scroll-snap-align: start;
   background: linear-gradient(to bottom, #eaeaea, #dadada);
+}
+.gift-card {
+  background: #eaeaea;
 }
 .product-image:first-of-type {
   position: absolute;

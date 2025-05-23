@@ -130,7 +130,15 @@ export async function loader({request, params, context}) {
   }
   if (collection && handle !== 'new-arrivals') return json({collection});
   else if (isFeatured) return json({collection});
-  else return json({products});
+  else {
+    const {search} = await storefront.query(SEARCH_QUERY_FOR_FILTERS);
+    return json({
+      products: {
+        ...products,
+        filters: search.productFilters,
+      },
+    });
+  }
 }
 
 export default function Collection() {
@@ -155,7 +163,6 @@ export default function Collection() {
       .addEventListener('change', (e) => setIsMobile(e.matches));
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
-
   return (
     <div className={isMobile ? 'home-mobile' : 'home'}>
       <AnimatePresence mode="wait">
@@ -169,7 +176,7 @@ export default function Collection() {
             <FilterAside
               isMobile={isMobile}
               toggleFilter={toggleFilter}
-              filters={collection?.products?.filters}
+              filters={collection?.products?.filters || products?.filters}
             />
           </motion.div>
         )}
@@ -309,15 +316,6 @@ function ProductItem({product, loading}) {
 }
 
 function FilterAside({isMobile, toggleFilter, filters}) {
-  const availalbeMaterials = filters
-    ?.find((f) => f.label === 'MATERIAL')
-    ?.values.map((v) => v.label);
-  function matFilterIsAvailable(mat) {
-    if (availalbeMaterials?.length > 0) {
-      if (availalbeMaterials.includes(mat)) return true;
-      else return false;
-    } else return true;
-  }
   const {pathname, search, hash} = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const params = new URLSearchParams(search);
@@ -337,6 +335,8 @@ function FilterAside({isMobile, toggleFilter, filters}) {
     if (searchParams.get('filter')) setMat(searchParams.get('filter'));
     if (searchParams.get('isFeatured')) setFeat(true);
   }, [searchParams]);
+
+  console.log(filters);
   return (
     <div
       aria-modal
@@ -459,85 +459,25 @@ function FilterAside({isMobile, toggleFilter, filters}) {
             </div>
             <p className="filter-header-bold">Metals:</p>
             <div className="filter-selection-container">
-              <button
-                className="filter-selection"
-                onClick={() => {
-                  if (matFilterIsAvailable('Sterling Silver'))
-                    setMat('Sterling Silver');
-                }}
-                style={{
-                  textDecoration:
-                    mat === 'Sterling Silver' ? 'underline' : null,
-                  color: matFilterIsAvailable('Sterling Silver')
-                    ? 'black'
-                    : 'grey',
-                  cursor: matFilterIsAvailable('Sterling Silver')
-                    ? 'pointer'
-                    : 'auto',
-                }}
-                disabled={!matFilterIsAvailable('Sterling Silver')}
-              >
-                Sterling Silver
-              </button>
-              <button
-                className="filter-selection"
-                onClick={() => {
-                  if (matFilterIsAvailable('Gold Vermeil'))
-                    setMat('Gold Vermeil');
-                }}
-                style={{
-                  textDecoration: mat === 'Gold Vermeil' ? 'underline' : null,
-                  color: matFilterIsAvailable('Gold Vermeil')
-                    ? 'black'
-                    : 'grey',
-                  cursor: matFilterIsAvailable('Gold Vermeil')
-                    ? 'pointer'
-                    : 'auto',
-                }}
-                disabled={!matFilterIsAvailable('Gold Vermeil')}
-              >
-                Gold Vermeil
-              </button>
-              <button
-                className="filter-selection"
-                onClick={() => {
-                  if (matFilterIsAvailable('14K (Solid Yellow Gold)'))
-                    setMat('14K (Solid Yellow Gold)');
-                }}
-                style={{
-                  textDecoration:
-                    mat === '14K (Solid Yellow Gold)' ? 'underline' : null,
-                  color: matFilterIsAvailable('14K (Solid Yellow Gold)')
-                    ? 'black'
-                    : 'grey',
-                  cursor: matFilterIsAvailable('14K (Solid Yellow Gold)')
-                    ? 'pointer'
-                    : 'auto',
-                }}
-                disabled={!matFilterIsAvailable('14K (Solid Yellow Gold)')}
-              >
-                14K (Solid Yellow Gold)
-              </button>
-              <button
-                className="filter-selection"
-                onClick={() => {
-                  if (matFilterIsAvailable('14K (Solid White Gold)'))
-                    setMat('14K (Solid White Gold)');
-                }}
-                style={{
-                  textDecoration:
-                    mat === '14K (Solid White Gold)' ? 'underline' : null,
-                  color: matFilterIsAvailable('14K (Solid White Gold)')
-                    ? 'black'
-                    : 'grey',
-                  cursor: matFilterIsAvailable('14K (Solid White Gold)')
-                    ? 'pointer'
-                    : 'auto',
-                }}
-                disabled={!matFilterIsAvailable('14K (Solid White Gold)')}
-              >
-                14K (Solid White Gold)
-              </button>
+              {filters
+                ?.find((filt) => filt.id === 'filter.v.option.material')
+                .values.map((val) => (
+                  <button
+                    key={val.label}
+                    className="filter-selection"
+                    onClick={() => {
+                      setMat(val.label);
+                    }}
+                    style={{
+                      textDecoration: mat === val.label ? 'underline' : null,
+                      color: val.count > 0 ? 'black' : 'grey',
+                      cursor: val.count > 0 ? 'pointer' : 'auto',
+                    }}
+                    disabled={val.count === 0}
+                  >
+                    {val.label}
+                  </button>
+                ))}
             </div>
           </div>
           <div className="filter-submit-container">
@@ -740,6 +680,25 @@ const NEW_ARRIVALS_QUERY = `#graphql
       }
     }
   }
+`;
+
+const SEARCH_QUERY_FOR_FILTERS = `#graphql
+query SEARCH {
+  search(first: 1, query: "") {
+    productFilters {
+      id
+      label
+      presentation
+      type
+      values {
+        id
+        count
+        input
+        label
+      }
+    }
+  }
+}
 `;
 
 /** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */
