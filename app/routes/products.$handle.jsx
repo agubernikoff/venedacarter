@@ -457,13 +457,13 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
   } else if (collectionType === 'necklaces') {
     imageSrc = necklaces;
   } else if (collectionType === 'ready-to-wear') {
-    const title = productTitle.toLowerCase();
+    const lowerTitle = title.toLowerCase();
 
-    if (title.includes('sleeve')) {
+    if (lowerTitle.includes('sleeve')) {
       imageSrc = hoodie;
-    } else if (title.includes('hoodie') && !title.includes('short')) {
+    } else if (lowerTitle.includes('hoodie') && !lowerTitle.includes('short')) {
       imageSrc = zipup;
-    } else if (title.includes('sweats')) {
+    } else if (lowerTitle.includes('sweats')) {
       imageSrc = sweats;
     }
   }
