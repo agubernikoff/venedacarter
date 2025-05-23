@@ -336,7 +336,6 @@ function FilterAside({isMobile, toggleFilter, filters}) {
     if (searchParams.get('isFeatured')) setFeat(true);
   }, [searchParams]);
 
-  console.log(filters);
   return (
     <div
       aria-modal
