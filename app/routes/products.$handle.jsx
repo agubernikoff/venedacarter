@@ -352,7 +352,7 @@ function ProductImage({
             ? 'is-necklace'
             : ''
         }`}
-        style={i !== 0 && isReadyToWear ? {marginTop: `${-adjustment}px`} : {}}
+        style={i === 1 && isReadyToWear ? {marginTop: `${-adjustment}px`} : {}}
         // style={
         //   i === 0
         //     ? pathname.includes('gift-card')
