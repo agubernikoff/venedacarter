@@ -456,28 +456,33 @@ function FilterAside({isMobile, toggleFilter, filters}) {
                 </>
               ) : null}
             </div>
-            <p className="filter-header-bold">Metals:</p>
-            <div className="filter-selection-container">
-              {filters
-                ?.find((filt) => filt.id === 'filter.v.option.material')
-                .values.map((val) => (
-                  <button
-                    key={val.label}
-                    className="filter-selection"
-                    onClick={() => {
-                      setMat(val.label);
-                    }}
-                    style={{
-                      textDecoration: mat === val.label ? 'underline' : null,
-                      color: val.count > 0 ? 'black' : 'grey',
-                      cursor: val.count > 0 ? 'pointer' : 'auto',
-                    }}
-                    disabled={val.count === 0}
-                  >
-                    {val.label}
-                  </button>
-                ))}
-            </div>
+            {filters?.find((filt) => filt.id === 'filter.v.option.material') ? (
+              <>
+                <p className="filter-header-bold">Metals:</p>
+                <div className="filter-selection-container">
+                  {filters
+                    ?.find((filt) => filt.id === 'filter.v.option.material')
+                    ?.values.map((val) => (
+                      <button
+                        key={val.label}
+                        className="filter-selection"
+                        onClick={() => {
+                          setMat(val.label);
+                        }}
+                        style={{
+                          textDecoration:
+                            mat === val.label ? 'underline' : null,
+                          color: val.count > 0 ? 'black' : 'grey',
+                          cursor: val.count > 0 ? 'pointer' : 'auto',
+                        }}
+                        disabled={val.count === 0}
+                      >
+                        {val.label}
+                      </button>
+                    ))}
+                </div>
+              </>
+            ) : null}
           </div>
           <div className="filter-submit-container">
             <button
