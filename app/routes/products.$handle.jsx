@@ -457,7 +457,7 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
   } else if (collectionType === 'necklaces') {
     imageSrc = necklaces;
   } else if (collectionType === 'ready-to-wear') {
-    const title = productTitle.toLowerCase();
+    const title = product.title.toLowerCase();
 
     if (title.includes('sleeve')) {
       imageSrc = hoodie;
