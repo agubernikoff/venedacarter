@@ -7,6 +7,9 @@ import x2 from '../assets/X2.png';
 import rings from '../assets/ring-guide.png';
 import bracelets from '../assets/bracelet-guide.png';
 import necklaces from '../assets/necklace-guide.png';
+import hoodie from '../assets/hoodie-guide.jpg';
+import zipup from '../assets/zipup-guide.jpg';
+import sweats from '../assets/sweats-guide.jpg';
 
 import {
   Image,
@@ -447,6 +450,16 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
     imageSrc = bracelets;
   } else if (collectionType === 'necklaces') {
     imageSrc = necklaces;
+  } else if (collectionType === 'ready-to-wear') {
+    const title = productTitle.toLowerCase();
+
+    if (title.includes('sleeve')) {
+      imageSrc = hoodie;
+    } else if (title.includes('hoodie') && !title.includes('short')) {
+      imageSrc = zipup;
+    } else if (title.includes('sweats')) {
+      imageSrc = sweats;
+    }
   }
 
   return (
