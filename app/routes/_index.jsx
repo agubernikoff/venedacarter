@@ -332,48 +332,48 @@ export function FeaturedProduct({
             />
           </div>
         ) : (
-          <AnimatePresence mode="popLayout" initial={false}>
-            <motion.div
-              key={index}
-              initial={{opacity: 0}}
-              animate={{opacity: 1}}
-              exit={{opacity: 0}}
-              // transition={{duration: 0.2}}
+          // <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div
+            key={`${product.title}-${index}`}
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            // transition={{duration: 0.2}}
+            style={{
+              width: '100%',
+              maxHeight: '100%',
+              overflow: 'hidden',
+              position: 'relative',
+            }}
+          >
+            <Image
+              data={product.images.nodes[index]}
+              aspectRatio="1/1"
+              crop={false}
+              loading={loading}
+              sizes="(min-width: 45em) 20vw, 50vw"
               style={{
-                width: '100%',
-                maxHeight: '100%',
-                overflow: 'hidden',
-                position: 'relative',
+                background: index === 0 ? '#f4f4f4' : '#ededed',
               }}
-            >
-              <Image
-                data={product.images.nodes[index]}
-                aspectRatio="1/1"
-                crop={false}
-                loading={loading}
-                sizes="(min-width: 45em) 20vw, 50vw"
-                style={{
-                  background: index === 0 ? '#f4f4f4' : '#ededed',
-                }}
-                // height={2000}
-                width={700}
-              />
-              <Image
-                data={product.images.nodes[1]}
-                aspectRatio="1/1"
-                crop={false}
-                loading={loading}
-                sizes="(min-width: 45em) 20vw, 50vw"
-                style={{
-                  background: index === 0 ? '#f4f4f4' : '#ededed',
-                  position: 'absolute',
-                  opacity: 0,
-                }}
-                // height={2000}
-                width={700}
-              />
-            </motion.div>
-          </AnimatePresence>
+              // height={2000}
+              width={700}
+            />
+            <Image
+              data={product.images.nodes[1]}
+              aspectRatio="1/1"
+              crop={false}
+              loading={loading}
+              sizes="(min-width: 45em) 20vw, 50vw"
+              style={{
+                background: index === 0 ? '#f4f4f4' : '#ededed',
+                position: 'absolute',
+                opacity: 0,
+              }}
+              // height={2000}
+              width={700}
+            />
+          </motion.div>
+          // </AnimatePresence>
         )}
       </div>
       <div
