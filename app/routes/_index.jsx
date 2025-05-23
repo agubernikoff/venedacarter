@@ -160,30 +160,30 @@ function MobileNewArrivals({collection, image}) {
  */
 function FeaturedProducts({products, isMobile, isHomepage}) {
   if (!products) return null;
-  const endOfSlice = isMobile ? 9 : 9;
+  const endOfSlice = isMobile ? 8 : 9;
   return (
     <div className={isMobile ? 'subgrid-mobile' : 'subgrid'}>
       <div className={isMobile ? 'title-container-mobile' : 'title-container'}>
         <p className="title">Featured Products</p>
       </div>
       {products.slice(0, endOfSlice).map((product, i) => {
-        if (i === 0 && isMobile)
-          return (
-            <MainFeaturedProduct
-              product={product}
-              key={product.id}
-              isMobile={isMobile}
-            />
-          );
-        else
-          return (
-            <FeaturedProduct
-              product={product}
-              key={product.id}
-              isMobile={isMobile}
-              isHomepage={isHomepage}
-            />
-          );
+        // if (i === 0 && isMobile)
+        //   return (
+        //     <MainFeaturedProduct
+        //       product={product}
+        //       key={product.id}
+        //       isMobile={isMobile}
+        //     />
+        //   );
+        // else
+        return (
+          <FeaturedProduct
+            product={product}
+            key={product.id}
+            isMobile={isMobile}
+            isHomepage={isHomepage}
+          />
+        );
       })}
     </div>
   );
