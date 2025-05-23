@@ -290,7 +290,9 @@ export function FeaturedProduct({
     <Link
       className="featured-product"
       to={`/products/${product.handle}`}
-      onMouseEnter={() => setIndex(1)}
+      onMouseEnter={() => {
+        if (product.images.nodes.length > 1) setIndex(1);
+      }}
       onMouseLeave={() => setIndex(0)}
       style={
         isHomepage
