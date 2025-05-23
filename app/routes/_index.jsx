@@ -160,7 +160,7 @@ function MobileNewArrivals({collection, image}) {
  */
 function FeaturedProducts({products, isMobile, isHomepage}) {
   if (!products) return null;
-  const endOfSlice = isMobile ? 9 : 6;
+  const endOfSlice = isMobile ? 9 : 9;
   return (
     <div className={isMobile ? 'subgrid-mobile' : 'subgrid'}>
       <div className={isMobile ? 'title-container-mobile' : 'title-container'}>
