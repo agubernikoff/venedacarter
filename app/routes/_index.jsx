@@ -307,6 +307,7 @@ export function FeaturedProduct({
     >
       <div
         style={{
+          transition: 'background 300ms ease-in-out',
           background: index === 0 ? '#f4f4f4' : '#ededed',
           aspectRatio: '1/1.2',
           display: 'flex',
@@ -333,27 +334,25 @@ export function FeaturedProduct({
           </div>
         ) : (
           // <AnimatePresence mode="popLayout" initial={false}>
-          <motion.div
-            key={`${product.title}-${index}`}
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
+          <div
             // transition={{duration: 0.2}}
             style={{
               width: '100%',
               maxHeight: '100%',
               overflow: 'hidden',
               position: 'relative',
+              // background: index === 0 ? '#f4f4f4' : '#ededed',
             }}
           >
             <Image
-              data={product.images.nodes[index]}
+              data={product.images.nodes[0]}
               aspectRatio="1/1"
               crop={false}
               loading={loading}
               sizes="(min-width: 45em) 20vw, 50vw"
               style={{
-                background: index === 0 ? '#f4f4f4' : '#ededed',
+                opacity: index === 0 ? 1 : 0,
+                transition: 'opacity 300ms ease-in-out',
               }}
               // height={2000}
               width={700}
@@ -365,14 +364,16 @@ export function FeaturedProduct({
               loading={loading}
               sizes="(min-width: 45em) 20vw, 50vw"
               style={{
-                background: index === 0 ? '#f4f4f4' : '#ededed',
                 position: 'absolute',
-                opacity: 0,
+                top: 0,
+                left: 0,
+                opacity: index === 0 ? 0 : 1,
+                transition: 'opacity 300ms ease-in-out',
               }}
               // height={2000}
               width={700}
             />
-          </motion.div>
+          </div>
           // </AnimatePresence>
         )}
       </div>

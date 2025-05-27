@@ -1302,6 +1302,9 @@ aside li {
   width: 100%;
   object-fit: cover;
 }
+.featured-product img {
+  background: transparent;
+}
 .product-title-price {
   margin-left: 1rem;
   font-size: 0.75rem;
