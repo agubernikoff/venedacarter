@@ -493,8 +493,14 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
           }
         >
           <div className={isMobile ? 'title-dissect-mobile' : 'title-dissect'}>
-            <p>{firstPart}</p>
-            <p>{secondPart}</p>
+            {product.handle === 'nike' ? (
+              <p>{product.title}</p>
+            ) : (
+              <>
+                <p>{firstPart}</p>
+                <p>{secondPart}</p>
+              </>
+            )}
           </div>
           <ProductPrice selectedVariant={selectedVariant} isMobile={isMobile} />
         </div>
