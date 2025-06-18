@@ -655,13 +655,14 @@ function AddToCartButtonComponent({selectedVariant, isMobile, customer}) {
           selectedVariant.product.handle === 'nike'
         )
           setIsNikeProductAlreadyInCart(true);
+        else setIsNikeProductAlreadyInCart(false);
       } catch (error) {
         console.error('Error fetching cart:', error);
       }
     };
 
     handleCart();
-  }, [data.cart]);
+  }, [data?.cart, selectedVariant.product.handle]);
   return (
     <AddToCartButton
       selectedVariant={selectedVariant}
@@ -860,8 +861,12 @@ function AddToCartButton({
                     ? 'profile-button-pdp'
                     : 'add-to-cart-button'
                   : isMobile
-                  ? 'profile-button-sold-out'
-                  : 'sold-out-cart-button'
+                  ? `profile-button-sold-out ${
+                      isNikeProductAlreadyInCart ? 'limit-1' : ''
+                    }`
+                  : `sold-out-cart-button ${
+                      isNikeProductAlreadyInCart ? 'limit-1' : ''
+                    }`
               }
               type="submit"
               onClick={onClick}

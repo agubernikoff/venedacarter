@@ -1865,6 +1865,10 @@ aside li {
   cursor: auto;
 }
 
+.limit-1 {
+  margin-bottom: 1rem;
+}
+
 .sold-out-cart-button-mobile {
   width: 100%;
   padding: 2.5rem;
