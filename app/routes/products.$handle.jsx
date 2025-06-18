@@ -862,7 +862,7 @@ function AddToCartButton({
                     : 'add-to-cart-button'
                   : isMobile
                   ? `profile-button-sold-out ${
-                      isNikeProductAlreadyInCart ? 'limit-1' : ''
+                      isNikeProductAlreadyInCart ? 'limit-1-mobile' : ''
                     }`
                   : `sold-out-cart-button ${
                       isNikeProductAlreadyInCart ? 'limit-1' : ''

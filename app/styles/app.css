@@ -2270,6 +2270,9 @@ fieldset > input {
   font-weight: 400;
   margin-bottom: 0.25rem;
 }
+.limit-1-mobile {
+  margin-bottom: 5rem;
+}
 .profile-button-clear {
   width: 100%;
   border-radius: 0 !important;
