@@ -31,6 +31,13 @@ export function Aside({children, heading, id = 'aside'}) {
   }, [hash, id]);
   return (
     <div aria-modal className="overlay" id={id} role="dialog">
+      <button
+        onClick={() => {
+          history.go(-1);
+          window.location.hash = '';
+        }}
+        className="close-aside"
+      />
       {heading != 'menu' ? null : (
         <button
           className="close-outside"

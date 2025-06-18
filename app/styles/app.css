@@ -193,7 +193,12 @@ aside li {
   visibility: hidden;
   z-index: 6;
 }
-
+.close-aside {
+  background: transparent;
+  border: none;
+  position: absolute;
+  inset: 0;
+}
 .overlay .close-outside,
 .filter-overlay .close-outside {
   background: transparent;
