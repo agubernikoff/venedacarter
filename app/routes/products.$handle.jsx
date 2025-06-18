@@ -637,10 +637,39 @@ function ProductForm({product, selectedVariant, variants, isMobile}) {
 }
 
 function AddToCartButtonComponent({selectedVariant, isMobile, customer}) {
+  const data = useRootLoaderData();
+
+  const [isNikeProductAlreadyInCart, setIsNikeProductAlreadyInCart] =
+    useState(false);
+
+  useEffect(() => {
+    if (!data.cart) return;
+
+    const handleCart = async () => {
+      try {
+        const d = await data.cart;
+        if (
+          d.lines.nodes.find(
+            (line) => line?.merchandise?.product?.handle === 'nike',
+          ) &&
+          selectedVariant.product.handle === 'nike'
+        )
+          setIsNikeProductAlreadyInCart(true);
+      } catch (error) {
+        console.error('Error fetching cart:', error);
+      }
+    };
+
+    handleCart();
+  }, [data.cart]);
   return (
     <AddToCartButton
       selectedVariant={selectedVariant}
-      disabled={!selectedVariant || !selectedVariant.availableForSale}
+      disabled={
+        !selectedVariant ||
+        !selectedVariant.availableForSale ||
+        isNikeProductAlreadyInCart
+      }
       onClick={() => {
         window.location.hash = '#cart-aside';
       }}
@@ -656,8 +685,13 @@ function AddToCartButtonComponent({selectedVariant, isMobile, customer}) {
       }
       isMobile={isMobile}
       customer={customer}
+      isNikeProductAlreadyInCart={isNikeProductAlreadyInCart}
     >
-      {selectedVariant?.availableForSale ? 'Add to cart' : 'Sold out'}
+      {isNikeProductAlreadyInCart
+        ? 'LIMIT: 1 PER CUSTOMER'
+        : selectedVariant?.availableForSale
+        ? 'Add to cart'
+        : 'Sold out'}
     </AddToCartButton>
   );
 }
@@ -734,6 +768,7 @@ function AddToCartButton({
   isMobile,
   selectedVariant,
   customer,
+  isNikeProductAlreadyInCart,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   function closePopUp() {
@@ -820,7 +855,7 @@ function AddToCartButton({
             />
             <button
               className={
-                selectedVariant?.availableForSale
+                selectedVariant?.availableForSale && !isNikeProductAlreadyInCart
                   ? isMobile
                     ? 'profile-button-pdp'
                     : 'add-to-cart-button'

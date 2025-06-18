@@ -283,35 +283,42 @@ function CartLineQuantity({line, currentInsurancePlan}) {
   const {id: lineId, quantity} = line;
   const prevQuantity = Number(Math.max(0, quantity - 1).toFixed(0));
   const nextQuantity = Number((quantity + 1).toFixed(0));
-
   return (
     <div>
       <div className="cart-line-quantity">
         <p>Quantity: {quantity} &nbsp;&nbsp;</p>
-        <CartLineUpdateButton lines={[{id: lineId, quantity: prevQuantity}]}>
-          <button
-            aria-label="Decrease quantity"
-            disabled={currentInsurancePlan ? true : quantity <= 1}
-            name="decrease-quantity"
-            value={prevQuantity}
-            className="quantity-button"
-          >
-            <span>&#8722; </span>
-          </button>
-        </CartLineUpdateButton>
-        &nbsp;
-        <CartLineUpdateButton lines={[{id: lineId, quantity: nextQuantity}]}>
-          <button
-            disabled={currentInsurancePlan ? true : false}
-            aria-label="Increase quantity"
-            name="increase-quantity"
-            value={nextQuantity}
-            className="quantity-button"
-          >
-            <span>&#43;</span>
-          </button>
-        </CartLineUpdateButton>
-        &nbsp;
+        {line.merchandise.product.handle !== 'nike' && (
+          <>
+            <CartLineUpdateButton
+              lines={[{id: lineId, quantity: prevQuantity}]}
+            >
+              <button
+                aria-label="Decrease quantity"
+                disabled={currentInsurancePlan ? true : quantity <= 1}
+                name="decrease-quantity"
+                value={prevQuantity}
+                className="quantity-button"
+              >
+                <span>&#8722; </span>
+              </button>
+            </CartLineUpdateButton>
+            &nbsp;
+            <CartLineUpdateButton
+              lines={[{id: lineId, quantity: nextQuantity}]}
+            >
+              <button
+                disabled={currentInsurancePlan ? true : false}
+                aria-label="Increase quantity"
+                name="increase-quantity"
+                value={nextQuantity}
+                className="quantity-button"
+              >
+                <span>&#43;</span>
+              </button>
+            </CartLineUpdateButton>
+            &nbsp;
+          </>
+        )}
       </div>
       <CartLineRemoveButton
         lineIds={[lineId]}
