@@ -251,7 +251,7 @@ function ProductsLoadedOnScroll({
  */
 function ProductsGrid({products, isMobile}) {
   const filteredProducts = products.filter(
-    (p) => p.handle !== 'shipping-protection' && p.handle !== 'nike',
+    (p) => p.handle !== 'shipping-protection',
   );
   const columns = isMobile ? 2 : 3;
   const itemsInLastRow = filteredProducts.length % columns;

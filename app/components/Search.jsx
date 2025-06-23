@@ -301,10 +301,8 @@ export function PredictiveSearchResults({
     !totalResults ||
     results
       ?.find((result) => result.type === 'products')
-      ?.items.filter(
-        (item) =>
-          item.handle !== 'nike' && item.handle !== 'shipping-protection',
-      ).length === 0
+      ?.items.filter((item) => item.handle !== 'shipping-protection').length ===
+      0
   ) {
     return <NoPredictiveSearchResults searchTerm={searchTerm} />;
   }
@@ -379,9 +377,7 @@ function PredictiveSearchResult({goToSearchResult, items, searchTerm, type}) {
   }, []);
 
   const columns = isMobile ? 2 : 3;
-  const filteredItems = items.filter(
-    (p) => p.handle !== 'shipping-protection' && p.handle !== 'nike',
-  );
+  const filteredItems = items.filter((p) => p.handle !== 'shipping-protection');
   const itemsInLastRow = filteredItems.length % columns;
   const firstItemInLastRow = filteredItems.length - itemsInLastRow;
   const firstItemInSecondLastRow = firstItemInLastRow - columns;
