@@ -128,7 +128,7 @@ export async function loader({request, params, context}) {
       status: 404,
     });
   }
-  if (collection && handle !== 'new-arrivals') return json({collection});
+  if (collection) return json({collection});
   else if (isFeatured) return json({collection});
   else {
     const {search} = await storefront.query(SEARCH_QUERY_FOR_FILTERS);
@@ -146,9 +146,9 @@ export default function Collection() {
   const {ref, inView, entry} = useInView();
   const {collection, products} = useLoaderData();
   const {pathname, search} = useLocation();
-  if (products && pathname.includes('new-arrivals')) {
-    products.pageInfo.hasNextPage = false;
-  }
+  // if (products && pathname.includes('new-arrivals')) {
+  //   products.pageInfo.hasNextPage = false;
+  // }
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   function toggleFilter() {
@@ -199,8 +199,7 @@ export default function Collection() {
       </div>
       <Pagination
         connection={
-          (!pathname.includes('all') && !pathname.includes('new-arrivals')) ||
-          search.includes('isFeatured=true')
+          !pathname.includes('all') || search.includes('isFeatured=true')
             ? collection.products
             : products
         }
