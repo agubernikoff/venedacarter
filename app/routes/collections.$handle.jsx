@@ -674,7 +674,7 @@ const NEW_ARRIVALS_QUERY = `#graphql
     $query: String
   ) @inContext(country: $country, language: $language) {
     products(
-      first: 12,
+      first: 250,
       sortKey: CREATED_AT,
       reverse: true,
       query: $query
