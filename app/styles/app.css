@@ -365,6 +365,7 @@ aside li {
   cursor: pointer;
   position: relative;
   padding-left: 17px;
+  text-wrap: nowrap;
 }
 .header-menu-item::before {
   content: ''; /* Ensures the pseudo-element has content */
@@ -382,6 +383,7 @@ aside li {
   cursor: pointer;
   position: relative;
   padding-left: 17px;
+  text-wrap: nowrap;
 }
 .header-menu-item-active::before {
   content: ''; /* Ensures the pseudo-element has content */
@@ -400,6 +402,7 @@ aside li {
   /* font-size: 0.75rem; */
   font-family: 'regular-font';
   width: fit-content;
+  text-wrap: nowrap;
 }
 
 .header-menu-mobile .subheader-menu-item {
