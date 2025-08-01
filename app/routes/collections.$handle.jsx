@@ -163,6 +163,7 @@ export default function Collection() {
       .addEventListener('change', (e) => setIsMobile(e.matches));
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
+
   return (
     <div className={isMobile ? 'home-mobile' : 'home'}>
       <AnimatePresence mode="wait">
@@ -204,8 +205,35 @@ export default function Collection() {
             : products
         }
       >
-        {({nodes, NextLink, hasNextPage, nextPageUrl, state}) => (
+        {({
+          nodes,
+          NextLink,
+          hasNextPage,
+          nextPageUrl,
+          hasPreviousPage,
+          previousPageUrl,
+          isLoading,
+          state,
+        }) => (
           <>
+            {hasPreviousPage && (
+              <Link
+                to={previousPageUrl}
+                style={{
+                  gridColumn: '1/-1',
+                  borderBottom: '1px solid #e9e9e9',
+                  padding: '12px 0',
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                  display: 'block',
+                }}
+                preventScrollReset
+                replace
+                state={state}
+              >
+                {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
+              </Link>
+            )}
             <ProductsLoadedOnScroll
               nodes={nodes}
               inView={inView}
