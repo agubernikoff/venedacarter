@@ -74,17 +74,9 @@ export async function loader({request, params, context}) {
 
   const {collection} = await storefront.query(COLLECTION_QUERY, {
     variables: {
-      sortKey:
-        handle !== 'all' && handle !== 'new-arrivals'
-          ? sortKey
-          : handle === 'new-arrivals'
-          ? 'CREATED'
-          : null,
-      reverse: handle !== 'new-arrivals' ? reverse : true,
-      handle:
-        (handle === 'all' || handle === 'new-arrivals') && isFeatured
-          ? 'featured-products'
-          : handle,
+      sortKey: handle !== 'all' && handle ? sortKey : null,
+      reverse,
+      handle: handle === 'all' && isFeatured ? 'featured-products' : handle,
       productFilter: filter,
       ...paginationVariables,
     },
@@ -163,7 +155,7 @@ export default function Collection() {
       .addEventListener('change', (e) => setIsMobile(e.matches));
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
-
+  console.log(collection);
   return (
     <div className={isMobile ? 'home-mobile' : 'home'}>
       <AnimatePresence mode="wait">
