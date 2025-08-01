@@ -33,9 +33,27 @@ export const meta = ({data}) => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({request, params, context}) {
+  const url = new URL(request.url);
+  const isHardRefresh = request.headers.get('sec-fetch-mode') === 'navigate';
+
+  if (isHardRefresh) {
+    const paginationKeys = ['cursor', 'direction'];
+    let shouldRedirect = false;
+
+    for (const key of paginationKeys) {
+      if (url.searchParams.has(key)) {
+        url.searchParams.delete(key);
+        shouldRedirect = true;
+      }
+    }
+
+    if (shouldRedirect) {
+      return redirect(`${url.pathname}?${url.searchParams.toString()}`);
+    }
+  }
+
   const {handle} = params;
   const {storefront} = context;
-  const url = new URL(request.url);
   const searchParams = new URLSearchParams(url.search);
   const sortKey = searchParams.get('sortkey')
     ? String(searchParams.get('sortkey'))
@@ -138,6 +156,7 @@ export default function Collection() {
   const {ref, inView, entry} = useInView();
   const {collection, products} = useLoaderData();
   const {pathname, search} = useLocation();
+
   // if (products && pathname.includes('new-arrivals')) {
   //   products.pageInfo.hasNextPage = false;
   // }
@@ -155,7 +174,7 @@ export default function Collection() {
       .addEventListener('change', (e) => setIsMobile(e.matches));
     if (window.matchMedia('(max-width:44em)').matches) setIsMobile(true);
   }, []);
-  console.log(collection);
+
   return (
     <div className={isMobile ? 'home-mobile' : 'home'}>
       <AnimatePresence mode="wait">
@@ -507,6 +526,8 @@ function FilterAside({isMobile, toggleFilter, filters}) {
             <button
               className={isMobile ? 'profile-button' : 'profile-button'}
               onClick={() => {
+                params.delete('cursor');
+                params.delete('direction');
                 if (sort) params.set('sortkey', sort);
                 else params.set('sortkey', '');
                 if (rev) params.set('reverse', true);
