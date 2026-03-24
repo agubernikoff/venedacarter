@@ -29,6 +29,7 @@
     "universal-cookie": "^7.1.4"
   },
   "devDependencies": {
+    "@parcel/watcher": "^2.5.6",
     "@remix-run/dev": "^2.8.0",
     "@remix-run/eslint-config": "^2.8.0",
     "@shopify/oxygen-workers-types": "^4.0.0",
