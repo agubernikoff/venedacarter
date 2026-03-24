@@ -513,7 +513,7 @@ function ProductMain({selectedVariant, product, variants, isMobile, customer}) {
           }
           dangerouslySetInnerHTML={{__html: descriptionHtml}}
         />
-        {collectionType && collectionType !== 'earrings' ? (
+        {collectionType && collectionType !== 'earrings' && imageSrc ? (
           <div className={isMobile ? 'size-guide-mobile' : 'size-guide'}>
             <p
               style={{
